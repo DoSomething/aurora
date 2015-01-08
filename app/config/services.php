@@ -27,5 +27,9 @@ return array(
     'model'  => 'User',
     'secret' => '',
   ),
+  'northstar' => array(
+    'url'     => ''
+    'version' => ''
+  ),
 
 );

@@ -11,10 +11,10 @@
 </head>
 
 <body>
-
   @include('layout.nav')
 
   @yield('main_content')
+
 </body>
 
 </html>
