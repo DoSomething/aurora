@@ -1,12 +1,16 @@
-<?php namespace Acme\Northstar
-
-use GuzzleHttp\Client;
+<?php namespace Aurora\Services\Northstar;
 
 class NorthstarAPI {
 
+  protected $client;
+
   public function __construct()
   {
-    $client = new Guzzle\Service\Client()
+    // $base_url = ;
+    $client = new \GuzzleHttp\Client([
+      'base_url' => \Config::get('northstar.url') . '/' .  \Config::get('version'),
+    ]);
+  }
 
   }
 }
