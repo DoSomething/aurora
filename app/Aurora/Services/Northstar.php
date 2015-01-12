@@ -6,10 +6,20 @@ class NorthstarAPI {
 
   public function __construct()
   {
-    // $base_url = ;
+    $base_url = \Config::get('services.northstar.url') . ":" . \Config::get('services.northstar.port');
+    $version = \Config::get('services.northstar.version');
+
     $client = new \GuzzleHttp\Client([
-      'base_url' => \Config::get('northstar.url') . '/' .  \Config::get('version'),
+      'base_url' => [$base_url . '/{version}/', ['version' => $version]],
+      'defaults' => array(
+        'headers' => [
+          'X-DS-Application-Id' => \Config::get('services.northstar.app_id') ,
+          'X-DS-REST-API-Key' => \Config::get('services.northstar.api_key'),
+          'Content-Type' => 'application/json'
+          ]
+        ),
     ]);
+    $this->client = $client;
   }
 
   }

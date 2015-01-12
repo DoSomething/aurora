@@ -27,9 +27,12 @@ return array(
     'model'  => 'User',
     'secret' => '',
   ),
-  'northstar' => array(
-    'url'     => ''
-    'version' => ''
+ 'northstar' => array(
+      'url'     => 'http://10.241.0.49',
+      'version' => '1',
+      'port'    => '8080',
+      'app_id'  => '456',
+      'api_key' => 'abc4324'
   ),
 
 );
