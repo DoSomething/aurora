@@ -12,9 +12,25 @@ class SessionsController extends \BaseController {
   {
     if (Auth::check())
     {
-      return Redirect::route('status');
+      // Already loged in.
     }
     return View::make('sessions.create');
+  }
+
+    /**
+   * Store a newly created resource in storage.
+   *
+   * @return Response
+   */
+  public function store()
+  {
+    $input = Input::only('email', 'password');
+    // Compare this to user api
+    $northstar = new Aurora\Services\Northstar\NorthstarAPI;
+    $res = $northstar->login($input);
+
+    var_dump($res);
+    // Login
   }
 
 }
