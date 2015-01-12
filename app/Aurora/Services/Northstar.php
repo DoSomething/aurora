@@ -15,13 +15,24 @@ class NorthstarAPI {
         'headers' => [
           'X-DS-Application-Id' => \Config::get('services.northstar.app_id') ,
           'X-DS-REST-API-Key' => \Config::get('services.northstar.api_key'),
-          'Content-Type' => 'application/json'
+          'Content-Type' => 'application/json',
+          'Accept' => 'application/json'
           ]
         ),
     ]);
     $this->client = $client;
   }
 
+  /**
+   * Sends a post request to login the user.
+   */
+  public function login($input)
+  {
+    $request = $this->client->post('login', [
+      'body' => json_encode($input)
+      ]);
+
+    return $request->json();
   }
 }
 
