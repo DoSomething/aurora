@@ -2,6 +2,8 @@
 
 @section('main_content')
 
+@include('users.partials.search')
+
 <table class= "table table-striped table-bordered">
   <thead>
     <tr>
