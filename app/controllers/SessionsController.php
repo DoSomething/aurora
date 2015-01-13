@@ -32,6 +32,8 @@ class SessionsController extends \BaseController {
 
       // @TODO log user in
 
+      return Redirect::route('users.index');
+
     } catch (Exception $e) {
        return Redirect::route('login')->with('flash_message', ['class' => 'alert alert-danger', 'text' => 'Login failed'])->withInput();
     }
