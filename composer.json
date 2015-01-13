@@ -17,6 +17,7 @@
       "app/database/seeds",
       "app/tests/TestCase.php"
     ],
+    "files": ["app/Aurora/helpers.php"],
     "psr-4": {
       "Aurora\\": "app/Aurora"
     }
