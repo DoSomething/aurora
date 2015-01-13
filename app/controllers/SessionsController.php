@@ -25,12 +25,16 @@ class SessionsController extends \BaseController {
   public function store()
   {
     $input = Input::only('email', 'password');
-    // Compare this to user api
-    $northstar = new Aurora\Services\Northstar\NorthstarAPI;
-    $res = $northstar->login($input);
+    // Try to log the user in with Norhtstar.
+    try {
+      $northstar = new Aurora\Services\Northstar\NorthstarAPI;
+      $response = $northstar->login($input);
 
-    var_dump($res);
-    // Login
+      // @TODO log user in
+
+    } catch (Exception $e) {
+       return Redirect::route('login')->with('flash_message', ['class' => 'alert alert-danger', 'text' => 'Login failed'])->withInput();
+    }
   }
 
 }

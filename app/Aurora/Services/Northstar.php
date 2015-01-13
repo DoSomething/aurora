@@ -28,11 +28,11 @@ class NorthstarAPI {
    */
   public function login($input)
   {
-    $request = $this->client->post('login', [
+    $response = $this->client->post('login', [
       'body' => json_encode($input)
       ]);
 
-    return $request->json();
+    return $response->json();
   }
 }
 
