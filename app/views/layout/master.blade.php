@@ -11,7 +11,15 @@
 </head>
 
 <body>
+
   @include('layout.nav')
+
+
+  @if (Session::has('flash_message'))
+    <div class="flash-message {{ Session::get('flash_message')['class'] }}">
+      <em>{{ Session::get('flash_message')['text'] }}</em>
+    </div>
+  @endif
 
   @yield('main_content')
 
