@@ -25,6 +25,9 @@ class NorthstarAPI {
 
   /**
    * Sends a post request to login the user.
+   *
+   * @param array - input
+   *
    */
   public function login($input)
   {
@@ -33,6 +36,17 @@ class NorthstarAPI {
       ]);
 
     return $response->json();
+  }
+
+  /**
+   * Sends a get request to return a user with that id.
+   *
+   * @param mixed ID, email, id, phone
+   * @return user object
+   */
+  public function getUser($type, $id)
+  {
+
   }
 }
 
