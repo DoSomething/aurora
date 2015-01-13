@@ -20,7 +20,9 @@
     </div>
   @endif
 
-  @yield('main_content')
+  <div class="container">
+    @yield('main_content')
+ </div>
 
 </body>
 
