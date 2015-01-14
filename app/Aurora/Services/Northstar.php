@@ -33,7 +33,7 @@ class NorthstarAPI {
   {
     $response = $this->client->post('login', [
       'body' => json_encode($input)
-      ]);
+    ]);
 
     return $response->json();
   }
@@ -46,7 +46,12 @@ class NorthstarAPI {
    */
   public function getUser($type, $id)
   {
-
+    $response = $this->client->get('users', [
+      'query' => [
+        $type => $id,
+      ],
+    ]);
+    return $response->json();
   }
 }
 
