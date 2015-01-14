@@ -1,6 +1,2 @@
 <?php
-
-function search_users_by()
-{
-
-}
+// Global helper functions.
