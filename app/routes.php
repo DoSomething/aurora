@@ -23,3 +23,4 @@ Route::resource('sessions', 'SessionsController', ['only' => ['create', 'store',
 
 # Users
 Route::resource('users', 'UsersController');
+Route::post('users', ['as' => 'userSearch', 'uses' => 'UsersController@search']);
