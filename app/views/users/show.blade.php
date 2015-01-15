@@ -4,8 +4,10 @@
 
  @foreach($user as $key => $field)
   @if (!in_array($key, ['created_at', 'updated_at', 'campaigns']))
-     <dt><strong>{{ $key }}</strong> </dt>
-     <dl> {{ $field }} </dl>
+    @if (!empty($field))
+       <dt><strong>{{ $key }}</strong> </dt>
+       <dl> {{ $field }} </dl>
+     @endif
    @endif
 
   @if ($key == 'campaigns')

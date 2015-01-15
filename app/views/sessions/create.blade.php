@@ -2,7 +2,7 @@
 
 @section('main_content')
 
-<div class = "container">
+<div class ="container">
 
   {{ Form::open(['route' => 'sessions.store', 'class' => 'form-signin']) }}
     <h2 class="form-signin-heading">Please sign in</h2>
