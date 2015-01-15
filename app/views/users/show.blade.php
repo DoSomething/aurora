@@ -9,9 +9,9 @@
    @endif
 
   @if ($key == 'campaigns')
-  @foreach($field as $campaigns)
-  {{var_dump($campaigns)}}
-  @endforeach
+    @foreach($field as $campaigns)
+      {{var_dump($campaigns)}}
+    @endforeach
   @endif
  @endforeach
 
