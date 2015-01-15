@@ -21,6 +21,29 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
    *
    * @var array
    */
-  protected $hidden = array('password', 'remember_token');
+  protected $hidden = array('remember_token');
+
+  /**
+   * This table does not have timestamps.
+   */
+  public $timestamps = false;
+
+
+  /**
+   * Define relationship with roles.
+   * @return object
+   */
+  public function roles()
+  {
+    return $this->belongsToMany('Role');
+  }
+
+  /**
+   * Assign a specific role to a User.
+   */
+  public function assignRole($role)
+  {
+    return $this->roles()->attach($role);
+  }
 
 }
