@@ -44,7 +44,8 @@ class UsersController extends \BaseController {
    */
   public function show($id)
   {
-
+    $user = Session::get('user');
+    return View::make('users.show')->with(compact('user'));
   }
 
 
@@ -92,7 +93,7 @@ class UsersController extends \BaseController {
       // Attempt to find the user.
       $northstar = new Aurora\Services\Northstar\NorthstarAPI;
       $user = $northstar->getUser($type, $search);
-      return View::make('users.show')->with(compact('user'));
+      return Redirect::route('users.show', array($user['_id']))->with(compact('user'));
 
     } catch (Exception $e) {
       return Redirect::back()->withInput()->with('flash_message', ['class' => 'alert alert-warning', 'text' => 'Hmm, couldn\'t find anyone, are you sure thats right?']);
