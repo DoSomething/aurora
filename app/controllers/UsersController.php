@@ -52,6 +52,10 @@ class UsersController extends \BaseController {
   public function show($id)
   {
     $user = Session::get('user');
+    if (!$user) {
+      $northstar = new Aurora\Services\Northstar\NorthstarAPI;
+      $user = $northstar->getUser('_id', $id);
+    }
     return View::make('users.show')->with(compact('user'));
   }
 
