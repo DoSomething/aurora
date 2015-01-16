@@ -9,8 +9,15 @@ class UsersController extends \BaseController {
    */
   public function index()
   {
-    // @TODO: return all users.
-    return View::make('users.index');
+    try {
+      // Attempt to fetch all users.
+      $northstar = new Aurora\Services\Northstar\NorthstarAPI;
+      $users = $northstar->getAllUsers();
+      return View::make('users.index')->with(compact('users'));
+
+    } catch (Exception $e) {
+      return View::make('users.index')->with('flash_message', ['class' => 'alert alert-warning', 'text' => 'Looks like there is something wrong with the connection!']);
+    }
   }
 
 
