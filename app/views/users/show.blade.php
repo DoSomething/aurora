@@ -2,6 +2,8 @@
 
 @section('main_content')
 
+<a href="{{ url('users/' . $user['_id'] . '/edit') }}"> Edit User <span class="glyphicon glyphicon-pencil"></span></a>
+
  @foreach($user as $key => $field)
   @if (!in_array($key, ['created_at', 'updated_at', 'campaigns']))
     @if (!empty($field))
