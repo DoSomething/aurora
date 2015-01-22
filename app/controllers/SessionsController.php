@@ -10,8 +10,7 @@ class SessionsController extends \BaseController {
    */
   public function create()
   {
-    if (Auth::check())
-    {
+    if (Auth::check()) {
       // Already loged in.
     }
     return View::make('sessions.create');
