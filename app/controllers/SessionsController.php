@@ -28,14 +28,19 @@ class SessionsController extends \BaseController {
     try {
       $northstar = new Aurora\Services\Northstar\NorthstarAPI;
       $response = $northstar->login($input);
-
-      // @TODO log user in
+      $user = $this->mapToUser($response);
+      Auth::login($user);
 
       return Redirect::route('users.index');
 
     } catch (Exception $e) {
        return Redirect::route('login')->with('flash_message', ['class' => 'alert alert-danger', 'text' => 'Login failed'])->withInput();
     }
+  }
+  public function mapToUser($response)
+  {
+    $user = User::firstOrCreate(array('_id' => $response['_id']));
+    return $user;
   }
 
 }
