@@ -118,5 +118,11 @@ class UsersController extends \BaseController {
     }
   }
 
+  public function adminCreate($user)
+  {
+    $user->assignRole('admin');
+    return Redirect::back()->with('flash_message', ['class' => 'alert alert-success', 'text' => 'The more admins the merrier.']);
+  }
+
 
 }
