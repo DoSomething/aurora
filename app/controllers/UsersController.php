@@ -59,8 +59,9 @@ class UsersController extends \BaseController {
     if (!$user) {
       $northstar = new Aurora\Services\Northstar\NorthstarAPI;
       $user = $northstar->getUser('_id', $id);
+      $aurora_user = User::where('_id', $id)->first();
     }
-    return View::make('users.show')->with(compact('user'));
+    return View::make('users.show')->with(compact('user', 'aurora_user'));
   }
 
 

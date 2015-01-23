@@ -23,7 +23,6 @@
           <td> {{ $user['last_name'] or '' }}</td>
           <td> {{ $user['email']  or '' }}</td>
           <td> {{ $user['mobile'] or '' }}</td>
-
         </tr>
       @endforeach
     </tbody>
