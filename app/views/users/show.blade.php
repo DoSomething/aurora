@@ -2,7 +2,7 @@
 
 @section('main_content')
 
-<h3> {{ $user['first_name'] }}</h3>
+<h3> {{ $user['first_name'] or '' }}</h3>
 <a href="{{ url('users/' . $user['_id'] . '/edit') }}"> Edit User <span class="glyphicon glyphicon-pencil"></span></a>
 @if ($aurora_user)
   Admin: {{ $aurora_user->hasRole('admin') ? '✓' : 'x' }}
