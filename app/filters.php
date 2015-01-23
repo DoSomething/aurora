@@ -35,15 +35,11 @@ App::after(function($request, $response)
 
 Route::filter('auth', function()
 {
-  if (Auth::guest())
-  {
-    if (Request::ajax())
-    {
+  if (Auth::guest()) {
+    if (Request::ajax()) {
       return Response::make('Unauthorized', 401);
-    }
-    else
-    {
-      return Redirect::guest('login');
+    } else {
+      return Redirect::guest('login')->with('flash_message', ['class' => 'alert alert-danger', 'text' => 'Whoops, unauthorized, please login first.']);
     }
   }
 });
