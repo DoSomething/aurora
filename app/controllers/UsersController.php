@@ -4,6 +4,7 @@ class UsersController extends \BaseController {
 
   public function __construct() {
     $this->beforeFilter('auth');
+    $this->beforeFilter('role:admin');
   }
   /**
    * Display a listing of the resource.
