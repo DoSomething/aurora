@@ -2,8 +2,8 @@
 
 @section('main_content')
 
+<h3> {{ $user['first_name'] }}</h3>
 <a href="{{ url('users/' . $user['_id'] . '/edit') }}"> Edit User <span class="glyphicon glyphicon-pencil"></span></a>
-
 @if ($aurora_user)
   Admin: {{ $aurora_user->hasRole('admin') ? '✓' : 'x' }}
   @if (!$aurora_user->hasRole('admin'))
@@ -13,19 +13,20 @@
   @endif
 @endif
 
- @foreach($user as $key => $field)
-  @if (!in_array($key, ['created_at', 'updated_at', 'campaigns']))
-    @if (!empty($field))
-       <dt><strong>{{ $key }}</strong> </dt>
-       <dl> {{ $field }} </dl>
+<div class="container">
+   @foreach($user as $key => $field)
+    @if (!in_array($key, ['created_at', 'updated_at', 'campaigns']))
+      @if (!empty($field))
+         <dt class="control-label col-sm-2"><strong>{{ $key }}</strong> </dt>
+         <dl> {{ $field }} </dl>
+       @endif
      @endif
-   @endif
 
-  @if ($key == 'campaigns')
-    @foreach($field as $campaigns)
-      {{var_dump($campaigns)}}
-    @endforeach
-  @endif
- @endforeach
-
+    @if ($key == 'campaigns')
+      @foreach($field as $campaigns)
+        {{var_dump($campaigns)}}
+      @endforeach
+    @endif
+   @endforeach
+</div>
 @stop
