@@ -3,7 +3,7 @@
 @section('main_content')
 
 
-<div class = 'container'>
+<div class ="container">
   {{ Form::model($user, [ 'method' => 'PATCH', 'route' => ['users.update', $user['_id']]]) }}
     <div class="form-group">
 

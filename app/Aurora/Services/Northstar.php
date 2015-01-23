@@ -55,5 +55,12 @@ class NorthstarAPI {
     $response = $this->client->get('users' . '/' .  $type  . '/' . $id);
     return $response->json();
   }
+
+  public function updateUser($id, $input)
+  {
+    $response = $this->client->put('users' . '/' . $id, [
+      'body' => json_encode($input)
+    ]);
+  }
 }
 

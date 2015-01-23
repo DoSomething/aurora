@@ -87,7 +87,10 @@ class UsersController extends \BaseController {
    */
   public function update($id)
   {
-    //
+    $input = Input::except('_token', '_id', 'drupal_uid');
+    $northstar = new Aurora\Services\Northstar\NorthstarAPI;
+    $user = $northstar->updateUser($id, $input);
+    return Redirect::back()->with('flash_message', ['class' => 'alert alert-success', 'text' => 'Sweet, look at you updating that user.']);
   }
 
 
