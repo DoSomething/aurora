@@ -52,11 +52,7 @@ class NorthstarAPI {
    */
   public function getUser($type, $id)
   {
-    $response = $this->client->get('users', [
-      'query' => [
-        $type => $id,
-      ],
-    ]);
+    $response = $this->client->get('users' . '/' .  $type  . '/' . $id);
     return $response->json();
   }
 }
