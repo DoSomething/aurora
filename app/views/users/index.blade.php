@@ -16,7 +16,7 @@
       </tr>
     </thead>
     <tbody>
-      @foreach($users as $user)
+      @foreach($users['data'] as $user)
         <tr>
           <td> {{ link_to_route('users.show', $user['_id'], array($user['_id'])) }}</td>
           <td> {{ $user['first_name'] or '' }}</td>
