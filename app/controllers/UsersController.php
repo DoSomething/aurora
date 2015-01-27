@@ -16,7 +16,8 @@ class UsersController extends \BaseController {
     try {
       // Attempt to fetch all users.
       $northstar = new Aurora\Services\Northstar\NorthstarAPI;
-      $users = $northstar->getAllUsers();
+      $input = Input::all();
+      $users = $northstar->getAllUsers($input);
       return View::make('users.index')->with(compact('users'));
 
     } catch (Exception $e) {

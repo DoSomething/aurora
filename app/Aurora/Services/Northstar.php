@@ -38,9 +38,11 @@ class NorthstarAPI {
     return $response->json();
   }
 
-  public function getAllUsers()
+  public function getAllUsers($input)
   {
-    $response = $this->client->get('users');
+    $response = $this->client->get('users', [
+      'query' => $input
+    ]);
     return $response->json();
 
   }
