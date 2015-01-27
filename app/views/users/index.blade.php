@@ -4,6 +4,10 @@
 
 @include('users.partials.search')
 
+<ul class = "pagination">
+  <li><a href="#">1</a></li>
+  <li> {{ link_to_route('users.index', $users['last_page'], array('page/'. $users['last_page'])) }} </li>
+</ul>
 @if ($users)
   <table class= "table table-striped table-bordered">
     <thead>
