@@ -15,7 +15,7 @@
 
 <div class="container">
    @foreach($user as $key => $field)
-    @if (!in_array($key, ['created_at', 'updated_at', 'campaigns']))
+    @if (!in_array($key, ['created_at', 'updated_at', 'campaigns', 'source']))
       @if (!empty($field))
          <dt class="control-label col-sm-2"><strong>{{ $key }}</strong> </dt>
          <dl> {{ $field }} </dl>
