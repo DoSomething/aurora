@@ -59,7 +59,7 @@ class UsersController extends \BaseController {
     $user = Session::get('user');
     if (!$user) {
       $northstar = new Aurora\Services\Northstar\NorthstarAPI;
-      $user = $northstar->getUser('_id', $id);
+      $user = $northstar->getUser('_id', $id)[0];
       $aurora_user = User::where('_id', $id)->first();
     }
     return View::make('users.show')->with(compact('user', 'aurora_user'));
@@ -75,7 +75,7 @@ class UsersController extends \BaseController {
   public function edit($id)
   {
     $northstar = new Aurora\Services\Northstar\NorthstarAPI;
-    $user = $northstar->getUser('_id', $id);
+    $user = $northstar->getUser('_id', $id)[0];
     return View::make('users.edit')->with(compact('user'));
   }
 
