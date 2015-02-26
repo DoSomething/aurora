@@ -4,6 +4,7 @@
 
 <a href="{{ URL::Route('keys.create') }}"><span class='glyphicon glyphicon-plus'></span>New App</a>
 
+<h2> Listing of all Norhtstar api keys. </h2>
 
 @if ($keys)
   @foreach($keys as $key)
