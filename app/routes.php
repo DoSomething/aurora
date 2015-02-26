@@ -28,4 +28,4 @@ Route::post('users', ['as' => 'users.search', 'uses' => 'UsersController@search'
 # Create admins.
 Route::post('admin/{user}', ['as' => 'admin.create', 'uses' => 'UsersController@adminCreate']);
 
-Route::get('keys', ['as' => 'keys.index', 'uses' => 'KeyController@index', 'before' => 'role:admin']);
+Route::resource('keys', 'KeyController');
