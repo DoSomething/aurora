@@ -71,5 +71,13 @@ class NorthstarAPI {
     return $response->json();
 
   }
+
+  public function createNewApiKey($input)
+  {
+    $response = $this->client->post('keys', [
+      'body' => json_encode($input),
+      ]);
+    return $response->json();
+  }
 }
 

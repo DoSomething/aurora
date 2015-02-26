@@ -2,7 +2,8 @@
 
 @section('main_content')
 
-<a href ="#"> Add New App <span class="glyphicon glyphicon-plus"></span> </a>
+<a href="{{ URL::Route('keys.create') }}"><span class='glyphicon glyphicon-plus'></span>New App</a>
+
 
 @if ($keys)
   @foreach($keys as $key)
