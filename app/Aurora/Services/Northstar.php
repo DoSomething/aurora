@@ -64,5 +64,12 @@ class NorthstarAPI {
       'body' => json_encode($input)
     ]);
   }
+
+  public function getAllApiKeys()
+  {
+    $response = $this->client->get('keys');
+    return $response->json();
+
+  }
 }
 
