@@ -13,7 +13,7 @@ build:
           code: sudo apt-get install php5-mongo
     after-steps:
       - sherzberg/slack-notify:
-          subdomain: wercker
+          subdomain: dosomething
           token: $SLACK_TOKEN
           channel: api
 deploy:
@@ -27,6 +27,6 @@ deploy:
     - cap
   after-steps:
     - sherzberg/slack-notify:
-        subdomain: wercker
+        subdomain: dosomething
         token: $SLACK_TOKEN
         channel: api
