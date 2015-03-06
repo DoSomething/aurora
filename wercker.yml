@@ -1,0 +1,32 @@
+box: blisteringherb/scholarship@0.0.6
+build:
+    # The steps that will be executed on build
+    steps:
+      # A custom script step, name value is used in the UI
+      # and the code value contains the command that get executed
+      - leipert/composer-install@0.0.1
+      - script:
+          name: update packages list
+          code: sudo apt-get update
+      - script:
+          name: install php mongo extension
+          code: sudo apt-get install php5-mongo
+    after-steps:
+      - sherzberg/slack-notify:
+          subdomain: wercker
+          token: $SLACK_TOKEN
+          channel: api
+deploy:
+  steps:
+    - bundle-install
+    - script:
+        name: write private key env var
+        code: |-
+          export CAP_PRIVATE_KEY=`mktemp`
+          echo -e $WERCKER_APP_KEY_PRIVATE > $CAP_PRIVATE_KEY
+    - cap
+  after-steps:
+    - sherzberg/slack-notify:
+        subdomain: wercker
+        token: $SLACK_TOKEN
+        channel: api
