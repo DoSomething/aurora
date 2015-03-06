@@ -12,10 +12,11 @@ build:
           name: install php mongo extension
           code: sudo apt-get install php5-mongo
     after-steps:
-      - sherzberg/slack-notify:
-          subdomain: dosomething
+      - iansmith9876/pretty-slack-notify:
+          team: dosomething
           token: $SLACK_TOKEN
           channel: api
+          username: george
 deploy:
   steps:
     - bundle-install
@@ -29,7 +30,8 @@ deploy:
         code: echo $WERCKER_APP_KEY_PUBLIC
     - cap
   after-steps:
-    - sherzberg/slack-notify:
-        subdomain: dosomething
+    - iansmith9876/pretty-slack-notify:
+        team: dosomething
         token: $SLACK_TOKEN
         channel: api
+        username: george
