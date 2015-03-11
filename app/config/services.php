@@ -28,11 +28,10 @@ return array(
     'secret' => '',
   ),
  'northstar' => array(
-      'url'     => 'http://url.com',
+      'url'     => getenv('NORTHSTAR_URL'),
       'version' => '1',
-      'port'    => '80',
-      'app_id'  => '456',
-      'api_key' => 'abc4324'
+      'app_id'  => getenv('NORTHSTAR_APP_ID'),
+      'api_key' => getenv('NORTHSTAR_API_KEY')
   ),
 
 );
