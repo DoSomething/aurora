@@ -6,7 +6,10 @@ class NorthstarAPI {
 
   public function __construct()
   {
-    $base_url = \Config::get('services.northstar.url') . ":" . \Config::get('services.northstar.port');
+    $base_url = \Config::get('services.northstar.url');
+    if (\App::environment('local')) {
+      $base_url .=  ":" . \Config::get('services.northstar.port');
+    }
     $version = \Config::get('services.northstar.version');
 
     $client = new \GuzzleHttp\Client([
