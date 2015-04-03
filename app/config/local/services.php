@@ -15,7 +15,7 @@
 
     'northstar' => array(
       'url'     => 'http://northstar.dev',
-      'version' => '1',
+      'version' => 'v1',
       'port'    => '80',
       'app_id'  => '456',
       'api_key' => 'abc4324'
