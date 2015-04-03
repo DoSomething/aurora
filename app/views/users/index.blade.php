@@ -21,6 +21,7 @@
 </ul>
 
 @if ($users)
+  <h4> Total members : {{ $users['total'] }}</h4>
   <table class= "table table-striped table-bordered">
     <thead>
       <tr>
