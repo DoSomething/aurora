@@ -29,7 +29,7 @@ return array(
   ),
  'northstar' => array(
       'url'     => getenv('NORTHSTAR_URL'),
-      'version' => '1',
+      'version' => 'v1',
       'app_id'  => getenv('NORTHSTAR_APP_ID'),
       'api_key' => getenv('NORTHSTAR_API_KEY')
   ),
