@@ -43,4 +43,17 @@ class SessionsController extends \BaseController {
     return $user;
   }
 
+   /**
+   * Remove the specified resource from storage.
+   *
+   * @param  int  $id
+   * @return Response
+   */
+  public function destroy($id = null)
+  {
+    Auth::logout();
+    return Redirect::to('/')->with('flash_message', ['text' => 'You have been logged out!', 'class' => 'alert alert-success']);
+  }
+
+
 }
