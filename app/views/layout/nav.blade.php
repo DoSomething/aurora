@@ -11,8 +11,13 @@
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav navbar-right">
-        <li> {{ link_to_route('keys.index', 'Keys') }} </li>
-        <li><a href="#">Help</a></li>
+        @if (Auth::user())
+          <li> {{ link_to_route('keys.index', 'Keys') }} </li>
+          <li> {{ link_to_route('users.index', 'Users') }} </li>
+          <li> {{ link_to_route('logout', 'Logout') }} </li>
+        @else
+          <li> {{ link_to_route('login', 'Login') }} </li>
+        @endif
       </ul>
     </div>
   </div>
