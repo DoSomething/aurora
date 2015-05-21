@@ -45,6 +45,7 @@ class NorthstarAPI {
     $response = $this->client->get('users', [
       'query' => $input
     ]);
+
     return $response->json();
 
   }
@@ -70,7 +71,7 @@ class NorthstarAPI {
   public function getAllApiKeys()
   {
     $response = $this->client->get('keys');
-    return $response->json();
+    return $response->json()['data'];
 
   }
 
