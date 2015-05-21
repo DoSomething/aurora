@@ -39,7 +39,7 @@ class SessionsController extends \BaseController {
   }
   public function mapToUser($response)
   {
-    $user = User::firstOrCreate(array('_id' => $response['data']['_id']));
+    $user = User::firstOrCreate(array('_id' => $response['_id']));
     return $user;
   }
 

@@ -37,8 +37,7 @@ class NorthstarAPI {
     $response = $this->client->post('login', [
       'body' => json_encode($input)
     ]);
-
-    return $response->json();
+    return $response->json()['data'];
   }
 
   public function getAllUsers($input)
