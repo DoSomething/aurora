@@ -37,8 +37,7 @@ class NorthstarAPI {
     $response = $this->client->post('login', [
       'body' => json_encode($input)
     ]);
-
-    return $response->json();
+    return $response->json()['data'];
   }
 
   public function getAllUsers($input)
@@ -46,6 +45,7 @@ class NorthstarAPI {
     $response = $this->client->get('users', [
       'query' => $input
     ]);
+
     return $response->json();
 
   }
@@ -58,7 +58,7 @@ class NorthstarAPI {
   public function getUser($type, $id)
   {
     $response = $this->client->get('users' . '/' .  $type  . '/' . $id);
-    return $response->json();
+    return $response->json()['data'][0];
   }
 
   public function updateUser($id, $input)
@@ -71,7 +71,7 @@ class NorthstarAPI {
   public function getAllApiKeys()
   {
     $response = $this->client->get('keys');
-    return $response->json();
+    return $response->json()['data'];
 
   }
 
