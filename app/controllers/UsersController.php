@@ -75,7 +75,7 @@ class UsersController extends \BaseController {
   public function edit($id)
   {
     $northstar = new Aurora\Services\Northstar\NorthstarAPI;
-    $user = $northstar->getUser('_id', $id)[0];
+    $user = $northstar->getUser('_id', $id);
     return View::make('users.edit')->with(compact('user'));
   }
 
