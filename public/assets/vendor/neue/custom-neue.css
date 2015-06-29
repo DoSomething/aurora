@@ -1,0 +1,14 @@
+/* Navigation */
+.navigation {
+	background-color: #23b7fb;
+}
+
+#brand-title {
+	font-size: 40px;
+	font-weight: sbold;
+}
+
+/* Body */
+.container {
+	margin: 2%;
+}

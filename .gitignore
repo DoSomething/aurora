@@ -7,4 +7,3 @@ composer.lock
 .DS_Store
 Thumbs.db
 /node_modules
-/public/assets/vendor
