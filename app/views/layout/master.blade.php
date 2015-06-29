@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
   <link rel="stylesheet" href="{{ asset('assets/vendor/neue/neue.css') }}">
+  <link rel="stylesheet" href="{{ asset('assets/vendor/neue/custom-neue.css') }}">
   <script src="{{ asset('/assets/vendor/neue/neue.js') }}"></script>
 </head>
 <body>
