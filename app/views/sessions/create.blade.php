@@ -1,7 +1,7 @@
 <div data-modal id="signin-modal" role="dialog">
   <h2 class="heading -banner">Please Sign In</h2>
   @if (Session::has('flash_message'))
-  <div class="messages {{'modifier_class'}}">
+  <div class="messages">
     <div class="flash-message {{ Session::get('flash_message')['class'] }}">
       <em>{{ Session::get('flash_message')['text'] }}</em>
     </div>
