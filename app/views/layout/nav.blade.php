@@ -18,9 +18,14 @@
       <li> {{ link_to_route('users.index', 'Users') }} </li>
       <li> {{ link_to_route('logout', 'Logout') }} </li>
     @else
-      <li> {{ link_to_route('login', 'Login') }} </li>
+      <li>
+        <!-- Modal Stuff  -->
+        <a href="#" data-modal-href="#signin-modal" class="signinModal">Login</a>
+        <!-- Modal Stuff -->
+     </li>
     @endif
-    </li>
+  </li>
   </ul>
   </div>
 </nav>
+   @include('sessions.create')
