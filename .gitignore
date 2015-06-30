@@ -8,3 +8,4 @@ composer.lock
 Thumbs.db
 /node_modules
 public/assets/vendor
+npm-debug.log

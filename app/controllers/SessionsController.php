@@ -34,8 +34,8 @@ class SessionsController extends \BaseController {
       return Redirect::route('users.index');
 
     } catch (Exception $e) {
-      $input['autoOpenModal'] = 'true';
-      return Redirect::back()->with('flash_message', ['class' => 'alert alert-danger', 'text' => 'Login Failed'])->withInput($input);
+      // return Redirect::back()->with('flash_message', ['class' => 'alert alert-danger', 'text' => 'Login Failed'])->withInput($input);
+      return Redirect::back()->with('flash_message', ['class' => 'alert alert-danger', 'text' => 'Login Failed']);
     }
   }
   public function mapToUser($response)

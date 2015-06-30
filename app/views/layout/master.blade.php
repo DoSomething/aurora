@@ -14,26 +14,25 @@
 </head>
 
 <body class="modernizr-no-js">
-    <div class="chrome">
-      @include('layout.nav')
-      @if (Session::has('flash_message'))
-        <div class="flash-message {{ Session::get('flash_message')['class'] }}">
-          <em>{{ Session::get('flash_message')['text'] }}</em>
-        </div>
+  <div class="chrome">
+    @include('layout.nav')
+    @if (Session::has('flash_message'))
+      @if (Session::get('flash_message')['text'] === "Login Failed")
+        <script>
+          $(document).ready(function () {
+            window.DSModal.open($("#signin-modal"));
+          });
+        </script>
       @endif
+      <div class="flash-message {{ Session::get('flash_message')['class'] }}">
+        <em>{{ Session::get('flash_message')['text'] }}</em>
+      </div>
+    @endif
     <div class="container">
       @yield('main_content')
     </div>
-   </div>
-
-    <script>
-      $(document).ready(function () {
-        if ({{ Input::old('autoOpenModal', 'false') }}) {
-          window.DSModal.open($("#signin-modal"));
-        }
-      });
-    </script>
-  </body>
+  </div>
+</body>
 
 <script src="{{ asset('/assets/vendor/neue/neue.js') }}"></script>
 <script src="{{ asset('/assets/vendor/modal/modal.js') }}"></script>
