@@ -1,9 +1,9 @@
-<nav class="navigation {{'modifier_class'}}">
+<nav class="navigation">
   <a class="navigation__logo" href=""><span>DoSomething.org</span></a>
   <div class="navigation__menu">
   <ul class="navigation__primary">
     <li>
-      <h1 id="brand-title">Aurora</h1>
+      <h1 class="heading -hero">Aurora</h1>
     </li>
   </ul>
   <ul class="navigation__secondary">
