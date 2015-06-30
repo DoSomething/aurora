@@ -14,4 +14,7 @@ elixir(function(mix) {
 mix.clean;
 // DoSomething Neue Interface
 mix.copy('node_modules/dosomething-neue/dist', 'public/assets/vendor/neue');
+
+mix.copy('node_modules/dosomething-modal/dist', 'public/assets/vendor/modal');
+
 });
