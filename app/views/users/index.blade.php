@@ -4,24 +4,9 @@
 
 @include('users.partials.search')
 
-<ul class = "waypoints">
- <li class="is-active"> {{ link_to_route('users.index', 'First', array('page=1')) }} </li>
-
- @if ($users['current_page'] > 1)
-   <?php $prev =  $users['current_page'] - 1 ?>
-   <li> {{ link_to_route('users.index', 'Prev', array('page=' . $prev))}} </li>
- @endif
-
- @if ($users['current_page'] < $users['last_page'])
-   <?php $next =  $users['current_page'] + 1 ?>
-   <li class="waypoints__primary-link"> {{ link_to_route('users.index', 'Next', array('page=' . $next))}} </li>
- @endif
-
- <li> {{ link_to_route('users.index', 'Last', array('page='. $users['last_page'])) }} </li>
-</ul>
-
 @if ($users)
- <h4> Total members : {{ $users['total'] }}</h4>
+   <p class="pagination-buttons"> Total members : {{ $users['total'] }}</p>
+    @include('users.partials.waypoints')
    <table id="user-table">
      <thead>
        <tr class="row table-header">

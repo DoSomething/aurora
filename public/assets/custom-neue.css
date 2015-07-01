@@ -33,14 +33,12 @@
  color: #ffffff ;
  background: #4e2b63 ;
 }
-
 @media screen and (max-width: 580px) {
  .row {
    padding: 8px 0;
    display: block;
  }
 }
-
 .table-cell {
  padding: 6px 12px;
  display: table-cell;
@@ -51,9 +49,12 @@
    display: block;
  }
 }
-
 #user-table{
- margin: 0 0 40px 0;
- width: 100%;
-    text-align: center;
+	width: 100%;
+	text-align: center;
+	margin-top: 1%
+}
+/* pagination buttson */
+.pagination-buttons {
+	display:inline;
 }

@@ -1,12 +1,9 @@
-<div class="col-lg-6">
-  <div class="input-group">
+  <div class="form-item -inline -padded">
     {{ Form::open(['action' => 'UsersController@search']) }}
-      {{ Form::text('search_by', NULL, ['class' => 'form-control', 'placeholder' => 'Search by...']) }}
+      {{ Form::text('search_by', NULL, ['class' => 'text-field', 'placeholder' => 'Search by...']) }}
 
-      <div class="btn-group" role="group">
-        {{ Form::submit('Email', ['name' => 'type', 'value' => 'email', 'class' => 'btn btn-default']) }}
-        {{ Form::submit('Mobile', ['name' => 'type', 'class' => 'btn btn-default']) }}
-        {{ Form::submit('Drupal uid', ['name' => 'type', 'class' => 'btn btn-default']) }}
-    </div>
+        {{ Form::submit('Email', ['name' => 'type', 'value' => 'email', 'class' => 'button -secondary']) }}
+        {{ Form::submit('Mobile', ['name' => 'type', 'class' => 'button -secondary']) }}
+        {{ Form::submit('Drupal uid', ['name' => 'type', 'class' => 'button -secondary']) }}
   </div>
 {{ Form::close () }}
