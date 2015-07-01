@@ -34,8 +34,7 @@ class SessionsController extends \BaseController {
       return Redirect::route('users.index');
 
     } catch (Exception $e) {
-      // return Redirect::back()->with('flash_message', ['class' => 'alert alert-danger', 'text' => 'Login Failed'])->withInput($input);
-      return Redirect::back()->with('flash_message', ['class' => 'alert alert-danger', 'text' => 'Login Failed']);
+      return Redirect::back()->with('trigger_modal', ['class' => 'messages -error', 'text' => 'Login Failed']);
     }
   }
   public function mapToUser($response)
@@ -53,7 +52,7 @@ class SessionsController extends \BaseController {
   public function destroy($id = null)
   {
     Auth::logout();
-    return Redirect::to('/')->with('flash_message', ['text' => 'You have been logged out!', 'class' => 'alert alert-success']);
+    return Redirect::to('/')->with('flash_message', ['text' => 'You have been logged out!', 'class' => 'messages']);
   }
 
 

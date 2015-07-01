@@ -16,18 +16,16 @@
 <body class="modernizr-no-js">
   <div class="chrome">
     @include('layout.nav')
-    @if (Session::has('flash_message'))
-      @if (Session::get('flash_message')['text'] === "Login Failed")
-        <script>
-          $(document).ready(function () {
-            window.DSModal.open($("#signin-modal"));
-          });
-        </script>
+    <div class="modal_trigger">
+      @if (Session::has('trigger_modal'))
+        {{ autoOpenModal() }}
       @endif
-      <div class="flash-message {{ Session::get('flash_message')['class'] }}">
-        <em>{{ Session::get('flash_message')['text'] }}</em>
-      </div>
-    @endif
+      @if (Session::has('flash_message'))
+        <div class="{{ Session::get('flash_message')['class'] }}">
+          <em>{{ Session::get('flash_message')['text'] }}</em>
+        </div>
+      @endif
+    </div>
     <div class="container">
       @yield('main_content')
     </div>

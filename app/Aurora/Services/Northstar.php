@@ -83,4 +83,3 @@ class NorthstarAPI {
     return $response->json();
   }
 }
-

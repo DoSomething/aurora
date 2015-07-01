@@ -1,11 +1,9 @@
 <div data-modal id="signin-modal" role="dialog">
   <h2 class="heading -banner">Please Sign In</h2>
-  @if (Session::has('flash_message'))
-  <div class="messages">
-    <div class="flash-message {{ Session::get('flash_message')['class'] }}">
-      <em>{{ Session::get('flash_message')['text'] }}</em>
+  @if (Session::has('trigger_modal'))
+    <div class="{{ Session::get('trigger_modal')['class'] }}">
+      <em>{{ Session::get('trigger_modal')['text'] }}</em>
     </div>
-  </div>
   @endif
   <div class="modal__block">
   {{ Form::open(['route' => 'sessions.store', 'class' => 'form-signin']) }}
