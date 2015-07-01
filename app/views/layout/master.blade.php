@@ -8,7 +8,7 @@
 
   <link rel="stylesheet" href="{{ asset('assets/vendor/neue/neue.css') }}">
   <link rel="stylesheet" href="{{ asset('assets/vendor/modal/modal.css') }}">
-  <link rel="stylesheet" href="{{ asset('assets/vendor/neue/custom-neue.css') }}">
+  <link rel="stylesheet" href="{{ asset('assets/custom-neue.css') }}">
   <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
   <script src="{{ asset('/assets/vendor/neue/modernizr.js') }}"></script>
 </head>
