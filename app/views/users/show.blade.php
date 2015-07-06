@@ -1,8 +1,8 @@
 @extends('layout.master')
 
 @section('main_content')
-  <div class="container -padded">
-    <div class="wrapper">
+  <div class="wrapper">
+    <div class="container__block">
       <h2 class="heading account-info">Account Info</h2>
       <a href="{{ url('users/' . $user['_id'] . '/edit') }}"> Edit User <span class="glyphicon glyphicon-pencil"></span></a>
       @if ($aurora_user)

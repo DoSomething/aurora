@@ -27,9 +27,13 @@
           </div>
         @endif
       </div>
+      
       <div class="container -padded">
-        @yield('main_content')
+        <div class="wrapper">
+          @yield('main_content')
+        </div>
       </div>
+
     </div>
   </div>
 </body>
