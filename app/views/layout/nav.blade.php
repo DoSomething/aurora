@@ -3,7 +3,7 @@
   <div class="navigation__menu">
   <ul class="navigation__primary">
     <li>
-      <a href="."><h1 class="heading -hero">Aurora</h1></a>
+      <a href="/"><h1 class="heading -hero">Aurora</h1></a>
     </li>
   </ul>
   <ul class="navigation__secondary">
