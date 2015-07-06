@@ -19,7 +19,6 @@ class UsersController extends \BaseController {
       $input = Input::all();
       $users = $northstar->getAllUsers($input);
       return View::make('users.index')->with(compact('users'));
-
     } catch (Exception $e) {
       return View::make('users.index')->with('flash_message', ['class' => 'alert alert-warning', 'text' => 'Looks like there is something wrong with the connection!']);
     }
