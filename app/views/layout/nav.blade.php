@@ -1,9 +1,9 @@
 <nav class="navigation">
-  <a class="navigation__logo" href=""><span>DoSomething.org</span></a>
+  <a class="navigation__logo" href="/"><span>DoSomething.org</span></a>
   <div class="navigation__menu">
   <ul class="navigation__primary">
     <li>
-      <h1 class="heading -hero">Aurora</h1>
+      <a href="."><h1 class="heading -hero">Aurora</h1></a>
     </li>
   </ul>
   <ul class="navigation__secondary">
