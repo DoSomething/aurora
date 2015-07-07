@@ -3,8 +3,14 @@
   <div class="navigation__menu">
   <ul class="navigation__primary">
     @if (Auth::user())
-      <li><strong class="navigation__title">{{ link_to_route('keys.index', 'Keys') }} </strong></li>
-      <li><strong class="navigation__title"> {{ link_to_route('users.index', 'Users') }} </strong></li>
+      <li>
+        <strong class="navigation__title">{{ link_to_route('keys.index', 'Keys') }} </strong>
+        <span class="navigation__subtitle">Northstar API Keys</span>
+      </li>
+      <li>
+        <strong class="navigation__title"> {{ link_to_route('users.index', 'Users') }} </strong>
+        <span class="navigation__subtitle">View all users</span>
+      </li>
     @endif
   </ul>
   <ul class="navigation__secondary">
