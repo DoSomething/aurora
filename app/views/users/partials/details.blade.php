@@ -2,8 +2,8 @@
 	<li>
 		<article class="figure -left">
 			<dt>Id: {{ $user['_id'] or '' }}</dt>
-			<dt>First Name:{{ $user['first_name'] or '' }}</dt>
-			<dt>Last Name:{{ $user['last_name'] or '' }}</dt>
+			<dt>First Name: {{ $user['first_name'] or '' }}</dt>
+			<dt>Last Name: {{ $user['last_name'] or '' }}</dt>
 			<dt>Email: {{ $user['email'] or '' }}</dt>
 			<dt>Mobile: {{ $user['mobile'] or '' }}</dt>
 			<dt>Birthday: {{ $user['birthdate'] or '' }}</dt>
