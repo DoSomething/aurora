@@ -109,13 +109,13 @@ class UsersController extends \BaseController {
   {
     $search = Input::get('search_by');
     $type = strtolower(str_replace(' ', '_', Input::get('type')));
-
     try {
       // Attempt to find the user.
       $northstar = new Aurora\Services\Northstar\NorthstarAPI;
       $user = $northstar->getUser($type, $search);
-      return Redirect::route('users.show', array($user['_id']))->with(compact('user'));
 
+      return Redirect::route('users.show', $user['_id']);
+      
     } catch (Exception $e) {
       return Redirect::back()->withInput()->with('flash_message', ['class' => 'alert alert-warning', 'text' => 'Hmm, couldn\'t find anyone, are you sure thats right?']);
     }
@@ -123,8 +123,8 @@ class UsersController extends \BaseController {
 
   public function adminCreate($user_id)
   {
-    $user = User::where('id', $user_id)->first();
-    $user->assignRole(1);
+    // Create a new user in database with admin role
+    User::create(['_id' => $user_id])->assignRole(1);
     return Redirect::back()->with('flash_message', ['class' => 'alert alert-success', 'text' => 'The more admins the merrier.']);
   }
 

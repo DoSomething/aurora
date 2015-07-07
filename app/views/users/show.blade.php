@@ -4,19 +4,16 @@
   <div class="wrapper">
     <div class="container__block">
       <h2 class="heading account-info">Account Info</h2>
-      <a href="{{ url('users/' . $user['_id'] . '/edit') }}"> Edit User <span class="glyphicon glyphicon-pencil"></span></a>
+      <a href="{{ url('users/' . $user['_id'] . '/edit') }}">Edit User</a>
       @if ($aurora_user)
         Admin: {{ $aurora_user->hasRole('admin') ? '✓' : 'x' }}
-        @if (!$aurora_user->hasRole('admin'))
-          {{ Form::open(['route' => array('admin.create', $aurora_user->id)]) }}
-          {{ Form::submit('make admin') }}
-          {{ Form::close() }}
-        @endif
       @endif
-
-      <div class="container -padded">
+        <div class="container -padded">
           @include('users.partials.details')
-      </div>
+        </div>
+        @if (!$aurora_user)
+          @include('users.partials.make-admin')
+        @endif
     </div>
   </div>
 @stop
