@@ -3,14 +3,12 @@
 @section('main_content')
 
 <div class ="container -padded">
-	<div class="">
-	  {{ Form::open(['route' => 'keys.store', 'method' => 'post']) }}
+  {{ Form::open(['route' => 'keys.store', 'method' => 'post']) }}
 
-			@include('keys.partials.form')
+		@include('keys.partials.form')
 
 
-	  {{ Form::close() }}
-  </div>
+  {{ Form::close() }}
 </div>
 
 @stop
