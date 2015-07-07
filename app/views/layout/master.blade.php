@@ -15,19 +15,20 @@
 
 <body class="modernizr-no-js">
   <div class="chrome">
-    @include('layout.nav')
-    <div class="modal_trigger">
-      @if (Session::has('trigger_modal'))
-        {{ autoOpenModal() }}
-      @endif
-      @if (Session::has('flash_message'))
-        <div class="{{ Session::get('flash_message')['class'] }}">
-          <em>{{ Session::get('flash_message')['text'] }}</em>
+    <div class="wrapper">
+
+      @include('layout.nav')
+      
+      <div class="modal_trigger">
+        @include('users.partials.trigger-modal')
+      </div>
+      
+      <div class="container -padded">
+        <div class="wrapper">
+          @yield('main_content')
         </div>
-      @endif
-    </div>
-    <div class="container">
-      @yield('main_content')
+      </div>
+
     </div>
   </div>
 </body>
