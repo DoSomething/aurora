@@ -8,11 +8,6 @@
   </ul>
   <ul class="navigation__secondary">
     <li>
-      <form action="#" method="post">
-        <input class="text-field -search" type="search">
-      </form>
-    </li>
-    <li>
     @if (Auth::user())
       <li> {{ link_to_route('keys.index', 'Keys') }} </li>
       <li> {{ link_to_route('users.index', 'Users') }} </li>
