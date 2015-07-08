@@ -15,15 +15,17 @@
 	<!-- not actually displaying campaigns, need to make call to api -->
 	<li>
 		<article class="figure -left">
-			@foreach ($user as $key => $field)
-				@if ($key == 'campaigns')
-					@foreach($field as $campaigns)
-						<div class="campaigns">
-							{{var_dump($user["campaigns"])}}
-						</div>
-					@endforeach
-				@endif
-			@endforeach
+			@if (!empty($user['campaigns']))
+				@foreach ($user["campaigns"] as $campaign)
+					<div class="campaigns">
+						<dt>Id: {{ $campaign['_id'] or '' }}</dt>
+						<dt>Drupal id: {{ $campaign['drupal_id'] or '' }}</dt>
+						<dt>Signup id: {{ $campaign['signup_id'] or '' }}</dt>
+						<dt>Signup Source: {{ $campaign['signup_source'] or '' }}</dt>
+						<dt>Reportback Id: {{ $campaign['reportback_id'] or '' }}</dt>
+					</div>
+				@endforeach
+			@endif
 		</article>
 	</li>
 </ul>
