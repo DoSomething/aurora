@@ -8,14 +8,16 @@
 		<h2> Listing of all Northstar API keys</h2>
 		@if ($keys)
 			<ul class="gallery -duo">
-			  @foreach($keys as $key)
+			  @forelse($keys as $key)
 			    <li>
 			      <article class="figure -left">
 	          	<dt><strong> App ID: </strong> {{ $key['app_id'] }} </dt>
 	          	<dt><strong> API Key: </strong>{{ $key['api_key'] }} </dt>
 			      </article>
 			    </li>
-			  @endforeach
+		    @empty
+					<h3>No API Keys</h3>
+			  @endforelse
 			</ul>
 		@endif
 	</div>
