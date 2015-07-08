@@ -4,12 +4,16 @@
   <ul class="navigation__primary">
     @if (Auth::user())
       <li>
-        <strong class="navigation__title">{{ link_to_route('keys.index', 'Keys') }} </strong>
-        <span class="navigation__subtitle">Northstar API Keys</span>
+        <a href="{{ route('keys.index', 'Keys') }}">
+          <strong class="navigation__title">API Keys</strong>
+          <span class="navigation__subtitle">Northstar API Keys</span>
+        </a>
       </li>
       <li>
-        <strong class="navigation__title"> {{ link_to_route('users.index', 'Users') }} </strong>
-        <span class="navigation__subtitle">View all users</span>
+        <a href="{{ route('users.index', 'Users') }}">
+          <strong class="navigation__title">Users</strong>
+          <span class="navigation__subtitle">View all users</span>
+        </a>
       </li>
     @endif
   </ul>
