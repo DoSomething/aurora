@@ -8,3 +8,9 @@ function autoOpenModal(){
 	});
 	</script>';
 }
+
+function sanitizePhoneNumber($number){
+	$number = preg_replace('/[^0-9]/', '', $number);
+	$number = preg_replace("/([0-9]{3})([0-9]{3})([0-9]{4})/", "$1-$2-$3", $number);
+	return $number;
+}

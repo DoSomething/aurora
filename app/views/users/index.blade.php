@@ -24,7 +24,7 @@
            <td class="table-cell"> {{ $user['first_name'] or '' }}</td>
            <td class="table-cell"> {{ $user['last_name'] or '' }}</td>
            <td class="table-cell"> {{ $user['email']  or '' }}</td>
-           <td class="table-cell"> {{ $user['mobile'] or '' }}</td>
+           <td class="table-cell"> {{ isset($user['mobile']) ? sanitizePhoneNumber($user['mobile']) : '' }}</td>
          </tr>
        @endforeach
      </tbody>
