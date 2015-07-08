@@ -2,19 +2,20 @@
 
 @section('main_content')
 
-
-<div class ="container">
+<div class ="container -padded">
   {{ Form::open(['route' => 'keys.store', 'method' => 'post']) }}
-    <div class="form-group">
 
-      {{ Form::label('App Name', null, ['class' => 'control-label col-sm-2']) }}
-      <div class="col-sm-10">
-        {{ Form::text('app_name', NULL, ['class' => 'form-control']) }}
-      </div>
-    </div>
+		<div class="container__block -half">
+			<h1 class="heading -alpha">Create a New App</h1>
+			  <div class="form-item -padded">
+				  {{ Form::label('App Name', null, ['class' => 'field-label']) }}
 
-    {{ Form::submit('Submit', ['class' => 'btn btn-large btn-default']) }}
+			    {{ Form::text('app_name', NULL, ['class' => 'text-field']) }}
+				</div>
+			    {{ Form::submit('Submit', ['class' => 'button']) }}
+		</div>
 
   {{ Form::close() }}
+</div>
 
 @stop

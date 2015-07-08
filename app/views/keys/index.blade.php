@@ -1,20 +1,25 @@
 @extends('layout.master')
 
 @section('main_content')
-
-<a href="{{ URL::Route('keys.create') }}"><span class='glyphicon glyphicon-plus'></span>New App</a>
-
-<h2> Listing of all Northstar api keys. </h2>
-
-@if ($keys)
-  @foreach($keys as $key)
-    <div class = "well" >
-     <dt class="control-label col-sm-2"><strong> App ID </strong> </dt>
-     <dl> {{ $key['app_id'] }} </dl>
-     <dt class="control-label col-sm-2"><strong> API Key </strong> </dt>
-     <dl> {{ $key['api_key'] }} </dl>
-    </div>
-  @endforeach
-@endif
-
+<div class="container -padded">
+	<div class="container__block">
+		<a href="{{ route('keys.create') }}">New App</a>
+	</div>
+		<h2> Listing of all Northstar API keys</h2>
+		@if ($keys)
+			<ul class="gallery -duo">
+			  @forelse($keys as $key)
+			    <li>
+			      <article class="figure -left">
+	          	<dt><strong> App ID: </strong> {{ $key['app_id'] }} </dt>
+	          	<dt><strong> API Key: </strong>{{ $key['api_key'] }} </dt>
+			      </article>
+			    </li>
+		    @empty
+					<h3>No API Keys</h3>
+			  @endforelse
+			</ul>
+		@endif
+	</div>
+</div>
 @stop
