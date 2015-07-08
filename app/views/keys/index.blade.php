@@ -5,7 +5,7 @@
 	<a href="{{ URL::Route('keys.create') }}"><span class='glyphicon glyphicon-plus'></span>New App</a>
 </div>
 <div class="container__block">
-	<h2> Listing of all Northstar api keys. </h2>
+	<h2> Listing of all Northstar API keys. </h2>
 	@if ($keys)
 		<ul class="gallery -duo">
 		  @foreach($keys as $key)
@@ -20,6 +20,5 @@
 		  @endforeach
 		</ul>
 	@endif
-	
 </div>
 @stop
