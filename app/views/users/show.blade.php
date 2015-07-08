@@ -8,7 +8,7 @@
       @if ($aurora_user)
         Admin: {{ $aurora_user->hasRole('admin') ? '✓' : 'x' }}
       @endif
-      <div class="container -padded">
+      <div class=" -padded">
         @include('users.partials.details')
       </div>
       <div class="container__block -half">

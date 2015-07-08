@@ -1,14 +1,16 @@
 <ul class="gallery -duo">
 	<li>
 		<article class="figure -left">
-			<dt>Id: {{ $user['_id'] or '' }}</dt>
-			<dt>First Name: {{ $user['first_name'] or '' }}</dt>
-			<dt>Last Name: {{ $user['last_name'] or '' }}</dt>
-			<dt>Email: {{ $user['email'] or '' }}</dt>
-			<dt>Mobile: {{ $user['mobile'] or '' }}</dt>
-			<dt>Birthday: {{ $user['birthdate'] or '' }}</dt>
-			<dt>Address: {{ $user['addr_street1'] or ''}} {{ $user['addr_street2'] or ''}} {{ $user['add_city'] or ''}}, {{ $user['addr_state'] or ''}} {{ $user['addr_zip'] or ''}}</dt>
-			<dt>Country: {{ $user['country'] or '' }}</dt>
+			<dl class="profile-settings">
+				<dt>Id:</dt><dd>{{ $user['_id'] or '' }}</dd>
+				<dt>First Name:</dt><dd>{{ $user['first_name'] or '' }}</dd>
+				<dt>Last Name:</dt><dd>{{ $user['last_name'] or '' }}</dd>
+				<dt>Email:</dt><dd>{{ $user['email'] or '' }}</dd>
+				<dt>Mobile:</dt><dd>{{ $user['mobile'] or '' }}</dd>
+				<dt>Birthday:</dt><dd>{{ $user['birthdate'] or '' }}</dd>
+				<dt>Address:</dt><dd>{{ $user['addr_street1'] or ''}} {{ $user['addr_street2'] or ''}} {{ $user['add_city'] or ''}}, {{ $user['addr_state'] or ''}} {{ $user['addr_zip'] or ''}}</dd>
+				<dt>Country:</dt><dd>{{ $user['country'] or '' }}</dd>
+			</dl>
 		</article>
 	</li>
 
@@ -16,15 +18,15 @@
 	<li>
 		<article class="figure -left">
 			@if (!empty($user['campaigns']))
-				@foreach ($user["campaigns"] as $campaign)
-					<div class="campaigns">
-						<dt>Id: {{ $campaign['_id'] or '' }}</dt>
-						<dt>Drupal id: {{ $campaign['drupal_id'] or '' }}</dt>
-						<dt>Signup id: {{ $campaign['signup_id'] or '' }}</dt>
-						<dt>Signup Source: {{ $campaign['signup_source'] or '' }}</dt>
-						<dt>Reportback Id: {{ $campaign['reportback_id'] or '' }}</dt>
-					</div>
-				@endforeach
+			@foreach ($user["campaigns"] as $campaign)
+			<dl class="profile-settings">
+				<dt>Id:</dt><dd>{{ $campaign['_id'] or '' }}</dd>
+				<dt>Drupal id:</dt><dd>{{ $campaign['drupal_id'] or '' }}</dd>
+				<dt>Signup id:</dt><dd>{{ $campaign['signup_id'] or '' }}</dd>
+				<dt>Signup Source:</dt> <dd>{{ $campaign['signup_source'] or '' }}</dd>
+				<dt>Reportback Id:</dt><dd>{{ $campaign['reportback_id'] or '' }}</dd>
+			</dl>
+			@endforeach
 			@endif
 		</article>
 	</li>
