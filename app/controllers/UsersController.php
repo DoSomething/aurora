@@ -62,8 +62,11 @@ class UsersController extends \BaseController {
       $user = $northstar->getUser('_id', $id);
       $aurora_user = User::where('_id', $id)->first();
       $drupal = new Aurora\Services\Drupal\DrupalAPI;
-      foreach($user['campaigns'] as $campaign){
-         array_push($campaigns, $drupal->getCampaign($campaign['drupal_id']));
+
+      if (!empty($user['campaigns'])){
+        foreach($user['campaigns'] as $campaign){
+           array_push($campaigns, $drupal->getCampaign($campaign['drupal_id']));
+        }
       }
     }
     $drupal = new Aurora\Services\Drupal\DrupalAPI;
