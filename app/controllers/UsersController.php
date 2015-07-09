@@ -56,7 +56,6 @@ class UsersController extends \BaseController {
   public function show($id)
   {
     $user = Session::get('user');
-    $campaigns = [];
     if (!$user) {
       $northstar = new Aurora\Services\Northstar\NorthstarAPI;
       $user = $northstar->getUser('_id', $id);
@@ -65,7 +64,7 @@ class UsersController extends \BaseController {
 
       if (!empty($user['campaigns'])){
         foreach($user['campaigns'] as $campaign){
-           array_push($campaigns, $drupal->getCampaign($campaign['drupal_id']));
+           $campaigns[]=$drupal->getCampaign($campaign['drupal_id']);
         }
       }
     }
