@@ -62,7 +62,7 @@ class UsersController extends \BaseController {
       $aurora_user = User::where('_id', $id)->first();
     }
     $drupal = new Aurora\Services\Drupal\DrupalAPI;
-    return View::make('users.show')->with(compact('user', 'aurora_user'));
+    return View::make('users.show')->with(compact('user', 'aurora_user', 'drupal'));
   }
 
 

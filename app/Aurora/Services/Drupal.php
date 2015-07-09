@@ -14,10 +14,10 @@ class DrupalAPI {
   }
 
 
-  public function getCampaign()
+  public function getCampaign($cid)
   {
 
-    $response = $this->client->get('campaigns/362');
+    $response = $this->client->get('campaigns/' . $cid);
 
     return $response->json()['data'];
   }

@@ -20,13 +20,9 @@
 	    @if (!empty($user['campaigns']))
 	      @foreach ($user["campaigns"] as $campaign)
       		<dl class="profile-settings">
-          	<!-- This Id is a problem, where dummy data has different nested array from actual drupal callback data -->
-          	<!-- Not quite sure what Id is as well -->
-	          <dt>Id:</dt><dd>{{ $campaign['_id']['$id'] or '' }}</dd>
-	          <dt>Drupal id:</dt><dd>{{ $campaign['drupal_id'] or '' }}</dd>
-	          <dt>Signup id:</dt><dd>{{ $campaign['signup_id'] or '' }}</dd>
-	          <dt>Signup Source:</dt> <dd>{{ $campaign['signup_source'] or '' }}</dd>
-	          <dt>Reportback Id:</dt><dd>{{ $campaign['reportback_id'] or '' }}</dd>
+							{{ $drupal->getCampaign($campaign['drupal_id'])['title'] }}
+							<img src= "{{ $drupal->getCampaign($campaign['drupal_id'])['cover_image']['default']['uri'] }}" height="42" width="42">
+
       		</dl>
       	@endforeach
     	@endif
