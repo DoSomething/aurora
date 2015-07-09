@@ -56,13 +56,18 @@ class UsersController extends \BaseController {
   public function show($id)
   {
     $user = Session::get('user');
+    $campaigns = [];
     if (!$user) {
       $northstar = new Aurora\Services\Northstar\NorthstarAPI;
       $user = $northstar->getUser('_id', $id);
       $aurora_user = User::where('_id', $id)->first();
+      $drupal = new Aurora\Services\Drupal\DrupalAPI;
+      foreach($user['campaigns'] as $campaign){
+         array_push($campaigns, $drupal->getCampaign($campaign['drupal_id']));
+      }
     }
     $drupal = new Aurora\Services\Drupal\DrupalAPI;
-    return View::make('users.show')->with(compact('user', 'aurora_user', 'drupal'));
+    return View::make('users.show')->with(compact('user', 'aurora_user', 'campaigns'));
   }
 
 

@@ -1,6 +1,7 @@
 <ul class="gallery -duo">
 	<li>
 		<article class="figure -left">
+			<h3>Account Info</h3>
 			<dl class="profile-settings">
 				<dt>Id:</dt><dd>{{ $user['_id'] or '' }}</dd>
 				<dt>First Name:</dt><dd>{{ $user['first_name'] or '' }}</dd>
@@ -16,16 +17,19 @@
 
 	<!-- not actually displaying campaigns, need to make call to api -->
 	<li>
-	  <article class="figure -left">
-	    @if (!empty($user['campaigns']))
-	      @foreach ($user["campaigns"] as $campaign)
-      		<dl class="profile-settings">
-							{{ $drupal->getCampaign($campaign['drupal_id'])['title'] }}
-							<img src= "{{ $drupal->getCampaign($campaign['drupal_id'])['cover_image']['default']['uri'] }}" height="42" width="42">
-
-      		</dl>
-      	@endforeach
-    	@endif
+	  <article class="figure -medium">
+	  <h3>Campaigns</h3>
+	      @forelse ($campaigns as $campaign)
+          <div class="figure__media">
+						<img src= "{{ $campaign['cover_image']['default']['uri'] }}">
+					</div>
+					<div class="figure__body">
+						<b>{{ $campaign['title'] }}</b>
+					</div>
+				@empty
+					<h3>This user has no campaigns</h3>	
+      	@endforelse
   	</article>
 	</li>
 </ul>
+
