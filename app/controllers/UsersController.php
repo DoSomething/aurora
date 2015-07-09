@@ -62,7 +62,6 @@ class UsersController extends \BaseController {
       $aurora_user = User::where('_id', $id)->first();
     }
     $drupal = new Aurora\Services\Drupal\DrupalAPI;
-    dd($drupal->getCampaigns());
     return View::make('users.show')->with(compact('user', 'aurora_user'));
   }
 

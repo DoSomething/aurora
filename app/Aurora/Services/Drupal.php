@@ -2,10 +2,22 @@
 
 class DrupalAPI {
 
-  public function getCampaigns()
+  protected $client;
+
+  public function __construct()
   {
-    $client = new \Guzzle\Service\Client("https://www.dosomething.org");
-    $response = $client->get('/api/v1/campaigns/362')->send();
+    $base_url = "http://staging.beta.dosomething.org/api/v1/";
+
+    $client = new \GuzzleHttp\Client(['base_url' => $base_url]);
+
+    $this->client = $client;
+  }
+
+
+  public function getCampaign()
+  {
+
+    $response = $this->client->get('campaigns/362');
 
     return $response->json()['data'];
   }
