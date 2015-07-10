@@ -5,6 +5,7 @@ class UsersController extends \BaseController {
   public function __construct() {
     $this->beforeFilter('auth');
     $this->beforeFilter('role:admin');
+    $this->drupal = new Aurora\Services\Drupal\DrupalAPI;
   }
   /**
    * Display a listing of the resource.
@@ -61,15 +62,12 @@ class UsersController extends \BaseController {
       $northstar = new Aurora\Services\Northstar\NorthstarAPI;
       $user = $northstar->getUser('_id', $id);
       $aurora_user = User::where('_id', $id)->first();
-      $drupal = new Aurora\Services\Drupal\DrupalAPI;
-
       if (!empty($user['campaigns'])){
         foreach($user['campaigns'] as $campaign){
-           array_push($campaigns, $drupal->getCampaign($campaign['drupal_id']));
+           array_push($campaigns, $this->drupal->getCampaign($campaign['drupal_id']));
         }
       }
     }
-    $drupal = new Aurora\Services\Drupal\DrupalAPI;
     return View::make('users.show')->with(compact('user', 'aurora_user', 'campaigns'));
   }
 
