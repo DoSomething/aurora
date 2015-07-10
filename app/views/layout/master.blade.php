@@ -22,12 +22,8 @@
       <div class="modal_trigger">
         @include('users.partials.trigger-modal')
       </div>
-      
-      <div class="container -padded">
-        <div class="wrapper">
-          @yield('main_content')
-        </div>
-      </div>
+
+      @yield('main_content')
 
     </div>
   </div>
