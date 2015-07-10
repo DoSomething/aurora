@@ -1,7 +1,16 @@
 @extends('layout.master')
 
 @section('main_content')
-
+<header class="header" role="banner">
+  <div class="wrapper">
+    <h1 class="header__title">
+      User Index
+    </h1>
+    <p class="header__subtitle">
+      Listing of all users
+    </p>
+  </div>
+</header>
 <div class="container -padded">
   <div class="wrapper">
     @include('users.partials.search')

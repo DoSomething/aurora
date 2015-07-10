@@ -1,11 +1,20 @@
 @extends('layout.master')
 
 @section('main_content')
+<header class="header" role="banner">
+  <div class="wrapper">
+    <h1 class="header__title">
+      Edit User
+    </h1>
+    <p class="header__subtitle">
+      Update info for {{ $user['first_name'] or '' }} {{ $user['last_name'] or '' }}
+    </p>
+  </div>
+</header>
 
 <div class ="container -padded">
   <div class="wrapper">
     <div class="container__block -narrow">
-      <h1 class="heading">Edit User</h1>
       {{ Form::model($user, [ 'method' => 'PATCH', 'route' => ['users.update', $user['_id']]]) }}
         <div class="form-item -padded">
           {{ Form::label('_id', 'Mongo Id', ['class' => 'field-label']) }}
