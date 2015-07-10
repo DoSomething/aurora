@@ -28,9 +28,6 @@
 <div class="container -padded">
   <div class="wrapper">
     <div class="container__block">
-      @if ($aurora_user)
-        Admin: {{ $aurora_user->hasRole('admin') ? '✓' : 'x' }}
-      @endif
       @include('users.partials.campaigns')
     </div>
   </div>
