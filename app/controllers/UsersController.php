@@ -1,12 +1,14 @@
 <?php
 use Aurora\Services\Drupal\DrupalAPI;
+use Aurora\Services\Northstar\NorthstarAPI;
 
 class UsersController extends \BaseController {
 
-  public function __construct(DrupalAPI $drupal) {
+  public function __construct(DrupalAPI $drupal, NorthstarAPI $northstar) {
     $this->beforeFilter('auth');
     $this->beforeFilter('role:admin');
     $this->drupal = $drupal;
+    $this->northstar = $northstar;
   }
   /**
    * Display a listing of the resource.
@@ -17,9 +19,8 @@ class UsersController extends \BaseController {
   {
     try {
       // Attempt to fetch all users.
-      $northstar = new Aurora\Services\Northstar\NorthstarAPI;
       $input = Input::all();
-      $users = $northstar->getAllUsers($input);
+      $users = $this->northstar->getAllUsers($input);
       return View::make('users.index')->with(compact('users'));
     } catch (Exception $e) {
       return View::make('users.index')->with('flash_message', ['class' => 'alert alert-warning', 'text' => 'Looks like there is something wrong with the connection!']);
@@ -60,8 +61,7 @@ class UsersController extends \BaseController {
     $campaigns = [];
     $user = Session::get('user');
     if (!$user) {
-      $northstar = new Aurora\Services\Northstar\NorthstarAPI;
-      $user = $northstar->getUser('_id', $id);
+      $user = $this->northstar->getUser('_id', $id);
       $aurora_user = User::where('_id', $id)->first();
       if (!empty($user['campaigns'])){
         foreach($user['campaigns'] as $campaign){
@@ -81,8 +81,7 @@ class UsersController extends \BaseController {
    */
   public function edit($id)
   {
-    $northstar = new Aurora\Services\Northstar\NorthstarAPI;
-    $user = $northstar->getUser('_id', $id);
+    $user = $this->northstar->getUser('_id', $id);
     return View::make('users.edit')->with(compact('user'));
   }
 
@@ -96,8 +95,7 @@ class UsersController extends \BaseController {
   public function update($id)
   {
     $input = Input::except('_token', '_id', 'drupal_uid');
-    $northstar = new Aurora\Services\Northstar\NorthstarAPI;
-    $user = $northstar->updateUser($id, $input);
+    $user = $this->northstar->updateUser($id, $input);
     return Redirect::back()->with('flash_message', ['class' => 'alert alert-success', 'text' => 'Sweet, look at you updating that user.']);
   }
 
@@ -119,8 +117,7 @@ class UsersController extends \BaseController {
     $type = strtolower(str_replace(' ', '_', Input::get('type')));
     try {
       // Attempt to find the user.
-      $northstar = new Aurora\Services\Northstar\NorthstarAPI;
-      $user = $northstar->getUser($type, $search);
+      $user = $this->northstar->getUser($type, $search);
 
       return Redirect::route('users.show', $user['_id']);
       
