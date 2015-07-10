@@ -1,16 +1,8 @@
 @extends('layout.master')
 
 @section('main_content')
-<header class="header" role="banner">
-  <div class="wrapper">
-    <h1 class="header__title">
-      Edit User
-    </h1>
-    <p class="header__subtitle">
-      Update info for {{ $user['first_name'] or '' }} {{ $user['last_name'] or '' }}
-    </p>
-  </div>
-</header>
+
+@include('layout.header', ['header' => 'Edit User', 'subtitle' => 'Update info for ' . ((isset($user['first_name']) ? $user['first_name'] : "") . " " . (isset($user['last_name']) ? $user['last_name'] : ""))])
 
 <div class ="container -padded">
   <div class="wrapper">

@@ -6,7 +6,7 @@ class DrupalAPI {
 
   public function __construct()
   {
-    $base_url = "http://staging.beta.dosomething.org/api/v1/";
+    $base_url = \Config::get('services.drupal.url');
 
     $client = new \GuzzleHttp\Client(['base_url' => $base_url]);
 
@@ -14,10 +14,10 @@ class DrupalAPI {
   }
 
 
-  public function getCampaign($cid)
+  public function getCampaign($id)
   {
 
-    $response = $this->client->get('campaigns/' . $cid);
+    $response = $this->client->get('campaigns/' . $id);
 
     return $response->json()['data'];
   }

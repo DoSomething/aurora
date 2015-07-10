@@ -1,13 +1,9 @@
 @extends('layout.master')
 
 @section('main_content')
-<header class="header" role="banner">
-  <div class="wrapper">
-    <h1 class="header__title">
-      Create a New App
-    </h1>
-  </div>
-</header>
+
+@include('layout.header', ['header' => 'Create a New App', 'subtitle' => ''])
+
 <div class="container -padded">
   <div class="wrapper">
 		<div class ="container -padded">

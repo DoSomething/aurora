@@ -1,16 +1,8 @@
 @extends('layout.master')
 
 @section('main_content')
-<header class="header" role="banner">
-  <div class="wrapper">
-    <h1 class="header__title">
-      {{ $user['first_name'] or '' }} {{ $user['last_name'] or '' }}
-    </h1>
-    <p class="header__subtitle">
-      View user info
-    </p>
-  </div>
-</header>
+
+@include('layout.header', ["header" => ((isset($user['first_name']) ? $user['first_name'] : "") . " " . (isset($user['last_name']) ? $user['last_name'] : "")), "subtitle" => "View user info"])
 
 <h1 class="heading -banner"><span>Account Info</span></h1>
 <div class="container -padded">

@@ -1,16 +1,8 @@
 @extends('layout.master')
 
 @section('main_content')
-<header class="header" role="banner">
-  <div class="wrapper">
-    <h1 class="header__title">
-     	API Keys
-    </h1>
-    <p class="header__subtitle">
-      Listing of all Northstar API Keys
-    </p>
-  </div>
-</header>
+
+@include('layout.header', ['header' => 'API Keys', 'subtitle' => 'Listing of all Northstar API Keys'])
 
 <div class="container -padded">
   <div class="wrapper">

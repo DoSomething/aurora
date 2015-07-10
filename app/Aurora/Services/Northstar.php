@@ -7,6 +7,7 @@ class NorthstarAPI {
   public function __construct()
   {
     $base_url = \Config::get('services.northstar.url');
+
     if (\App::environment('local')) {
       $base_url .=  ":" . \Config::get('services.northstar.port');
     }

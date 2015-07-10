@@ -33,5 +33,8 @@ return array(
       'app_id'  => getenv('NORTHSTAR_APP_ID'),
       'api_key' => getenv('NORTHSTAR_API_KEY')
   ),
+ 'drupal' => array(
+      'url' => "http://staging.beta.dosomething.org/api/v1/"
+  ),
 
 );

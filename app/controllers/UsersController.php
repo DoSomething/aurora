@@ -1,11 +1,12 @@
 <?php
+use Aurora\Services\Drupal\DrupalAPI;
 
 class UsersController extends \BaseController {
 
-  public function __construct() {
+  public function __construct(DrupalAPI $drupal) {
     $this->beforeFilter('auth');
     $this->beforeFilter('role:admin');
-    $this->drupal = new Aurora\Services\Drupal\DrupalAPI;
+    $this->drupal = $drupal;
   }
   /**
    * Display a listing of the resource.
