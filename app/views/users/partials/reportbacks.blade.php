@@ -1,6 +1,5 @@
 <ul class="gallery -triad " data-show-more="true">
-	@forelse ($reportbacks_array as $reportback)
-
+	@forelse ($reportbacks as $reportback)
 		<li>
 	    <div class="figure">
 	      <div class="figure__media">

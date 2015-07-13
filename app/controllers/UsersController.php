@@ -59,7 +59,7 @@ class UsersController extends \BaseController {
   public function show($id)
   {
     $campaigns = [];
-    $reportbacks_array = [];
+    $reportbacks = [];
     $user = Session::get('user');
     if (!$user) {
       $user = $this->northstar->getUser('_id', $id);
@@ -68,12 +68,12 @@ class UsersController extends \BaseController {
         foreach($user['campaigns'] as $campaign){
           array_push($campaigns, $this->drupal->getCampaign($campaign['drupal_id']));
           if (!empty($campaign['reportback_id'])) {
-            array_push($reportbacks_array, $this->drupal->getReportbacks($campaign['reportback_id']));
+            array_push($reportbacks, $this->drupal->getReportbacks($campaign['reportback_id']));
           }
         }
       }
     }
-    return View::make('users.show')->with(compact('user', 'aurora_user', 'campaigns', 'reportbacks_array'));
+    return View::make('users.show')->with(compact('user', 'aurora_user', 'campaigns', 'reportbacks'));
   }
 
 
