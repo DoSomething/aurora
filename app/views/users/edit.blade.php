@@ -2,10 +2,11 @@
 
 @section('main_content')
 
+@include('layout.header', ['header' => 'Edit User', 'subtitle' => 'Update info for ' . ((isset($user['first_name']) ? $user['first_name'] : "") . " " . (isset($user['last_name']) ? $user['last_name'] : ""))])
+
 <div class ="container -padded">
   <div class="wrapper">
     <div class="container__block -narrow">
-      <h1 class="heading">Edit User</h1>
       {{ Form::model($user, [ 'method' => 'PATCH', 'route' => ['users.update', $user['_id']]]) }}
         <div class="form-item -padded">
           {{ Form::label('_id', 'Mongo Id', ['class' => 'field-label']) }}

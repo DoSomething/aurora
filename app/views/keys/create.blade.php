@@ -2,20 +2,23 @@
 
 @section('main_content')
 
-<div class ="container -padded">
-  {{ Form::open(['route' => 'keys.store', 'method' => 'post']) }}
+@include('layout.header', ['header' => 'Create a New App', 'subtitle' => ''])
 
-		<div class="container__block -half">
-			<h1 class="heading -alpha">Create a New App</h1>
-			  <div class="form-item -padded">
-				  {{ Form::label('App Name', null, ['class' => 'field-label']) }}
+<div class="container -padded">
+  <div class="wrapper">
+		<div class ="container -padded">
+		  {{ Form::open(['route' => 'keys.store', 'method' => 'post']) }}
+				<div class="container__block -half">
+				  <div class="form-item -padded">
+					  {{ Form::label('App Name', null, ['class' => 'field-label']) }}
 
-			    {{ Form::text('app_name', NULL, ['class' => 'text-field']) }}
+				    {{ Form::text('app_name', NULL, ['class' => 'text-field']) }}
+					</div>
+				    {{ Form::submit('Submit', ['class' => 'button']) }}
 				</div>
-			    {{ Form::submit('Submit', ['class' => 'button']) }}
+		  {{ Form::close() }}
 		</div>
-
-  {{ Form::close() }}
+	</div>
 </div>
 
 @stop

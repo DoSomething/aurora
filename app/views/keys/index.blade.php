@@ -1,11 +1,14 @@
 @extends('layout.master')
 
 @section('main_content')
+
+@include('layout.header', ['header' => 'API Keys', 'subtitle' => 'Listing of all Northstar API Keys'])
+
 <div class="container -padded">
-	<div class="container__block">
-		<a href="{{ route('keys.create') }}">New App</a>
-	</div>
-		<h2> Listing of all Northstar API keys</h2>
+  <div class="wrapper">
+		<div class="container__block">
+			<a href="{{ route('keys.create') }}">New App</a>
+		</div>
 		@if ($keys)
 			<ul class="gallery -duo">
 			  @forelse($keys as $key)
