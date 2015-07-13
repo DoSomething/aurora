@@ -21,5 +21,6 @@
       'api_key' => 'abc4324'
     ),
     'drupal' => array(
-      'url' => "http://staging.beta.dosomething.org/api/v1/")
+      'url' => "http://staging.beta.dosomething.org/api/v1/"
+    )
   );

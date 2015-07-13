@@ -1,5 +1,7 @@
 <?php namespace Aurora\Services\Drupal;
 
+use GuzzleHttp\Client;
+
 class DrupalAPI {
 
   protected $client;
@@ -8,7 +10,7 @@ class DrupalAPI {
   {
     $base_url = \Config::get('services.drupal.url');
 
-    $client = new \GuzzleHttp\Client(['base_url' => $base_url]);
+    $client = new Client(['base_url' => $base_url]);
 
     $this->client = $client;
   }
