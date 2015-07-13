@@ -26,4 +26,13 @@
   </div>
 </div>
 
+<h1 class="heading -banner"><span>Reportbacks</span></h1>
+<div class="container -padded">
+  <div class="wrapper">
+    <div class="container__block">
+      @include('users.partials.reportbacks')
+    </div>
+  </div>
+</div>
+
 @stop

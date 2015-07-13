@@ -28,13 +28,6 @@ class DrupalAPI {
   {
     $response = $this->client->get('reportbacks/' . $id . '.json');
 
-    return $response->json()['data']['reportback_items']['data'];
-  }
-
-  public function getReportbackItems($id)
-  {
-    $response = $this->client->get('reportback-items/' . $id . '.json');
-    
     return $response->json()['data'];
   }
 

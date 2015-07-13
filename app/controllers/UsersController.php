@@ -59,17 +59,21 @@ class UsersController extends \BaseController {
   public function show($id)
   {
     $campaigns = [];
+    $reportbacks_array = [];
     $user = Session::get('user');
     if (!$user) {
       $user = $this->northstar->getUser('_id', $id);
       $aurora_user = User::where('_id', $id)->first();
       if (!empty($user['campaigns'])){
         foreach($user['campaigns'] as $campaign){
-           array_push($campaigns, $this->drupal->getCampaign($campaign['drupal_id']));
+          array_push($campaigns, $this->drupal->getCampaign($campaign['drupal_id']));
+          if (!empty($campaign['reportback_id'])) {
+            array_push($reportbacks_array, $this->drupal->getReportbacks($campaign['reportback_id']));
+          }
         }
       }
     }
-    return View::make('users.show')->with(compact('user', 'aurora_user', 'campaigns'));
+    return View::make('users.show')->with(compact('user', 'aurora_user', 'campaigns', 'reportbacks_array'));
   }
 
 
