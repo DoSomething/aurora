@@ -7,7 +7,7 @@
 				<dt>First Name:</dt><dd>{{ $user['first_name'] or '' }}</dd>
 				<dt>Last Name:</dt><dd>{{ $user['last_name'] or '' }}</dd>
 				<dt>Email:</dt><dd>{{ $user['email'] or '' }}</dd>
-				<dt>Mobile:</dt><dd>{{ isset($user['mobile']) ? sanitizePhoneNumber($user['mobile']) : ''}}</dd>
+				<dt>Mobile:</dt><dd>{{ isset($user['mobile']) ? sanitizePhoneNumber($user['mobile'], $user['country']) : ''}}</dd>
 				<dt>Birthday:</dt><dd>{{ $user['birthdate'] or '' }}</dd>
 				<dt>Address:</dt><dd>{{ $user['addr_street1'] or ''}} {{ $user['addr_street2'] or ''}} {{ $user['add_city'] or ''}}, {{ $user['addr_state'] or ''}} {{ $user['addr_zip'] or ''}}</dd>
 				<dt>Country:</dt><dd>{{ $user['country'] or '' }}</dd>
