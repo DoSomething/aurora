@@ -120,7 +120,7 @@ class UsersController extends \BaseController {
       $user = $this->northstar->getUser($type, $search);
 
       return Redirect::route('users.show', $user['_id']);
-      
+
     } catch (Exception $e) {
       return Redirect::back()->withInput()->with('flash_message', ['class' => 'alert alert-warning', 'text' => 'Hmm, couldn\'t find anyone, are you sure thats right?']);
     }
