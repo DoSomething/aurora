@@ -29,3 +29,5 @@ Route::post('users', ['as' => 'users.search', 'uses' => 'UsersController@search'
 Route::post('admin/{user}', ['as' => 'admin.create', 'uses' => 'UsersController@adminCreate']);
 
 Route::resource('keys', 'KeyController');
+
+Route::get('/users/{user}/mobile-commons-messages', 'UsersController@mobileCommonsMessages');
