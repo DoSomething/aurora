@@ -6,7 +6,8 @@
   "type": "project",
   "require": {
     "laravel/framework": "4.2.*",
-    "guzzlehttp/guzzle": "5.1.*"
+    "guzzlehttp/guzzle": "5.1.*",
+    "giggsey/libphonenumber-for-php": "~7.0"
   },
   "autoload": {
     "classmap": [
