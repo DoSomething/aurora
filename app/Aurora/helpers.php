@@ -8,6 +8,7 @@ function autoOpenModal(){
 	});
 	</script>';
 }
+
 //https://github.com/giggsey/libphonenumber-for-php
 function sanitizePhoneNumber($number){
 	$phoneUtil = \libphonenumber\PhoneNumberUtil::getInstance();
