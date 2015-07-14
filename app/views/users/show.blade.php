@@ -16,6 +16,7 @@
     </div>
   </div>
 </div>
+
 <h1 class="heading -banner"><span>Campaigns</span></h1>
 <div class="container -padded">
   <div class="wrapper">
@@ -25,14 +26,13 @@
   </div>
 </div>
 
+<h1 class="heading -banner"><span>Reportbacks</span></h1>
 <div class="container -padded">
   <div class="wrapper">
-    <div class="container__block -half">
-      @if (!$aurora_user)
-        @include('users.partials.make-admin')
-      @endif
+    <div class="container__block">
+      @include('users.partials.reportbacks')
     </div>
-  </div>    
-</div>    
+  </div>
+</div>
 
 @stop
