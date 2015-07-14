@@ -9,8 +9,13 @@ function autoOpenModal(){
 	</script>';
 }
 
+//https://github.com/giggsey/libphonenumber-for-php
 function sanitizePhoneNumber($number){
-	$number = preg_replace('/[^0-9]/', '', $number);
-	$number = preg_replace("/([0-9]{3})([0-9]{3})([0-9]{4})/", "$1-$2-$3", $number);
-	return $number;
+	$phoneUtil = \libphonenumber\PhoneNumberUtil::getInstance();
+	try {
+		$number = $phoneUtil->parse($number, "US");
+		return $phoneUtil->format($number, \libphonenumber\PhoneNumberFormat::INTERNATIONAL);
+	} catch (\libphonenumber\NumberParseException $e) {
+    return $e;
+	}
 }
