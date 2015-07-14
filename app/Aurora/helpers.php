@@ -10,12 +10,13 @@ function autoOpenModal(){
 }
 
 //https://github.com/giggsey/libphonenumber-for-php
-function sanitizePhoneNumber($number){
+function sanitizePhoneNumber($number, $userCountry){
 	$phoneUtil = \libphonenumber\PhoneNumberUtil::getInstance();
 	try {
 		$number = $phoneUtil->parse($number, "US");
 		return $phoneUtil->format($number, \libphonenumber\PhoneNumberFormat::INTERNATIONAL);
 	} catch (\libphonenumber\NumberParseException $e) {
-    return $e;
+    Log::error($e);
+		return $number;
 	}
 }
