@@ -14,4 +14,12 @@
 			</dl>
 		</article>
 	</li>
+	<li>
+		<article class="figure -left">
+			<div class="container -padded">
+	      @if (!$aurora_user)
+	        @include('users.partials.make-admin')
+	      @endif
+		</article>
+	</li>
 </ul>

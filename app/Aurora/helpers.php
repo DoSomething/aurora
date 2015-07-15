@@ -10,15 +10,11 @@ function autoOpenModal(){
 }
 
 //https://github.com/giggsey/libphonenumber-for-php
-function sanitizePhoneNumber($number, $countryName){
-	if(!$countryName){
-		$countryName = "US";
-		//checking if country code is found, if not will just be US as default
-	}
+function sanitizePhoneNumber($number, $countryName = 'US'){
 	$phoneUtil = \libphonenumber\PhoneNumberUtil::getInstance();
 	try {
-		$number = $phoneUtil->parse($number, $countryName);
-		return $phoneUtil->format($number, \libphonenumber\PhoneNumberFormat::INTERNATIONAL);
+		$formattedNumber = $phoneUtil->parse($number, $countryName);
+		return $phoneUtil->format($formattedNumber, \libphonenumber\PhoneNumberFormat::INTERNATIONAL);
 	}catch (\libphonenumber\NumberParseException $e) {
     Log::error($e);
 		return $number;
