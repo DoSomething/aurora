@@ -8,7 +8,7 @@
   <div class="wrapper">
     @include('users.partials.search')
     @if ($users)
-      <p class="pagination-buttons"> Total members : {{ $users['total'] }}</p>
+      <p class="pagination-buttons"> Total members : {{ number_format($users['total']) }}</p>
       @include('users.partials.waypoints')
       <table id="user-table">
         <thead>
