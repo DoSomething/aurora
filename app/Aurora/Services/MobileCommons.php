@@ -24,7 +24,7 @@ class MobileCommonsAPI {
     $this->client = $client;
   }
 
-  public function userProfile($mobile)
+  public function userProfile($mobile) 
   {
 
     $response = $this->client->get('?phone_number=' . $mobile . '&include_messages=true');
@@ -32,7 +32,7 @@ class MobileCommonsAPI {
     $xml = $response->xml();
 
     $json = json_encode($xml);
-
+ 
     $array = json_decode($json, TRUE);
 
     return $array['profile'];
@@ -40,16 +40,9 @@ class MobileCommonsAPI {
 
   public function userMessages($mobile)
   {
+    $profile = $this->userProfile($mobile);
 
-    $response = $this->client->get('?phone_number=' . $mobile . '&include_messages=true');
-
-    $xml = $response->xml();
-
-    $json = json_encode($xml);
-
-    $array = json_decode($json, TRUE);
-
-    return $array['profile']['messages']['message'];
+    return $profile['messages']['message'];
   }
 
 }
