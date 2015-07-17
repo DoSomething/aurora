@@ -13,8 +13,8 @@
           {{ Form::text('_id', NULL, ['class' => 'text-field', 'disabled' => 'true']) }}
         </div>
         <div class="form-item -padded">
-          {{ Form::label('drupal_uid', 'Drupal UID', ['class' => 'field-label']) }}
-          {{ Form::text('drupal_uid', NULL, ['class' => 'text-field', 'disabled' => 'true']) }}
+          {{ Form::label('drupal_id', 'Drupal ID', ['class' => 'field-label']) }}
+          {{ Form::text('drupal_id', NULL, ['class' => 'text-field', 'disabled' => 'true']) }}
         </div>
         <div class="form-item -padded">
           {{ Form::label('first_name', 'First Name', ['class' => 'field-label']) }}

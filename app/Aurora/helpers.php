@@ -9,7 +9,6 @@ function autoOpenModal(){
 	</script>';
 }
 
-
 function time_formatter($date)
 {
   $date = date_create($date);
@@ -27,5 +26,17 @@ function message_state_class($message)
 		echo 'is-failed';
 	} else{
 		echo 'is-received';
+	}
+}
+
+//https://github.com/giggsey/libphonenumber-for-php
+function sanitizePhoneNumber($number, $countryName = 'US'){
+	$phoneUtil = \libphonenumber\PhoneNumberUtil::getInstance();
+	try {
+		$formattedNumber = $phoneUtil->parse($number, $countryName);
+		return $phoneUtil->format($formattedNumber, \libphonenumber\PhoneNumberFormat::INTERNATIONAL);
+	}catch (\libphonenumber\NumberParseException $e) {
+    Log::error($e);
+		return $number;
 	}
 }

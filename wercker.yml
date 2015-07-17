@@ -14,6 +14,16 @@ build:
       - script:
           name: install php mongo extension
           code: sudo apt-get install php5-mongo
+      - script:
+          name: npm install
+          code: |-
+            mkdir -p $WERCKER_CACHE_DIR/wercker/npm
+            npm config set cache $WERCKER_CACHE_DIR/wercker/npm
+            sudo npm install
+      - wercker/bundle-install@1.1.1
+      - script:
+          name: build assets
+          code: gulp --production
     after-steps:
       - iansmith9876/pretty-slack-notify:
           team: dosomething

@@ -8,7 +8,7 @@
   <div class="wrapper">
     @include('users.partials.search')
     @if ($users)
-      <p class="pagination-buttons"> Total members : {{ $users['total'] }}</p>
+      <p class="pagination-buttons"> Total members : {{ number_format($users['total']) }}</p>
       @include('users.partials.waypoints')
       <table id="user-table">
         <thead>
@@ -27,7 +27,7 @@
               <td class="table-cell"> {{ $user['first_name'] or '' }}</td>
               <td class="table-cell"> {{ $user['last_name'] or '' }}</td>
               <td class="table-cell"> {{ $user['email']  or '' }}</td>
-              <td class="table-cell"> {{ $user['mobile'] or '' }}</td>
+              <td class="table-cell"> {{ isset($user['mobile']) ? sanitizePhoneNumber($user['mobile'], isset($user['country']) ? $user['country'] : "") : '' }}</td>
             </tr>
           @endforeach
         </tbody>
