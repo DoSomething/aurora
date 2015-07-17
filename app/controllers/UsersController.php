@@ -139,9 +139,10 @@ class UsersController extends \BaseController {
 
   public function adminIndex()
   {
-    // $admins = User::find(1)->roles;
-    $admins = User::has('roles', 1)->get()->all();
-
+    $db_admins = User::has('roles', 1)->get()->all();
+    foreach($db_admins as $admin){
+      $admins[] = $this->northstar->getUser('_id', $admin['_id']);
+    }
     return View::make('users.admin-index')->with(compact('admins'));
   }
 
