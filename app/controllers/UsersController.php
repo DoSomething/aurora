@@ -137,5 +137,9 @@ class UsersController extends \BaseController {
     return Redirect::back()->with('flash_message', ['class' => 'alert alert-success', 'text' => 'The more admins the merrier.']);
   }
 
+  public function adminIndex()
+  {
+    dd("workds");
+  }
 
 }
