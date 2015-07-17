@@ -75,7 +75,6 @@ class UsersController extends \BaseController {
         }
       }
     }
-
     $mc_profile = $this->mobileCommons->userProfile($user['mobile']);
 
     $mc_messages = $this->mobileCommons->userMessages($user['mobile']);
