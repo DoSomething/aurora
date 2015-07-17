@@ -139,7 +139,10 @@ class UsersController extends \BaseController {
 
   public function adminIndex()
   {
-    dd("workds");
+    // $admins = User::find(1)->roles;
+    $admins = User::has('roles', 1)->get()->all();
+
+    return View::make('users.admin-index')->with(compact('admins'));
   }
 
 }
