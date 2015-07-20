@@ -11,7 +11,7 @@
 	<tbody>
 		@foreach($users as $user)
 			<tr class="table-row">
-				<td class="table-cell"> {{ link_to_route('users.show', e($user['_id']), array(e($user['_id']))) }}</td>
+				<td class="table-cell"> {{ link_to_route('users.show', $user['_id'], array($user['_id'])) }}</td>
 				<td class="table-cell"> {{{ $user['first_name'] or '' }}}</td>
 				<td class="table-cell"> {{{ $user['last_name'] or '' }}}</td>
 				<td class="table-cell"> {{{ $user['email']  or '' }}}</td>
