@@ -7,7 +7,11 @@
 	<div class="wrapper">
 		<div class="container__block">
 	    <h1 class="heading -hero">You have arrived.</h1>
+				@if (Session::has('trigger_modal'))
+				  {{ autoOpenModal() }}
+				@endif
 		</div>
 	</div>
 </div>
+
 @stop
