@@ -1,7 +1,7 @@
 <table id="user-table">
 	<thead>
 		<tr class="row table-header">
-			<th class="table-cell">_id</th>
+			<th class="table-cell">User Id</th>
 			<th class="table-cell">First Name</th>
 			<th class="table-cell">Last Name</th>
 			<th class="table-cell">Email</th>
