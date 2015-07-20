@@ -16,7 +16,7 @@
 									<dl class="profile-settings">
 							  		<dt>Status: </dt><dd>{{{ $message['@attributes']['status'] }}}</dd>
 							  		<dt>Message Type:	</dt><dd>{{{ $message['@attributes']['message_type'] }}}</dd>
-							  		<dt>Campaign: </dt><dd>{{{ $message['campaign']['name'] }}}</dd>
+							  		<dt>Campaign: </dt><dd><a href="https://secure.mcommons.com/campaigns/{{{ $message['campaign']['@attributes']['id'] }}}">{{{ $message['campaign']['name'] }}}</a></dd>
 							  		<dt>Campaign ID: </dt><dd>{{{ $message['campaign']['@attributes']['id'] }}}</dd>
 							  		<dt>Active?: </dt><dd>{{{ $message['campaign']['@attributes']['active'] }}}</dd>
 							  		<dt>Sent On: </dt><dd>{{{ time_formatter($message['when']), true }}}</dd>
