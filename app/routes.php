@@ -16,19 +16,20 @@ Route::get('/', function()
   return View::make('hello');
 });
 
-# Authentication
+ # Authentication
 Route::get('login', ['as' => 'login', 'uses' => 'SessionsController@create']);
 Route::get('logout', ['as' => 'logout', 'uses' => 'SessionsController@destroy']);
 Route::resource('sessions', 'SessionsController', ['only' => ['create', 'store', 'destroy']]);
 
-# Users
+ # Users
 Route::resource('users', 'UsersController');
 Route::post('users', ['as' => 'users.search', 'uses' => 'UsersController@search', 'before' =>'auth']);
 
-# Create admins.
+ # Create admins.
 Route::post('admin/{user}', ['as' => 'admin.create', 'uses' => 'UsersController@adminCreate']);
 
-#Get all admins
+ # Get all admins
 Route::get('/admins', 'UsersController@adminIndex');
 
+ # Key
 Route::resource('keys', 'KeyController');

@@ -18,7 +18,7 @@
     <div class="wrapper">
 
       @include('layout.nav')
-      
+
       <div class="modal_trigger">
         @include('users.partials.trigger-modal')
       </div>
