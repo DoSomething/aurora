@@ -22,8 +22,9 @@ class UsersController extends \BaseController {
     try {
       // Attempt to fetch all users.
       $input = Input::all();
-      $users = $this->northstar->getAllUsers($input);
-      return View::make('users.index')->with(compact('users'));
+      $data = $this->northstar->getAllUsers($input);
+      $users = $data['data'];
+      return View::make('users.index')->with(compact('users', 'data'));
     } catch (Exception $e) {
       return View::make('users.index')->with('flash_message', ['class' => 'alert alert-warning', 'text' => 'Looks like there is something wrong with the connection!']);
     }
@@ -150,6 +151,15 @@ class UsersController extends \BaseController {
     $mc_messages = $this->mobileCommons->userMessages($user['mobile']);
 
     return View::make('users.mobile-commons-messages')->with(compact('user', 'mc_messages'));
+  }
+
+  public function adminIndex()
+  {
+    $db_admins = User::has('roles', 1)->get()->all();
+    foreach($db_admins as $admin){
+      $users[] = $this->northstar->getUser('_id', $admin['_id']);
+    }
+    return View::make('users.admin-index')->with(compact('users'));
   }
 
 

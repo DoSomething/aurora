@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="{{ asset('assets/vendor/neue/neue.css') }}">
   <link rel="stylesheet" href="{{ asset('assets/vendor/modal/modal.css') }}">
   <link rel="stylesheet" href="{{ asset('assets/custom-neue.css') }}">
-  <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <script src="{{ asset('/assets/vendor/neue/modernizr.js') }}"></script>
 </head>
 
@@ -18,10 +18,6 @@
     <div class="wrapper">
 
       @include('layout.nav')
-      
-      <div class="modal_trigger">
-        @include('users.partials.trigger-modal')
-      </div>
 
       @yield('main_content')
 

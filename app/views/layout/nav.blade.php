@@ -15,6 +15,12 @@
             <span class="navigation__subtitle">View all users</span>
           </a>
         </li>
+        <li>
+          <a href="{{ url('/admins') }}">
+            <strong class="navigation__title">Admins</strong>
+            <span class="navigation__subtitle">View all Admins</span>
+          </a>
+        </li>
       @endif
     </ul>
     <ul class="navigation__secondary">
@@ -31,4 +37,4 @@
   </div>
 </nav>
 
-@include('sessions.create')
+@include('sessions.signin-modal')
