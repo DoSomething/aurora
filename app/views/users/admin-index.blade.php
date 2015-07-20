@@ -6,7 +6,7 @@
 <ul class="gallery -duo">
   @forelse($admins as $admin)
     <li>
-      <article class="figure -left admin-box">
+      <article class="figure -left admin-profile">
         <dl class="profile-settings">
           <dt>Id:</dt><dd>{{{ $admin['_id'] }}}</dd>
           {{ isset($admin['drupal_id']) ? ('<dt>Drupal Id:</dt><dd>' . e($admin['drupal_id']) . '</dd>') : "" }}
