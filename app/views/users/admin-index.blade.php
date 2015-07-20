@@ -7,6 +7,5 @@
   <div class="wrapper">
     @include('users.partials.index-table')
   </div>
-
 </div>
 @stop
