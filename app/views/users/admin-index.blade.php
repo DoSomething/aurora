@@ -6,11 +6,7 @@
 <div class="container -padded">
   <div class="wrapper">
     <div class="container__block">
-      @if(empty($users))
-        <h1>No admin found</h1>
-      @else
-        @include('users.partials.index-table')
-      @endif
+      @include('users.partials.index-table')
     </div>
   </div>
 </div>

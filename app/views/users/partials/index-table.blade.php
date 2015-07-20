@@ -9,7 +9,7 @@
 		</tr>
 	</thead>
 	<tbody>
-		@foreach($users as $user)
+		@forelse($users as $user)
 			<tr class="table-row">
 				<td class="table-cell"> {{ link_to_route('users.show', $user['_id'], array($user['_id'])) }}</td>
 				<td class="table-cell"> {{ $user['first_name'] or '' }}</td>
@@ -17,6 +17,8 @@
 				<td class="table-cell"> {{ $user['email']  or '' }}</td>
 				<td class="table-cell"> {{ isset($user['mobile']) ? sanitizePhoneNumber($user['mobile'], isset($user['country']) ? $user['country'] : "") : '' }}</td>
 			</tr>
-		@endforeach
+		@empty
+		<h1>No user found</h1>
+		@endforelse
 	</tbody>
 </table>
