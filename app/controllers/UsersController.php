@@ -24,7 +24,7 @@ class UsersController extends \BaseController {
       $users = $data['data'];
       return View::make('users.index')->with(compact('users', 'data'));
     } catch (Exception $e) {
-      return View::make('users.index')->with('flash_message', ['class' => 'alert alert-warning', 'text' => 'Looks like there is something wrong with the connection!']);
+      return View::make('users.index')->with('flash_message', ['class' => 'messages -error', 'text' => 'Looks like there is something wrong with the connection!']);
     }
   }
 
@@ -101,7 +101,7 @@ class UsersController extends \BaseController {
   {
     $input = Input::except('_token', '_id', 'drupal_uid');
     $user = $this->northstar->updateUser($id, $input);
-    return Redirect::back()->with('flash_message', ['class' => 'alert alert-success', 'text' => 'Sweet, look at you updating that user.']);
+    return Redirect::back()->with('flash_message', ['class' => 'messages', 'text' => 'Sweet, look at you updating that user.']);
   }
 
 
@@ -127,7 +127,7 @@ class UsersController extends \BaseController {
       return Redirect::route('users.show', $user['_id']);
 
     } catch (Exception $e) {
-      return Redirect::back()->withInput()->with('flash_message', ['class' => 'alert alert-warning', 'text' => 'Hmm, couldn\'t find anyone, are you sure thats right?']);
+      return Redirect::back()->withInput()->with('flash_message', ['class' => 'messages -error', 'text' => 'Hmm, couldn\'t find anyone, are you sure thats right?']);
     }
   }
 
@@ -135,7 +135,7 @@ class UsersController extends \BaseController {
   {
     // Create a new user in database with admin role
     User::create(['_id' => $user_id])->assignRole(1);
-    return Redirect::back()->with('flash_message', ['class' => 'alert alert-success', 'text' => 'The more admins the merrier.']);
+    return Redirect::back()->with('flash_message', ['class' => 'messages', 'text' => 'The more admins the merrier.']);
   }
 
   public function adminIndex()
