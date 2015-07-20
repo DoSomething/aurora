@@ -20,7 +20,7 @@
       @include('layout.nav')
 
       @yield('main_content')
-      
+
     </div>
   </div>
 </body>
