@@ -20,15 +20,16 @@ class DrupalAPI {
   {
 
     $response = $this->client->get('campaigns/' . $id);
-
-    return $response->json()['data'];
+    if (empty($response->json()['error'])){
+      return $response->json()['data'];
+    }
   }
 
   public function getReportbacks($id)
   {
     $response = $this->client->get('reportbacks/' . $id . '.json');
-
-    return $response->json()['data'];
+    if (empty($response->json()['error'])){
+      return $response->json()['data'];
+    }
   }
-
 }
