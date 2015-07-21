@@ -39,7 +39,7 @@ Route::filter('auth', function()
     if (Request::ajax()) {
       return Response::make('Unauthorized', 401);
     } else {
-      return Redirect::guest('login')->with('flash_message', ['class' => 'alert alert-danger', 'text' => 'Whoops, unauthorized, please login first.']);
+      return Redirect::guest('login')->with('flash_message', ['class' => 'messages -error', 'text' => 'Whoops, unauthorized, please login first.']);
     }
   }
 });
@@ -88,6 +88,6 @@ Route::filter('csrf', function()
 Route::filter('role', function($route, $request, $role)
 {
   if (Auth::guest() or ! Auth::user()->hasRole($role)) {
-    return Response::make('Unauthorized', 401);
+    return View::make('sessions.unauthorized');
   }
 });
