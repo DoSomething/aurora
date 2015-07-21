@@ -33,3 +33,5 @@ Route::get('/admins', 'UsersController@adminIndex');
 
 # Key
 Route::resource('keys', 'KeyController');
+
+Route::get('/users/{user}/mobile-commons-messages', 'UsersController@mobileCommonsMessages');

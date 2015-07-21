@@ -1,14 +1,16 @@
 <?php
 use Aurora\Services\Drupal\DrupalAPI;
 use Aurora\Services\Northstar\NorthstarAPI;
+use Aurora\Services\MobileCommons\MobileCommonsAPI;
 
 class UsersController extends \BaseController {
 
-  public function __construct(DrupalAPI $drupal, NorthstarAPI $northstar) {
+  public function __construct(DrupalAPI $drupal, NorthstarAPI $northstar, MobileCommonsAPI $mobileCommons) {
     $this->beforeFilter('auth');
     $this->beforeFilter('role:admin');
     $this->drupal = $drupal;
     $this->northstar = $northstar;
+    $this->mobileCommons = $mobileCommons;
   }
   /**
    * Display a listing of the resource.
@@ -74,7 +76,11 @@ class UsersController extends \BaseController {
         }
       }
     }
-    return View::make('users.show')->with(compact('user', 'aurora_user', 'campaigns', 'reportbacks'));
+    $mc_profile = $this->mobileCommons->userProfile($user['mobile']);
+
+    $mc_messages = $this->mobileCommons->userMessages($user['mobile']);
+    
+    return View::make('users.show')->with(compact('user', 'aurora_user', 'campaigns', 'reportbacks', 'mc_messages', 'mc_profile'));
   }
 
 
@@ -138,6 +144,15 @@ class UsersController extends \BaseController {
     return Redirect::back()->with('flash_message', ['class' => 'messages', 'text' => 'The more admins the merrier.']);
   }
 
+  public function mobileCommonsMessages($id)
+  {
+    $user = $this->northstar->getUser('_id', $id);
+
+    $mc_messages = $this->mobileCommons->userMessages($user['mobile']);
+
+    return View::make('users.mobile-commons-messages')->with(compact('user', 'mc_messages'));
+  }
+
   public function adminIndex()
   {
     $db_admins = User::has('roles', 1)->get()->all();
@@ -146,5 +161,6 @@ class UsersController extends \BaseController {
     }
     return View::make('users.admin-index')->with(compact('users'));
   }
+
 
 }
