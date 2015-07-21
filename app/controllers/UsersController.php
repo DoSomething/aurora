@@ -69,9 +69,11 @@ class UsersController extends \BaseController {
       $aurora_user = User::where('_id', $id)->first();
       if (!empty($user['campaigns'])){
         foreach($user['campaigns'] as $campaign){
-          array_push($campaigns, $this->drupal->getCampaign($campaign['drupal_id']));
-          if (!empty($campaign['reportback_id'])) {
-            array_push($reportbacks, $this->drupal->getReportbacks($campaign['reportback_id']));
+          if (!empty($campaign['drupal_id'])) {
+            array_push($campaigns, $this->drupal->getCampaign($campaign['drupal_id']));
+            if (!empty($campaign['reportback_id'])) {
+              array_push($reportbacks, $this->drupal->getReportbacks($campaign['reportback_id']));
+            }
           }
         }
       }
