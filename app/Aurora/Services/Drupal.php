@@ -20,8 +20,9 @@ class DrupalAPI {
   {
 
     $response = $this->client->get('campaigns/' . $id);
-
-    return $response->json()['data'];
+    if(!empty($response->json()['data'])){
+      return $response->json()['data'];
+    }
   }
 
   public function getReportbacks($id)
