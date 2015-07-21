@@ -87,7 +87,9 @@ Route::filter('csrf', function()
 
 Route::filter('role', function($route, $request, $role)
 {
+  $gifs = ["yPBHuNVGsrrxK", "DKclRd6n3KGD6", "777J8bECVBEOs", "FYy4Efj2hyZBm", "EMxy32NDE3Mac", "9LkjuISavFFXG"];
+  $gif = $gifs[rand(0,count($gifs) - 1)];
   if (Auth::guest() or ! Auth::user()->hasRole($role)) {
-    return View::make('sessions.unauthorized');
+    return View::make('sessions.unauthorized')->with(compact('gif'));
   }
 });
