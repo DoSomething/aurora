@@ -39,7 +39,7 @@ Route::filter('auth', function()
     if (Request::ajax()) {
       return Response::make('Unauthorized', 401);
     } else {
-      return Redirect::guest('login')->with('flash_message', ['class' => 'alert alert-danger', 'text' => 'Whoops, unauthorized, please login first.']);
+      return Redirect::guest('login')->with('flash_message', ['class' => 'messages -error', 'text' => 'Whoops, unauthorized, please login first.']);
     }
   }
 });
@@ -87,7 +87,9 @@ Route::filter('csrf', function()
 
 Route::filter('role', function($route, $request, $role)
 {
+  $gifs = ["yPBHuNVGsrrxK", "DKclRd6n3KGD6", "777J8bECVBEOs", "FYy4Efj2hyZBm", "EMxy32NDE3Mac", "9LkjuISavFFXG"];
+  $gif = $gifs[rand(0,count($gifs) - 1)];
   if (Auth::guest() or ! Auth::user()->hasRole($role)) {
-    return Response::make('Unauthorized', 401);
+    return View::make('sessions.unauthorized')->with(compact('gif'));
   }
 });
