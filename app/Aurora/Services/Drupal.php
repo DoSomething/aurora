@@ -27,8 +27,8 @@ class DrupalAPI {
   public function getReportbacksFromDrupal($id)
   {
     $response = $this->client->get('reportbacks/' . $id . '.json');
-
-    return $response->json()['data'];
+    if(isset($response->json()['data'])){
+      return $response->json()['data'];
+    }
   }
-
 }
