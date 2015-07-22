@@ -6,14 +6,13 @@ use Aurora\Services\MobileCommons\MobileCommonsAPI;
 
 class APIUser {
 
-  protected $profile, $campaigns, $reportbacks;
+  protected $profile;
 
-  function __construct($profile, DrupalAPI $drupal, NorthstarAPI $northstar, MobileCommonsAPI $mobileCommons)
+  function __construct($profile, DrupalAPI $drupal, MobileCommonsAPI $mobileCommons)
   {
     $this->profile = $profile;
 
     $this->drupal = $drupal;
-    $this->northstar = $northstar;
     $this->mobileCommons = $mobileCommons;
 
     // $this->messages = App::make('Aurora\Services\MobileCommons\MobileCommonsAPI')->getMessages();
@@ -44,12 +43,12 @@ class APIUser {
     return $reportbacks;
   }
 
-  function getSmsProfile()
+  function getMobileCommonsProfile()
   {
     return $this->mobileCommons->userProfile($this->profile['mobile']);
   }
 
-  function getSmsMessages()
+  function getMobileCommonsMessages()
   {
     return $this->mobileCommons->userMessages($this->profile['mobile']);
   }

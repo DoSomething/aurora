@@ -1,17 +1,16 @@
 <?php
+use Aurora\APIUser;
 use Aurora\Services\Drupal\DrupalAPI;
 use Aurora\Services\Northstar\NorthstarAPI;
 use Aurora\Services\MobileCommons\MobileCommonsAPI;
-use Aurora\APIUser;
+
 
 class UsersController extends \BaseController {
 
-  public function __construct(DrupalAPI $drupal, NorthstarAPI $northstar, MobileCommonsAPI $mobileCommons) {
+  public function __construct(NorthstarAPI $northstar) {
     $this->beforeFilter('auth');
     $this->beforeFilter('role:admin');
-    $this->drupal = $drupal;
     $this->northstar = $northstar;
-    $this->mobileCommons = $mobileCommons;
   }
 
 
@@ -66,17 +65,12 @@ class UsersController extends \BaseController {
   {
     $user = $this->northstar->getUser('_id', $id);
     $aurora_user = User::where('_id', $id)->first();
-
-    $APIUser = new APIUser($user, new DrupalAPI, new NorthstarAPI, new MobileCommonsAPI);
-
+    $APIUser = new APIUser($user, new DrupalAPI, new MobileCommonsAPI);
     $campaigns = $APIUser->getCampaigns();
     $reportbacks = $APIUser->getReportbacks();
+    $mc_profile = $APIUser->getMobileCommonsProfile();
 
-    $mc_profile = $APIUser->getSmsProfile();
-
-    $mc_messages = $APIUser->getSmsMessages();
-
-    return View::make('users.show')->with(compact('user', 'aurora_user', 'campaigns', 'reportbacks', 'mc_messages', 'mc_profile'));
+    return View::make('users.show')->with(compact('user', 'aurora_user', 'campaigns', 'reportbacks', 'mc_profile'));
   }
 
 
@@ -143,8 +137,8 @@ class UsersController extends \BaseController {
   public function mobileCommonsMessages($id)
   {
     $user = $this->northstar->getUser('_id', $id);
-
-    $mc_messages = $this->mobileCommons->userMessages($user['mobile']);
+    $APIUser = new APIUser($user, new DrupalAPI, new MobileCommonsAPI);
+    $mc_messages = $APIUser->getMobileCommonsMessages();
 
     return View::make('users.mobile-commons-messages')->with(compact('user', 'mc_messages'));
   }
