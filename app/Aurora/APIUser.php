@@ -25,16 +25,23 @@ class APIUser {
 
   function getCampaigns() {
     $campaigns = [];
-    $reportbacks = [];
     foreach($this->profile['campaigns'] as $campaign){
       if (!empty($campaign['drupal_id'])) {
-        array_push($campaigns, $this->drupal->getCampaign($campaign['drupal_id']));
-        if (!empty($campaign['reportback_id'])) {
-          array_push($reportbacks, $this->drupal->getReportbacks($campaign['reportback_id']));
-        }
+        array_push($campaigns, $this->drupal->getCampaignFromDrupal($campaign['drupal_id']));
       }
     }
     return $campaigns;
+  }
+
+  function getReportbacks()
+  {
+    $reportbacks = [];
+    foreach($this->profile['campaigns'] as $campaign){
+      if(!empty($campaign["reportback_id"])) {
+        array_push($reportbacks, $this->drupal->getReportbacksFromDrupal($campaign['reportback_id']));
+      }
+    }
+    return $reportbacks;
   }
 
   function getSmsProfile()
