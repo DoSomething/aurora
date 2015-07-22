@@ -6,43 +6,48 @@ use Aurora\Services\MobileCommons\MobileCommonsAPI;
 
 class NorthstarUser {
 
-  protected $profile;
-
-  public function __construct($profile)
+  public function __construct($id, NorthstarAPI $northstar, DrupalAPI $drupal, MobileCommonsAPI $mobileCommons)
   {
-    $this->profile = $profile;
-    $this->drupal = new DrupalAPI;
-    $this->mobileCommons = new MobileCommonsAPI;
-  }
-
-  public function getProfile() {
-    return $this->profile;
+    $this->northstar = $northstar;
+    $this->drupal = $drupal;
+    $this->mobileCommons = $mobileCommons;
+    $this->profile = $this->northstar->getUser('_id', $id);
   }
 
   public function getCampaigns() {
     $campaigns = [];
-    foreach($this->profile['campaigns'] as $campaign){
-      if (!empty($campaign['drupal_id'])) {
-        array_push($campaigns, $this->drupal->getCampaignFromDrupal($campaign['drupal_id']));
+    $profile = $this->profile;
+
+    if(isset($profile['campaigns'])){
+      foreach($profile['campaigns'] as $campaign){
+        if (isset($campaign['drupal_id'])) {
+          array_push($campaigns, $this->drupal->getCampaignFromDrupal($campaign['drupal_id']));
+        }
       }
     }
-    return $campaigns;
+    return array_filter($campaigns);
   }
 
   public function getReportbacks()
   {
     $reportbacks = [];
-    foreach($this->profile['campaigns'] as $campaign){
-      if(!empty($campaign["reportback_id"])) {
-        array_push($reportbacks, $this->drupal->getReportbacksFromDrupal($campaign['reportback_id']));
+    $profile = $this->profile;
+    if(isset($profile['campaigns'])){
+      foreach($profile['campaigns'] as $campaign){
+        if(isset($campaign["reportback_id"])) {
+          array_push($reportbacks, $this->drupal->getReportbacksFromDrupal($campaign['reportback_id']));
+        }
       }
     }
-    return $reportbacks;
+    return array_filter($reportbacks);
   }
 
   public function getMobileCommonsProfile()
   {
-    return $this->mobileCommons->userProfile($this->profile['mobile']);
+    if(isset($this->profile['mobile']))
+    {
+      return $this->mobileCommons->userProfile($this->profile['mobile']);
+    }
   }
 
   public function getMobileCommonsMessages()

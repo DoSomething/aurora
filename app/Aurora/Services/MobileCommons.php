@@ -43,7 +43,7 @@ class MobileCommonsAPI {
   {
     $profile = $this->userProfile($mobile);
     if (!empty($profile)) {
-      return $profile['messages']['message'];
+      return array_filter($profile['messages']['message']);
     } else {
       return [];
     }

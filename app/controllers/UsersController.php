@@ -1,6 +1,8 @@
 <?php
 use Aurora\NorthstarUser;
+use Aurora\Services\Drupal\DrupalAPI;
 use Aurora\Services\Northstar\NorthstarAPI;
+use Aurora\Services\MobileCommons\MobileCommonsAPI;
 
 class UsersController extends \BaseController {
 
@@ -60,12 +62,13 @@ class UsersController extends \BaseController {
    */
   public function show($id)
   {
-    $northstarUser = new NorthstarUser($this->northstar->getUser('_id', $id));
+    $northstarUser = new NorthstarUser($id, new NorthstarAPI, new DrupalAPI, new MobileCommonsAPI);
     $aurora_user = User::where('_id', $id)->first();
-    $northstar_profile = $northstarUser->getProfile();
+    $northstar_profile = $northstarUser->profile;
     $campaigns = $northstarUser->getCampaigns();
     $reportbacks = $northstarUser->getReportbacks();
     $mc_profile = $northstarUser->getMobileCommonsProfile();
+
 
     return View::make('users.show')->with(compact('northstar_profile', 'aurora_user', 'campaigns', 'reportbacks', 'mc_profile'));
   }
@@ -133,7 +136,8 @@ class UsersController extends \BaseController {
 
   public function mobileCommonsMessages($id)
   {
-    $northstarUser = new NorthstarUser($user = $this->northstar->getUser('_id', $id));
+    $northstarUser = new NorthstarUser($id, new NorthstarAPI, new DrupalAPI, new MobileCommonsAPI);
+
     $mc_messages = $northstarUser->getMobileCommonsMessages();
 
     return View::make('users.mobile-commons-messages')->with(compact('mc_messages'));

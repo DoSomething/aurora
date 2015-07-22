@@ -19,7 +19,7 @@ class DrupalAPI {
   public function getCampaignFromDrupal($id)
   {
     $response = $this->client->get('campaigns/' . $id);
-    if(!empty($response->json()['data'])){
+    if(isset($response->json()['data'])){
       return $response->json()['data'];
     }
   }
