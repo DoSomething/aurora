@@ -1,4 +1,5 @@
 <?php
+
 use Aurora\NorthstarUser;
 use Aurora\Services\Drupal\DrupalAPI;
 use Aurora\Services\Northstar\NorthstarAPI;
@@ -63,12 +64,12 @@ class UsersController extends \BaseController {
   public function show($id)
   {
     $northstarUser = new NorthstarUser($id, new NorthstarAPI, new DrupalAPI, new MobileCommonsAPI);
-    $aurora_user = User::where('_id', $id)->first();
+    $aurora_user = $northstarUser->isAdmin($id); //Checking if user is admin.
     $northstar_profile = $northstarUser->profile;
+    //Calling other APIs related to the user.
     $campaigns = $northstarUser->getCampaigns();
     $reportbacks = $northstarUser->getReportbacks();
     $mc_profile = $northstarUser->getMobileCommonsProfile();
-
 
     return View::make('users.show')->with(compact('northstar_profile', 'aurora_user', 'campaigns', 'reportbacks', 'mc_profile'));
   }

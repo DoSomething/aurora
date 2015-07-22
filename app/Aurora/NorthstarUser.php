@@ -32,6 +32,7 @@ class NorthstarUser {
   {
     $reportbacks = [];
     $profile = $this->profile;
+
     if(isset($profile['campaigns'])){
       foreach($profile['campaigns'] as $campaign){
         if(isset($campaign["reportback_id"])) {
@@ -55,8 +56,8 @@ class NorthstarUser {
     return $this->mobileCommons->userMessages($this->profile['mobile']);
   }
 
-  public function isAdmin() {
-    return AuroraUser::where('_id', $this->id)->first();
+  public function isAdmin($id) {
+    return \User::where('_id', $id)->first();
   }
 
 }
