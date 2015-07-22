@@ -64,16 +64,17 @@ class UsersController extends \BaseController {
    */
   public function show($id)
   {
-    $campaigns = [];
-    $reportbacks = [];
     $user = $this->northstar->getUser('_id', $id);
+    $aurora_user = User::where('_id', $id)->first();
 
     $APIUser = new APIUser($user, new DrupalAPI, new NorthstarAPI, new MobileCommonsAPI);
-    dd($APIUser->getReportbacks());
 
-    $mc_profile = $this->mobileCommons->userProfile($user['mobile']);
+    $campaigns = $APIUser->getCampaigns();
+    $reportbacks = $APIUser->getReportbacks();
 
-    $mc_messages = $this->mobileCommons->userMessages($user['mobile']);
+    $mc_profile = $APIUser->getSmsProfile();
+
+    $mc_messages = $APIUser->getSmsMessages();
 
     return View::make('users.show')->with(compact('user', 'aurora_user', 'campaigns', 'reportbacks', 'mc_messages', 'mc_profile'));
   }

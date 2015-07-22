@@ -46,12 +46,12 @@ class APIUser {
 
   function getSmsProfile()
   {
-    return $this->mobileCommons->userProfile($user['mobile']);
+    return $this->mobileCommons->userProfile($this->profile['mobile']);
   }
 
   function getSmsMessages()
   {
-    return $this->mobileCommons->userMessages($user['mobile']);
+    return $this->mobileCommons->userMessages($this->profile['mobile']);
   }
 
   function isAdmin() {
