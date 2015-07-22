@@ -4,7 +4,7 @@ use Aurora\Services\Drupal\DrupalAPI;
 use Aurora\Services\Northstar\NorthstarAPI;
 use Aurora\Services\MobileCommons\MobileCommonsAPI;
 
-class APIUser {
+class NorthstarUser {
 
   protected $profile;
 
@@ -14,8 +14,6 @@ class APIUser {
 
     $this->drupal = $drupal;
     $this->mobileCommons = $mobileCommons;
-
-    // $this->messages = App::make('Aurora\Services\MobileCommons\MobileCommonsAPI')->getMessages();
   }
 
   public function getProfile() {
