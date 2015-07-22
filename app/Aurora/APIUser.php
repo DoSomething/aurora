@@ -6,7 +6,7 @@ use Aurora\Services\MobileCommons\MobileCommonsAPI;
 
 class APIUser {
 
-  protected $data;
+  protected $profile, $campaigns, $reportbacks;
 
   function __construct($profile, DrupalAPI $drupal, NorthstarAPI $northstar, MobileCommonsAPI $mobileCommons)
   {
@@ -24,14 +24,17 @@ class APIUser {
   }
 
   function getCampaigns() {
-    foreach($this->data['campaigns'] as $campaign){
+    $campaigns = [];
+    $reportbacks = [];
+    foreach($this->profile['campaigns'] as $campaign){
       if (!empty($campaign['drupal_id'])) {
         array_push($campaigns, $this->drupal->getCampaign($campaign['drupal_id']));
         if (!empty($campaign['reportback_id'])) {
-          $user->getReportback($campaign['reportback_id'], $reportbacks);
+          array_push($reportbacks, $this->drupal->getReportbacks($campaign['reportback_id']));
         }
       }
     }
+    return $campaigns;
   }
 
   function getSmsProfile()

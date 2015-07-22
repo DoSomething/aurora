@@ -67,8 +67,9 @@ class UsersController extends \BaseController {
     $campaigns = [];
     $reportbacks = [];
     $user = $this->northstar->getUser('_id', $id);
+
     $APIUser = new APIUser($user, new DrupalAPI, new NorthstarAPI, new MobileCommonsAPI);
-    dd($APIUser->getData());
+    dd($APIUser->getCampaigns());
 
     $mc_profile = $this->mobileCommons->userProfile($user['mobile']);
 
