@@ -8,7 +8,7 @@ class APIUser {
 
   protected $profile;
 
-  function __construct($profile, DrupalAPI $drupal, MobileCommonsAPI $mobileCommons)
+  public function __construct($profile, DrupalAPI $drupal, MobileCommonsAPI $mobileCommons)
   {
     $this->profile = $profile;
 
@@ -18,11 +18,11 @@ class APIUser {
     // $this->messages = App::make('Aurora\Services\MobileCommons\MobileCommonsAPI')->getMessages();
   }
 
-  function getProfile() {
+  public function getProfile() {
     return $this->profile;
   }
 
-  function getCampaigns() {
+  public function getCampaigns() {
     $campaigns = [];
     foreach($this->profile['campaigns'] as $campaign){
       if (!empty($campaign['drupal_id'])) {
@@ -32,7 +32,7 @@ class APIUser {
     return $campaigns;
   }
 
-  function getReportbacks()
+  public function getReportbacks()
   {
     $reportbacks = [];
     foreach($this->profile['campaigns'] as $campaign){
@@ -43,17 +43,17 @@ class APIUser {
     return $reportbacks;
   }
 
-  function getMobileCommonsProfile()
+  public function getMobileCommonsProfile()
   {
     return $this->mobileCommons->userProfile($this->profile['mobile']);
   }
 
-  function getMobileCommonsMessages()
+  public function getMobileCommonsMessages()
   {
     return $this->mobileCommons->userMessages($this->profile['mobile']);
   }
 
-  function isAdmin() {
+  public function isAdmin() {
     return AuroraUser::where('_id', $this->id)->first();
   }
 
