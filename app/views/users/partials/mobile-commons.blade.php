@@ -11,7 +11,7 @@
 					{{ isset($mc_profile['opted_out_at']) ? ('<dt>Opted Out On:</dt><dd>' . e(time_formatter($mc_profile['opted_out_at']))) : "" }}
 					{{ isset($mc_profile['opted_out_source']) ? ('<dt>Opted Out Source:</dt><dd>' . e($mc_profile['opted_out_source'])) : "" }}
 					<dt>{{ link_to("https://secure.mcommons.com/profiles/".e($mc_profile['@attributes']['id']), "View Mobile Commons Profile") }}</dt>
-					<dt><a href="{{{ url('users/' . $user['_id'] . '/mobile-commons-messages') }}}">View Message Backlog</a></dt>
+					<dt><a href="{{{ url('users/' . $northstar_profile['_id'] . '/mobile-commons-messages') }}}">View Message Backlog</a></dt>
 				</dl>
 			@else
 				<h3>This user does not have a mobile commons account</h3>

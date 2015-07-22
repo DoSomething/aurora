@@ -8,12 +8,11 @@ class NorthstarUser {
 
   protected $profile;
 
-  public function __construct($profile, DrupalAPI $drupal, MobileCommonsAPI $mobileCommons)
+  public function __construct($profile)
   {
     $this->profile = $profile;
-
-    $this->drupal = $drupal;
-    $this->mobileCommons = $mobileCommons;
+    $this->drupal = new DrupalAPI;
+    $this->mobileCommons = new MobileCommonsAPI;
   }
 
   public function getProfile() {
