@@ -1,18 +1,26 @@
 <?php namespace Aurora;
 
+use Aurora\Services\Drupal\DrupalAPI;
+use Aurora\Services\Northstar\NorthstarAPI;
+use Aurora\Services\MobileCommons\MobileCommonsAPI;
+
 class APIUser {
 
   protected $data;
 
-  function __construct($data, DrupalAPI $drupal, NorthstarAPI $northstar, MobileCommonsAPI $mobileCommons)
+  function __construct($profile, DrupalAPI $drupal, NorthstarAPI $northstar, MobileCommonsAPI $mobileCommons)
   {
-    $this->data = $data;
+    $this->profile = $profile;
 
-    $this->messages = App::make('Aurora\Services\MobileCommons\MobileCommonsAPI')->getMessages();
+    $this->drupal = $drupal;
+    $this->northstar = $northstar;
+    $this->mobileCommons = $mobileCommons;
+
+    // $this->messages = App::make('Aurora\Services\MobileCommons\MobileCommonsAPI')->getMessages();
   }
 
-  function getData() {
-    return $data;
+  function getProfile() {
+    return $this->profile;
   }
 
   function getCampaigns() {

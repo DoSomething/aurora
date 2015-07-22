@@ -2,6 +2,7 @@
 use Aurora\Services\Drupal\DrupalAPI;
 use Aurora\Services\Northstar\NorthstarAPI;
 use Aurora\Services\MobileCommons\MobileCommonsAPI;
+use Aurora\APIUser;
 
 class UsersController extends \BaseController {
 
@@ -12,6 +13,8 @@ class UsersController extends \BaseController {
     $this->northstar = $northstar;
     $this->mobileCommons = $mobileCommons;
   }
+
+
   /**
    * Display a listing of the resource.
    *
@@ -63,8 +66,9 @@ class UsersController extends \BaseController {
   {
     $campaigns = [];
     $reportbacks = [];
-
     $user = $this->northstar->getUser('_id', $id);
+    $APIUser = new APIUser($user, new DrupalAPI, new NorthstarAPI, new MobileCommonsAPI);
+    dd($APIUser->getData());
 
     $mc_profile = $this->mobileCommons->userProfile($user['mobile']);
 
