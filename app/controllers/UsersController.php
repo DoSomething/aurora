@@ -72,6 +72,15 @@ class UsersController extends \BaseController {
     return View::make('users.show')->with(compact('northstar_profile', 'aurora_user', 'campaigns', 'reportbacks', 'mobile_commons_profile'));
   }
 
+  public function mobileCommonsMessages($id)
+  {
+    $northstar_user = new NorthstarUser($id);
+
+    $mobile_commons_messages = $northstar_user->getMobileCommonsMessages();
+
+    return View::make('users.mobile-commons-messages')->with(compact('mobile_commons_messages'));
+  }
+
 
   /**
    * Show the form for editing the specified resource.
@@ -133,14 +142,12 @@ class UsersController extends \BaseController {
     return Redirect::back()->with('flash_message', ['class' => 'messages', 'text' => 'The more admins the merrier.']);
   }
 
-  public function mobileCommonsMessages($id)
+  public function adminRemove($user_id)
   {
-    $northstar_user = new NorthstarUser($id);
-
-    $mobile_commons_messages = $northstar_user->getMobileCommonsMessages();
-
-    return View::make('users.mobile-commons-messages')->with(compact('mobile_commons_messages'));
+    User::find(['_id' => $user_id])->removeRole(1);
+    return Redirect::back()->with('flash_message', ['class' => 'messages', 'text' => "fuck you bitch!"]);
   }
+
 
   public function adminIndex()
   {
