@@ -64,14 +64,14 @@ class UsersController extends \BaseController {
   public function show($id)
   {
     $northstarUser = new NorthstarUser($id, new NorthstarAPI, new DrupalAPI, new MobileCommonsAPI);
-    $aurora_user = $northstarUser->isAdmin($id); //Checking if user is admin.
-    $northstar_profile = $northstarUser->profile;
+    $auroraUser = $northstarUser->isAdmin($id); //Checking if user is admin.
+    $northstarProfile = $northstarUser->profile;
     //Calling other APIs related to the user.
     $campaigns = $northstarUser->getCampaigns();
     $reportbacks = $northstarUser->getReportbacks();
-    $mc_profile = $northstarUser->getMobileCommonsProfile();
+    $mobileCommonsProfile = $northstarUser->getMobileCommonsProfile();
 
-    return View::make('users.show')->with(compact('northstar_profile', 'aurora_user', 'campaigns', 'reportbacks', 'mc_profile'));
+    return View::make('users.show')->with(compact('northstarProfile', 'auroraUser', 'campaigns', 'reportbacks', 'mobileCommonsProfile'));
   }
 
 
@@ -139,9 +139,9 @@ class UsersController extends \BaseController {
   {
     $northstarUser = new NorthstarUser($id, new NorthstarAPI, new DrupalAPI, new MobileCommonsAPI);
 
-    $mc_messages = $northstarUser->getMobileCommonsMessages();
+    $mobileCommonsMessages = $northstarUser->getMobileCommonsMessages();
 
-    return View::make('users.mobile-commons-messages')->with(compact('mc_messages'));
+    return View::make('users.mobile-commons-messages')->with(compact('mobileCommonsMessages'));
   }
 
   public function adminIndex()
