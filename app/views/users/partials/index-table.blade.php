@@ -15,7 +15,7 @@
 				<td class="table-cell"> {{{ $user['first_name'] or '' }}}</td>
 				<td class="table-cell"> {{{ $user['last_name'] or '' }}}</td>
 				<td class="table-cell"> {{{ $user['email']  or '' }}}</td>
-				<td class="table-cell"> {{{ isset($user['mobile']) ? e(sanitizePhoneNumber($user['mobile']), isset($user['country']) ? e($user['country']) : "") : '' }}}</td>
+				<td class="table-cell"> {{{ isset($user['mobile']) ? e(sanitize_phone_number($user['mobile']), isset($user['country']) ? e($user['country']) : "") : '' }}}</td>
 			</tr>
 		@empty
 		<h1>No user found</h1>
