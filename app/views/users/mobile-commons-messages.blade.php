@@ -7,7 +7,7 @@
 <div class ="container -padded">
   <div class="wrapper">
 	  <div class="container__block">
-	  	@forelse($mobileCommonsMessages as $message)
+	  	@forelse($mobile_commons_messages as $message)
 				<div class="mobile-commons-message {{ message_state_class($message['@attributes']['status']) }}" >
 			  	<ul class="gallery -duo">
 			  		<li>
