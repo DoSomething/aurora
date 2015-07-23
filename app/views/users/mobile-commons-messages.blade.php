@@ -8,7 +8,7 @@
   <div class="wrapper">
 	  <div class="container__block">
 	  	@forelse($mobile_commons_messages as $message)
-				<div class="mobile-commons-message {{ message_state_class($message['@attributes']['status']) }}" >
+				<div class="mobile-commons-message {{ messageStateClass($message['@attributes']['status']) }}" >
 			  	<ul class="gallery -duo">
 			  		<li>
 				  		<article class="figure -left">
@@ -19,7 +19,7 @@
 							  		<dt>Campaign: </dt><dd><a href="https://secure.mcommons.com/campaigns/{{{ $message['campaign']['@attributes']['id'] }}}">{{{ $message['campaign']['name'] }}}</a></dd>
 							  		<dt>Campaign ID: </dt><dd>{{{ $message['campaign']['@attributes']['id'] }}}</dd>
 							  		<dt>Active?: </dt><dd>{{{ $message['campaign']['@attributes']['active'] }}}</dd>
-							  		<dt>Sent On: </dt><dd>{{{ time_formatter($message['when']), true }}}</dd>
+							  		<dt>Sent On: </dt><dd>{{{ timeFormatter($message['when']), true }}}</dd>
 									</dl>
 					  		</div>
 				  		</article>
