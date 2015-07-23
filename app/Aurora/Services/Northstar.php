@@ -82,4 +82,10 @@ class NorthstarAPI {
       ]);
     return $response->json();
   }
+  // used in the search action of the users controller for the sake of duplicate users
+  public function getUsers($type, $id)
+  {
+    $response = $this->client->get('users' . '/' .  $type  . '/' . $id);
+    return $response->json()['data'];
+  }
 }

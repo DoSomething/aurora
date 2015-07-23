@@ -126,9 +126,9 @@ class UsersController extends \BaseController {
     $type = strtolower(str_replace(' ', '_', Input::get('type')));
     try {
       // Attempt to find the user.
-      $user = $this->northstar->getUser($type, $search);
+      $northstar_users = $this->northstar->getUsers($type, $search);
 
-      return Redirect::route('users.show', $user['_id']);
+      return View::make('search.results')->with(compact('northstar_users'));
 
     } catch (Exception $e) {
       return Redirect::back()->withInput()->with('flash_message', ['class' => 'messages -error', 'text' => 'Hmm, couldn\'t find anyone, are you sure thats right?']);
