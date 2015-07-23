@@ -1,9 +1,7 @@
 <?php
 
 use Aurora\NorthstarUser;
-use Aurora\Services\Drupal\DrupalAPI;
 use Aurora\Services\Northstar\NorthstarAPI;
-use Aurora\Services\MobileCommons\MobileCommonsAPI;
 
 class UsersController extends \BaseController {
 
@@ -63,7 +61,7 @@ class UsersController extends \BaseController {
    */
   public function show($id)
   {
-    $northstarUser = new NorthstarUser($id, new NorthstarAPI, new DrupalAPI, new MobileCommonsAPI);
+    $northstarUser = new NorthstarUser($id);
     $auroraUser = $northstarUser->isAdmin($id); //Checking if user is admin.
     $northstarProfile = $northstarUser->profile;
     //Calling other APIs related to the user.
@@ -137,7 +135,7 @@ class UsersController extends \BaseController {
 
   public function mobileCommonsMessages($id)
   {
-    $northstarUser = new NorthstarUser($id, new NorthstarAPI, new DrupalAPI, new MobileCommonsAPI);
+    $northstarUser = new NorthstarUser($id);
 
     $mobileCommonsMessages = $northstarUser->getMobileCommonsMessages();
 

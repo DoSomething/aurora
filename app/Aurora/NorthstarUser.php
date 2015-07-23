@@ -1,16 +1,17 @@
 <?php namespace Aurora;
 
+use App;
 use Aurora\Services\Drupal\DrupalAPI;
 use Aurora\Services\Northstar\NorthstarAPI;
 use Aurora\Services\MobileCommons\MobileCommonsAPI;
 
 class NorthstarUser {
 
-  public function __construct($id, NorthstarAPI $northstar, DrupalAPI $drupal, MobileCommonsAPI $mobileCommons)
+  public function __construct($id)
   {
-    $this->northstar = $northstar;
-    $this->drupal = $drupal;
-    $this->mobileCommons = $mobileCommons;
+    $this->northstar = App::make('Aurora\Services\Northstar\NorthstarAPI');
+    $this->drupal = App::make('Aurora\Services\Drupal\DrupalAPI');
+    $this->mobileCommons = App::make('Aurora\Services\MobileCommons\MobileCommonsAPI');
     $this->profile = $this->northstar->getUser('_id', $id);
   }
 
