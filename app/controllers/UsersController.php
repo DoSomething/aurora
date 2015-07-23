@@ -61,15 +61,15 @@ class UsersController extends \BaseController {
    */
   public function show($id)
   {
-    $northstarUser = new NorthstarUser($id);
-    $auroraUser = $northstarUser->isAdmin($id); //Checking if user is admin.
-    $northstarProfile = $northstarUser->profile;
+    $northstar_user = new NorthstarUser($id);
+    $aurora_user = $northstar_user->isAdmin($id); //Checking if user is admin.
+    $northstar_profile = $northstar_user->profile;
     //Calling other APIs related to the user.
-    $campaigns = $northstarUser->getCampaigns();
-    $reportbacks = $northstarUser->getReportbacks();
-    $mobileCommonsProfile = $northstarUser->getMobileCommonsProfile();
+    $campaigns = $northstar_user->getCampaigns();
+    $reportbacks = $northstar_user->getReportbacks();
+    $mobile_commons_profile = $northstar_user->getMobileCommonsProfile();
 
-    return View::make('users.show')->with(compact('northstarProfile', 'auroraUser', 'campaigns', 'reportbacks', 'mobileCommonsProfile'));
+    return View::make('users.show')->with(compact('northstar_profile', 'aurora_user', 'campaigns', 'reportbacks', 'mobile_commons_profile'));
   }
 
 
@@ -129,17 +129,17 @@ class UsersController extends \BaseController {
   public function adminCreate($user_id)
   {
     // Create a new user in database with admin role
-    User::create(['_id' => $user_id])->assignRole(1);
+    User::firstOrCreate(['_id' => $user_id])->assignRole(1);
     return Redirect::back()->with('flash_message', ['class' => 'messages', 'text' => 'The more admins the merrier.']);
   }
 
   public function mobileCommonsMessages($id)
   {
-    $northstarUser = new NorthstarUser($id);
+    $northstar_user = new NorthstarUser($id);
 
-    $mobileCommonsMessages = $northstarUser->getMobileCommonsMessages();
+    $mobile_commons_messages = $northstar_user->getMobileCommonsMessages();
 
-    return View::make('users.mobile-commons-messages')->with(compact('mobileCommonsMessages'));
+    return View::make('users.mobile-commons-messages')->with(compact('mobile_commons_messages'));
   }
 
   public function adminIndex()
