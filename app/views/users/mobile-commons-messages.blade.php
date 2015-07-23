@@ -7,7 +7,7 @@
 <div class ="container -padded">
   <div class="wrapper">
 	  <div class="container__block">
-	  	@forelse($mc_messages as $message)
+	  	@forelse($mobileCommonsMessages as $message)
 				<div class="mobile-commons-message {{ message_state_class($message['@attributes']['status']) }}" >
 			  	<ul class="gallery -duo">
 			  		<li>
@@ -37,7 +37,7 @@
 				</div>
 	  	@empty
 	  		<h3>This user has no messages</h3>
-	  	@endforelse				
+	  	@endforelse
 		</div>
   </div>
 </div>

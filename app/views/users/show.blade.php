@@ -2,15 +2,15 @@
 
 @section('main_content')
 
-@include('layout.header', ["header" => ((isset($user['first_name']) ? $user['first_name'] : "") . " " . (isset($user['last_name']) ? $user['last_name'] : "")), "subtitle" => "View user info"])
+@include('layout.header', ["header" => ((isset($northstarProfile['first_name']) ? $northstarProfile['first_name'] : "") . " " . (isset($northstarProfile['last_name']) ? $northstarProfile['last_name'] : "")), "subtitle" => ""])
 
 <h1 class="heading -banner"><span>Account Info</span></h1>
 <div class="container -padded">
   <div class="wrapper">
     <div class="container__block">
-      <a href="{{ url('users/' . $user['_id'] . '/edit') }}">Edit User</a>
-      @if ($aurora_user)
-        Admin: {{ $aurora_user->hasRole('admin') ? '✓' : 'x' }}
+      <a href="{{ url('users/' . $northstarProfile['_id'] . '/edit') }}">Edit User</a>
+      @if ($auroraUser)
+        Admin: {{ $auroraUser->hasRole('admin') ? '✓' : 'x' }}
       @endif
       @include('users.partials.details')
     </div>

@@ -30,7 +30,6 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
    */
   public $timestamps = false;
 
-
   /**
    * Define relationship with roles.
    * @return object
@@ -60,5 +59,4 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
     }
     return false;
   }
-
 }

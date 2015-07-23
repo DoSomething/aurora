@@ -1,26 +1,25 @@
 <ul class="gallery -duo">
 	<li>
 		<article class="figure -left">
-			<h3>Account Info</h3>
 			<dl class="profile-settings">
-				<dt>Id:</dt><dd>{{{ $user['_id'] }}}</dd>
-				{{ isset($user['drupal_id']) ? ('<dt>Drupal Id:</dt><dd>' . e($user['drupal_id']) . '</dd>') : "" }}
-				{{ isset($user['first_name']) ? ('<dt>First Name:</dt><dd>' . e($user['first_name']) . '</dd>') : "" }}
-				{{ isset($user['last_name']) ? ('<dt>Last Name:</dt><dd>' . e($user['last_name']) . '</dd>') : "" }}
-				{{ isset($user['email']) ? ('<dt>Email:</dt><dd>' . e($user['email']) . '</dd>') : "" }}
-				{{ isset($user['mobile']) ? ('<dt>Mobile:</dt><dd>' . e($user['mobile']) . '</dd>') : "" }}
-				{{ isset($user['birthdate']) ? ('<dt>Birthday:</dt><dd>' . e($user['birthdate']) . '</dd>') : "" }}
-				@if (isset($user['addr_street1']) || isset($user['addr_street2']) || isset($user['add_city']) || isset($user['addr_state']) || isset($user['addr_zip']) )
-					<dt>Address:</dt><dd>{{{ $user['addr_street1'] or '' }}} {{{ $user['addr_street2'] or '' }}} {{{ $user['add_city'] or '' }}} {{{ $user['addr_state'] or '' }}} {{{ $user['addr_zip'] or '' }}}</dd>
+				<dt>Id:</dt><dd>{{{ $northstarProfile['_id'] }}}</dd>
+				{{ isset($northstarProfile['drupal_id']) ? ('<dt>Drupal Id:</dt><dd>' . e($northstarProfile['drupal_id']) . '</dd>') : "" }}
+				{{ isset($northstarProfile['first_name']) ? ('<dt>First Name:</dt><dd>' . e($northstarProfile['first_name']) . '</dd>') : "" }}
+				{{ isset($northstarProfile['last_name']) ? ('<dt>Last Name:</dt><dd>' . e($northstarProfile['last_name']) . '</dd>') : "" }}
+				{{ isset($northstarProfile['email']) ? ('<dt>Email:</dt><dd>' . e($northstarProfile['email']) . '</dd>') : "" }}
+				{{ isset($northstarProfile['mobile']) ? ('<dt>Mobile:</dt><dd>' . e($northstarProfile['mobile']) . '</dd>') : "" }}
+				{{ isset($northstarProfile['birthdate']) ? ('<dt>Birthday:</dt><dd>' . e($northstarProfile['birthdate']) . '</dd>') : "" }}
+				@if (isset($northstarProfile['addr_street1']) || isset($northstarProfile['addr_street2']) || isset($northstarProfile['add_city']) || isset($northstarProfile['addr_state']) || isset($northstarProfile['addr_zip']) )
+					<dt>Address:</dt><dd>{{{ $northstarProfile['addr_street1'] or '' }}} {{{ $northstarProfile['addr_street2'] or '' }}} {{{ $northstarProfile['add_city'] or '' }}} {{{ $northstarProfile['addr_state'] or '' }}} {{{ $northstarProfile['addr_zip'] or '' }}}</dd>
 				@endif
-				{{ isset($user['country']) ? ('<dt>Country:</dt><dd>' . e($user['country']) . '</dd>') : "" }}
+				{{ isset($northstarProfile['country']) ? ('<dt>Country:</dt><dd>' . e($northstarProfile['country']) . '</dd>') : "" }}
 			</dl>
 		</article>
 	</li>
 	<li>
 		<article class="figure -left">
 			<div class="container -padded">
-	      @if (!$aurora_user)
+	      @if (!$auroraUser)
 	        @include('users.partials.make-admin')
 	      @endif
 		</article>

@@ -1,17 +1,17 @@
 <?php
-use Aurora\Services\Drupal\DrupalAPI;
+
+use Aurora\NorthstarUser;
 use Aurora\Services\Northstar\NorthstarAPI;
-use Aurora\Services\MobileCommons\MobileCommonsAPI;
 
 class UsersController extends \BaseController {
 
-  public function __construct(DrupalAPI $drupal, NorthstarAPI $northstar, MobileCommonsAPI $mobileCommons) {
+  public function __construct(NorthstarAPI $northstar) {
     $this->beforeFilter('auth');
     $this->beforeFilter('role:admin');
-    $this->drupal = $drupal;
     $this->northstar = $northstar;
-    $this->mobileCommons = $mobileCommons;
   }
+
+
   /**
    * Display a listing of the resource.
    *
@@ -61,28 +61,15 @@ class UsersController extends \BaseController {
    */
   public function show($id)
   {
-    $campaigns = [];
-    $reportbacks = [];
-    $user = Session::get('user');
-    if (!$user) {
-      $user = $this->northstar->getUser('_id', $id);
-      $aurora_user = User::where('_id', $id)->first();
-      if (!empty($user['campaigns'])){
-        foreach($user['campaigns'] as $campaign){
-          if (!empty($campaign['drupal_id'])) {
-            array_push($campaigns, $this->drupal->getCampaign($campaign['drupal_id']));
-            if (!empty($campaign['reportback_id'])) {
-              array_push($reportbacks, $this->drupal->getReportbacks($campaign['reportback_id']));
-            }
-          }
-        }
-      }
-    }
-    $mc_profile = $this->mobileCommons->userProfile($user['mobile']);
+    $northstarUser = new NorthstarUser($id);
+    $auroraUser = $northstarUser->isAdmin($id); //Checking if user is admin.
+    $northstarProfile = $northstarUser->profile;
+    //Calling other APIs related to the user.
+    $campaigns = $northstarUser->getCampaigns();
+    $reportbacks = $northstarUser->getReportbacks();
+    $mobileCommonsProfile = $northstarUser->getMobileCommonsProfile();
 
-    $mc_messages = $this->mobileCommons->userMessages($user['mobile']);
-    
-    return View::make('users.show')->with(compact('user', 'aurora_user', 'campaigns', 'reportbacks', 'mc_messages', 'mc_profile'));
+    return View::make('users.show')->with(compact('northstarProfile', 'auroraUser', 'campaigns', 'reportbacks', 'mobileCommonsProfile'));
   }
 
 
@@ -148,11 +135,11 @@ class UsersController extends \BaseController {
 
   public function mobileCommonsMessages($id)
   {
-    $user = $this->northstar->getUser('_id', $id);
+    $northstarUser = new NorthstarUser($id);
 
-    $mc_messages = $this->mobileCommons->userMessages($user['mobile']);
+    $mobileCommonsMessages = $northstarUser->getMobileCommonsMessages();
 
-    return View::make('users.mobile-commons-messages')->with(compact('user', 'mc_messages'));
+    return View::make('users.mobile-commons-messages')->with(compact('mobileCommonsMessages'));
   }
 
   public function adminIndex()
