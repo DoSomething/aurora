@@ -30,7 +30,8 @@ function messageStateClass($message)
 }
 
 //https://github.com/giggsey/libphonenumber-for-php
-function sanitizePhoneNumber($number, $countryName = 'US'){
+function sanitizePhoneNumber($number, $countryName = 'US')
+{
 	$phoneUtil = \libphonenumber\PhoneNumberUtil::getInstance();
 	try {
 		$formattedNumber = $phoneUtil->parse($number, $countryName);
