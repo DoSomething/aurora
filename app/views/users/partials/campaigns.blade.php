@@ -3,7 +3,6 @@
 		<li>
 	    <div class="figure">
 	      <div class="figure__media">
-					<img src="" alt="" />
 					{{ isset($campaign['cover_image']['default']['uri']) ? ('<img src=' . e($campaign['cover_image']['default']['uri']) . '>') : '<img src='. (asset('assets/images/campaign-placeholder.png')) .'>' }}
 				</div>
 				<div class="figure__body">
