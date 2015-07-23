@@ -13,6 +13,7 @@
 					<article class="figure -left">
 						<dl class="profile-settings">
 							<dt>Id:</dt><dd>{{ link_to_route('users.show', $northstar_profile['_id'], array($northstar_profile['_id'])) }}</dd>
+							{{ isset($northstar_profile['updated_at']) ? ('<dt>Updated At:</dt><dd>' . e(time_formatter($northstar_profile['updated_at'])) . '</dd>') : "" }}
 							{{ isset($northstar_profile['drupal_id']) ? ('<dt>Drupal Id:</dt><dd>' . e($northstar_profile['drupal_id']) . '</dd>') : "" }}
 							{{ isset($northstar_profile['first_name']) ? ('<dt>First Name:</dt><dd>' . e($northstar_profile['first_name']) . '</dd>') : "" }}
 							{{ isset($northstar_profile['last_name']) ? ('<dt>Last Name:</dt><dd>' . e($northstar_profile['last_name']) . '</dd>') : "" }}
