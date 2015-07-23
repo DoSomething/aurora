@@ -1,6 +1,7 @@
 <?php
 // Global helper functions.
-function autoOpenModal(){
+function auto_open_modal()
+{
 	return
 	'<script>
 	$(document).ready(function () {
@@ -30,7 +31,8 @@ function message_state_class($message)
 }
 
 //https://github.com/giggsey/libphonenumber-for-php
-function sanitizePhoneNumber($number, $countryName = 'US'){
+function sanitize_phone_number($number, $countryName = 'US')
+{
 	$phoneUtil = \libphonenumber\PhoneNumberUtil::getInstance();
 	try {
 		$formattedNumber = $phoneUtil->parse($number, $countryName);
