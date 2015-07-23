@@ -144,8 +144,8 @@ class UsersController extends \BaseController {
 
   public function adminRemove($user_id)
   {
-    User::find(['_id' => $user_id])->removeRole(1);
-    return Redirect::back()->with('flash_message', ['class' => 'messages', 'text' => "fuck you bitch!"]);
+    User::where(['_id' => $user_id])->firstOrFail()->removeRole(1);
+    return Redirect::back()->with('flash_message', ['class' => 'messages', 'text' => "The less admins the warier"]);
   }
 
 
