@@ -10,6 +10,16 @@ function auto_open_modal()
 	</script>';
 }
 
+function addClassToFirstResult()
+{
+	return
+	"<script>
+	$(document).ready(function () {
+		$('.results').first().addClass('first-result').prepend('<h3>This appears to be the most recent user!</h3>')
+	});
+	</script>";
+}
+
 function time_formatter($date)
 {
   $date = date_create($date);

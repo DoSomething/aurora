@@ -102,3 +102,9 @@
   background: #ea5656;
   border-color: #ea5656;
 }
+
+.results.first-result {
+  border: 10px solid #23b7fb;
+  border-radius: 4px;
+  background: #ddd;
+}
