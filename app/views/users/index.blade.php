@@ -8,13 +8,13 @@
   <div class="wrapper">
 
     @include('users.partials.search')
-    
+
     @if ($users)
       <p class="pagination-buttons"> Total members : {{{ number_format($data['total']) }}}</p>
 
-      @include('users.partials.waypoints')
-
       @include('users.partials.index-table')
+
+      @include('users.partials.waypoints')
 
     @endif
   </div>
