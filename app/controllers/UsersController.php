@@ -122,7 +122,7 @@ class UsersController extends \BaseController {
 
   public function search()
   {
-    $search = Input::get('search_by');
+    $search = filter_var(Input::get('search_by'), FILTER_SANITIZE_STRING);
     $type = strtolower(str_replace(' ', '_', Input::get('type')));
     try {
       // Attempt to find the user.
@@ -160,8 +160,12 @@ class UsersController extends \BaseController {
 
   public function deleteNorthstarUser($id)
   {
-    $northstaruser = $this->northstar->deleteUser($id);
-    return Redirect::back()->with('flash_message', ['class' => 'messages', 'text' => 'User has been deleted!']);
+    try{
+      $northstaruser = $this->northstar->deleteUser($id);
+      return Redirect::back()->with('flash_message', ['class' => 'messages', 'text' => 'User has been deleted!']);
+    } catch (Exception $e) {
+      return Redirect::back()->with('flash_message', ['class' => 'messages -error', 'text' => 'Hmm... looks like something went wrong']);
+    }
   }
 
 

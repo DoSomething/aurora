@@ -13,6 +13,7 @@
 						<div class="container__block -padded results">
 						<article class="figure -left">
 							<dl class="profile-settings">
+							  <dt><a href="{{ url('users/' . $northstar_profile['_id'] . '/edit') }}">Edit User</a></dt>
 								<dt>Id:</dt><dd>{{ link_to_route('users.show', $northstar_profile['_id'], array($northstar_profile['_id'])) }}</dd>
 								{{ isset($northstar_profile['updated_at']) ? ('<dt>Updated At:</dt><dd>' . e(time_formatter($northstar_profile['updated_at'])) . '</dd>') : "" }}
 								{{ isset($northstar_profile['drupal_id']) ? ('<dt>Drupal Id:</dt><dd>' . e($northstar_profile['drupal_id']) . '</dd>') : "" }}
@@ -29,6 +30,13 @@
 							</dl>
 						</article>
 								@include('users.partials.delete')
+								  <div class="form-item">
+								    <label class="option -checkbox">
+											{{ Form::checkbox('name') }}
+											<span class="option__indicator"></span>
+											<span>Merge User</span>
+										</label>
+									</div>
 						</div>
 					</li>
 				@empty
@@ -38,16 +46,9 @@
 		</div>
 	</div>
 </div>
-{{ addClassToFirstResult(); userDeleteConfirmation(); }}
-<script>
-	$('form').submit(function(e){
-		var choice = confirm('Are you sure you want to delete this user?');
-		if (choice === true) {
-			return true;
-		}
-		return false;
-	});
-</script>
+{{ addClassToFirstResult() }}
+{{ userDeleteConfirmation() }}
+
 @stop
 
 

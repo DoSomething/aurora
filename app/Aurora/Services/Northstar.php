@@ -100,6 +100,5 @@ class NorthstarAPI {
   public function deleteUser($id)
   {
     $response = $this->client->delete('users/' . $id);
-
   }
 }
