@@ -95,4 +95,11 @@ class NorthstarAPI {
     });
     return $northstar_users;
   }
+
+  // use with caution!
+  public function deleteUser($id)
+  {
+    $response = $this->client->delete('users' . $id);
+
+  }
 }
