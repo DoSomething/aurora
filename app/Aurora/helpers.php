@@ -4,9 +4,9 @@ function auto_open_modal()
 {
 	return
 	'<script>
-	$(document).ready(function () {
-	window.DSModal.open($("#signin-modal"));
-	});
+		$(document).ready(function () {
+		window.DSModal.open($("#signin-modal"));
+		});
 	</script>';
 }
 
@@ -14,9 +14,23 @@ function addClassToFirstResult()
 {
 	return
 	"<script>
-	$(document).ready(function () {
-		$('.results').first().addClass('first-result').prepend('<h3>This appears to be the most recent user!</h3>')
-	});
+		$(document).ready(function () {
+			$('.results').first().addClass('first-result').prepend('<h3>This appears to be the most recent user!</h3>')
+		});
+	</script>";
+}
+
+function userDeleteConfirmation()
+{
+	return
+	"<script>
+		$('form').submit(function(e){
+			var choice = confirm('Are you sure you want to delete this user?');
+			if (choice === true) {
+				return true;
+			}
+			return false;
+		});
 	</script>";
 }
 

@@ -38,7 +38,7 @@
 		</div>
 	</div>
 </div>
-{{ addClassToFirstResult() }}
+{{ addClassToFirstResult(); userDeleteConfirmation(); }}
 <script>
 	$('form').submit(function(e){
 		var choice = confirm('Are you sure you want to delete this user?');
