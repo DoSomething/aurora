@@ -86,6 +86,13 @@ class NorthstarAPI {
   public function getUsers($type, $id)
   {
     $response = $this->client->get('users' . '/' .  $type  . '/' . $id);
-    return $response->json()['data'];
+    $northstar_users = $response->json()['data'];
+    uasort($northstar_users, function ($a, $b) {
+      if ($a['updated_at'] == $b['updated_at']) {
+          return 0;
+      }
+      return ($a['updated_at'] > $b['updated_at']) ? -1 : 1;
+    });
+    return $northstar_users;
   }
 }

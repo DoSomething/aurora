@@ -127,12 +127,6 @@ class UsersController extends \BaseController {
     try {
       // Attempt to find the user.
       $northstar_users = $this->northstar->getUsers($type, $search);
-      uasort($northstar_users, function ($a, $b) {
-        if ($a['updated_at'] == $b['updated_at']) {
-            return 0;
-        }
-        return ($a['updated_at'] > $b['updated_at']) ? -1 : 1;
-      });
 
       return View::make('search.results')->with(compact('northstar_users'));
 
