@@ -1,3 +1,3 @@
-	{{ Form::open(['route' => array('admin.create', $northstar_profile['_id'])]) }}
-	{{ Form::submit('Make admin', ['class' => 'button -secondary']) }}
-	{{ Form::close() }}
+{{ Form::model($northstar_profile, ['method' => 'DELETE', 'route' => ['users.delete', $northstar_profile['_id']]]) }}
+{{ Form::submit('Delete user', ['class' => 'button -secondary delete-warning']) }}
+{{ Form::close() }}

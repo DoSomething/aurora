@@ -158,5 +158,12 @@ class UsersController extends \BaseController {
     return View::make('users.admin-index')->with(compact('users'));
   }
 
+  public function deleteNorthstarUser($id)
+  {
+    dd($id);
+    $northstaruser = $this->northstar->deleteUser($id);
+    return Redirect::back()->with('flash_message', ['class' => 'messages', 'text' => 'User has been deleted!']);
+  }
+
 
 }

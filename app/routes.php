@@ -24,6 +24,7 @@ Route::resource('sessions', 'SessionsController', ['only' => ['create', 'store',
 # Users
 Route::resource('users', 'UsersController');
 Route::post('users', ['as' => 'users.search', 'uses' => 'UsersController@search', 'before' =>'auth']);
+Route::delete('northstar-user-delete/{user}', ['as' => 'users.delete', 'uses' => 'UsersController@deleteNorthstarUser', 'before' => 'auth']);
 
 # Create admins.
 Route::post('admin/{user}', ['as' => 'admin.create', 'uses' => 'UsersController@adminCreate']);

@@ -26,9 +26,9 @@
 								@endif
 								{{ isset($northstar_profile['country']) ? ('<dt>Country:</dt><dd>' . e($northstar_profile['country']) . '</dd>') : "" }}
 								{{ isset($northstar_profile['campaigns']) ? ('<dt>No. of Campaigns:</dt><dd>' . count($northstar_profile['campaigns']) . '</dd>') : "<dt>This user has no campaigns</dt>" }}
-								@include('users.partials.delete')
 							</dl>
 						</article>
+								@include('users.partials.delete')
 						</div>
 					</li>
 				@empty
@@ -39,4 +39,16 @@
 	</div>
 </div>
 {{ addClassToFirstResult() }}
+<script>
+	$('form').submit(function(e){
+		var choice = confirm('Are you sure you want to delete this user?');
+		if (choice === true) {
+			return true;
+		}
+		return false;
+	});
+</script>
 @stop
+
+
+
