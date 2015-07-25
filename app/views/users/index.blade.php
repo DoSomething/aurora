@@ -10,7 +10,7 @@
     @include('users.partials.search')
 
     @if ($users)
-      <p> Total members : {{{ number_format($data['total']) }}}</p>
+      <h3 class="heading -gamma">Total members : {{{ number_format($data['total']) }}}</h3>
 
       @include('users.partials.index-table')
 
