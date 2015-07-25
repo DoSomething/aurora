@@ -46,7 +46,10 @@
 }
 /* pagination buttson */
 .pagination-buttons {
-	display:inline;
+  background: grey;
+  width: 100%;
+  display: block;
+  margin: 0 auto;
 }
 
 .make-admin-header {
@@ -101,11 +104,4 @@
   color: black;
   background: #ea5656;
   border-color: #ea5656;
-}
-
-#pagination-box{
-  background: grey;
-  widows: 100%;
-  display: table;
-  margin: 0 auto;
 }
