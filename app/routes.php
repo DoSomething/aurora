@@ -28,9 +28,6 @@ Route::post('users', ['as' => 'users.search', 'uses' => 'UsersController@search'
 # Create admins.
 Route::post('admin/{user}', ['as' => 'admin.create', 'uses' => 'UsersController@adminCreate']);
 
-# Remove admins.
-Route::post('admin-remove/{user}', ['as' => 'admin.remove', 'uses' => 'UsersController@adminRemove']);
-
 # Get all admins
 Route::get('/admins', 'UsersController@adminIndex');
 
