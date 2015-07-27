@@ -117,7 +117,8 @@ class UsersController extends \BaseController {
    */
   public function destroy($id)
   {
-    //
+    User::where(['_id' => $id])->firstOrFail()->removeRole(1);
+    return Redirect::back()->with('flash_message', ['class' => 'messages', 'text' => "The less admins the warier"]);
   }
 
   public function search()
@@ -141,13 +142,6 @@ class UsersController extends \BaseController {
     User::firstOrCreate(['_id' => $user_id])->assignRole(1);
     return Redirect::back()->with('flash_message', ['class' => 'messages', 'text' => 'The more admins the merrier.']);
   }
-
-  public function adminRemove($user_id)
-  {
-    User::where(['_id' => $user_id])->firstOrFail()->removeRole(1);
-    return Redirect::back()->with('flash_message', ['class' => 'messages', 'text' => "The less admins the warier"]);
-  }
-
 
   public function adminIndex()
   {
