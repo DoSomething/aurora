@@ -44,9 +44,10 @@
 	text-align: center;
 	margin-top: 1%
 }
+
 /* pagination buttson */
-.pagination-buttons {
-	display:inline;
+#pagination-buttons {
+  text-align: center;
 }
 
 .make-admin-header {
