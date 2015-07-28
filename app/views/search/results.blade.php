@@ -29,26 +29,40 @@
 								{{ isset($northstar_profile['campaigns']) ? ('<dt>No. of Campaigns:</dt><dd>' . count($northstar_profile['campaigns']) . '</dd>') : "<dt>This user has no campaigns</dt>" }}
 							</dl>
 						</article>
-								@include('users.partials.delete')
-								  <div class="form-item">
-								    <label class="option -checkbox">
-											{{ Form::checkbox('name') }}
-											<span class="option__indicator"></span>
-											<span>Merge User</span>
-										</label>
-									</div>
+							@include('users.partials.delete')
 						</div>
 					</li>
 				@empty
 					No User Found
 				@endforelse
 			</ul>
+
+			{{ Form::submit('Merge users', ['class' => 'button -secondary merge']) }}
+
 		</div>
 	</div>
 </div>
+<div id="merge-form">
+	
+</div>
 {{ addClassToFirstResult() }}
-{{ userDeleteConfirmation() }}
-
+<!-- {{ userDeleteConfirmation() }} -->
+<script>
+	$(document).ready(function(){
+		$('.merge').click(function(){
+			$.ajax({
+				url: '/merge',
+				method: 'POST',
+				data: {
+					data: "{{$ids}}"
+				}
+			}).done(function(flaka){
+				debugger;
+				$('#merge-form').html(flaka);
+			});
+		});
+	});
+</script>
 @stop
 
 

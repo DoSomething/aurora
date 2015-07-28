@@ -2,6 +2,7 @@
 
 use Aurora\NorthstarUser;
 use Aurora\Services\Northstar\NorthstarAPI;
+use Illuminate\Support\Facades\Input;
 
 class UsersController extends \BaseController {
 
@@ -121,25 +122,26 @@ class UsersController extends \BaseController {
     return Redirect::back()->with('flash_message', ['class' => 'messages', 'text' => "The less admins the warier"]);
   }
 
-public function search()
- {
-   $search = filter_var(Input::get('search_by'), FILTER_SANITIZE_STRING);
-   $type = strtolower(str_replace(' ', '_', Input::get('type')));
-   try {
-     // Attempt to find the user.
-     $northstar_users = $this->northstar->getUsers($type, $search);
+  public function search()
+  {
+    $search = filter_var(Input::get('search_by'), FILTER_SANITIZE_STRING);
+    $type = strtolower(str_replace(' ', '_', Input::get('type')));
+    $ids = [];
+    try {
+      // Attempt to find the user.
+      $northstar_users = $this->northstar->getUsers($type, $search);
 
-     if (count($northstar_users) > 1){
-       //returning multiple user found in search
-       return View::make('search.results')->with(compact('northstar_users'));
-     }else{
-       //returning user show if only 1 user found
-       return Redirect::route('users.show', $northstar_users[0]['_id']);
-     }
-   } catch (Exception $e) {
-     return Redirect::back()->withInput()->with('flash_message', ['class' => 'messages -error', 'text' => 'Hmm, couldn\'t find anyone, are you sure thats right?']);
-   }
- }
+      foreach($northstar_users as $northstar_user)
+      {
+        array_push($ids, $northstar_user['_id']);
+      }
+      $ids = implode(',',$ids);
+      return View::make('search.results')->with(compact('northstar_users', 'ids'));
+
+    } catch (Exception $e) {
+      return Redirect::back()->withInput()->with('flash_message', ['class' => 'messages -error', 'text' => 'Hmm, couldn\'t find anyone, are you sure thats right?']);
+    }
+  }
 
   public function adminCreate($user_id)
   {
@@ -159,13 +161,39 @@ public function search()
 
   public function deleteNorthstarUser($id)
   {
-    try{
-      $northstaruser = $this->northstar->deleteUser($id);
-      return Redirect::back()->with('flash_message', ['class' => 'messages', 'text' => 'User has been deleted!']);
-    } catch (Exception $e) {
-      return Redirect::back()->with('flash_message', ['class' => 'messages -error', 'text' => 'Hmm... looks like something went wrong']);
-    }
+    $northstaruser = $this->northstar->deleteUser($id);
+    return Redirect::back()->with('flash_message', ['class' => 'messages', 'text' => 'User has been deleted!']);
   }
 
+  public function merge()
+  {
+    $user_ids = $_POST['data'];
+    $northstar_users = [];
+    $user_ids = explode(',', $user_ids);
+    foreach($user_ids as $id){
+      $user = $this->northstar->getUser('_id', $id);
+      array_push($northstar_users, $user);
+    }
+    $count = 0;
+    while ($count = count($northstar_users)) {
+      array_merge($northstar_users[$count]);
+    }
 
+    $merged = array_merge($northstar_users);
+    return $merged;
+  }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
