@@ -106,7 +106,8 @@ class UsersController extends \BaseController {
   {
     $input = Input::except('_token', '_id', 'drupal_uid');
     $user = $this->northstar->updateUser($id, $input);
-    return Redirect::back()->with('flash_message', ['class' => 'messages', 'text' => 'Sweet, look at you updating that user.']);
+    // return Redirect::back()->with('flash_message', ['class' => 'messages', 'text' => 'Sweet, look at you updating that user.']);
+    return Redirect::route('users.show', $id)->with('flash_message', ['class' => 'messages', 'text' => 'Sweet, look at you updating that user.']);
   }
 
 
@@ -165,22 +166,41 @@ class UsersController extends \BaseController {
     return Redirect::back()->with('flash_message', ['class' => 'messages', 'text' => 'User has been deleted!']);
   }
 
+  // public function merge()
+  // {
+  //   $user_ids = $_POST['data'];
+  //   $northstar_users = [];
+  //   $user_ids = explode(',', $user_ids);
+  //   foreach($user_ids as $id){
+  //     $user = $this->northstar->getUser('_id', $id);
+  //     array_push($northstar_users, $user);
+  //   }
+  //   $count = 0;
+  //   while ($count = count($northstar_users)) {
+  //     array_merge($northstar_users[$count]);
+  //   }
+
+  //   $merged = array_merge($northstar_users);
+  //   return $merged;
+  // }
   public function merge()
   {
-    $user_ids = $_POST['data'];
-    $northstar_users = [];
-    $user_ids = explode(',', $user_ids);
-    foreach($user_ids as $id){
-      $user = $this->northstar->getUser('_id', $id);
-      array_push($northstar_users, $user);
-    }
-    $count = 0;
-    while ($count = count($northstar_users)) {
-      array_merge($northstar_users[$count]);
-    }
+    $inputs = Input::all();
+    $keep_id =  $inputs['keep'];
+    $delete_ids = $inputs['rest'];
+    $merge = $this->northstar->getUser('_id', $keep_id);
+    return $rest_ids;
 
-    $merged = array_merge($northstar_users);
-    return $merged;
+
+
+    // foreach($inputs as $id => $input){
+    //   if($input === "delete"){
+    //     $will_be_deleted_user = $this->northstar->getUser('_id', $id);
+    //     $merge = array_merge($will_be_deleted_user, $merge);
+    //   }
+    // }
+    $user = $merge;
+    return View::make('users.partials._form')->with(compact('user'));
   }
 }
 
