@@ -61,6 +61,9 @@
 				}
 			}).done(function(view){
 				$('#merge-form').html(view);
+				$('html, body').animate({
+					scrollTop: $('#merge-form').offset().top
+				}, 800);
 			});
 		});
 	});

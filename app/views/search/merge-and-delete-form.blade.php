@@ -1,5 +1,6 @@
 <div class ="container -padded">
   <div class="wrapper">
+    <h1 class="heading -hero">Please make sure user information is correct</h1>
     <div class="container__block -narrow">
       {{ Form::model($user, [ 'method' => 'PATCH', 'route' => ['users.update', $user['_id']]]) }}
       <div class="form-item -padded">
@@ -54,11 +55,10 @@
         {{ Form::label('country', 'Country', ['class' => 'field-label']) }}
         {{ Form::text('country', NULL, ['class' => 'text-field']) }}
       </div>
-      {{ Form::submit("Save", ['class' => 'button', 'name' => 'complete']) }}
+      {{ Form::submit("Merge Users", ['class' => 'button', 'name' => 'complete']) }}
     </div>
   </div>
 </div>
-
 
 <script>
   $('form').submit(function(e){
@@ -82,24 +82,3 @@
     return false;
   });
 </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
