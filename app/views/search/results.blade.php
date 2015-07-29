@@ -11,6 +11,7 @@
 				@forelse($northstar_users as $northstar_profile)
 					<li>
 						<article class="figure -left">
+						<div class="container__block results">
 							<dl class="profile-settings">
 							  <dt><a href="{{ url('users/' . $northstar_profile['_id'] . '/edit') }}">Edit User</a></dt>
 								<dt>Id:</dt><dd>{{ link_to_route('users.show', $northstar_profile['_id'], array($northstar_profile['_id'])) }}</dd>
@@ -28,6 +29,8 @@
 								{{ isset($northstar_profile['campaigns']) ? ('<dt>No. of Campaigns:</dt><dd>' . count($northstar_profile['campaigns']) . '</dd>') : "<dt>This user has no campaigns</dt>" }}
 								<dt>{{ Form::radio('keep', $northstar_profile['_id'], false, ['class' => 'merge']) }}</dt><dd>{{ Form::label('Keep this user')}}</dd>
 							</dl>
+							
+						</div>
 						</article>
 					</li>
 				@empty
