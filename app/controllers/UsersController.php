@@ -131,13 +131,7 @@ class UsersController extends \BaseController {
       // Attempt to find the user.
       $northstar_users = $this->northstar->getUsers($type, $search);
       if (count($northstar_users) > 1){
-        $ids = [];
-        foreach($northstar_users as $northstar_user)
-        {
-          array_push($ids, $northstar_user['_id']);
-        }
-        $ids = implode(',',$ids);
-        return View::make('search.results')->with(compact('northstar_users', 'ids'));
+        return View::make('search.results')->with(compact('northstar_users'));
       } else {
         return Redirect::route('users.show', $northstar_users[0]['_id']);
       }
