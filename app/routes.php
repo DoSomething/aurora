@@ -29,7 +29,9 @@ Route::delete('northstar-user-delete/{user}', ['as' => 'northstar.delete', 'uses
 # Search
 Route::post('users', ['as' => 'users.search', 'uses' => 'UsersController@search', 'before' =>'auth']);
 
-Route::get('merge', ['as' => 'users.merge', 'uses' => 'UsersController@merge']);
+Route::get('merge', ['as' => 'users.merge', 'uses' => 'UsersController@mergedForm']);
+
+Route::post('merge', ['as' => 'users.merge-and-delete', 'uses' => 'UsersController@mergeAndDelete']);
 
 # Create admins.
 Route::post('admin/{user}', ['as' => 'admin.create', 'uses' => 'UsersController@adminCreate']);

@@ -7,7 +7,7 @@
 <div class="container -padded">
 	<div class="wrapper">
 		<div class="container__block">
-			{{ Form::open(['route' => 'users.merge', "method" => "post"]) }}
+			{{ Form::open(['route' => 'users.merge-and-delete', "method" => "post"]) }}
 				<ul class="gallery -duo">
 				@forelse($northstar_users as $northstar_profile)
 					<li>
@@ -35,21 +35,19 @@
 					No User Found
 				@endforelse
 			</ul>
-			{{ Form::submit('Merge Users', ['class' => 'button -secondary']) }}
-      {{ Form::close() }}
 		</div>
 	</div>
 </div>
-<div class="container -padded">
 	<div class="wrapper">
-		<div class="container__block">
+		<div class="container__block" id="merge-form-container">
 			<div id="merge-form">
 				
 			</div>
-			
+		{{ Form::close() }}			
 		</div>
+{{ Form::submit('Merge Users', ['class' => 'button -secondary']) }}
 	</div>
-</div>
+{{ Form::close() }}
 {{ addClassToFirstResult() }}
 <!-- {{ userDeleteConfirmation() }} -->
 <script>
@@ -70,7 +68,7 @@
 					delete: delete_ids
 				}
 			}).done(function(view){
-				debugger
+				$("#merge-form-container").html("{{ Form::model($user, [ 'method' => 'PATCH', 'route' => ['users.update', $user['_id']]]) }}");
 				$('#merge-form').html(view);
 			});
 		});

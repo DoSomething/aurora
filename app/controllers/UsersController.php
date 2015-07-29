@@ -166,24 +166,7 @@ class UsersController extends \BaseController {
     return Redirect::back()->with('flash_message', ['class' => 'messages', 'text' => 'User has been deleted!']);
   }
 
-  // public function merge()
-  // {
-  //   $user_ids = $_POST['data'];
-  //   $northstar_users = [];
-  //   $user_ids = explode(',', $user_ids);
-  //   foreach($user_ids as $id){
-  //     $user = $this->northstar->getUser('_id', $id);
-  //     array_push($northstar_users, $user);
-  //   }
-  //   $count = 0;
-  //   while ($count = count($northstar_users)) {
-  //     array_merge($northstar_users[$count]);
-  //   }
-
-  //   $merged = array_merge($northstar_users);
-  //   return $merged;
-  // }
-  public function merge()
+  public function mergedForm()
   {
     $inputs = Input::all();
     $keep_id =  $inputs['keep'];
@@ -197,12 +180,12 @@ class UsersController extends \BaseController {
     $user = $merged;
     return View::make('users.partials._form')->with(compact('user'));
   }
+
+  public function mergeAndDelete()
+  {
+    dd(Input::all());
+  }
 }
-
-
-
-
-
 
 
 
