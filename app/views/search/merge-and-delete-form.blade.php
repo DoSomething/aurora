@@ -1,6 +1,6 @@
 <div class ="container -padded">
   <div class="wrapper">
-    <h1 class="heading -hero">Please make sure user information is correct</h1>
+    <h1 class="heading -hero">Please make verify user info</h1>
     <div class="container__block -narrow">
       {{ Form::model($user, [ 'method' => 'PATCH', 'route' => ['users.update', $user['_id']]]) }}
       <div class="form-item -padded">
@@ -59,26 +59,4 @@
     </div>
   </div>
 </div>
-
-<script>
-  $('form').submit(function(e){
-    var delete_ids = [];
-    $("[type=radio]").each(function(index, radio){
-      if(radio.checked != true){
-        delete_ids.push(radio.value);
-      }
-    });
-    var choice = confirm('CAUTION! This will delete other users that were not specified. Are you sure you want to proceed?');
-    if (choice === true) {
-      $.ajax({
-        url: '/merge',
-        method: 'POST',
-        data: {
-          delete: delete_ids
-        }
-      })
-      return true;
-    }
-    return false;
-  });
-</script>
+{{ ajax_confirm_and_delete() }}

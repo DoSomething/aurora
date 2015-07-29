@@ -42,32 +42,8 @@
 
 {{ add_class_to_first_result() }}
 
-<script>
-	$(document).ready(function(){
-		$('.merge').click(function(){
-			var keep = $(this).val();
-			var delete_ids = [];
-			$("[type=radio]").each(function(index, radio){
-				if(radio.checked != true){
-					delete_ids.push(radio.value);
-				}
-			});
-			$.ajax({
-				url: '/merge',
-				method: 'GET',
-				data: {
-					keep: keep,
-					delete: delete_ids
-				}
-			}).done(function(view){
-				$('#merge-form').html(view);
-				$('html, body').animate({
-					scrollTop: $('#merge-form').offset().top
-				}, 800);
-			});
-		});
-	});
-</script>
+{{ ajax_edit_merge_form() }}
+
 @stop
 
 
