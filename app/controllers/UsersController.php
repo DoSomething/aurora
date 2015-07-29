@@ -187,19 +187,14 @@ class UsersController extends \BaseController {
   {
     $inputs = Input::all();
     $keep_id =  $inputs['keep'];
-    $delete_ids = $inputs['rest'];
-    $merge = $this->northstar->getUser('_id', $keep_id);
-    return $rest_ids;
-
-
-
-    // foreach($inputs as $id => $input){
-    //   if($input === "delete"){
-    //     $will_be_deleted_user = $this->northstar->getUser('_id', $id);
-    //     $merge = array_merge($will_be_deleted_user, $merge);
-    //   }
-    // }
-    $user = $merge;
+    $delete_ids = $inputs['delete'];
+    $keep_user = $this->northstar->getUser('_id', $keep_id);
+    $merged = [];
+    foreach($delete_ids as $delete_id){
+      $delete_user = $this->northstar->getUser('_id', $delete_id);
+      $merged = array_merge($merged, $delete_user, $keep_user);
+    }
+    $user = $merged;
     return View::make('users.partials._form')->with(compact('user'));
   }
 }
