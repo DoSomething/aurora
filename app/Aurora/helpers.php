@@ -20,20 +20,6 @@ function add_class_to_first_result()
 	</script>";
 }
 
-function user_delete_confirmation()
-{
-	return
-	"<script>
-		$('form').submit(function(e){
-			var choice = confirm('CAUTION! This will delete other users that were not specified. Are you sure you want to proceed?');
-			if (choice === true) {
-				return true;
-			}
-			return false;
-		});
-	</script>";
-}
-
 function time_formatter($date)
 {
   $date = date_create($date);

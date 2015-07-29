@@ -87,6 +87,7 @@ class NorthstarAPI {
   {
     $response = $this->client->get('users' . '/' .  $type  . '/' . $id);
     $northstar_users = $response->json()['data'];
+    // sort users by "updated_at" attribute
     uasort($northstar_users, function ($a, $b) {
       if ($a['updated_at'] == $b['updated_at']) {
           return 0;

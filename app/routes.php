@@ -24,13 +24,16 @@ Route::resource('sessions', 'SessionsController', ['only' => ['create', 'store',
 # Users
 Route::resource('users', 'UsersController');
 
+# Delete Northstar User
 Route::delete('northstar-user-delete/{user}', ['as' => 'northstar.delete', 'uses' => 'UsersController@deleteNorthstarUser']);
 
 # Search
 Route::post('users', ['as' => 'users.search', 'uses' => 'UsersController@search', 'before' =>'auth']);
 
+# Display edit form with merged users
 Route::get('merge', ['as' => 'users.merge', 'uses' => 'UsersController@mergedForm']);
 
+# Delete other users that were not selected
 Route::post('merge', ['as' => 'users.merge-and-delete', 'uses' => 'UsersController@deleteUnmergedUsers']);
 
 # Create admins.

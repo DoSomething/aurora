@@ -1,6 +1,6 @@
 <div class ="container -padded">
   <div class="wrapper">
-    <h1 class="heading -hero">Please make verify user info</h1>
+    <h1 class="heading -hero">Please verify user info</h1>
     <div class="container__block -narrow">
       {{ Form::model($user, [ 'method' => 'PATCH', 'route' => ['users.update', $user['_id']]]) }}
       <div class="form-item -padded">
