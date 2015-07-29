@@ -7,9 +7,7 @@
 <div class ="container -padded">
   <div class="wrapper">
     <div class="container__block -narrow">
-      {{ Form::model($user, [ 'method' => 'PATCH', 'route' => ['users.update', $user['_id']]]) }}
-			  @include('users.partials._form')
-	    {{ Form::close() }}
+		  @include('users.partials._form')
     </div>
   </div>
 </div>

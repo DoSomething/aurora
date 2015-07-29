@@ -31,7 +31,7 @@ Route::post('users', ['as' => 'users.search', 'uses' => 'UsersController@search'
 
 Route::get('merge', ['as' => 'users.merge', 'uses' => 'UsersController@mergedForm']);
 
-Route::post('merge', ['as' => 'users.merge-and-delete', 'uses' => 'UsersController@mergeAndDelete']);
+Route::post('merge', ['as' => 'users.merge-and-delete', 'uses' => 'UsersController@deleteUnmergedUsers']);
 
 # Create admins.
 Route::post('admin/{user}', ['as' => 'admin.create', 'uses' => 'UsersController@adminCreate']);

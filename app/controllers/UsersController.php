@@ -127,18 +127,20 @@ class UsersController extends \BaseController {
   {
     $search = filter_var(Input::get('search_by'), FILTER_SANITIZE_STRING);
     $type = strtolower(str_replace(' ', '_', Input::get('type')));
-    $ids = [];
     try {
       // Attempt to find the user.
       $northstar_users = $this->northstar->getUsers($type, $search);
-
-      foreach($northstar_users as $northstar_user)
-      {
-        array_push($ids, $northstar_user['_id']);
+      if (count($northstar_users) > 1){
+        $ids = [];
+        foreach($northstar_users as $northstar_user)
+        {
+          array_push($ids, $northstar_user['_id']);
+        }
+        $ids = implode(',',$ids);
+        return View::make('search.results')->with(compact('northstar_users', 'ids'));
+      } else {
+        return Redirect::route('users.show', $northstar_users[0]['_id']);
       }
-      $ids = implode(',',$ids);
-      return View::make('search.results')->with(compact('northstar_users', 'ids'));
-
     } catch (Exception $e) {
       return Redirect::back()->withInput()->with('flash_message', ['class' => 'messages -error', 'text' => 'Hmm, couldn\'t find anyone, are you sure thats right?']);
     }
@@ -160,12 +162,6 @@ class UsersController extends \BaseController {
     return View::make('users.admin-index')->with(compact('users'));
   }
 
-  public function deleteNorthstarUser($id)
-  {
-    $northstaruser = $this->northstar->deleteUser($id);
-    return Redirect::back()->with('flash_message', ['class' => 'messages', 'text' => 'User has been deleted!']);
-  }
-
   public function mergedForm()
   {
     $inputs = Input::all();
@@ -178,12 +174,16 @@ class UsersController extends \BaseController {
       $merged = array_merge($merged, $delete_user, $keep_user);
     }
     $user = $merged;
-    return View::make('users.partials._form')->with(compact('user'));
+    return View::make('search.merge-and-delete-form')->with(compact('user'));
   }
 
-  public function mergeAndDelete()
+  public function deleteUnmergedUsers()
   {
-    dd(Input::all());
+    $inputs = Input::all();
+    $delete_ids = $inputs['delete'];
+    foreach($delete_ids as $id){
+      $this->northstar->deleteUser($id);
+    }
   }
 }
 
