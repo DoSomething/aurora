@@ -66,3 +66,15 @@ function sanitize_phone_number($number, $countryName = 'US')
 		return $number;
 	}
 }
+
+
+function myFunction($result, $merged, $delete)
+{
+  foreach($merged as $k => $v)
+  {
+		if(empty($delete[$k]) || $merged[$k] !== $delete[$k]){
+    	$result[$k] = $v;
+		}
+	}
+return $result;
+}

@@ -127,17 +127,14 @@ class UsersController extends \BaseController {
   {
     $search = filter_var(Input::get('search_by'), FILTER_SANITIZE_STRING);
     $type = strtolower(str_replace(' ', '_', Input::get('type')));
+    // $diff = [];
     try {
       // Attempt to find the user.
       $northstar_users = $this->northstar->getUsers($type, $search);
       if (count($northstar_users) > 1){
-        $ids = [];
-        foreach($northstar_users as $northstar_user)
-        {
-          array_push($ids, $northstar_user['_id']);
-        }
-        $ids = implode(',',$ids);
-        return View::make('search.results')->with(compact('northstar_users', 'ids'));
+        // $diff =  array_udiff_assoc($northstar_users[0], $northstar_users[1], "myFunction");
+        // $different = array_keys($diff);
+        return View::make('search.results')->with(compact('northstar_users', 'different'));
       } else {
         return Redirect::route('users.show', $northstar_users[0]['_id']);
       }
@@ -169,12 +166,15 @@ class UsersController extends \BaseController {
     $delete_ids = $inputs['delete'];
     $keep_user = $this->northstar->getUser('_id', $keep_id);
     $merged = [];
+    $diff = [];
     foreach($delete_ids as $delete_id){
       $delete_user = $this->northstar->getUser('_id', $delete_id);
+      $diff = myFunction($diff, $keep_user, $delete_user);
       $merged = array_merge($merged, $delete_user, $keep_user);
     }
     $user = $merged;
-    return View::make('search.merge-and-delete-form')->with(compact('user'));
+    $different = array_keys($diff);
+    return View::make('search.merge-and-delete-form')->with(compact('user', 'different'));
   }
 
   public function deleteUnmergedUsers()
@@ -186,12 +186,3 @@ class UsersController extends \BaseController {
     }
   }
 }
-
-
-
-
-
-
-
-
-

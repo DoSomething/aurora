@@ -2,6 +2,13 @@
   <div class="wrapper">
     <h1 class="heading -hero">Please make sure user information is correct</h1>
     <div class="container__block -narrow">
+@forelse($different as $key)
+<p>
+  {{$key}}
+</p>
+@empty
+Nothing found
+@endforelse
       {{ Form::model($user, [ 'method' => 'PATCH', 'route' => ['users.update', $user['_id']]]) }}
       <div class="form-item -padded">
         {{ Form::label('_id', 'Mongo Id', ['class' => 'field-label']) }}
