@@ -10,16 +10,22 @@ function add_class_to_first_result()
 	$('.results').first().addClass('first-result').prepend('<h3>This appears to be the most recent user!</h3>')
 }
 
+function get_delete_ids()
+{
+	var delete_ids = [];
+	$("[type=radio]").each(function(index, radio){
+	  if(radio.checked != true){
+	    delete_ids.push(radio.value);
+	  }
+	});
+	return delete_ids;
+}
+
 function ajax_edit_merge_form()
 {
-	$('.js-merge').click(function(){
+	$('.js-keep').click(function(){
 		var keep = $(this).val();
-		var delete_ids = [];
-		$("[type=radio]").each(function(index, radio){
-			if(radio.checked != true){
-				delete_ids.push(radio.value);
-			}
-		});
+		var delete_ids = get_delete_ids();
 		$.ajax({
 			url: '/merge',
 			method: 'GET',
@@ -36,26 +42,37 @@ function ajax_edit_merge_form()
 	});
 }
 
-function ajax_confirm_and_delete()
+function confirm_submit(message, func)
 {
-  $('form').submit(function(e){
-    var delete_ids = [];
-    $("[type=radio]").each(function(index, radio){
-      if(radio.checked != true){
-        delete_ids.push(radio.value);
-      }
-    });
-    var choice = confirm('CAUTION! This will delete other users that were not specified. Are you sure you want to proceed?');
-    if (choice === true) {
-      $.ajax({
-        url: '/merge',
-        method: 'POST',
-        data: {
-          delete: delete_ids
-        }
-      })
-      return true;
+  $('form').submit(function(){
+		var choice = confirm(message);
+		if (choice == true) {
+			func();
+			return true;
+		}
+		return false;
+	});
+}
+
+function ajax_delete_unmerged_users(){
+	$.ajax({
+    url: '/merge',
+    method: 'POST',
+    data: {
+      delete: get_delete_ids()
     }
-    return false;
   });
 }
+
+function confirm_and_delete()
+{
+	confirm_submit("CAUTION! This will delete other users that were not specified. Are you sure you want to proceed?", ajax_delete_unmerged_users);
+}
+
+
+
+
+
+
+
+

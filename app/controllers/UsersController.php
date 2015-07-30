@@ -106,7 +106,6 @@ class UsersController extends \BaseController {
   {
     $input = Input::except('_token', '_id', 'drupal_uid');
     $user = $this->northstar->updateUser($id, $input);
-    // return Redirect::back()->with('flash_message', ['class' => 'messages', 'text' => 'Sweet, look at you updating that user.']);
     return Redirect::route('users.show', $id)->with('flash_message', ['class' => 'messages', 'text' => 'Sweet, look at you updating that user.']);
   }
 

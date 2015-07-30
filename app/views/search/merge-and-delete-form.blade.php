@@ -7,5 +7,5 @@
 </div>
 
 <script>	
-	ajax_confirm_and_delete();
+	confirm_and_delete();
 </script>
