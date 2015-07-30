@@ -27,7 +27,7 @@
 								@endif
 								{{ isset($northstar_profile['country']) ? ('<dt>Country:</dt><dd>' . e($northstar_profile['country']) . '</dd>') : "" }}
 								{{ isset($northstar_profile['campaigns']) ? ('<dt>No. of Campaigns:</dt><dd>' . count($northstar_profile['campaigns']) . '</dd>') : "<dt>This user has no campaigns</dt>" }}
-								<dt>{{ Form::radio('keep', $northstar_profile['_id'], false, ['class' => 'merge']) }}</dt><dd>{{ Form::label('Keep this user')}}</dd>
+								<dt>{{ Form::radio('keep', $northstar_profile['_id'], false, ['class' => 'js-merge']) }}</dt><dd>{{ Form::label('Keep this user')}}</dd>
 							</dl>
 							
 						</div>

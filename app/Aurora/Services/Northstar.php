@@ -82,7 +82,13 @@ class NorthstarAPI {
       ]);
     return $response->json();
   }
-  // used in the search action of the users controller for the sake of duplicate users
+
+  /**
+   * Sends a get request to return all users matching $type
+   * @todo need to make a parameter for Northstar API's retreive user query to sort by most recent user
+   * @param mixed ID, email, id, phone
+   * @return user objects
+   */
   public function getUsers($type, $id)
   {
     $response = $this->client->get('users' . '/' .  $type  . '/' . $id);

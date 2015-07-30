@@ -58,7 +58,7 @@ function ajax_edit_merge_form()
 	return 
 	"<script>
 	$(document).ready(function(){
-		$('.merge').click(function(){
+		$('.js-merge').click(function(){
 			var keep = $(this).val();
 			var delete_ids = [];
 			$(\"[type=radio]\").each(function(index, radio){
