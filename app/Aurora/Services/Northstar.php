@@ -50,17 +50,6 @@ class NorthstarAPI {
     return $response->json();
 
   }
-  /**
-   * Sends a get request to return a user with that id.
-   *
-   * @param mixed ID, email, id, phone
-   * @return user object
-   */
-  public function getUser($type, $id)
-  {
-    $response = $this->client->get('users' . '/' .  $type  . '/' . $id);
-    return $response->json()['data'][0];
-  }
 
   public function updateUser($id, $input)
   {
@@ -82,11 +71,23 @@ class NorthstarAPI {
       ]);
     return $response->json();
   }
-  // used in the search action of the users controller for the sake of duplicate users
+
+
+  /**
+   * Sends a get request to return users with that id.
+   *
+   * @param mixed ID, email, id, phone
+   * @return users object
+   *
+   */
   public function getUsers($type, $id)
   {
     $response = $this->client->get('users' . '/' .  $type  . '/' . $id);
     $northstar_users = $response->json()['data'];
+    if(count($northstar_users) == 1 ){
+      return $northstar_users[0];
+    }
+    // sort users by "updated_at" attribute
     uasort($northstar_users, function ($a, $b) {
       if ($a['updated_at'] == $b['updated_at']) {
           return 0;

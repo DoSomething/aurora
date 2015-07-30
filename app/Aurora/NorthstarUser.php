@@ -12,7 +12,7 @@ class NorthstarUser {
     $this->northstar = App::make('Aurora\Services\Northstar\NorthstarAPI');
     $this->drupal = App::make('Aurora\Services\Drupal\DrupalAPI');
     $this->mobileCommons = App::make('Aurora\Services\MobileCommons\MobileCommonsAPI');
-    $this->profile = $this->northstar->getUser('_id', $id);
+    $this->profile = $this->northstar->getUsers('_id', $id);
   }
 
   public function getCampaigns() {

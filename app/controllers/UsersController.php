@@ -91,7 +91,7 @@ class UsersController extends \BaseController {
    */
   public function edit($id)
   {
-    $user = $this->northstar->getUser('_id', $id);
+    $user = $this->northstar->getUsers('_id', $id);
     return View::make('users.edit')->with(compact('user'));
   }
 
@@ -106,7 +106,6 @@ class UsersController extends \BaseController {
   {
     $input = Input::except('_token', '_id', 'drupal_uid');
     $user = $this->northstar->updateUser($id, $input);
-    // return Redirect::back()->with('flash_message', ['class' => 'messages', 'text' => 'Sweet, look at you updating that user.']);
     return Redirect::route('users.show', $id)->with('flash_message', ['class' => 'messages', 'text' => 'Sweet, look at you updating that user.']);
   }
 
@@ -132,9 +131,7 @@ class UsersController extends \BaseController {
       // Attempt to find the user.
       $northstar_users = $this->northstar->getUsers($type, $search);
       if (count($northstar_users) > 1){
-        // $diff =  array_udiff_assoc($northstar_users[0], $northstar_users[1], "myFunction");
-        // $different = array_keys($diff);
-        return View::make('search.results')->with(compact('northstar_users', 'different'));
+        return View::make('search.results')->with(compact('northstar_users'));
       } else {
         return Redirect::route('users.show', $northstar_users[0]['_id']);
       }
@@ -154,7 +151,7 @@ class UsersController extends \BaseController {
   {
     $db_admins = User::has('roles', 1)->get()->all();
     foreach($db_admins as $admin){
-      $users[] = $this->northstar->getUser('_id', $admin['_id']);
+      $users[] = $this->northstar->getUsers('_id', $admin['_id']);
     }
     return View::make('users.admin-index')->with(compact('users'));
   }
@@ -164,17 +161,13 @@ class UsersController extends \BaseController {
     $inputs = Input::all();
     $keep_id =  $inputs['keep'];
     $delete_ids = $inputs['delete'];
-    $keep_user = $this->northstar->getUser('_id', $keep_id);
-    $merged = [];
-    $diff = [];
+    $keep_user = $this->northstar->getUsers('_id', $keep_id);
+    $user = [];
     foreach($delete_ids as $delete_id){
-      $delete_user = $this->northstar->getUser('_id', $delete_id);
-      $diff = myFunction($diff, $keep_user, $delete_user);
-      $merged = array_merge($merged, $delete_user, $keep_user);
+      $delete_user = $this->northstar->getUsers('_id', $delete_id);
+      $user = array_merge($user, $delete_user, $keep_user);
     }
-    $user = $merged;
-    $different = array_keys($diff);
-    return View::make('search.merge-and-delete-form')->with(compact('user', 'different'));
+    return View::make('search.merge-and-delete-form')->with(compact('user'));
   }
 
   public function deleteUnmergedUsers()

@@ -6,11 +6,7 @@
 
 <div class ="container -padded">
   <div class="wrapper">
-    <div class="container__block -narrow">
-		  @include('users.partials._form')
-    </div>
+    @include('users.partials._form')
   </div>
 </div>
-
-
 @stop
