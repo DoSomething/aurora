@@ -64,10 +64,7 @@ function ajax_delete_unmerged_users(){
   });
 }
 
-function confirm_and_delete()
-{
-	confirm_submit("CAUTION! This will delete other users that were not specified. Are you sure you want to proceed?", ajax_delete_unmerged_users);
-}
+
 
 
 
