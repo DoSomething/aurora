@@ -43,9 +43,12 @@
 
 <div id="merge-form"></div>
 
-{{ add_class_to_first_result() }}
-
-{{ ajax_edit_merge_form() }}
+<script>
+	$(document).ready(function(){
+		add_class_to_first_result();
+		ajax_edit_merge_form();
+	});
+</script>
 
 @stop
 

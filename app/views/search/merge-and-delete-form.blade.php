@@ -5,4 +5,7 @@
     </div>
   </div>
 </div>
-{{ ajax_confirm_and_delete() }}
+
+<script>	
+	ajax_confirm_and_delete();
+</script>
