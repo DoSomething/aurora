@@ -163,11 +163,14 @@ class UsersController extends \BaseController {
     $delete_ids = $inputs['delete'];
     $keep_user = $this->northstar->getUsers('_id', $keep_id);
     $user = [];
+    $different_tags = [];
     foreach($delete_ids as $delete_id){
       $delete_user = $this->northstar->getUsers('_id', $delete_id);
+      $different_tags = find_diff_tags($different_tags, $delete_user, $keep_user );
       $user = array_merge($user, $delete_user, $keep_user);
     }
-    return View::make('search.merge-and-delete-form')->with(compact('user'));
+    $different_tags = array_keys($different_tags);
+    return View::make('search.merge-and-delete-form')->with(compact('user', 'different_tags'));
   }
 
   public function deleteUnmergedUsers()

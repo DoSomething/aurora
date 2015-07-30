@@ -33,3 +33,22 @@ function sanitize_phone_number($number, $countryName = 'US')
 		return $number;
 	}
 }
+
+function find_diff_tags($array, $delete_user, $keep_user)
+{
+  foreach($delete_user as $k => $v){
+    if(empty($keep_user[$k]) && empty($array[$k])){
+      $array[$k] = $v;
+    }elseif(!empty($keep_user[$k])&& $keep_user[$k] != $delete_user[$k]){
+      $array[$k] = $v;
+    }
+  }
+  foreach($keep_user as $k => $v){
+    if(empty($delete_user[$k]) && empty($array[$k])){
+      $array[$k] = $v;
+    }elseif(!empty($delete_user[$k]) && $keep_user[$k] != $delete_user[$k]){
+      $array[$k] = $v;
+    }
+  }
+  return $array;
+}
