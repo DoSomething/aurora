@@ -33,3 +33,10 @@ function sanitize_phone_number($number, $countryName = 'US')
 		return $number;
 	}
 }
+
+function add_class_to_first_result($arr, $ele)
+{
+	if ($ele == reset($arr)){
+		return "first-result";
+	}
+}

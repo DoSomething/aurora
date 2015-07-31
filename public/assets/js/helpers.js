@@ -5,11 +5,6 @@ function auto_open_modal()
 	});
 }
 
-function add_class_to_first_result()
-{
-	$('.results').first().addClass('first-result').prepend('<h3>This appears to be the most recent user!</h3>')
-}
-
 function get_delete_ids()
 {
 	var delete_ids = [];

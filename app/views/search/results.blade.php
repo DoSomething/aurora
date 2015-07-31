@@ -11,7 +11,7 @@
 				@forelse($northstar_users as $northstar_profile)
 					<li>
 						<article class="figure -left">
-						<div class="container__block results">
+						<div class="container__block results {{ add_class_to_first_result($northstar_users, $northstar_profile) }}">
 							<dl class="profile-settings">
 							  <dt><a href="{{ url('users/' . $northstar_profile['_id'] . '/edit') }}">Edit User</a></dt>
 								<dt>Id:</dt><dd>{{ link_to_route('users.show', $northstar_profile['_id'], array($northstar_profile['_id'])) }}</dd>
@@ -45,7 +45,7 @@
 
 <script>
 	$(document).ready(function(){
-		add_class_to_first_result();
+
 		ajax_edit_merge_form();
 	});
 </script>
