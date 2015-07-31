@@ -169,7 +169,6 @@ class UsersController extends \BaseController {
       $different_tags = find_diff_tags($different_tags, $delete_user, $keep_user );
       $user = array_merge($user, $delete_user, $keep_user);
     }
-    $different_tags = array_keys($different_tags);
     return View::make('search.merge-and-delete-form')->with(compact('user', 'different_tags'));
   }
 

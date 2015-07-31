@@ -4,17 +4,17 @@
 
 @include('layout.header', ['header' => 'Search Results', 'subtitle' => ''])
 <script type="text/javascript">
-	add_class_to_first_result()
 	ajax_edit_merge_form()
 </script>
 <div class="container -padded">
 	<div class="wrapper">
 		<div class="container__block">
+			<h3>This appears to be the most recent user!</h3>
 			<ul class="gallery -duo">
 				@forelse($northstar_users as $northstar_profile)
-					<li>
+					<li class="results">
 						<article class="figure -left">
-						<div class="container__block results">
+						<div class="container__block">
 							<dl class="profile-settings">
 							  <dt><a href="{{ url('users/' . $northstar_profile['_id'] . '/edit') }}">Edit User</a></dt>
 								<dt>Id:</dt><dd>{{ link_to_route('users.show', $northstar_profile['_id'], array($northstar_profile['_id'])) }}</dd>

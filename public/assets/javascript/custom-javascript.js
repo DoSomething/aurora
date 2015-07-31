@@ -65,3 +65,8 @@ function ajax_confirm_and_delete()
 	  });
 	})
 }
+
+function markField(tag)
+{
+	return '$(`input[name=${tag}]`).addClass("has-error")';
+}
