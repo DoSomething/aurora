@@ -52,3 +52,10 @@ function find_diff_tags($array, $delete_user, $keep_user)
   }
   return $array;
 }
+
+function add_class_to_first_result($arr, $ele)
+{
+	if ($ele == reset($arr)){
+		return "first-result";
+	}
+}

@@ -74,11 +74,10 @@ class NorthstarAPI {
 
 
   /**
-   * Sends a get request to return users with that id.
-   *
+   * Sends a get request to return all users matching $type
+   * @todo need to make a parameter for Northstar API's retreive user query to sort by most recent user
    * @param mixed ID, email, id, phone
-   * @return users object
-   *
+   * @return user objects
    */
   public function getUsers($type, $id)
   {

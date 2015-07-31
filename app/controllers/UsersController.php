@@ -2,7 +2,7 @@
 
 use Aurora\NorthstarUser;
 use Aurora\Services\Northstar\NorthstarAPI;
-use Illuminate\Support\Facades\Input;
+use Input;
 
 class UsersController extends \BaseController {
 
@@ -124,7 +124,7 @@ class UsersController extends \BaseController {
 
   public function search()
   {
-    $search = filter_var(Input::get('search_by'), FILTER_SANITIZE_STRING);
+    $search = Input::get('search_by');
     $type = strtolower(str_replace(' ', '_', Input::get('type')));
     // $diff = [];
     try {
