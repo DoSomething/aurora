@@ -2,7 +2,7 @@
 
 use Aurora\NorthstarUser;
 use Aurora\Services\Northstar\NorthstarAPI;
-use Illuminate\Support\Facades\Input;
+use Input;
 
 class UsersController extends \BaseController {
 
