@@ -1,14 +1,5 @@
 <?php
 // Global helper functions.
-function auto_open_modal()
-{
-	return
-	'<script>
-	$(document).ready(function () {
-	window.DSModal.open($("#signin-modal"));
-	});
-	</script>';
-}
 
 function time_formatter($date)
 {
@@ -40,5 +31,12 @@ function sanitize_phone_number($number, $countryName = 'US')
 	}catch (\libphonenumber\NumberParseException $e) {
     Log::error($e);
 		return $number;
+	}
+}
+
+function add_class_to_first_result($arr, $ele)
+{
+	if ($ele == reset($arr)){
+		return "first-result";
 	}
 }
