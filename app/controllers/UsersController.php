@@ -90,6 +90,7 @@ class UsersController extends \BaseController {
     $requested_tickets = $northstar_user->zendeskRequestedTickets();
 
 
+
     return View::make('users.zendesk-tickets')->with(compact('requested_tickets'));
   }
 
