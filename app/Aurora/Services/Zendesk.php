@@ -28,14 +28,15 @@ class ZendeskAPI {
   { 
     $response = $this->client->get('search.json?query=type:user "' . $email . "\"");
 
-    return $response->json()['results']['0'];
-
+    if(isset($response->json()['resulst']['0'])){
+      return $response->json()['results']['0'];
+    }
   }
 
   public function requestedTickets($id)
   {
-    $response = $this->client->get('users/' . $id . '/tickets/requested.json' );
 
+    $response = $this->client->get('users/' . $id . '/tickets/requested.json' );
     return $response->json();
   }
 }
