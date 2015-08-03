@@ -87,11 +87,10 @@ class UsersController extends \BaseController {
   {
     $northstar_user = new NorthstarUser($id);
 
-    $tickets = $northstar_user->zendeskRequestedTickets();
+    $requested_tickets = $northstar_user->zendeskRequestedTickets();
 
-    dd($tickets);
 
-    return View::make('users.zendesk-tickets')->with(compact('tickets'));
+    return View::make('users.zendesk-tickets')->with(compact('requested_tickets'));
   }
 
   /**
