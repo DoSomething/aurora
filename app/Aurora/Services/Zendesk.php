@@ -34,7 +34,6 @@ class ZendeskAPI {
 
   public function requestedTickets($id)
   {
-
     $response = $this->client->get('users/' . $id . '/tickets/requested.json' );
 
     return $response->json();
