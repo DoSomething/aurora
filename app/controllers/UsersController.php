@@ -8,7 +8,6 @@ class UsersController extends \BaseController {
   public function __construct(NorthstarAPI $northstar) {
     $this->beforeFilter('auth');
     $this->beforeFilter('role:admin', ['only' =>['edit', 'update', 'destroy', 'adminCreate', 'adminIndex']]);
-    $this->beforeFilter('role:admin' || 'role:staff');
     $this->northstar = $northstar;
   }
 
@@ -62,6 +61,7 @@ class UsersController extends \BaseController {
    */
   public function show($id)
   {
+    dd(Auth::user());
     $northstar_user = new NorthstarUser($id);
     $aurora_user = $northstar_user->isAdmin($id); //Checking if user is admin.
     $northstar_profile = $northstar_user->profile;
