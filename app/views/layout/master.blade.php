@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="{{ asset('assets/custom-neue.css') }}">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <script src="{{ asset('/assets/vendor/neue/modernizr.js') }}"></script>
+  <script src="{{ asset('/assets/js/helpers.js') }}"></script>
 </head>
 
 <body class="modernizr-no-js">
