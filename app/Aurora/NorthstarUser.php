@@ -65,12 +65,14 @@ class NorthstarUser {
 
   public function searchZendeskUserByEmail()
   {
+
     return $this->zendesk->searchByEmail($this->profile['email']);
   }
 
   public function zendeskRequestedTickets()
   {
     $zendeskID = $this->zendesk->searchByEmail($this->profile['email'])['id'];
+    
     return $this->zendesk->requestedTickets($zendeskID)['tickets'];
   }
 }

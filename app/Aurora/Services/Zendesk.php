@@ -27,8 +27,7 @@ class ZendeskAPI {
   public function searchByEmail($email)
   { 
     $response = $this->client->get('search.json?query=type:user "' . $email . "\"");
-
-    if(isset($response->json()['resulst']['0'])){
+    if(isset($response->json()['results']['0'])){
       return $response->json()['results']['0'];
     }
   }
@@ -37,6 +36,7 @@ class ZendeskAPI {
   {
 
     $response = $this->client->get('users/' . $id . '/tickets/requested.json' );
+
     return $response->json();
   }
 }

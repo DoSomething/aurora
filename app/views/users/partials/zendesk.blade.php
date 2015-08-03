@@ -13,7 +13,7 @@
 								</dd>
 							@endforeach
 						{{ isset($zendesk_profile['notes']) ? ('<dt>Notes: </dt><dd>' . $zendesk_profile['notes']) : "" }}
-						<dt>{{ link_to("https://dosomethingorg1.zendesk.com/agent/users/" . e($zendesk_profile['id']) . "requested_tickets", "View Zendesk Profile") }}</dt>
+						<dt>{{ link_to("https://dosomethingorg1.zendesk.com/agent/users/" . e($zendesk_profile['id']) . "/requested_tickets", "View Zendesk Profile") }}</dt>
 						<dt><a href="{{{ url('users/' . $northstar_profile['_id'] . '/zendesk-tickets') }}}">View Zendesk Tickets</a></dt>
 					</dl>
 			</article>
