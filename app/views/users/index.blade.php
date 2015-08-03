@@ -8,13 +8,13 @@
   <div class="wrapper">
 
     @include('users.partials.search')
-    
-    @if ($users)
-      <p class="pagination-buttons"> Total members : {{{ number_format($data['total']) }}}</p>
 
-      @include('users.partials.waypoints')
+    @if ($users)
+      <h3 class="heading -gamma">Total members : {{{ number_format($data['total']) }}}</h3>
 
       @include('users.partials.index-table')
+
+      @include('users.partials.waypoints')
 
     @endif
   </div>
