@@ -63,8 +63,14 @@ class NorthstarUser {
     return \User::where('_id', $id)->first();
   }
 
-  public function searchByEmail()
+  public function searchZendeskUserByEmail()
   {
     return $this->zendesk->searchByEmail($this->profile['email']);
+  }
+
+  public function zendeskRequestedTickets()
+  {
+    $zendeskID = $this->zendesk->searchByEmail($this->profile['email'])['id'];
+    return $this->zendesk->requestedTickets($zendeskID)['tickets'];
   }
 }

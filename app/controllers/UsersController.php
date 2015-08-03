@@ -68,7 +68,7 @@ class UsersController extends \BaseController {
     $campaigns = $northstar_user->getCampaigns();
     $reportbacks = $northstar_user->getReportbacks();
     $mobile_commons_profile = $northstar_user->getMobileCommonsProfile();
-    $zendesk_profile = $northstar_user->searchByEmail();
+    $zendesk_profile = $northstar_user->searchZendeskUserByEmail();
 
 
     return View::make('users.show')->with(compact('northstar_profile', 'aurora_user', 'campaigns', 'reportbacks', 'mobile_commons_profile', 'zendesk_profile'));
@@ -83,6 +83,16 @@ class UsersController extends \BaseController {
     return View::make('users.mobile-commons-messages')->with(compact('mobile_commons_messages'));
   }
 
+  public function zendeskTickets($id)
+  {
+    $northstar_user = new NorthstarUser($id);
+
+    $tickets = $northstar_user->zendeskRequestedTickets();
+
+    dd($tickets);
+
+    return View::make('users.zendesk-tickets')->with(compact('tickets'));
+  }
 
   /**
    * Show the form for editing the specified resource.
