@@ -12,7 +12,7 @@
 			<h3>This appears to be the most recent user!</h3>
 			<ul class="gallery -duo">
 				@forelse($northstar_users as $northstar_profile)
-					<li class="results">
+					<li>
 						<article class="figure -left">
 						<div class="container__block results {{ add_class_to_first_result($northstar_users, $northstar_profile) }}">
 							<dl class="profile-settings">
@@ -32,7 +32,6 @@
 								{{ isset($northstar_profile['campaigns']) ? ('<dt>No. of Campaigns:</dt><dd>' . count($northstar_profile['campaigns']) . '</dd>') : "<dt>This user has no campaigns</dt>" }}
 								<dt>{{ Form::radio('keep', $northstar_profile['_id'], false, ['class' => 'js-keep']) }}</dt><dd>{{ Form::label('Keep this user')}}</dd>
 							</dl>
-
 						</div>
 						</article>
 					</li>
