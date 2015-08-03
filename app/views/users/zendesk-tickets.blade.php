@@ -9,7 +9,7 @@
 	  <div class="container__block">
 	  	@forelse($requested_tickets as $ticket)
 	  	<!-- need to add custom css to this -->
-	  	<div class="zendesk-ticket">
+	  	<div class="zendesk-ticket {{ ticket_state_class($ticket['status']) }}">
 			  	<ul class="gallery -duo">
 			  		<li>
 				  		<article class="figure -left">
