@@ -68,10 +68,10 @@ class UsersController extends \BaseController {
     $campaigns = $northstar_user->getCampaigns();
     $reportbacks = $northstar_user->getReportbacks();
     $mobile_commons_profile = $northstar_user->getMobileCommonsProfile();
-    $zendesk = $northstar_user->searchByEmail();
-    dd($zendesk);
+    $zendesk_profile = $northstar_user->searchByEmail();
 
-    return View::make('users.show')->with(compact('northstar_profile', 'aurora_user', 'campaigns', 'reportbacks', 'mobile_commons_profile'));
+
+    return View::make('users.show')->with(compact('northstar_profile', 'aurora_user', 'campaigns', 'reportbacks', 'mobile_commons_profile', 'zendesk_profile'));
   }
 
   public function mobileCommonsMessages($id)

@@ -28,7 +28,7 @@ class ZendeskAPI {
   { 
     $response = $this->client->get('search.json?query=type:user "' . $email . "\"");
 
-    return $response->json();
+    return $response->json()['results']['0'];
 
   }
 
