@@ -7,7 +7,8 @@ class UsersController extends \BaseController {
 
   public function __construct(NorthstarAPI $northstar) {
     $this->beforeFilter('auth');
-    $this->beforeFilter('role:admin');
+    $this->beforeFilter('role:admin', ['only' =>['edit', 'update', 'destroy', 'adminCreate', 'adminIndex']]);
+    $this->beforeFilter('role:admin' || 'role:staff');
     $this->northstar = $northstar;
   }
 
@@ -138,9 +139,15 @@ class UsersController extends \BaseController {
 
   public function adminCreate($user_id)
   {
-    // Create a new user in database with admin role
-    User::firstOrCreate(['_id' => $user_id])->assignRole(1);
-    return Redirect::back()->with('flash_message', ['class' => 'messages', 'text' => 'The more admins the merrier.']);
+    $type = Input::get('type');
+    if($type === 'Make staff'){
+      $role = 2;
+    }elseif($type === 'Make admin'){
+      $role = 1;
+    }
+    // Create a new user in database with type of role
+    $user = User::firstOrCreate(['_id' => $user_id])->assignRole($role);
+    return Redirect::back()->with('flash_message', ['class' => 'messages', 'text' => 'You assigned that user as' . substr($type, 5)]);
   }
 
   public function adminIndex()

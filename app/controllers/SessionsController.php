@@ -37,6 +37,7 @@ class SessionsController extends \BaseController {
       return Redirect::back()->with('trigger_modal', ['class' => 'messages -error', 'text' => 'Login Failed']);
     }
   }
+  
   public function mapToUser($response)
   {
     $user = User::firstOrCreate(array('_id' => $response['_id']));
@@ -54,6 +55,4 @@ class SessionsController extends \BaseController {
     Auth::logout();
     return Redirect::to('/')->with('flash_message', ['text' => 'You have been logged out!', 'class' => 'messages']);
   }
-
-
 }

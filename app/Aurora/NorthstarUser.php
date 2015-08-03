@@ -58,7 +58,20 @@ class NorthstarUser {
   }
 
   public function isAdmin($id) {
-    return \User::where('_id', $id)->first();
+    $user = \User::where('_id', $id)->first();
+    if(!empty($user)){
+      if($user->hasRole('admin')){
+        return $user;
+      }
+    }
   }
 
+  public function isStaff($id) {
+    $user = \User::where('_id', $id)->first();
+    if(!empty($user)){
+      if($user->hasRole('staff')){
+        return $user;
+      }
+    }
+  }
 }

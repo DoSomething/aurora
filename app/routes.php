@@ -23,7 +23,7 @@ Route::resource('sessions', 'SessionsController', ['only' => ['create', 'store',
 
 # Users
 Route::resource('users', 'UsersController');
-Route::post('users', ['as' => 'users.search', 'uses' => 'UsersController@search', 'before' =>'auth']);
+Route::post('users', ['as' => 'users.search', 'uses' => 'UsersController@search', 'before' => 'auth']);
 
 # Create admins.
 Route::post('admin/{user}', ['as' => 'admin.create', 'uses' => 'UsersController@adminCreate']);
