@@ -2,6 +2,7 @@
 
 use Aurora\NorthstarUser;
 use Aurora\Services\Northstar\NorthstarAPI;
+use Input;
 
 class UsersController extends \BaseController {
 
@@ -105,7 +106,7 @@ class UsersController extends \BaseController {
   {
     $input = Input::except('_token', '_id', 'drupal_uid');
     $user = $this->northstar->updateUser($id, $input);
-    return Redirect::back()->with('flash_message', ['class' => 'messages', 'text' => 'Sweet, look at you updating that user.']);
+    return Redirect::route('users.show', $id)->with('flash_message', ['class' => 'messages', 'text' => 'Sweet, look at you updating that user.']);
   }
 
 
@@ -127,10 +128,12 @@ class UsersController extends \BaseController {
     $type = strtolower(str_replace(' ', '_', Input::get('type')));
     try {
       // Attempt to find the user.
-      $user = $this->northstar->getUser($type, $search);
-
-      return Redirect::route('users.show', $user['_id']);
-
+      $northstar_users = $this->northstar->getUsers($type, $search);
+      if (count($northstar_users) > 1){
+        return View::make('search.results')->with(compact('northstar_users'));
+      } else {
+        return Redirect::route('users.show', $northstar_users[0]['_id']);
+      }
     } catch (Exception $e) {
       return Redirect::back()->withInput()->with('flash_message', ['class' => 'messages -error', 'text' => 'Hmm, couldn\'t find anyone, are you sure thats right?']);
     }
@@ -152,5 +155,26 @@ class UsersController extends \BaseController {
     return View::make('users.admin-index')->with(compact('users'));
   }
 
+  public function mergedForm()
+  {
+    $inputs = Input::all();
+    $keep_id =  $inputs['keep'];
+    $delete_ids = $inputs['delete'];
+    $keep_user = $this->northstar->getUser('_id', $keep_id);
+    $user = [];
+    foreach($delete_ids as $delete_id){
+      $delete_user = $this->northstar->getUser('_id', $delete_id);
+      $user = array_merge($user, $delete_user, $keep_user);
+    }
+    return View::make('search.merge-and-delete-form')->with(compact('user'));
+  }
 
+  public function deleteUnmergedUsers()
+  {
+    $inputs = Input::all();
+    $delete_ids = $inputs['delete'];
+    foreach($delete_ids as $id){
+      $this->northstar->deleteUser($id);
+    }
+  }
 }

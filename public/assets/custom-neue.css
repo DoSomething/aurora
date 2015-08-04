@@ -103,3 +103,18 @@
   background: #ea5656;
   border-color: #ea5656;
 }
+
+.results {
+  background: #ddd;
+  border: 2px solid #23b7fb;
+}
+.results.first-result {
+  border: 10px solid #23b7fb;
+  border-radius: 4px;
+}
+
+.results.first-result:before {
+  font-size: 20px;
+  font-weight: bold;
+  content: "This appears to be the most recent user!";
+}
