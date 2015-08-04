@@ -60,6 +60,6 @@ class NorthstarUser {
   public function getRole($id) {
     $user = \User::where('_id', $id)->first();
     if(!empty($user)) return $user->findRole();
-    else return 'no role';
+    else return 'unassigned';
   }
 }

@@ -20,7 +20,7 @@
 		<article class="figure -left">
 			<div class="container -padded">
 				<!-- To check if current user is admin and not modifiying his own admin privilege-->
-				@if(Auth::user()->hasRole('admin') && Auth::user()['_id'] != $northstar_profile['_id'])
+				@if(Auth::user()->hasRole('admin'))
 		      @if ($role == "admin")
 						@include('users.partials.remove-role')
 		      @else

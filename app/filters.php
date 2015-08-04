@@ -94,7 +94,7 @@ Route::filter('role', function($route, $request, $role)
 
 Route::filter('roles', function()
 {
-  if(Auth::user()->findRole() == "no role"){
+  if(Auth::user()->findRole() == "unassigned"){
     return Redirect::to('/unauthorized');
   }
 });

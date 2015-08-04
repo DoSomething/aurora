@@ -10,7 +10,7 @@
 		{{ Form::submit('Remove staff', ['name'=>'type', 'class' => 'button -secondary make-role']) }}
 		{{ Form::close() }}
 		{{ Form::open(['route' => array('role.create', $northstar_profile['_id'])]) }}
-		{{ Form::submit('Make admin', ['name' => 'type', 'value' => '1', 'class' => 'button -secondary mkae-role']) }}
+		{{ Form::submit('Make admin', ['name' => 'type', 'value' => '1', 'class' => 'button -secondary']) }}
 		{{ Form::close() }}
 	@else
 		{{ Form::open(['route' => array('role.create', $northstar_profile['_id'])]) }}

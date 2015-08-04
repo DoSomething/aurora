@@ -9,10 +9,13 @@
   <div class="wrapper">
     <div class="container__block">
       <dl class="profile-settings">
-      <dt><a href="{{ url('users/' . $northstar_profile['_id'] . '/edit') }}">Edit User</a></dt>
-      @if (isset($role))
-        <dt>Role: {{ $role }}</dt>
-      @endif
+        @if(Auth::user()->hasRole('admin'))
+          <dt><a href="{{ url('users/' . $northstar_profile['_id'] . '/edit') }}">Edit User</a></dt>
+          <!-- this checking if this user exist in the database -->
+          @if((User::where('_id',$northstar_profile['_id'])->first()))
+            <dt>Role: {{ $role }}</dt>
+          @endif
+        @endif
       </dl>
       @include('users.partials.details')
     </div>
