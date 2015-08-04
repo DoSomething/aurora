@@ -39,10 +39,13 @@ Route::post('merge', ['as' => 'users.merge-and-delete', 'uses' => 'UsersControll
 # Create admins.
 Route::post('admin/{user}', ['as' => 'admin.create', 'uses' => 'UsersController@adminCreate']);
 
-# Get all admins
 Route::get('/admins', 'UsersController@adminIndex');
 
 # Key
 Route::resource('keys', 'KeyController');
 
+# Mobile Commons Message Backlog
 Route::get('/users/{user}/mobile-commons-messages', 'UsersController@mobileCommonsMessages');
+
+# Zendesk Requested Tickets Backlog
+Route::get('/users/{user}/zendesk-tickets', 'UsersController@zendeskTickets');
