@@ -71,4 +71,6 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
     else return 'unassigned';
   }
 
+
+
 }

@@ -206,7 +206,7 @@ class UsersController extends \BaseController {
       $unassigned[] = $this->northstar->getUser('_id', $nonmember->_id);
     }
 
-    return View::make('users.admin-index')->with(compact('admins', 'staffs', 'interns', 'unassigned'));
+    return View::make('users.staff-index')->with(compact('admins', 'staffs', 'interns', 'unassigned'));
   }
 
   public function mergedForm()

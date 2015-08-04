@@ -81,5 +81,5 @@ class NorthstarUser {
 
     return $this->zendesk->requestedTickets($zendeskID)['tickets'];
   }
-
+  
 }

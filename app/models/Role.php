@@ -15,4 +15,6 @@ class Role extends Eloquent {
   {
     return $this->belongsToMany('User');
   }
+
+
 }
