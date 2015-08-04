@@ -27,4 +27,9 @@
       'username' => getenv('MOBILE_COMMONS_USERNAME'),
       'password' => getenv('MOBILE_COMMONS_PASSWORD')
     ),
+    'zendesk' => array(
+      'url' => 'https://dosomethingorg1.zendesk.com/api/v2/',
+      'username' => getenv('ZENDESK_USERNAME'),
+      'password' => getenv('ZENDESK_PASSWORD')
+    ),
   );

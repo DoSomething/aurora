@@ -40,3 +40,14 @@ function add_class_to_first_result($arr, $ele)
 		return "first-result";
 	}
 }
+
+function ticket_state_class($message)
+{
+	if ($message == "closed") {
+		echo 'is-closed';
+	} elseif ($message == "open"){
+		echo 'is-open';
+	} else{
+		echo 'is-pending';
+	}
+}
