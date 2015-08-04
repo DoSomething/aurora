@@ -13,7 +13,7 @@
           <dt><a href="{{ url('users/' . $northstar_profile['_id'] . '/edit') }}">Edit User</a></dt>
           <!-- this checking if this user exist in the database -->
           @if((User::where('_id',$northstar_profile['_id'])->first()))
-            <dt>Role: {{ $role }}</dt>
+            {{ !empty($user_roles) ? ('<dt>Role: '. $user_roles[0] . '</dt>') : "" }}
           @endif
         @endif
       </dl>
@@ -48,5 +48,15 @@
     </div>
   </div>
 </div>
+
+<h1 class="heading -banner"><span>Zendesk Activity</span></h1>
+<div class="container -padded">
+  <div class="wrapper">
+    <div class="container__block">
+      @include('users.partials.zendesk')
+    </div>
+  </div>
+</div>
+
 
 @stop

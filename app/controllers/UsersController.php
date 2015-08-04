@@ -13,7 +13,6 @@ class UsersController extends \BaseController {
     $this->northstar = $northstar;
   }
 
-
   /**
    * Display a listing of the resource.
    *
@@ -64,20 +63,22 @@ class UsersController extends \BaseController {
   public function show($id)
   {
     $northstar_user = new NorthstarUser($id);
-    $role = $northstar_user->getRole($id); //Finding for the user role
     $northstar_profile = $northstar_user->profile;
-    // $roles = array_map('strtoupper', (Role::all()->lists('name')));
 
+    // $roles = array_map('strtoupper', (Role::all()->lists('name')));
+    $user_roles = $northstar_user->getRoles($id); //Finding for the user roles
     $roles = array('1' => 'admin', '2' => 'staff', '3' => 'intern');
     // list all roles for a user minus roles already given
-    unset($roles[array_search($role, $roles)]);
-    $roles = array_map('strtoupper', $roles);
+    foreach ($user_roles as $role){
+      unset($roles[array_search($role, $roles)]);
+    }
     //Calling other APIs related to the user.
     $campaigns = $northstar_user->getCampaigns();
     $reportbacks = $northstar_user->getReportbacks();
     $mobile_commons_profile = $northstar_user->getMobileCommonsProfile();
+    $zendesk_profile = $northstar_user->searchZendeskUserByEmail();
 
-    return View::make('users.show')->with(compact('northstar_profile', 'role', 'campaigns', 'reportbacks', 'mobile_commons_profile', 'roles'));
+    return View::make('users.show')->with(compact('northstar_profile', 'roles', 'user_roles', 'campaigns', 'reportbacks', 'mobile_commons_profile', 'zendesk_profile'));
   }
 
   public function mobileCommonsMessages($id)
@@ -89,6 +90,14 @@ class UsersController extends \BaseController {
     return View::make('users.mobile-commons-messages')->with(compact('mobile_commons_messages'));
   }
 
+  public function zendeskTickets($id)
+  {
+    $northstar_user = new NorthstarUser($id);
+
+    $requested_tickets = $northstar_user->zendeskRequestedTickets();
+
+    return View::make('users.zendesk-tickets')->with(compact('requested_tickets'));
+  }
 
   /**
    * Show the form for editing the specified resource.

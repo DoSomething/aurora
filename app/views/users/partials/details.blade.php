@@ -20,9 +20,7 @@
 		<article class="figure -left">
 			<div class="container -padded">
 				@if(Auth::user()->hasRole('admin'))
-					@include('users.partials.remove-role')
-					
-	        @include('users.partials.make-role')
+	        @include('users.partials.assign-role')
 				@endif
 		</article>
 	</li>
