@@ -18,7 +18,7 @@ class MobileCommonsAPI {
       'base_url' => $base_url,
       'defaults' => array(
       'auth' => [$username, $password, 'Basic']
-        ),
+      ),
     ]);
 
     $this->client = $client;

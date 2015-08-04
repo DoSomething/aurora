@@ -14,11 +14,11 @@ class ZendeskAPI {
 
     $password = \Config::get('services.zendesk.password');
 
-    $client = new \GuzzleHttp\Client([
+    $client = new Client([
       'base_url' => $base_url,
       'defaults' => array(
       'auth' => [$username, $password, 'Basic']
-        ),
+      ),
     ]);
 
     $this->client = $client;
