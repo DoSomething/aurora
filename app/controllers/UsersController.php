@@ -147,29 +147,55 @@ class UsersController extends \BaseController {
     }
   }
 
-  public function RoleCreate($user_id)
+  public function roleCreate($id)
   {
-    $type = Input::get('type');
-    if($type === 'Make staff'){
-      $role = 2;
-    }elseif($type === 'Make admin'){
-      $role = 1;
-    }
+    $role = Input::get('role');
     // Create a new user in database with type of role
-    $user = User::firstOrCreate(['_id' => $user_id])->assignRole($role);
-    return Redirect::back()->with('flash_message', ['class' => 'messages', 'text' => 'You assigned that user as ' . substr($type, 5)]);
+    $user = User::firstOrCreate(['_id' => $id])->assignRole($role);
+    return Redirect::back()->with('flash_message', ['class' => 'messages', 'text' => 'You assigned that user as ' . $type]);
   }
 
   public function adminIndex()
   {
-    $db_admins = User::whereHas('roles', function($q)
+    $admins = [];
+    $staffs = [];
+    $interns = [];
+    $unassigned = [];
+
+    $db_admins = User::whereHas('roles', function($query)
     {
-      $q->where('name', 'admin');
+      $query->where('name', 'admin');
     })->get();
+
+    $db_staffs = User::whereHas('roles', function($query)
+    {
+      $query->where('name', 'staff');
+    })->get();
+
+    $db_interns = User::whereHas('roles', function($query)
+    {
+      $query->where('name', 'intern');
+    })->get();
+
+    $db_unassigned = DB::select('select * from users left join role_user on users.id = role_user.user_id where role_user.user_id is NULL');
+
     foreach($db_admins as $admin){
-      $users[] = $this->northstar->getUser('_id', $admin['_id']);
+      $admins[] = $this->northstar->getUser('_id', $admin['_id']);
     }
-    return View::make('users.admin-index')->with(compact('users'));
+
+    foreach($db_staffs as $staff){
+      $staffs[] = $this->northstar->getUser('_id', $staff['_id']);
+    }
+
+    foreach($db_interns as $interns){
+      $interns[] = $this->northstar->getUser('_id', $intern['_id']);
+    }
+
+    foreach($db_unassigned as $nonmember){
+      $unassigned[] = $this->northstar->getUser('_id', $nonmember->_id);
+    }
+
+    return View::make('users.admin-index')->with(compact('admins', 'staffs', 'interns', 'unassigned'));
   }
 
   public function mergedForm()

@@ -17,7 +17,7 @@
         </li>
         <li>
           <a href="{{ url('/admins') }}">
-            <strong class="navigation__title">Admins</strong>
+            <strong class="navigation__title">Staffs</strong>
             <span class="navigation__subtitle">View all Admins</span>
           </a>
         </li>

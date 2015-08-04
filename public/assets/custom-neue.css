@@ -50,7 +50,7 @@
   text-align: center;
 }
 
-.make-role-header {
+.assign-role-header {
   font-weight: 900;
   color: #ffffff ;
   background: red ;
@@ -59,12 +59,15 @@
   border-radius: 5px 5px 0 0;
 }
 
-.make-role-container{
+.assign-role-container{
   border: 1px solid black;
   line-height: 200%;
   border-radius: 0 0 5px 5px;
 }
 
+.assign-role-form{
+  float: left;
+}
 
 .profile-settings dt{
   float: left;
