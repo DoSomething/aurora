@@ -77,8 +77,8 @@ class UsersController extends \BaseController {
     $reportbacks = $northstar_user->getReportbacks();
     $mobile_commons_profile = $northstar_user->getMobileCommonsProfile();
     $zendesk_profile = $northstar_user->searchZendeskUserByEmail();
-
-    return View::make('users.show')->with(compact('northstar_profile', 'roles', 'user_roles', 'campaigns', 'reportbacks', 'mobile_commons_profile', 'zendesk_profile'));
+    $aurora_user = User::where('_id', $northstar_profile['_id'])->first();
+    return View::make('users.show')->with(compact('northstar_profile', 'roles', 'user_roles', 'campaigns', 'reportbacks', 'mobile_commons_profile', 'zendesk_profile', 'aurora_user'));
   }
 
   public function mobileCommonsMessages($id)
@@ -166,7 +166,7 @@ class UsersController extends \BaseController {
     return Redirect::back()->with('flash_message', ['class' => 'messages', 'text' => 'This user has been assigned a role of ' . $roles[$role]]);
   }
 
-  public function adminIndex()
+  public function staffIndex()
   {
     $admins = [];
     $staffs = [];

@@ -39,7 +39,7 @@ Route::post('merge', ['as' => 'users.merge-and-delete', 'uses' => 'UsersControll
 # Create admins.
 Route::post('role/{user}', ['as' => 'role.create', 'uses' => 'UsersController@roleCreate']);
 
-Route::get('/admins', 'UsersController@adminIndex');
+Route::get('/admins', 'UsersController@staffIndex');
 
 # Key
 Route::resource('keys', 'KeyController');

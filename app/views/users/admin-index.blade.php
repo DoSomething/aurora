@@ -2,7 +2,7 @@
 
 @section('main_content')
 
-@include('layout.header', ["header" => "Admin Index", "subtitle" => "Listing of all admins"])
+@include('layout.header', ["header" => "Staff Index", "subtitle" => "Listing of all staff logged into Aurora"])
 
 @if (!empty($admins))
   <h1 class="heading -banner"><span>Admins</span></h1>
