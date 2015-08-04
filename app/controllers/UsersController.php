@@ -66,13 +66,18 @@ class UsersController extends \BaseController {
     $northstar_user = new NorthstarUser($id);
     $role = $northstar_user->getRole($id); //Finding for the user role
     $northstar_profile = $northstar_user->profile;
+    // $roles = array_map('strtoupper', (Role::all()->lists('name')));
 
+    $roles = array('1' => 'admin', '2' => 'staff', '3' => 'intern');
+    // list all roles for a user minus roles already given
+    unset($roles[array_search($role, $roles)]);
+    $roles = array_map('strtoupper', $roles);
     //Calling other APIs related to the user.
     $campaigns = $northstar_user->getCampaigns();
     $reportbacks = $northstar_user->getReportbacks();
     $mobile_commons_profile = $northstar_user->getMobileCommonsProfile();
 
-    return View::make('users.show')->with(compact('northstar_profile', 'role', 'campaigns', 'reportbacks', 'mobile_commons_profile'));
+    return View::make('users.show')->with(compact('northstar_profile', 'role', 'campaigns', 'reportbacks', 'mobile_commons_profile', 'roles'));
   }
 
   public function mobileCommonsMessages($id)
@@ -120,14 +125,10 @@ class UsersController extends \BaseController {
    */
   public function destroy($id)
   {
-    $type = Input::get('type');
-    if($type === 'Remove staff'){
-      $role = 2;
-    }elseif($type === 'Remove admin'){
-      $role = 1;
-    }
+    $type = Input::get('role');
+    $role = Role::where('name', $type)->first();
     User::where(['_id' => $id])->firstOrFail()->removeRole($role);
-    return Redirect::back()->with('flash_message', ['class' => 'messages', 'text' => "User has been removed as ". substr($type, 7)]);
+    return Redirect::back()->with('flash_message', ['class' => 'messages', 'text' => "This user's role as " . $type . " has been removed"]);
   }
 
   public function search()
@@ -150,9 +151,10 @@ class UsersController extends \BaseController {
   public function roleCreate($id)
   {
     $role = Input::get('role');
+    $roles = array('1' => 'admin', '2' => 'staff', '3' => 'intern');
     // Create a new user in database with type of role
     $user = User::firstOrCreate(['_id' => $id])->assignRole($role);
-    return Redirect::back()->with('flash_message', ['class' => 'messages', 'text' => 'You assigned that user as ' . $type]);
+    return Redirect::back()->with('flash_message', ['class' => 'messages', 'text' => 'This user has been assigned a role of ' . $roles[$role]]);
   }
 
   public function adminIndex()
@@ -187,7 +189,7 @@ class UsersController extends \BaseController {
       $staffs[] = $this->northstar->getUser('_id', $staff['_id']);
     }
 
-    foreach($db_interns as $interns){
+    foreach($db_interns as $intern){
       $interns[] = $this->northstar->getUser('_id', $intern['_id']);
     }
 

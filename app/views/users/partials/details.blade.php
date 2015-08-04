@@ -19,13 +19,10 @@
 	<li>
 		<article class="figure -left">
 			<div class="container -padded">
-				<!-- To check if current user is admin and not modifiying his own admin privilege-->
 				@if(Auth::user()->hasRole('admin'))
-		      @if ($role == "admin")
-						@include('users.partials.remove-role')
-		      @else
-		        @include('users.partials.make-role')
-		      @endif
+					@include('users.partials.remove-role')
+					
+	        @include('users.partials.make-role')
 				@endif
 		</article>
 	</li>
