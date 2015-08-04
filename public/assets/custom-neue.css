@@ -50,7 +50,7 @@
   text-align: center;
 }
 
-.make-admin-header {
+.make-role-header {
   font-weight: 900;
   color: #ffffff ;
   background: red ;
@@ -59,10 +59,14 @@
   border-radius: 5px 5px 0 0;
 }
 
-.make-admin-container{
+.make-role-container{
   border: 1px solid black;
   line-height: 200%;
   border-radius: 0 0 5px 5px;
+}
+
+.make-role{
+  float: left;
 }
 
 .profile-settings dt{
@@ -102,4 +106,19 @@
   color: black;
   background: #ea5656;
   border-color: #ea5656;
+}
+
+.results {
+  background: #ddd;
+  border: 2px solid #23b7fb;
+}
+.results.first-result {
+  border: 10px solid #23b7fb;
+  border-radius: 4px;
+}
+
+.results.first-result:before {
+  font-size: 20px;
+  font-weight: bold;
+  content: "This appears to be the most recent user!";
 }

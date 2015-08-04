@@ -8,7 +8,9 @@
 		<div class="container__block">
 	    <h1 class="heading -hero">You have arrived.</h1>
 				@if (Session::has('trigger_modal'))
-				  {{ auto_open_modal() }}
+					<script>
+					  auto_open_modal()
+					</script>
 				@endif
 		</div>
 	</div>

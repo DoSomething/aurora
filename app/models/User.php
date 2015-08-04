@@ -63,4 +63,12 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
     }
     return false;
   }
+
+  public function findRole() {
+    if($this->hasRole('admin')) return "admin";
+    elseif($this->hasRole('staff')) return "staff";
+    elseif ($this->hasRole('intern')) return "intern";
+    else return 'no role';
+  }
+
 }

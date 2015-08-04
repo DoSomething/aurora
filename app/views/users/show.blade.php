@@ -8,10 +8,12 @@
 <div class="container -padded">
   <div class="wrapper">
     <div class="container__block">
-      <a href="{{ url('users/' . $northstar_profile['_id'] . '/edit') }}">Edit User</a>
-      @if ($aurora_user)
-        Admin: {{ $aurora_user->hasRole('admin') ? '✓' : 'x' }}
+      <dl class="profile-settings">
+      <dt><a href="{{ url('users/' . $northstar_profile['_id'] . '/edit') }}">Edit User</a></dt>
+      @if (isset($role))
+        <dt>Role: {{ $role }}</dt>
       @endif
+      </dl>
       @include('users.partials.details')
     </div>
   </div>

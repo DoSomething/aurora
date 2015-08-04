@@ -57,21 +57,9 @@ class NorthstarUser {
     return $this->mobileCommons->userMessages($this->profile['mobile']);
   }
 
-  public function isAdmin($id) {
+  public function getRole($id) {
     $user = \User::where('_id', $id)->first();
-    if(!empty($user)){
-      if($user->hasRole('admin')){
-        return $user;
-      }
-    }
-  }
-
-  public function isStaff($id) {
-    $user = \User::where('_id', $id)->first();
-    if(!empty($user)){
-      if($user->hasRole('staff')){
-        return $user;
-      }
-    }
+    if(!empty($user)) return $user->findRole();
+    else return 'no role';
   }
 }
