@@ -70,8 +70,7 @@ class UsersController extends \BaseController {
     $user_roles = array_pluck($northstar_user->getRoles($id), 'name');
 
     // Getting roles that haven't been assigned to the user
-    $all_roles = Role::getAllRoleWithAttributes();
-    $unassigned_roles = array_diff($all_roles, $user_roles);
+    $unassigned_roles = $northstar_user->unassignedRoles($user_roles);
 
     //Calling other APIs related to the user.
     $campaigns = $northstar_user->getCampaigns();

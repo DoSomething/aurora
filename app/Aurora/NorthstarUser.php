@@ -82,4 +82,16 @@ class NorthstarUser {
     return $this->zendesk->requestedTickets($zendeskID)['tickets'];
   }
 
+  public function unassignedRoles($user_roles) {
+    $all_roles = ['1' => 'admin', '2' => 'staff', '3' => 'intern'];
+    $unassigned_roles = array_diff($all_roles, $user_roles);
+    if (!in_array('staff', $unassigned_roles)){
+      $unassigned_roles = ['1' => 'ADMIN'];
+    }
+    foreach($unassigned_roles as $key => $value){
+      $unassigned_roles[$key] = ucfirst($value);
+    }
+    return $unassigned_roles;
+  }
+
 }
