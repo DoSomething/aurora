@@ -60,11 +60,11 @@ class NorthstarUser {
   }
 
   public function getRoles($id) {
+    $roles = [];
     $user = \User::where('_id', $id)->first();
-    $roles =[];
     if(!empty($user)){
       foreach ($user->roles as $role) {
-        $roles[] =$role['name'];
+        $roles[] = $role->getAttributes();
       }
     }
     return $roles;
@@ -81,5 +81,5 @@ class NorthstarUser {
 
     return $this->zendesk->requestedTickets($zendeskID)['tickets'];
   }
-  
+
 }

@@ -16,5 +16,12 @@ class Role extends Eloquent {
     return $this->belongsToMany('User');
   }
 
+  public static function getAllRoleWithAttributes(){
+    $roles = Role::all();
+    foreach($roles as $role){
+      $role_attributes[$role->getAttributes()['id']] = $role->getAttributes()['name'];
+    }
+    return $role_attributes;
+  }
 
 }

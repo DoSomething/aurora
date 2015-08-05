@@ -62,23 +62,23 @@ class UsersController extends \BaseController {
    */
   public function show($id)
   {
+    // Finding the user in nortstar DB and getting the informations
     $northstar_user = new NorthstarUser($id);
     $northstar_profile = $northstar_user->profile;
 
-    // $roles = array_map('strtoupper', (Role::all()->lists('name')));
-    $user_roles = $northstar_user->getRoles($id); //Finding for the user roles
-    $roles = array('1' => 'admin', '2' => 'staff', '3' => 'intern');
-    // list all roles for a user minus roles already given
-    foreach ($user_roles as $role){
-      unset($roles[array_search($role, $roles)]);
-    }
+    // Finding the user assigned roles
+    $user_roles = array_pluck($northstar_user->getRoles($id), 'name');
+
+    // Getting roles that haven't been assigned to the user
+    $all_roles = Role::getAllRoleWithAttributes();
+    $unassigned_roles = array_diff($all_roles, $user_roles);
+
     //Calling other APIs related to the user.
     $campaigns = $northstar_user->getCampaigns();
     $reportbacks = $northstar_user->getReportbacks();
     $mobile_commons_profile = $northstar_user->getMobileCommonsProfile();
     $zendesk_profile = $northstar_user->searchZendeskUserByEmail();
-    $aurora_user = User::where('_id', $northstar_profile['_id'])->first();
-    return View::make('users.show')->with(compact('northstar_profile', 'roles', 'user_roles', 'campaigns', 'reportbacks', 'mobile_commons_profile', 'zendesk_profile', 'aurora_user'));
+    return View::make('users.show')->with(compact('northstar_profile', 'user_roles', 'unassigned_roles', 'campaigns', 'reportbacks', 'mobile_commons_profile', 'zendesk_profile'));
   }
 
   public function mobileCommonsMessages($id)
@@ -161,6 +161,7 @@ class UsersController extends \BaseController {
   {
     $role = Input::get('role');
     $roles = array('1' => 'admin', '2' => 'staff', '3' => 'intern');
+
     // Create a new user in database with type of role
     $user = User::firstOrCreate(['_id' => $id])->assignRole($role);
     return Redirect::back()->with('flash_message', ['class' => 'messages', 'text' => 'This user has been assigned a role of ' . $roles[$role]]);
@@ -168,45 +169,32 @@ class UsersController extends \BaseController {
 
   public function staffIndex()
   {
-    $admins = [];
-    $staffs = [];
-    $interns = [];
-    $unassigned = [];
+    $employee['admin'] = User::usersWithRole('admin');
 
-    $db_admins = User::whereHas('roles', function($query)
-    {
-      $query->where('name', 'admin');
-    })->get();
+    $employee['staff'] = User::usersWithRole('staff');
 
-    $db_staffs = User::whereHas('roles', function($query)
-    {
-      $query->where('name', 'staff');
-    })->get();
+    $employee['intern'] = User::usersWithRole('intern');
 
-    $db_interns = User::whereHas('roles', function($query)
-    {
-      $query->where('name', 'intern');
-    })->get();
+    // users that tried to sign in but has no role or unauthorized
+    $employee['unassigned'] = DB::select('select * from users left join role_user on users.id = role_user.user_id where role_user.user_id is NULL');
 
-    $db_unassigned = DB::select('select * from users left join role_user on users.id = role_user.user_id where role_user.user_id is NULL');
-
-    foreach($db_admins as $admin){
-      $admins[] = $this->northstar->getUser('_id', $admin['_id']);
+    foreach($employee as $role => $users){
+      foreach($users as $user){
+      $group[$role][] = $this->northstar->getUser('_id', $user['_id']);
+      }
     }
-
-    foreach($db_staffs as $staff){
-      $staffs[] = $this->northstar->getUser('_id', $staff['_id']);
-    }
-
-    foreach($db_interns as $intern){
-      $interns[] = $this->northstar->getUser('_id', $intern['_id']);
-    }
-
-    foreach($db_unassigned as $nonmember){
-      $unassigned[] = $this->northstar->getUser('_id', $nonmember->_id);
-    }
-
-    return View::make('users.staff-index')->with(compact('admins', 'staffs', 'interns', 'unassigned'));
+    // foreach($db_staffs as $staff){
+    //   $staffs[] = $this->northstar->getUser('_id', $staff['_id']);
+    // }
+    //
+    // foreach($db_interns as $intern){
+    //   $interns[] = $this->northstar->getUser('_id', $intern['_id']);
+    // }
+    //
+    // foreach($db_unassigned as $nonmember){
+    //   $unassigned[] = $this->northstar->getUser('_id', $nonmember->_id);
+    // }
+    return View::make('users.staff-index')->with(compact('group'));
   }
 
   public function mergedForm()

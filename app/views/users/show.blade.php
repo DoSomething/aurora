@@ -13,7 +13,7 @@
           <dt><a href="{{ url('users/' . $northstar_profile['_id'] . '/edit') }}">Edit User</a></dt>
           <!-- this checking if this user exist in the database -->
           @if((User::where('_id',$northstar_profile['_id'])->first()))
-            {{ !empty($user_roles) ? ('<dt>Role: '. $aurora_user->findRole() . '</dt>') : "" }}
+            {{ !empty($user_roles) ? ('<dt>Role: '. value(array_slice($user_roles, -1, 1)[0]) . '</dt>') : "" }}
           @endif
         @endif
       </dl>

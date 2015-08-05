@@ -51,11 +51,3 @@ function ticket_state_class($message)
 		echo 'is-pending';
 	}
 }
-function usersWithRole($role)
-{
-  $users = User::whereHas('roles', function($query)
-  {
-    $query->where('name', 'admin');
-  })->get();
-  return $users;
-}
