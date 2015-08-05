@@ -180,20 +180,13 @@ class UsersController extends \BaseController {
 
     foreach($employee as $role => $users){
       foreach($users as $user){
-      $group[$role][] = $this->northstar->getUser('_id', $user['_id']);
+        if ($role == 'unassigned') {
+          $group[$role][] = $this->northstar->getUser('_id', $user->_id);
+        } else {
+        $group[$role][] = $this->northstar->getUser('_id', $user['_id']);
+        }
       }
     }
-    // foreach($db_staffs as $staff){
-    //   $staffs[] = $this->northstar->getUser('_id', $staff['_id']);
-    // }
-    //
-    // foreach($db_interns as $intern){
-    //   $interns[] = $this->northstar->getUser('_id', $intern['_id']);
-    // }
-    //
-    // foreach($db_unassigned as $nonmember){
-    //   $unassigned[] = $this->northstar->getUser('_id', $nonmember->_id);
-    // }
     return View::make('users.staff-index')->with(compact('group'));
   }
 
