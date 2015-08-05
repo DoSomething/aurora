@@ -18,8 +18,8 @@
           </li>
           <li>
             <a href="{{ url('/admins') }}">
-              <strong class="navigation__title">Staffs</strong>
-              <span class="navigation__subtitle">View all staff</span>
+              <strong class="navigation__title">Staff</strong>
+              <span class="navigation__subtitle">View all aurora users</span>
             </a>
           </li>
         @endif
