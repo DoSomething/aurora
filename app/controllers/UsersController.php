@@ -136,7 +136,7 @@ class UsersController extends \BaseController {
   {
     $search = Input::get('search_by');
     $type = strtolower(str_replace(' ', '_', Input::get('type')));
-    // $diff = [];
+
     try {
       // Attempt to find the user.
       $northstar_users = $this->northstar->getUsers($type, $search);
