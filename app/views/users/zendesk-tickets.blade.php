@@ -18,7 +18,7 @@
 							  		{{ isset($ticket['status']) ? ('<dt>Status: </dt><dd>' . ucfirst($ticket['status'])) : "" }}
 							  		<dt>Ticket ID: </dt><dd>{{ link_to("https://dosomethingorg1.zendesk.com/agent/tickets/" . $ticket['id'], $ticket['id']) }}</dd>
 							  		{{ isset($ticket['orgainzation_id']) ? ('<dt>Organization ID: </dt><dd>' . $ticket['organization_id']) : "" }}
-							  		{{ isset($ticket['group_id']) ? ('<dt>Group ID: </dt><dd>' . link_to("https://dosomethingorg1.zendesk.com/groups" . $ticket['group_id'], $ticket['group_id'])) : "" }}
+							  		{{ isset($ticket['group_id']) ? ('<dt>Group ID: </dt><dd>' . link_to("https://dosomethingorg1.zendesk.com/groups/" . $ticket['group_id'], $ticket['group_id'])) : "" }}
 	  					  		{{ isset($ticket['assignee_id']) ? ('<dt>Assignee ID: </dt><dd>' . link_to("https://dosomethingorg1.zendesk.com/agent/users/" . $ticket['assignee_id'] . "/assigned_tickets", $ticket['assignee_id'])) : "" }}
 							  		<dt>Sent On: </dt><dd>{{{ e(time_formatter($ticket['created_at'])) }}}</dd>
 							  		@if (!empty($ticket['tags']))
