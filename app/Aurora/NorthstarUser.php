@@ -4,6 +4,7 @@ use App;
 use Aurora\Services\Drupal\DrupalAPI;
 use Aurora\Services\Northstar\NorthstarAPI;
 use Aurora\Services\MobileCommons\MobileCommonsAPI;
+use Aurora\Services\Zendesk\ZendeskAPI;
 
 class NorthstarUser {
 
@@ -12,7 +13,8 @@ class NorthstarUser {
     $this->northstar = App::make('Aurora\Services\Northstar\NorthstarAPI');
     $this->drupal = App::make('Aurora\Services\Drupal\DrupalAPI');
     $this->mobileCommons = App::make('Aurora\Services\MobileCommons\MobileCommonsAPI');
-    $this->profile = $this->northstar->getUsers('_id', $id);
+    $this->zendesk = App::make('Aurora\Services\Zendesk\ZendeskAPI');
+    $this->profile = $this->northstar->getUser('_id', $id);
   }
 
   public function getCampaigns() {
@@ -61,4 +63,15 @@ class NorthstarUser {
     return \User::where('_id', $id)->first();
   }
 
+  public function searchZendeskUserByEmail()
+  {
+    return $this->zendesk->searchByEmail($this->profile['email']);
+  }
+
+  public function zendeskRequestedTickets()
+  {
+    $zendeskID = $this->zendesk->searchByEmail($this->profile['email'])['id'];
+
+    return $this->zendesk->requestedTickets($zendeskID)['tickets'];
+  }
 }

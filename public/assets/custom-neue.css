@@ -119,3 +119,31 @@
   font-weight: bold;
   content: "This appears to be the most recent user!";
 }
+
+.zendesk-ticket {
+  border-radius: 2px;
+  float: right;
+  width: 100%;
+  position: relative;
+  margin: 12px 0;
+  padding-left: 1%;
+  padding-right: 1%;
+}
+
+.zendesk-ticket.is-closed {
+  color: #999;
+  background: #c7fcc7;
+  border-color: #c7fcc7;
+}
+
+.zendesk-ticket.is-pending {
+  color: white;
+  background: #2095FE;
+  border-color: #2095FE;
+}
+
+.zendesk-ticket.is-open {
+  color: black;
+  background: #ea5656;
+  border-color: #ea5656;
+}

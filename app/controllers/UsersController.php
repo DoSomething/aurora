@@ -69,8 +69,10 @@ class UsersController extends \BaseController {
     $campaigns = $northstar_user->getCampaigns();
     $reportbacks = $northstar_user->getReportbacks();
     $mobile_commons_profile = $northstar_user->getMobileCommonsProfile();
+    $zendesk_profile = $northstar_user->searchZendeskUserByEmail();
 
-    return View::make('users.show')->with(compact('northstar_profile', 'aurora_user', 'campaigns', 'reportbacks', 'mobile_commons_profile'));
+
+    return View::make('users.show')->with(compact('northstar_profile', 'aurora_user', 'campaigns', 'reportbacks', 'mobile_commons_profile', 'zendesk_profile'));
   }
 
   public function mobileCommonsMessages($id)
@@ -82,6 +84,14 @@ class UsersController extends \BaseController {
     return View::make('users.mobile-commons-messages')->with(compact('mobile_commons_messages'));
   }
 
+  public function zendeskTickets($id)
+  {
+    $northstar_user = new NorthstarUser($id);
+
+    $requested_tickets = $northstar_user->zendeskRequestedTickets();
+
+    return View::make('users.zendesk-tickets')->with(compact('requested_tickets'));
+  }
 
   /**
    * Show the form for editing the specified resource.
@@ -91,7 +101,7 @@ class UsersController extends \BaseController {
    */
   public function edit($id)
   {
-    $user = $this->northstar->getUsers('_id', $id);
+    $user = $this->northstar->getUser('_id', $id);
     return View::make('users.edit')->with(compact('user'));
   }
 
@@ -151,7 +161,7 @@ class UsersController extends \BaseController {
   {
     $db_admins = User::has('roles', 1)->get()->all();
     foreach($db_admins as $admin){
-      $users[] = $this->northstar->getUsers('_id', $admin['_id']);
+      $users[] = $this->northstar->getUser('_id', $admin['_id']);
     }
     return View::make('users.admin-index')->with(compact('users'));
   }
@@ -161,11 +171,11 @@ class UsersController extends \BaseController {
     $inputs = Input::all();
     $keep_id =  $inputs['keep'];
     $delete_ids = $inputs['delete'];
-    $keep_user = $this->northstar->getUsers('_id', $keep_id);
+    $keep_user = $this->northstar->getUser('_id', $keep_id);
     $user = [];
     $different_tags = [];
     foreach($delete_ids as $delete_id){
-      $delete_user = $this->northstar->getUsers('_id', $delete_id);
+      $delete_user = $this->northstar->getUser('_id', $delete_id);
       $different_tags = find_diff_tags($different_tags, $delete_user, $keep_user );
       $user = array_merge($user, $delete_user, $keep_user);
     }

@@ -50,6 +50,17 @@ class NorthstarAPI {
     return $response->json();
 
   }
+  /**
+   * Sends a get request to return a user with that id.
+   *
+   * @param mixed ID, email, id, phone
+   * @return user object
+   */
+  public function getUser($type, $id)
+  {
+    $response = $this->client->get('users' . '/' .  $type  . '/' . $id);
+    return $response->json()['data'][0];
+  }
 
   public function updateUser($id, $input)
   {
@@ -72,7 +83,6 @@ class NorthstarAPI {
     return $response->json();
   }
 
-
   /**
    * Sends a get request to return all users matching $type
    * @todo need to make a parameter for Northstar API's retreive user query to sort by most recent user
@@ -83,9 +93,6 @@ class NorthstarAPI {
   {
     $response = $this->client->get('users' . '/' .  $type  . '/' . $id);
     $northstar_users = $response->json()['data'];
-    if(count($northstar_users) == 1 ){
-      return $northstar_users[0];
-    }
     // sort users by "updated_at" attribute
     uasort($northstar_users, function ($a, $b) {
       if ($a['updated_at'] == $b['updated_at']) {

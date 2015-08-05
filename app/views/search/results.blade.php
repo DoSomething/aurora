@@ -3,9 +3,7 @@
 @section('main_content')
 
 @include('layout.header', ['header' => 'Search Results', 'subtitle' => ''])
-<script type="text/javascript">
-	ajax_edit_merge_form()
-</script>
+
 <div class="container -padded">
 	<div class="wrapper">
 		<div class="container__block">
