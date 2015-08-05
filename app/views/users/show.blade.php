@@ -9,7 +9,7 @@
   <div class="wrapper">
     <div class="container__block">
       <dl class="profile-settings">
-        @if(Auth::user()->hasRole('admin'))
+        @if(Auth::user()->hasRole('admin') || Auth::user()->hasRole('staff'))
           <dt><a href="{{ url('users/' . $northstar_profile['_id'] . '/edit') }}">Edit User</a></dt>
           <!-- this checking if this user exist in the database -->
           @if((User::where('_id',$northstar_profile['_id'])->first()))

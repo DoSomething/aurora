@@ -160,7 +160,6 @@ class UsersController extends \BaseController {
   public function roleCreate($id)
   {
     $role = Input::get('role');
-    $roles = array('1' => 'admin', '2' => 'staff', '3' => 'intern');
 
     // Create a new user in database with type of role
     $user = User::firstOrCreate(['_id' => $id])->assignRole($role);

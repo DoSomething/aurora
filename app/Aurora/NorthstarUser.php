@@ -59,17 +59,6 @@ class NorthstarUser {
     return $this->mobileCommons->userMessages($this->profile['mobile']);
   }
 
-  public function getRoles($id) {
-    $roles = [];
-    $user = \User::where('_id', $id)->first();
-    if(!empty($user)){
-      foreach ($user->roles as $role) {
-        $roles[] = $role->getAttributes();
-      }
-    }
-    return $roles;
-  }
-
   public function searchZendeskUserByEmail()
   {
     return $this->zendesk->searchByEmail($this->profile['email']);
@@ -80,6 +69,17 @@ class NorthstarUser {
     $zendeskID = $this->zendesk->searchByEmail($this->profile['email'])['id'];
 
     return $this->zendesk->requestedTickets($zendeskID)['tickets'];
+  }
+
+  public function getRoles($id) {
+    $roles = [];
+    $user = \User::where('_id', $id)->first();
+    if(!empty($user)){
+      foreach ($user->roles as $role) {
+        $roles[] = $role->getAttributes();
+      }
+    }
+    return $roles;
   }
 
   public function unassignedRoles($user_roles) {

@@ -63,14 +63,20 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
     }
     return false;
   }
-
+  /**
+   * Used in filters.php
+   * @return string
+   */
   public function findRole() {
     if($this->roles()->first()){
       return $this->roles()->first()['name'];
     }
     return NULL;
   }
-
+  /**
+   * Used in UsersController
+   * @return eloquent collection
+   */
   public static function usersWithRole($role)
   {
     $users = User::whereHas('roles', function($query) use($role){
