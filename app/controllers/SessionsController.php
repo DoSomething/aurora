@@ -30,7 +30,7 @@ class SessionsController extends \BaseController {
       $response = $northstar->login($input);
       $user = $this->mapToUser($response);
       Auth::login($user);
-      
+
       return Redirect::route('users.index');
     } catch (Exception $e) {
       return Redirect::back()->with('trigger_modal', ['class' => 'messages -error', 'text' => 'Login Failed']);

@@ -71,6 +71,12 @@ class NorthstarUser {
     return $this->zendesk->requestedTickets($zendeskID)['tickets'];
   }
 
+
+  /**
+   * Used in UsersController->show()
+   *
+   * @var array of roles this user has
+   */
   public function getRoles($id) {
     $roles = [];
     $user = \User::where('_id', $id)->first();
@@ -82,6 +88,11 @@ class NorthstarUser {
     return $roles;
   }
 
+  /**
+   * Used in UsersController->show()
+   *
+   * @var array of roles this user doesnt have
+   */
   public function unassignedRoles($user_roles) {
     $all_roles = ['1' => 'admin', '2' => 'staff', '3' => 'intern'];
     $unassigned_roles = array_diff($all_roles, $user_roles);
