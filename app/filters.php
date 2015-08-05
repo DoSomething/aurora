@@ -85,9 +85,16 @@ Route::filter('csrf', function()
   }
 });
 
-Route::filter('role', function($route, $request, $role)
+Route::filter('notadmin', function()
 {
-  if (Auth::guest() or ! Auth::user()->hasRole($role)) {
+  if (Auth::guest() or ! Auth::user()->hasRole('admin')) {
+    return Redirect::to('/unauthorized');
+  }
+});
+
+Route::filter('intern', function()
+{
+  if(Auth::user()->hasRole('intern')) {
     return Redirect::to('/unauthorized');
   }
 });
