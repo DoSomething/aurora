@@ -173,17 +173,12 @@ class UsersController extends \BaseController {
     $employee['staff'] = User::usersWithRole('staff');
 
     $employee['intern'] = User::usersWithRole('intern');
-
     // users that tried to sign in but has no role or unauthorized
-    $employee['unassigned'] = DB::select('select * from users left join role_user on users.id = role_user.user_id where role_user.user_id is NULL');
+    $employee['unassigned'] = User::leftJoin('role_user', 'users.id', '=', 'role_user.user_id')->whereNull('role_user.user_id')->get();
 
-    foreach($employee as $role => $users){
-      foreach($users as $user){
-        if ($role == 'unassigned') {
-          $group[$role][] = $this->northstar->getUser('_id', $user->_id);
-        } else {
+    foreach ($employee as $role => $users) {
+      foreach ($users as $user) {
         $group[$role][] = $this->northstar->getUser('_id', $user['_id']);
-        }
       }
     }
     return View::make('users.staff-index')->with(compact('group'));
