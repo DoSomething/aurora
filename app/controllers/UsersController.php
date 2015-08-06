@@ -9,8 +9,8 @@ class UsersController extends \BaseController {
   public function __construct(NorthstarAPI $northstar) {
     $this->beforeFilter('auth');
     $this->beforeFilter('roles');
-    $this->beforeFilter('intern', ['only'=>['edit', 'update', 'mobileCommonsMessages', 'zendeskTickets']]);
-    $this->beforeFilter('notAdmin', ['only' =>['destroy', 'roleCreate', 'staffIndex', 'deleteUnmergedUsers' ]]);
+    $this->beforeFilter('internLimits', ['except'=>['index', 'show', 'search']]);
+    $this->beforeFilter('adminPrivileges', ['only' =>['destroy', 'roleCreate', 'staffIndex', 'deleteUnmergedUsers' ]]);
     $this->northstar = $northstar;
   }
 

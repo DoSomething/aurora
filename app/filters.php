@@ -85,23 +85,23 @@ Route::filter('csrf', function()
   }
 });
 
-Route::filter('notadmin', function()
+Route::filter('adminPrivileges', function()
 {
   if (Auth::guest() or ! Auth::user()->hasRole('admin')) {
     return Redirect::to('/unauthorized');
   }
 });
 
-Route::filter('intern', function()
+Route::filter('internLimits', function()
 {
-  if(Auth::user()->hasRole('intern')) {
+  if (Auth::user()->hasRole('intern')) {
     return Redirect::to('/unauthorized');
   }
 });
 
 Route::filter('roles', function()
 {
-  if(empty(Auth::user()->findRole())){
+  if (empty(Auth::user()->findRole())) {
     return Redirect::to('/unauthorized');
   }
 });
