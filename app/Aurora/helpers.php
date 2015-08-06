@@ -36,20 +36,22 @@ function sanitize_phone_number($number, $countryName = 'US')
 
 function find_diff_tags($array, $delete_user, $keep_user)
 {
-  foreach($delete_user as $k => $v){
-    if(empty($keep_user[$k]) && !in_array($k, $array)){
+  foreach ($delete_user as $k => $v){
+    if (empty($keep_user[$k]) && !in_array($k, $array)){
       array_push($array, $k);
-    }elseif(!empty($keep_user[$k])&& $keep_user[$k] != $delete_user[$k]){
-      array_push($array, $k);
-    }
-  }
-  foreach($keep_user as $k => $v){
-    if(empty($delete_user[$k]) && !in_array($k, $array)){
-      array_push($array, $k);
-    }elseif(!empty($delete_user[$k]) && $keep_user[$k] != $delete_user[$k]){
+    }elseif (!empty($keep_user[$k])&& $keep_user[$k] != $delete_user[$k]){
       array_push($array, $k);
     }
   }
+  
+  foreach ($keep_user as $k => $v){
+    if (empty($delete_user[$k]) && !in_array($k, $array)){
+      array_push($array, $k);
+    }elseif (!empty($delete_user[$k]) && $keep_user[$k] != $delete_user[$k]){
+      array_push($array, $k);
+    }
+  }
+
   return $array;
 }
 
