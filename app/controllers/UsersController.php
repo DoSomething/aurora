@@ -140,7 +140,7 @@ class UsersController extends \BaseController {
    */
   public function destroy($id)
   {
-    User::where(['_id' => $id])->firstOrFail()->removeRole(1);
+    $user = User::where(['_id' => $id])->firstOrFail()->removeRole(1);
     return Redirect::back()->with('flash_message', ['class' => 'messages', 'text' => "The less admins the warier"]);
   }
 
@@ -210,7 +210,6 @@ class UsersController extends \BaseController {
   /**
    * Making request to NorthstarAPI to delete users marked
    * for deletion from duplication form
-   *
    */
   public function deleteUnmergedUsers()
   {
