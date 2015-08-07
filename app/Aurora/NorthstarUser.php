@@ -17,6 +17,12 @@ class NorthstarUser {
     $this->profile = $this->northstar->getUser('_id', $id);
   }
 
+
+  /**
+   * Get all user's campaigns
+   *
+   * @return Array user's campaigns
+   */
   public function getCampaigns() {
     $campaigns = [];
     $profile = $this->profile;
@@ -31,6 +37,12 @@ class NorthstarUser {
     return array_filter($campaigns);
   }
 
+
+  /**
+   * Get all user's reportbacks
+   *
+   * @return Array user's reportbacks
+   */
   public function getReportbacks()
   {
     $reportbacks = [];
@@ -46,6 +58,12 @@ class NorthstarUser {
     return array_filter($reportbacks);
   }
 
+
+  /**
+   * Get user's mobile commons profile
+   *
+   * @return Array user's mobile commons profile
+   */
   public function getMobileCommonsProfile()
   {
     if(isset($this->profile['mobile']))
@@ -54,6 +72,12 @@ class NorthstarUser {
     }
   }
 
+
+  /**
+   * Get all user's mobile commons message backlogs
+   *
+   * @return Array user's mobile commons message backlogs
+   */
   public function getMobileCommonsMessages()
   {
     return $this->mobileCommons->userMessages($this->profile['mobile']);
@@ -63,11 +87,23 @@ class NorthstarUser {
     return \User::where('_id', $id)->first();
   }
 
+
+  /**
+   * Get user's zendesk profile
+   *
+   * @return Array user's zendesk profile infomation
+   */
   public function searchZendeskUserByEmail()
   {
     return $this->zendesk->searchByEmail($this->profile['email']);
   }
 
+
+  /**
+   * Get user's zendesk tickets
+   *
+   * @return Array user's zendesk tickets
+   */
   public function zendeskRequestedTickets()
   {
     $zendeskID = $this->zendesk->searchByEmail($this->profile['email'])['id'];
