@@ -18,7 +18,6 @@
 				<td class="table-cell"> {{{ isset($user['mobile']) ? e(sanitize_phone_number($user['mobile']), isset($user['country']) ? e($user['country']) : "") : '' }}}</td>
 			</tr>
 		@empty
-		<h1>No user found</h1>
 		@endforelse
 	</tbody>
 </table>
