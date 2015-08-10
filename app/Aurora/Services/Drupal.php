@@ -16,6 +16,12 @@ class DrupalAPI {
   }
 
 
+  /**
+   * Send a GET request to return campaign information
+   *
+   * @param String campaign ID
+   * @return JSON file
+   */
   public function getCampaignFromDrupal($id)
   {
     $response = $this->client->get('campaigns/' . $id);
@@ -24,6 +30,12 @@ class DrupalAPI {
     }
   }
 
+  /**
+   * Send a GET request to return a user reportbacks information
+   *
+   * @param String reportback ID
+   * @return JSON file
+   */
   public function getReportbacksFromDrupal($id)
   {
     $response = $this->client->get('reportbacks/' . $id . '.json');
