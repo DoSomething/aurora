@@ -2,16 +2,17 @@
 
 use Aurora\NorthstarUser;
 use Aurora\Services\Northstar\NorthstarAPI;
-use Input;
+use Illuminate\Support\Facades\Input;
 
 class UsersController extends \BaseController {
 
   public function __construct(NorthstarAPI $northstar) {
     $this->beforeFilter('auth');
-    $this->beforeFilter('role:admin');
+    $this->beforeFilter('roles');
+    $this->beforeFilter('internLimits', ['except'=>['index', 'show', 'search']]);
+    $this->beforeFilter('adminPrivileges', ['only' =>['destroy', 'roleCreate', 'staffIndex', 'deleteUnmergedUsers' ]]);
     $this->northstar = $northstar;
   }
-
 
   /**
    * Display a listing of the resource.
@@ -61,17 +62,22 @@ class UsersController extends \BaseController {
    */
   public function show($id)
   {
+    // Finding the user in nortstar DB and getting the informations
     $northstar_user = new NorthstarUser($id);
-    $aurora_user = $northstar_user->isAdmin($id); //Checking if user is admin.
     $northstar_profile = $northstar_user->profile;
+
+    // Finding the user assigned roles
+    $user_roles = array_pluck($northstar_user->getRoles($id), 'name');
+
+    // Getting roles that haven't been assigned to the user
+    $unassigned_roles = $northstar_user->unassignedRoles($user_roles);
+
     //Calling other APIs related to the user.
     $campaigns = $northstar_user->getCampaigns();
     $reportbacks = $northstar_user->getReportbacks();
     $mobile_commons_profile = $northstar_user->getMobileCommonsProfile();
     $zendesk_profile = $northstar_user->searchZendeskUserByEmail();
-
-
-    return View::make('users.show')->with(compact('northstar_profile', 'aurora_user', 'campaigns', 'reportbacks', 'mobile_commons_profile', 'zendesk_profile'));
+    return View::make('users.show')->with(compact('northstar_profile', 'user_roles', 'unassigned_roles', 'campaigns', 'reportbacks', 'mobile_commons_profile', 'zendesk_profile'));
   }
 
   /**
@@ -140,8 +146,10 @@ class UsersController extends \BaseController {
    */
   public function destroy($id)
   {
-    $user = User::where(['_id' => $id])->firstOrFail()->removeRole(1);
-    return Redirect::back()->with('flash_message', ['class' => 'messages', 'text' => "The less admins the warier"]);
+    $type = Input::get('role');
+    $role = Role::where('name', $type)->first();
+    User::where(['_id' => $id])->firstOrFail()->removeRole($role);
+    return Redirect::back()->with('flash_message', ['class' => 'messages', 'text' => "This user's role as " . $type . " has been removed"]);
   }
 
 
@@ -167,21 +175,44 @@ class UsersController extends \BaseController {
     }
   }
 
-  public function adminCreate($user_id)
+
+  /**
+   * Assign user to a role
+   * @param Int User ID, String role name
+   *
+   * @return Response
+   */
+  public function roleCreate($id)
   {
-    // Create a new user in database with admin role
-    User::firstOrCreate(['_id' => $user_id])->assignRole(1);
-    return Redirect::back()->with('flash_message', ['class' => 'messages', 'text' => 'The more admins the merrier.']);
+    $role = Input::get('role');
+
+    // Create a new user in database with type of role
+    $user = User::firstOrCreate(['_id' => $id])->assignRole($role);
+    return Redirect::back()->with('flash_message', ['class' => 'messages', 'text' => 'This user has been assigned a role of ' . $roles[$role]]);
   }
 
 
-  public function adminIndex()
+  /**
+   * Display Users roles
+   *
+   * @return Response
+   */
+  public function staffIndex()
   {
-    $db_admins = User::has('roles', 1)->get()->all();
-    foreach($db_admins as $admin){
-      $users[] = $this->northstar->getUser('_id', $admin['_id']);
+    $employee['admin'] = User::usersWithRole('admin');
+
+    $employee['staff'] = User::usersWithRole('staff');
+
+    $employee['intern'] = User::usersWithRole('intern');
+    // users that tried to sign in but has no role or unauthorized
+    $employee['unassigned'] = User::leftJoin('role_user', 'users.id', '=', 'role_user.user_id')->whereNull('role_user.user_id')->get();
+
+    foreach ($employee as $role => $users) {
+      foreach ($users as $user) {
+        $group[$role][] = $this->northstar->getUser('_id', $user['_id']);
+      }
     }
-    return View::make('users.admin-index')->with(compact('users'));
+    return View::make('users.staff-index')->with(compact('group'));
   }
 
 

@@ -50,7 +50,7 @@
   text-align: center;
 }
 
-.make-admin-header {
+.assign-role-header {
   font-weight: 900;
   color: #ffffff ;
   background: red ;
@@ -59,7 +59,7 @@
   border-radius: 5px 5px 0 0;
 }
 
-.make-admin-container{
+.assign-role-container{
   border: 1px solid black;
   line-height: 200%;
   border-radius: 0 0 5px 5px;
