@@ -23,8 +23,7 @@ class UsersController extends \BaseController {
   {
     try {
       // Attempt to fetch all users.
-      $input = Input::all();
-      $data = $this->northstar->getAllUsers($input);
+      $data = $this->northstar->getAllUsers();
       $users = $data['data'];
       return View::make('users.index')->with(compact('users', 'data'));
     } catch (Exception $e) {
@@ -58,7 +57,7 @@ class UsersController extends \BaseController {
   /**
    * Display the specified resource.
    *
-   * @param  int  $id
+   * @param  String  $id
    * @return Response
    */
   public function show($id)
@@ -81,6 +80,12 @@ class UsersController extends \BaseController {
     return View::make('users.show')->with(compact('northstar_profile', 'user_roles', 'unassigned_roles', 'campaigns', 'reportbacks', 'mobile_commons_profile', 'zendesk_profile'));
   }
 
+  /**
+   * Display user's mobile commons messages
+   *
+   * @param  String  $id
+   * @return Response
+   */
   public function mobileCommonsMessages($id)
   {
     $northstar_user = new NorthstarUser($id);
@@ -90,6 +95,13 @@ class UsersController extends \BaseController {
     return View::make('users.mobile-commons-messages')->with(compact('mobile_commons_messages'));
   }
 
+
+  /**
+   * Display user's zendesk tickets
+   *
+   * @param  String  $id
+   * @return Response
+   */
   public function zendeskTickets($id)
   {
     $northstar_user = new NorthstarUser($id);
@@ -100,9 +112,9 @@ class UsersController extends \BaseController {
   }
 
   /**
-   * Show the form for editing the specified resource.
+   * Display the form for editing user information
    *
-   * @param  int  $id
+   * @param  String  $id
    * @return Response
    */
   public function edit($id)
@@ -113,9 +125,9 @@ class UsersController extends \BaseController {
 
 
   /**
-   * Update the specified resource in storage.
+   * Making request to NorthstarAPI to update user's information
    *
-   * @param  int  $id
+   * @param  String  $id
    * @return Response
    */
   public function update($id)
@@ -127,9 +139,9 @@ class UsersController extends \BaseController {
 
 
   /**
-   * Remove the specified resource from storage.
+   * Remove a role from user in database
    *
-   * @param  int  $id
+   * @param  String  $id
    * @return Response
    */
   public function destroy($id)
@@ -140,6 +152,12 @@ class UsersController extends \BaseController {
     return Redirect::back()->with('flash_message', ['class' => 'messages', 'text' => "This user's role as " . $type . " has been removed"]);
   }
 
+
+  /**
+   * Display user/users found by processing the Input
+   *
+   * @return Response
+   */
   public function search()
   {
     $search = Input::get('search_by');
@@ -157,6 +175,13 @@ class UsersController extends \BaseController {
     }
   }
 
+
+  /**
+   * Assign user to a role
+   * @param Int User ID, String role name
+   *
+   * @return Response
+   */
   public function roleCreate($id)
   {
     $role = Input::get('role');
@@ -166,6 +191,12 @@ class UsersController extends \BaseController {
     return Redirect::back()->with('flash_message', ['class' => 'messages', 'text' => 'This user has been assigned a role of ' . $roles[$role]]);
   }
 
+
+  /**
+   * Display Users roles
+   *
+   * @return Response
+   */
   public function staffIndex()
   {
     $employee['admin'] = User::usersWithRole('admin');
@@ -184,6 +215,14 @@ class UsersController extends \BaseController {
     return View::make('users.staff-index')->with(compact('group'));
   }
 
+
+  /**
+   * Display form to merge duplicate users. Multiple users information is
+   * merged into the selected user where blank/different attribute will
+   * be filled or overwritten by the selected keep user.
+   *
+   * @return Response
+   */
   public function mergedForm()
   {
     $inputs = Input::all();
@@ -198,6 +237,11 @@ class UsersController extends \BaseController {
     return View::make('search.merge-and-delete-form')->with(compact('user'));
   }
 
+
+  /**
+   * Making request to NorthstarAPI to delete users marked
+   * for deletion from duplication form
+   */
   public function deleteUnmergedUsers()
   {
     $inputs = Input::all();

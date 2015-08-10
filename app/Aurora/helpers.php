@@ -1,6 +1,12 @@
 <?php
 // Global helper functions.
 
+/**
+ * Format time from given into US eastern time zone (ET)
+ *
+ * @param Date in Coordinated Universal Time(UTC) time format
+ * @return Date in ET format
+ */
 function time_formatter($date)
 {
   $date = date_create($date);
@@ -10,18 +16,34 @@ function time_formatter($date)
   return date_format($date, 'Y-m-d h:ia');
 }
 
-function message_state_class($message)
+
+/**
+ * To modify message backlogs container css background color
+ * by checking given string
+ *
+ * @param String message status
+ * @return String to modify html class
+ */
+function message_state_class($status)
 {
-	if ($message == "sent") {
+	if ($status == "sent") {
 		echo 'is-sent';
-	} elseif ($message == "failed_permanently"){
+	} elseif ($status == "failed_permanently"){
 		echo 'is-failed';
 	} else{
 		echo 'is-received';
 	}
 }
 
-//https://github.com/giggsey/libphonenumber-for-php
+
+/**
+ * Modify phone number given into the the origin country format
+ * https://github.com/giggsey/libphonenumber-for-php
+ *
+ * @param String number
+ * @param String country name(set to US by default)
+ * @return String of formatted phone number
+ */
 function sanitize_phone_number($number, $countryName = 'US')
 {
 	$phoneUtil = \libphonenumber\PhoneNumberUtil::getInstance();
@@ -34,6 +56,15 @@ function sanitize_phone_number($number, $countryName = 'US')
 	}
 }
 
+
+/**
+ * When duplicate users occur, this function is called to add a class to html
+ * markup
+ *
+ * @param Array duplite users
+ * @param Array most recent user
+ * @return String to modify html class
+ */
 function add_class_to_first_result($arr, $ele)
 {
 	if ($ele == reset($arr)){
@@ -41,11 +72,19 @@ function add_class_to_first_result($arr, $ele)
 	}
 }
 
-function ticket_state_class($message)
+
+/**
+ * To modify tickets container css background color
+ * by checking given string
+ *
+ * @param String message status
+ * @return String to modify html class
+ */
+function ticket_state_class($status)
 {
-	if ($message == "closed") {
+	if ($status == "closed") {
 		echo 'is-closed';
-	} elseif ($message == "open"){
+	} elseif ($status == "open"){
 		echo 'is-open';
 	} else{
 		echo 'is-pending';
