@@ -1,4 +1,4 @@
-  <div class="form-item -inline -padded">
+  <div class="form-item -inline -padded" id="normal-search-container">
     {{ Form::open(['action' => 'UsersController@search']) }}
       {{ Form::text('search_by', NULL, ['class' => 'text-field -search', 'placeholder' => 'Search by...']) }}
       {{ Form::submit('Email', ['name' => 'type', 'class' => 'button -secondary']) }}

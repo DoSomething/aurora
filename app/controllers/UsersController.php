@@ -2,7 +2,7 @@
 
 use Aurora\NorthstarUser;
 use Aurora\Services\Northstar\NorthstarAPI;
-use Input;
+use Illuminate\Support\Facades\Input;
 
 class UsersController extends \BaseController {
 
@@ -190,10 +190,11 @@ class UsersController extends \BaseController {
 
   public function advancedSearch()
   {
-    $source = Input::get('source');
+    $inputs = array_filter(Input::except('_token'));
     try {
-    $northstar_users = $this->northstar->getUsersBySource('source');
-    dd($northstar_users);
+      $data = $this->northstar->getAdvancedSearchUsers($inputs);
+      $users = $data['data'];
+      return View::make('users.index')->with(compact('users', 'data'));
     } catch (Exception $e) {
       return View::make('users.index')->with('flash_message', ['class' => 'messages -error', 'text' => 'Looks like there is something wrong with the connection!']);
     }

@@ -30,14 +30,9 @@
           {{ Form::label('Drupal') }}
         </label>
         <label class="option -radio">
-          {{ Form::radio('source', 'web', false) }}
+          {{ Form::radio('source', 'services', false) }}
           <span class="option__indicator"></span>
-          {{ Form::label('Web') }}
-        </label>
-        <label class="option -radio">
-          {{ Form::radio('source', 'mobile', false) }}
-          <span class="option__indicator"></span>
-          {{ Form::label('Mobile') }}
+          {{ Form::label('Services') }}
         </label>
         <div class="form-item -inline">
           {{ Form::label('country', 'Country', ['class' => 'field-label']) }}
