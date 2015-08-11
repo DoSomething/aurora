@@ -132,21 +132,46 @@ class UsersController extends \BaseController {
     return Redirect::back()->with('flash_message', ['class' => 'messages', 'text' => "The less admins the warier"]);
   }
 
+
+  /**
+   * Search users by attributes
+   *
+   * @todo validate string and find users by name
+   * @param  String
+   * @return Response
+   */
   public function search()
   {
-    $search = Input::get('search_by');
-    $type = strtolower(str_replace(' ', '_', Input::get('type')));
-    try {
-      // Attempt to find the user.
-      $northstar_users = $this->northstar->getUsers($type, $search);
-      if (count($northstar_users) > 1){
-        return View::make('search.results')->with(compact('northstar_users'));
-      } else {
-        return Redirect::route('users.show', $northstar_users[0]['_id']);
-      }
-    } catch (Exception $e) {
-      return Redirect::back()->withInput()->with('flash_message', ['class' => 'messages -error', 'text' => 'Hmm, couldn\'t find anyone, are you sure thats right?']);
+    $input = Input::get('search_by');
+    if (filter_var($input, FILTER_VALIDATE_EMAIL)) {
+      $type = 'email';
+    } elseif (strlen((string)intval($input)) >= 10) { //filter_var($number, FILTER_SANITIZE_NUMBER_INT);
+      $type = 'mobile';
+    } else if (strlen((string)intval($input)) !== 1 && strlen((string)intval($input)) <= 10) {
+      $type = 'drupal';
+    } else {
+      dd('i dont know what this is');
     }
+    try {
+      $data = $this->northstar->getAdvancedSearchUsers([$type=>$input]);
+      $users = $data['data'];
+      return View::make('users.index')->with(compact('users', 'data'));
+    } catch (Exception $e) {
+      return View::make('users.index')->with('flash_message', ['class' => 'messages -error', 'text' => 'Looks like there is something wrong with the connection!']);
+    }
+
+
+    // try {
+    //   // Attempt to find the user.
+    //   $northstar_users = $this->northstar->getUsers($type, $search);
+    //   if (count($northstar_users) > 1){
+    //     return View::make('search.results')->with(compact('northstar_users'));
+    //   } else {
+    //     return Redirect::route('users.show', $northstar_users[0]['_id']);
+    //   }
+    // } catch (Exception $e) {
+    //   return Redirect::back()->withInput()->with('flash_message', ['class' => 'messages -error', 'text' => 'Hmm, couldn\'t find anyone, are you sure thats right?']);
+    // }
   }
 
   public function adminCreate($user_id)
