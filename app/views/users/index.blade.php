@@ -39,7 +39,7 @@
         {{ Form::label('country', 'Country', ['class' => 'field-label']) }}
         {{ Form::text('country', NULL, ['class' => 'text-field']) }}
       </div>
-      {{ Form::submit('Search', ['class' => 'button'])}}
+      {{ Form::submit('Search', ['class' => 'button -secondary'])}}
       {{ Form::close() }}
     </div>
     @if ($users)
