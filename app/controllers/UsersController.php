@@ -39,7 +39,7 @@ class UsersController extends \BaseController {
    */
   public function create()
   {
-    //
+
   }
 
 
@@ -185,6 +185,17 @@ class UsersController extends \BaseController {
     $delete_ids = $inputs['delete'];
     foreach($delete_ids as $id){
       $this->northstar->deleteUser($id);
+    }
+  }
+
+  public function advancedSearch()
+  {
+    $source = Input::get('source');
+    try {
+    $northstar_users = $this->northstar->getUsersBySource('source');
+    dd($northstar_users);
+    } catch (Exception $e) {
+      return View::make('users.index')->with('flash_message', ['class' => 'messages -error', 'text' => 'Looks like there is something wrong with the connection!']);
     }
   }
 }

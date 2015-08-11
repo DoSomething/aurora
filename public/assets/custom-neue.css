@@ -146,3 +146,11 @@
   background: #ea5656;
   border-color: #ea5656;
 }
+
+#advanced-search-container {
+  display: none;
+}
+
+#advanced-search-link {
+  float: left;
+}

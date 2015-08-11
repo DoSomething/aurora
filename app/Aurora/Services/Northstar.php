@@ -92,9 +92,7 @@ class NorthstarAPI {
   public function getUsers($type, $id)
   {
     $response = $this->client->get('users' . '/' .  $type  . '/' . $id);
-    // $response = $this->client->get('users-source/agg');
-    // $response = $this->client->get('users?source=agg');
-    dd($northstar_users = $response->json()['data']);
+    $northstar_users = $response->json()['data'];
     // sort users by "updated_at" attribute
     uasort($northstar_users, function ($a, $b) {
       if ($a['updated_at'] == $b['updated_at']) {
@@ -109,5 +107,11 @@ class NorthstarAPI {
   public function deleteUser($id)
   {
     $response = $this->client->delete('users/' . $id);
+  }
+
+  public function getUsersBySource($source)
+  {
+    $response = $this->client->get('users?source=' . $source);
+    return $response->json()['data'];
   }
 }

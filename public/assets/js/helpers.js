@@ -59,12 +59,12 @@ function ajax_delete_unmerged_users(){
   });
 }
 
-
-
-
-
-
-
-
-
-
+function advancedSearchToggle(){
+	$(document).ready(function(){
+	  var container = $( "#advanced-search-container" );
+	  $( "#advanced-search-link" ).on( "click", function( event ) {
+	    event.preventDefault();
+	    container.toggle('slow');
+	  });
+	});
+}
