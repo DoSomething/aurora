@@ -148,9 +148,9 @@ class UsersController extends \BaseController {
     } elseif (strlen((string)intval($input)) >= 10) { //filter_var($number, FILTER_SANITIZE_NUMBER_INT);
       $type = 'mobile';
     } else if (strlen((string)intval($input)) !== 1 && strlen((string)intval($input)) <= 10) {
-      $type = 'drupal';
+      $type = 'drupal_id';
     } else {
-      dd('i dont know what this is');
+      return Redirect::to('/users')->with('flash_message', ['class' => 'messages', 'text' => "Uh, oh, there's something wrong!?"]);
     }
     try {
       $data = $this->northstar->getAdvancedSearchUsers([$type=>$input]);
