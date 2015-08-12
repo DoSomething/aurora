@@ -20,7 +20,8 @@ class DrupalAPI {
   {
     $response = $this->client->get('campaigns/' . $id);
     if(isset($response->json()['data'])){
-      return $response->json()['data'];
+
+      dd($response->json()['data']);
     }
   }
 

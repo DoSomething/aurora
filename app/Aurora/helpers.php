@@ -51,3 +51,22 @@ function ticket_state_class($message)
 		echo 'is-pending';
 	}
 }
+
+function type_detection($input)
+{
+  $query = [];
+  $name = explode(' ', $input);
+  if (filter_var($input, FILTER_VALIDATE_EMAIL)) {
+    $query['email'] = $input;
+  } elseif (strlen((string)intval($input)) >= 10) { //filter_var($number, FILTER_SANITIZE_NUMBER_INT);
+    $query['mobile'] = $input;
+  } else if (strlen((string)intval($input)) !== 1 && strlen((string)intval($input)) <= 10) {
+    $query['drupal_id'] = $input;
+  } else if (ctype_alpha($input)) {
+    $query['first_name'] = $input;
+  } else if (count($name) === 2) {
+    $query['first_name'] = $name[0];
+    $query['last_name'] = $name[1];
+  }
+  return $query;
+}

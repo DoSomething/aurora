@@ -27,8 +27,6 @@ Route::resource('users', 'UsersController');
 # Delete Northstar User
 Route::delete('northstar-user-delete/{user}', ['as' => 'northstar.delete', 'uses' => 'UsersController@deleteNorthstarUser']);
 
-# Search
-Route::post('users', ['as' => 'users.search', 'uses' => 'UsersController@search', 'before' =>'auth']);
 
 # Display edit form with merged users
 Route::get('merge', ['as' => 'users.merge', 'uses' => 'UsersController@mergedForm']);
@@ -50,5 +48,8 @@ Route::get('/users/{user}/mobile-commons-messages', 'UsersController@mobileCommo
 # Zendesk Requested Tickets Backlog
 Route::get('/users/{user}/zendesk-tickets', 'UsersController@zendeskTickets');
 
-# Advance Search
+# Search
+Route::post('search', ['as' => 'users.search', 'uses' => 'UsersController@search', 'before' =>'auth']);
+
+# Advanced Search
 Route::post('/advanced-search', 'UsersController@advancedSearch');

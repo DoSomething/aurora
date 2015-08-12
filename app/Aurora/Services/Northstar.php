@@ -43,13 +43,11 @@ class NorthstarAPI {
 
   public function getAllUsers($input)
   {
-    $response = $this->client->get('users', [
-      'query' => $input
-    ]);
-
+    $response = $this->client->get('users?' . $input);
     return $response->json();
-
   }
+
+  
   /**
    * Sends a get request to return a user with that id.
    *
@@ -109,9 +107,8 @@ class NorthstarAPI {
     $response = $this->client->delete('users/' . $id);
   }
 
-  public function getAdvancedSearchUsers($inputs)
+  public function getAdvancedSearchUsers($queries)
   {
-    $queries = http_build_query($inputs);
     $response = $this->client->get('users?' . $queries);
     return $response->json();
   }
