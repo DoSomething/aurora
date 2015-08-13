@@ -24,7 +24,7 @@ class UsersController extends \BaseController {
     try {
       // Attempt to fetch all users.
       $inputs = http_build_query(Input::all());
-      $data = $this->northstar->getAdvancedSearchUsers($inputs);
+      $data = $this->northstar->getAllUsers($inputs);
       $users = $data['data'];
       return View::make('users.index')->with(compact('users', 'data', 'inputs'));
     } catch (Exception $e) {
@@ -166,12 +166,12 @@ class UsersController extends \BaseController {
   {
     $inputs = Input::get('search_by');
     $query = type_detection($inputs);
-    try {
-      $data = $this->northstar->getAdvancedSearchUsers(http_build_query($query));
-      $users = $data['data'];
+    $data = $this->northstar->getAllUsers(http_build_query($query));
+    $users = $data['data'];
+    if (!empty($users)) {
       return View::make('users.index')->with(compact('users', 'data', 'inputs'));
-    } catch (Exception $e) {
-      return Redirect::to('/users')->with('flash_message', ['class' => 'messages -error', 'text' => 'Hmm, couldn\'t find anyone, are you sure thats right?']);
+    } else {
+      return Redirect::to('users')->with('flash_message', ['class' => 'messages -error', 'text' => 'Hmm, couldn\'t find anyone, are you sure thats right?']);
     }
   }
 
@@ -185,8 +185,9 @@ class UsersController extends \BaseController {
   public function advancedSearch()
   {
     $inputs = http_build_query(array_filter(Input::except('_token')));
-    $data = $this->northstar->getAdvancedSearchUsers($inputs);
-    if (!empty($users = $data['data'])) {
+    $data = $this->northstar->getAllUsers($inputs);
+    $users = $data['data'];
+    if (!empty($users)) {
       return View::make('users.index')->with(compact('users', 'data', 'inputs'));
     } else {
       return Redirect::to('users')->with('flash_message', ['class' => 'messages -error', 'text' => 'Hmm, couldn\'t find anyone, are you sure thats right?']);
@@ -203,6 +204,7 @@ class UsersController extends \BaseController {
   public function roleCreate($id)
   {
     $role = Input::get('role');
+    $roles = array('1' => 'admin', '2' => 'staff', '3' => 'intern');
 
     // Create a new user in database with type of role
     $user = User::firstOrCreate(['_id' => $id])->assignRole($role);

@@ -1,5 +1,5 @@
 <div class="form-item -inline -padded" id="normal-search-container">
-  {{ Form::open(['action' => 'UsersController@search']) }}
+  {{ Form::open(['action' => 'UsersController@search', 'method' => 'get']) }}
     {{ Form::text('search_by', NULL, ['class' => 'text-field -search', 'placeholder' => 'Email, mobile, drupal id']) }}
     {{ Form::submit('Search', ['name' => 'type', 'class' => 'button -secondary']) }}
   {{ Form::close () }}
@@ -8,36 +8,8 @@
 <a href="#" id="advanced-search-link">Advanced Search Options</a>
 
 <div id="advanced-search-container">
-  {{ Form::open(array('url' => '/advanced-search')) }}
-<ul class="gallery -triad -aligned">
-  <li>
-    <div class="figure__body">
-      <div class="form-item">
-        {{ Form::label('first_name', 'First Name', ['class' => 'field-label']) }}
-        {{ Form::text('first_name', NULL, ['class' => 'text-field']) }}
-      </div>
-      <div class="form-item">
-        {{ Form::label('last_name', 'Last Name', ['class' => 'field-label']) }}
-        {{ Form::text('last_name', NULL, ['class' => 'text-field']) }}
-      </div>
-    </div>
-  </li>
-  <li>
-    <div class="figure__body">
-      <div class="form-item">
-        {{ Form::label('country', 'Country', ['class' => 'field-label']) }}
-        {{ Form::text('country', NULL, ['class' => 'text-field']) }}
-      </div>
-      <div class="form-item">
-        {{ Form::label('addr_zip', 'Zip Code', ['class' => 'field-label']) }}
-        {{ Form::text('addr_zip', NULL, ['class' => 'text-field']) }}
-      </div>
-      <div class="form-item">
-        {{ Form::label('addr_state', 'State', ['class' => 'field-label']) }}
-        {{ Form::text('addr_state', NULL, ['class' => 'text-field']) }}
-      </div>
-    </div>
-  </li>
+  {{ Form::open(array('url' => '/advanced-search', 'method' => 'get')) }}
+<ul class="gallery -duo -aligned">
   <li>
     <div class="figure__body">
       {{ Form::label('source', 'Signup Source', ['class' => 'field-label']) }}
@@ -61,6 +33,22 @@
         <span class="option__indicator"></span>
         {{ Form::label('Services') }}
       </label>
+    </div>
+  </li>
+  <li>
+    <div class="figure__body">
+      <div class="form-item">
+        {{ Form::label('addr_state', 'State', ['class' => 'field-label']) }}
+        {{ Form::text('addr_state', NULL, ['class' => 'text-field']) }}
+      </div>
+      <div class="form-item">
+        {{ Form::label('addr_zip', 'Zip Code', ['class' => 'field-label']) }}
+        {{ Form::text('addr_zip', NULL, ['class' => 'text-field']) }}
+      </div>
+      <div class="form-item">
+        {{ Form::label('country', 'Country', ['class' => 'field-label']) }}
+        {{ Form::text('country', NULL, ['class' => 'text-field']) }}
+      </div>
     </div>
   </li>
 </ul>

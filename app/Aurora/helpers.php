@@ -99,7 +99,7 @@ function type_detection($input)
     $query['email'] = $input;
   } elseif (strlen((string)intval($input)) >= 10) {
     $query['mobile'] = $input;
-  } else if (strlen((string)intval($input)) !== 1 && strlen((string)intval($input)) <= 10) {
+  } else if (strlen((string)intval($input)) !== 1 && strlen((string)intval($input)) <= 8) {
     $query['drupal_id'] = $input;
   } else if (ctype_alpha($input)) {
     $query['first_name'] = $input;

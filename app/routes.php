@@ -49,10 +49,10 @@ Route::get('/users/{user}/mobile-commons-messages', 'UsersController@mobileCommo
 Route::get('/users/{user}/zendesk-tickets', 'UsersController@zendeskTickets');
 
 # Search
-Route::post('search', ['as' => 'users.search', 'uses' => 'UsersController@search', 'before' =>'auth']);
+Route::get('search', ['as' => 'users.search', 'uses' => 'UsersController@search', 'before' =>'auth']);
 
 # Advanced Search
-Route::post('/advanced-search', 'UsersController@advancedSearch');
+Route::get('/advanced-search', 'UsersController@advancedSearch');
 
 # Unauthorized Page
 Route::get('/unauthorized', 'SessionsController@unauthorized');

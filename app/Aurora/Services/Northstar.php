@@ -49,7 +49,7 @@ class NorthstarAPI {
    *
    * @return JSON users
    */
-   public function getAdvancedSearchUsers($inputs)
+   public function getAllUsers($inputs)
    {
        $response = $this->client->get('users?' . $inputs);
        return $response->json();
