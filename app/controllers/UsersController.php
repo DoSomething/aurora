@@ -134,10 +134,11 @@ class UsersController extends \BaseController {
 
 
   /**
-   * Search users by attributes
+   * Search users by given input ex. email, mobile, drupal id,
+   * first name, last name.
    *
-   * @todo validate string and find users by name
-   * @param  String
+   *
+   * @param  String input
    * @return Response
    */
   public function search()
@@ -153,6 +154,13 @@ class UsersController extends \BaseController {
     }
   }
 
+
+  /**
+   *  Search users by user attribute fields
+   *
+   * @param String inputs
+   * @return Response
+   */
   public function advancedSearch()
   {
     try {

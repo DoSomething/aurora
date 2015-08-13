@@ -47,7 +47,7 @@ class NorthstarAPI {
     return $response->json();
   }
 
-  
+
   /**
    * Sends a get request to return a user with that id.
    *
