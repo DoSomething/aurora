@@ -51,8 +51,8 @@ class NorthstarAPI {
    */
    public function getAllUsers($inputs)
    {
-       $response = $this->client->get('users?' . $inputs);
-       return $response->json();
+      $response = $this->client->get('users?' . $inputs);
+      return $response->json();
    }
 
 
@@ -140,6 +140,4 @@ class NorthstarAPI {
   {
     $response = $this->client->delete('users/' . $id);
   }
-
-
 }

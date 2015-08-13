@@ -91,7 +91,16 @@ function ticket_state_class($status)
 	}
 }
 
-function type_detection($input)
+
+/**
+ * To Check input type and return an array
+ * of user attribute possibility
+ *
+ * @param String search input
+ * @return Array k=>v
+ */
+
+function param_builder($input)
 {
   $query = [];
   $name = explode(' ', $input);

@@ -40,7 +40,7 @@ class UsersController extends \BaseController {
    */
   public function create()
   {
-
+    //
   }
 
 
@@ -165,7 +165,7 @@ class UsersController extends \BaseController {
   public function search()
   {
     $inputs = Input::get('search_by');
-    $query = type_detection($inputs);
+    $query = param_builder($inputs);
     $data = $this->northstar->getAllUsers(http_build_query($query));
     $users = $data['data'];
     if (!empty($users)) {
