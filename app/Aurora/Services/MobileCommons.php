@@ -24,6 +24,13 @@ class MobileCommonsAPI {
     $this->client = $client;
   }
 
+
+  /**
+   * Send a GET request to return a user profile
+   *
+   * @param String mobile number
+   * @return Array user profile
+   */
   public function userProfile($mobile)
   {
     $response = $this->client->get('?phone_number=' . $mobile . '&include_messages=true');
@@ -39,6 +46,13 @@ class MobileCommonsAPI {
     }
   }
 
+
+  /**
+   * Send a GET request to return a user messages
+   *
+   * @param String mobile number
+   * @return Array user messages backlog
+   */
   public function userMessages($mobile)
   {
     $profile = $this->userProfile($mobile);
@@ -48,5 +62,4 @@ class MobileCommonsAPI {
       return [];
     }
   }
-
 }

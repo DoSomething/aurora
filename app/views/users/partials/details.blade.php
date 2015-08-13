@@ -19,11 +19,9 @@
 	<li>
 		<article class="figure -left">
 			<div class="container -padded">
-	      @if (!$aurora_user or !$aurora_user->hasRole('admin'))
-	        @include('users.partials.make-admin')
-	      @else
-					@include('users.partials.remove-admin')
-	      @endif
+				@if(Auth::user()->hasRole('admin'))
+	        @include('users.partials.assign-role')
+				@endif
 		</article>
 	</li>
 </ul>

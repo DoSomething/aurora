@@ -35,9 +35,9 @@ Route::get('merge', ['as' => 'users.merge', 'uses' => 'UsersController@mergedFor
 Route::post('merge', ['as' => 'users.merge-and-delete', 'uses' => 'UsersController@deleteUnmergedUsers']);
 
 # Create admins.
-Route::post('admin/{user}', ['as' => 'admin.create', 'uses' => 'UsersController@adminCreate']);
+Route::post('role/{user}', ['as' => 'role.create', 'uses' => 'UsersController@roleCreate']);
 
-Route::get('/admins', 'UsersController@adminIndex');
+Route::get('/admins', 'UsersController@staffIndex');
 
 # Key
 Route::resource('keys', 'KeyController');
@@ -53,3 +53,6 @@ Route::post('search', ['as' => 'users.search', 'uses' => 'UsersController@search
 
 # Advanced Search
 Route::post('/advanced-search', 'UsersController@advancedSearch');
+
+# Unauthorized Page
+Route::get('/unauthorized', 'SessionsController@unauthorized');

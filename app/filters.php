@@ -85,11 +85,23 @@ Route::filter('csrf', function()
   }
 });
 
-Route::filter('role', function($route, $request, $role)
+Route::filter('adminPrivileges', function()
 {
-  $gifs = ["yPBHuNVGsrrxK", "DKclRd6n3KGD6", "777J8bECVBEOs", "FYy4Efj2hyZBm", "EMxy32NDE3Mac", "9LkjuISavFFXG"];
-  $gif = $gifs[rand(0,count($gifs) - 1)];
-  if (Auth::guest() or ! Auth::user()->hasRole($role)) {
-    return View::make('sessions.unauthorized')->with(compact('gif'));
+  if (Auth::guest() or ! Auth::user()->hasRole('admin')) {
+    return Redirect::to('/unauthorized');
+  }
+});
+
+Route::filter('internLimits', function()
+{
+  if (Auth::user()->hasRole('intern')) {
+    return Redirect::to('/unauthorized');
+  }
+});
+
+Route::filter('roles', function()
+{
+  if (empty(Auth::user()->findRole())) {
+    return Redirect::to('/unauthorized');
   }
 });

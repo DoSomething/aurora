@@ -3,7 +3,6 @@
 @section('main_content')
 
 @include('layout.header', ['header' => 'Search Results', 'subtitle' => ''])
-
 <div class="container -padded">
 	<div class="wrapper">
 		<div class="container__block">
@@ -27,9 +26,11 @@
 								@endif
 								{{ isset($northstar_profile['country']) ? ('<dt>Country:</dt><dd>' . e($northstar_profile['country']) . '</dd>') : "" }}
 								{{ isset($northstar_profile['campaigns']) ? ('<dt>No. of Campaigns:</dt><dd>' . count($northstar_profile['campaigns']) . '</dd>') : "<dt>This user has no campaigns</dt>" }}
-								<dt>{{ Form::radio('keep', $northstar_profile['_id'], false, ['class' => 'js-keep']) }}</dt><dd>{{ Form::label('Keep this user')}}</dd>
+								@if (Auth::user()->hasRole('admin'))
+									<dt>{{ Form::radio('keep', $northstar_profile['_id'], false, ['class' => 'js-keep']) }}</dt><dd>{{ Form::label('Keep this user')}}</dd>
+								@endif
 							</dl>
-							
+
 						</div>
 						</article>
 					</li>
@@ -51,6 +52,3 @@
 </script>
 
 @stop
-
-
-

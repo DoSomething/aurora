@@ -27,8 +27,9 @@ class NorthstarAPI {
     $this->client = $client;
   }
 
+
   /**
-   * Sends a post request to login the user.
+   * Send a POST request to login the user.
    *
    * @param array - input
    *
@@ -41,6 +42,12 @@ class NorthstarAPI {
     return $response->json()['data'];
   }
 
+
+  /**
+   * Send a GET request to return all users from northstar database
+   *
+   * @return JSON users
+   */
   public function getAllUsers($input)
   {
     $response = $this->client->get('users?' . $input);
@@ -49,10 +56,10 @@ class NorthstarAPI {
 
 
   /**
-   * Sends a get request to return a user with that id.
+   * Send a GET request to return a user with that id.
    *
    * @param mixed ID, email, id, phone
-   * @return user object
+   * @return JSON user
    */
   public function getUser($type, $id)
   {
@@ -60,6 +67,12 @@ class NorthstarAPI {
     return $response->json()['data'][0];
   }
 
+
+  /**
+   * Send a PUT request to update a user
+   *
+   * @param mixed ID, mixed input
+   */
   public function updateUser($id, $input)
   {
     $response = $this->client->put('users' . '/' . $id, [
@@ -67,12 +80,25 @@ class NorthstarAPI {
     ]);
   }
 
+
+  /**
+   * Send a GET request to return all northstar keys
+   *
+   * @return JSON keys
+   */
   public function getAllApiKeys()
   {
     $response = $this->client->get('keys');
     return $response->json()['data'];
   }
 
+
+  /**
+   * Send a POST request to generate new keys to northstar
+   *
+   * @param String input
+   * @return JSON file
+   */
   public function createNewApiKey($input)
   {
     $response = $this->client->post('keys', [
@@ -81,8 +107,10 @@ class NorthstarAPI {
     return $response->json();
   }
 
+
   /**
-   * Sends a get request to return all users matching $type
+   * Send a GET request to return all users matching $type
+   *
    * @todo need to make a parameter for Northstar API's retreive user query to sort by most recent user
    * @param mixed ID, email, id, phone
    * @return user objects
@@ -101,7 +129,12 @@ class NorthstarAPI {
     return $northstar_users;
   }
 
-  // use with caution!
+
+  /**
+   * Send a DELETE request to delete an user from northstar database
+   *
+   * @param mixed ID
+   */
   public function deleteUser($id)
   {
     $response = $this->client->delete('users/' . $id);
