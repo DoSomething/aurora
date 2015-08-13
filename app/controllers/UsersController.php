@@ -78,7 +78,7 @@ class UsersController extends \BaseController {
     $reportbacks = $northstar_user->getReportbacks();
     $mobile_commons_profile = $northstar_user->getMobileCommonsProfile();
     $zendesk_profile = $northstar_user->searchZendeskUserByEmail();
-    dd('test');
+
     return View::make('users.show')->with(compact('northstar_profile', 'user_roles', 'unassigned_roles', 'campaigns', 'reportbacks', 'mobile_commons_profile', 'zendesk_profile'));
   }
 
@@ -184,13 +184,12 @@ class UsersController extends \BaseController {
    */
   public function advancedSearch()
   {
-    try {
-      $inputs = http_build_query(array_filter(Input::except('_token')));
-      $data = $this->northstar->getAdvancedSearchUsers($inputs);
-      $users = $data['data'];
+    $inputs = http_build_query(array_filter(Input::except('_token')));
+    $data = $this->northstar->getAdvancedSearchUsers($inputs);
+    if (!empty($users = $data['data'])) {
       return View::make('users.index')->with(compact('users', 'data', 'inputs'));
-    } catch (Exception $e) {
-      return View::make('users.index')->with('flash_message', ['class' => 'messages -error', 'text' => 'Looks like there is something wrong with the connection!']);
+    } else {
+      return Redirect::to('users')->with('flash_message', ['class' => 'messages -error', 'text' => 'Hmm, couldn\'t find anyone, are you sure thats right?']);
     }
   }
 
