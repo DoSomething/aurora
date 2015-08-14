@@ -23,9 +23,10 @@ class UsersController extends \BaseController {
   {
     try {
       // Attempt to fetch all users.
-      $data = $this->northstar->getAllUsers();
+      $inputs = http_build_query(Input::all());
+      $data = $this->northstar->getAllUsers($inputs);
       $users = $data['data'];
-      return View::make('users.index')->with(compact('users', 'data'));
+      return View::make('users.index')->with(compact('users', 'data', 'inputs'));
     } catch (Exception $e) {
       return View::make('users.index')->with('flash_message', ['class' => 'messages -error', 'text' => 'Looks like there is something wrong with the connection!']);
     }
@@ -77,6 +78,7 @@ class UsersController extends \BaseController {
     $reportbacks = $northstar_user->getReportbacks();
     $mobile_commons_profile = $northstar_user->getMobileCommonsProfile();
     $zendesk_profile = $northstar_user->searchZendeskUserByEmail();
+
     return View::make('users.show')->with(compact('northstar_profile', 'user_roles', 'unassigned_roles', 'campaigns', 'reportbacks', 'mobile_commons_profile', 'zendesk_profile'));
   }
 
@@ -154,24 +156,41 @@ class UsersController extends \BaseController {
 
 
   /**
-   * Display user/users found by processing the Input
+   * Search users by given input ex. email, mobile, drupal id,
+   * first name, last name.
    *
+   * @param  String input
    * @return Response
    */
   public function search()
   {
-    $search = Input::get('search_by');
-    $type = strtolower(str_replace(' ', '_', Input::get('type')));
-    try {
-      // Attempt to find the user.
-      $northstar_users = $this->northstar->getUsers($type, $search);
-      if (count($northstar_users) > 1){
-        return View::make('search.results')->with(compact('northstar_users'));
-      } else {
-        return Redirect::route('users.show', $northstar_users[0]['_id']);
-      }
-    } catch (Exception $e) {
-      return Redirect::back()->withInput()->with('flash_message', ['class' => 'messages -error', 'text' => 'Hmm, couldn\'t find anyone, are you sure thats right?']);
+    $inputs = Input::get('search_by');
+    $query = param_builder($inputs);
+    $data = $this->northstar->getAllUsers(http_build_query($query));
+    $users = $data['data'];
+    if (!empty($users)) {
+      return View::make('users.index')->with(compact('users', 'data', 'inputs'));
+    } else {
+      return Redirect::to('users')->with('flash_message', ['class' => 'messages -error', 'text' => 'Hmm, couldn\'t find anyone, are you sure thats right?']);
+    }
+  }
+
+
+  /**
+   *  Search users by user attribute fields
+   *
+   * @param String inputs
+   * @return Response
+   */
+  public function advancedSearch()
+  {
+    $inputs = http_build_query(array_filter(Input::except('_token')));
+    $data = $this->northstar->getAllUsers($inputs);
+    $users = $data['data'];
+    if (!empty($users)) {
+      return View::make('users.index')->with(compact('users', 'data', 'inputs'));
+    } else {
+      return Redirect::to('users')->with('flash_message', ['class' => 'messages -error', 'text' => 'Hmm, couldn\'t find anyone, are you sure thats right?']);
     }
   }
 
@@ -185,6 +204,7 @@ class UsersController extends \BaseController {
   public function roleCreate($id)
   {
     $role = Input::get('role');
+    $roles = array('1' => 'admin', '2' => 'staff', '3' => 'intern');
 
     // Create a new user in database with type of role
     $user = User::firstOrCreate(['_id' => $id])->assignRole($role);

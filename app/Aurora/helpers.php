@@ -90,3 +90,31 @@ function ticket_state_class($status)
 		echo 'is-pending';
 	}
 }
+
+
+/**
+ * To Check input type and return an array
+ * of user attribute possibility
+ *
+ * @param String search input
+ * @return Array k=>v
+ */
+
+function param_builder($input)
+{
+  $query = [];
+  $name = explode(' ', $input);
+  if (filter_var($input, FILTER_VALIDATE_EMAIL)) {
+    $query['email'] = $input;
+  } elseif (strlen((string)intval($input)) >= 10) {
+    $query['mobile'] = $input;
+  } else if (strlen((string)intval($input)) !== 1 && strlen((string)intval($input)) <= 8) {
+    $query['drupal_id'] = $input;
+  } else if (ctype_alpha($input)) {
+    $query['first_name'] = $input;
+  } else if (count($name) === 2) {
+    $query['first_name'] = $name[0];
+    $query['last_name'] = $name[1];
+  }
+  return $query;
+}

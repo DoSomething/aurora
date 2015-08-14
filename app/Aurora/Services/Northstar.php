@@ -44,15 +44,16 @@ class NorthstarAPI {
 
 
   /**
-   * Send a GET request to return all users from northstar database
+   * Send a GET request to return all users with given query
+   * from northstar database
    *
    * @return JSON users
    */
-  public function getAllUsers()
-  {
-    $response = $this->client->get('users');
-    return $response->json();
-  }
+   public function getAllUsers($inputs)
+   {
+      $response = $this->client->get('users?' . $inputs);
+      return $response->json();
+   }
 
 
   /**
