@@ -276,7 +276,9 @@ class UsersController extends \BaseController {
    */
   public function unsubscribe()
   {
-    dd('waka');
+    $email = Input::get('email');
+    $mailchimp = new Aurora\Services\MailChimp\MailChimpAPI;
+    $mailchimp->unsubscribe($email);
   }
 
 }

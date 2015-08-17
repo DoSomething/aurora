@@ -23,8 +23,8 @@
 	</div>
 @endif
 
-
+<br>
 <!-- Unsubscribe User -->
-{{ Form::model($northstar_profile, ['route' => array('users.unsubscribe', $northstar_profile['email']), 'method' => 'post']) }}
+{{ Form::model($northstar_profile, ['route' => array('users.unsubscribe', 'email' => $northstar_profile['email']), 'method' => 'post']) }}
 {{ Form::submit('Unsubscribe', ['class' => 'button -secondary']) }}
 {{ Form::close() }}
