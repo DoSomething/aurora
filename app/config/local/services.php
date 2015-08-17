@@ -32,4 +32,9 @@
       'username' => getenv('ZENDESK_USERNAME'),
       'password' => getenv('ZENDESK_PASSWORD')
     ),
+    'mailchimp' => array(
+      'url' => 'https://us4.api.mailchimp.com/2.0/',
+      'username' => getenv('MAILCHIMP_USERNAME'),
+      'apikey' => getenv('MAILCHIMP_API_KEY')
+    ),
   );

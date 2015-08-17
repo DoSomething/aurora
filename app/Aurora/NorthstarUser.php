@@ -5,6 +5,7 @@ use Aurora\Services\Drupal\DrupalAPI;
 use Aurora\Services\Northstar\NorthstarAPI;
 use Aurora\Services\MobileCommons\MobileCommonsAPI;
 use Aurora\Services\Zendesk\ZendeskAPI;
+use Aurora\Services\MailChimp\MailChimpAPI;
 
 class NorthstarUser {
 
@@ -14,6 +15,7 @@ class NorthstarUser {
     $this->drupal = App::make('Aurora\Services\Drupal\DrupalAPI');
     $this->mobileCommons = App::make('Aurora\Services\MobileCommons\MobileCommonsAPI');
     $this->zendesk = App::make('Aurora\Services\Zendesk\ZendeskAPI');
+    $this->mailchimp = App::make('Aurora\Services\MailChimp\MailChimpAPI');
     $this->profile = $this->northstar->getUser('_id', $id);
   }
 
@@ -141,4 +143,8 @@ class NorthstarUser {
     return $unassigned_roles;
   }
 
+  public function mailChimpLists(){
+    $profile = $this->mailchimp->lists();
+    return $profile;
+  }
 }

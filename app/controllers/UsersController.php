@@ -66,7 +66,7 @@ class UsersController extends \BaseController {
     // Finding the user in nortstar DB and getting the informations
     $northstar_user = new NorthstarUser($id);
     $northstar_profile = $northstar_user->profile;
-
+    $mailChimpProfile = $northstar_user->mailChimpLists();
     // Finding the user assigned roles
     $user_roles = array_pluck($northstar_user->getRoles($id), 'name');
 
