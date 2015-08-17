@@ -147,4 +147,15 @@ class NorthstarUser {
     $profile = $this->mailchimp->lists();
     return $profile;
   }
+
+  public function mailChimpSubscribe($email){
+    $subscribe = $this->mailchimp->subscribe($email);
+    return $subscribe;
+  }
+
+  public function mailChimpUnsubscribe($email){
+    $subscribe = $this->mailchimp->unsubscribe($email);
+  return $subscribe;
+  }
+
 }
