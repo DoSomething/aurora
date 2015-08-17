@@ -118,3 +118,23 @@ function param_builder($input)
   }
   return $query;
 }
+
+function check_if_email_or_mobile($query)
+{
+	if (key($query) == 'email' || key($query) == 'mobile') {
+		return true;
+	} else {
+		return false;
+	}
+}
+
+function duplicate_user_check($array)
+{
+  foreach ($array as $element) {
+    if ($element['email'] == next($array)['email']) {
+    	return true;
+    } else if ($element['mobile'] == next($array)['mobile']) {
+    	return true;
+    }
+  }
+}

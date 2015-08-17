@@ -168,6 +168,11 @@ class UsersController extends \BaseController {
     $query = param_builder($inputs);
     $data = $this->northstar->getAllUsers(http_build_query($query));
     $users = $data['data'];
+    if (check_if_email_or_mobile($query)) {
+      if (duplicate_user_check($users)) {
+        return View::make('search.results')->with(compact('users'));
+      }
+    }
     if (!empty($users)) {
       return View::make('users.index')->with(compact('users', 'data', 'inputs'));
     } else {
