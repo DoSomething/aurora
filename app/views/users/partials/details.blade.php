@@ -4,6 +4,7 @@
 			<dl class="profile-settings">
 				<dt>Id:</dt><dd>{{{ $northstar_profile['_id'] }}}</dd>
 				{{ isset($northstar_profile['drupal_id']) ? ('<dt>Drupal Id:</dt><dd>' . e($northstar_profile['drupal_id']) . '</dd>') : "" }}
+				{{ isset($northstar_profile['source']) ? ('<dt>Sign Up Source:</dt><dd>' . e($northstar_profile['source']) . '</dd>') : "" }}
 				{{ isset($northstar_profile['first_name']) ? ('<dt>First Name:</dt><dd>' . e($northstar_profile['first_name']) . '</dd>') : "" }}
 				{{ isset($northstar_profile['last_name']) ? ('<dt>Last Name:</dt><dd>' . e($northstar_profile['last_name']) . '</dd>') : "" }}
 				{{ isset($northstar_profile['email']) ? ('<dt>Email:</dt><dd>' . e($northstar_profile['email']) . '</dd>') : "" }}

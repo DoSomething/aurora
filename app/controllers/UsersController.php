@@ -257,7 +257,7 @@ class UsersController extends \BaseController {
     $user = [];
     foreach($delete_ids as $delete_id){
       $delete_user = $this->northstar->getUser('_id', $delete_id);
-      $user = array_merge($user, $delete_user, $keep_user);
+      $user = array_merge($user, array_filter($delete_user), array_filter($keep_user));
     }
     return View::make('search.merge-and-delete-form')->with(compact('user'));
   }
