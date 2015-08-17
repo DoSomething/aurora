@@ -66,8 +66,6 @@ class UsersController extends \BaseController {
     // Finding the user in nortstar DB and getting the informations
     $northstar_user = new NorthstarUser($id);
     $northstar_profile = $northstar_user->profile;
-    $mailChimpProfile = $northstar_user->mailChimpUnsubscribe();
-    dd($mailChimpProfile);
     // Finding the user assigned roles
     $user_roles = array_pluck($northstar_user->getRoles($id), 'name');
 
@@ -271,4 +269,14 @@ class UsersController extends \BaseController {
       $this->northstar->deleteUser($id);
     }
   }
+
+  /**
+   * Making request to MailChimp to unsubscribe
+   * @TODO implement unsubscribe to Mobile Commons, Drupal and Message Broker
+   */
+  public function unsubscribe()
+  {
+    dd('waka');
+  }
+
 }

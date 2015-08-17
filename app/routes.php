@@ -56,3 +56,6 @@ Route::get('/advanced-search', 'UsersController@advancedSearch');
 
 # Unauthorized Page
 Route::get('/unauthorized', 'SessionsController@unauthorized');
+
+# Unsubscribe to MailChimp
+Route::post('unsubscribe', ['as' => 'users.unsubscribe', 'uses' => 'UsersController@unsubscribe']);
