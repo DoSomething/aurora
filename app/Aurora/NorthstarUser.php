@@ -145,12 +145,15 @@ class NorthstarUser {
   public function mailChimpUnsubscribe($id) {
     $email = $this->profile['email'];
     $unsubscribe = $this->mailchimp->unsubscribe($email, $id);
-    return $unsubscribe;
   }
 
   public function mailChimpListFinder() {
     $email = $this->profile['email'];
-    $list_id = $this->mailchimp->listFinder($email);
-    return $list_id;
+    if ($email != null) {
+      $list_id = $this->mailchimp->listFinder($email);
+      return $list_id;
+    } else {
+      return [];
+    }
   }
 }

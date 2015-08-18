@@ -7,7 +7,7 @@ class MailChimpAPI {
 
   public function __construct()
   {
-    // this ID is for "test" users only
+    // for "test" users only
     $this->testID = \Config::get('services.mailchimp.test_id');
     // international members
     $this->internationalID = \Config::get('services.mailchimp.international_id');
