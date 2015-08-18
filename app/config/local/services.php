@@ -34,9 +34,9 @@
     ),
     'mailchimp' => array(
       'apikey' => getenv('MAILCHIMP_API_KEY'),
-      'test_id' => 'e6dede3f84',
-      'international_id' => '8e7844f6dd',
-      'domestic_id' => 'f2fab1dfd4',
-      'dinosaur_id' => 'a27895fe0c'
+      'test_id' => getenv('MAILCHIMP_TEST_ID'),
+      'international_id' => getenv('MAILCHIMP_INTERNATIONAL_ID'),
+      'domestic_id' => getenv('MAILCHIMP_DOMESTIC_ID'),
+      'dinosaur_id' => getenv('MAILCHIMP_DINOSAUR_ID')
     ),
   );

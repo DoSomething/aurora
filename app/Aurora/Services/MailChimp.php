@@ -45,20 +45,32 @@ class MailChimpAPI {
 
   public function memberInfo($email)
   {
-   
-    $testID = $this->testID;
-    $response = $this->client->call('lists/member-info', array(
-      'id' => $testID,
-      'emails' => [["email" => $email]]
-    ));
-    if (!empty($response['errors'])) { // check if user exists in database
-      // empty array, error message is available if needed
-      return $response['data'];
-    } else if ($response['data'][0]['status'] == 'unsubscribed') { // check if user is unsubsrcibed
-      return [];
-    } else { // user exists and is subscribed
-      // empty array
-      return $response['data'];
+    $list_ids = [$this->domesticID, $this->internationalID, $this->dinosaurID, $this->testID];
+
+    foreach($list_ids as $id) {
+      $response = $this->client->call('lists/member-info', array('id' => $id, 'emails' => [["email" => $email]] ));
+      if (empty($response['errors'])) {
+        if ($response['data'][0]['status'] == 'unsubscribed'){
+          return [];
+        } else {
+          return $response['data'];
+        }
+      }
     }
+    return [];
   }
+  //   $response = $this->client->call('lists/member-info', array(
+  //     'id' => $testID,
+  //     'emails' => [["email" => $email]]
+  //   ));
+  //   if (!empty($response['errors'])) { // check if user exists in database
+  //     // empty array, error message is available if needed
+  //     return $response['data'];
+  //   } else if ($response['data'][0]['status'] == 'unsubscribed') { // check if user is unsubsrcibed
+  //     return [];
+  //   } else { // user exists and is subscribed
+  //     // empty array
+  //     return $response['data'];
+  //   }
+  // }
 }

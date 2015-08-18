@@ -82,7 +82,7 @@ class UsersController extends \BaseController {
     $mobile_commons_profile = $northstar_user->getMobileCommonsProfile();
     $zendesk_profile = $northstar_user->searchZendeskUserByEmail();
     $mailchimp_profile = $northstar_user->mailChimpMemberInfo();
-
+    dd($mailchimp_profile);
     return View::make('users.show')->with(compact('northstar_profile', 'user_roles', 'unassigned_roles', 'campaigns', 'reportbacks', 'mobile_commons_profile', 'zendesk_profile', 'mailchimp_profile'));
   }
 
