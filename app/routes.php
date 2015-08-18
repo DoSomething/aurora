@@ -58,4 +58,4 @@ Route::get('/advanced-search', 'UsersController@advancedSearch');
 Route::get('/unauthorized', 'SessionsController@unauthorized');
 
 # Unsubscribe to MailChimp
-Route::post('unsubscribe', ['as' => 'users.unsubscribe', 'uses' => 'UsersController@unsubscribe']);
+Route::post('unsubscribe', ['as' => 'users.unsubscribe', 'uses' => 'UsersController@unsubscribeToMailChimp']);

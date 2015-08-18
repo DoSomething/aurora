@@ -7,6 +7,7 @@ class MailChimpAPI {
 
   public function __construct()
   {
+    // this ID is for "test" users only, production ID for this should be different, can be found in the "lists" function call
     $this->testID = \Config::get('services.mailchimp.list_id');
     $this->client = new \Drewm\MailChimp(\Config::get('services.mailchimp.apikey'));
   }
@@ -33,7 +34,6 @@ class MailChimpAPI {
 
   public function unsubscribe($email)
   {
-    // this ID is for "test" users only, production ID for this should be different, can be found in the "lists" function call
     $testID = $this->testID;
     $response = $this->client->call('lists/unsubscribe', array(
       'id' => $testID,
