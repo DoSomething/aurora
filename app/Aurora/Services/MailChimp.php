@@ -30,13 +30,13 @@ class MailChimpAPI {
   public function listFinder($email)
   {
     $list_ids = [$this->domesticID, $this->internationalID, $this->dinosaurID, $this->testID];
-    foreach($list_ids as $id) {
-      $response = $this->client->call('lists/member-info', array('id' => $id, 'emails' => [["email" => $email]] ));
+    foreach($list_ids as $list_id) {
+      $response = $this->client->call('lists/member-info', array('id' => $list_id, 'emails' => [["email" => $email]] ));
       if (empty($response['errors'])) {
         if ($response['data'][0]['status'] == 'unsubscribed'){
           return [];
         } else {
-          return $id;
+          return $list_id;
         }
       }
     }

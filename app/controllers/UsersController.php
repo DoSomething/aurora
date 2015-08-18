@@ -273,7 +273,7 @@ class UsersController extends \BaseController {
   public function unsubscribeFromMailChimp()
   {
     $northstar_id = Input::get('northstar_id');
-    $mailchimp_id = Input::get('mailchimp_listt_id');
+    $mailchimp_list_id = Input::get('mailchimp_listt_id');
     $northstar_user = new NorthstarUser($northstar_id);
     $northstar_user->mailChimpUnsubscribe($mailchimp_list_id);
     return Redirect::back()->with('flash_message', ['class' => 'messages', 'text' => 'This user has been unsubscribed from MailChimp!']);
