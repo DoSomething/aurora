@@ -280,7 +280,7 @@ class UsersController extends \BaseController {
     $northstar_id = Input::get('northstar_id');
     $northstar_user = new NorthstarUser($northstar_id);
     $northstar_user->mailChimpUnsubscribe();
-    return Redirect::back()->with('flash_message', ['class' => 'messages', 'text' => 'This user has been unsubscribed to MailChimp!']);
+    return Redirect::back()->with('flash_message', ['class' => 'messages', 'text' => 'This user has been unsubscribed from MailChimp!']);
   }
 
 }
