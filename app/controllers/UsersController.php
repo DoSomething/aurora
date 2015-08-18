@@ -65,10 +65,6 @@ class UsersController extends \BaseController {
   { 
     // Finding the user in nortstar DB and getting the informations
     $northstar_user = new NorthstarUser($id);
-    $waka = $northstar_user->mailChimpLists();
-    $bdate = $northstar_user->profile['birthdate'];
-    $waka = calculate_age_from_birthdate($bdate);
-
     $northstar_profile = $northstar_user->profile;
     // Finding the user assigned roles
     $user_roles = array_pluck($northstar_user->getRoles($id), 'name');
@@ -81,9 +77,8 @@ class UsersController extends \BaseController {
     $reportbacks = $northstar_user->getReportbacks();
     $mobile_commons_profile = $northstar_user->getMobileCommonsProfile();
     $zendesk_profile = $northstar_user->searchZendeskUserByEmail();
-    $mailchimp_profile = $northstar_user->mailChimpMemberInfo();
-    dd($mailchimp_profile);
-    return View::make('users.show')->with(compact('northstar_profile', 'user_roles', 'unassigned_roles', 'campaigns', 'reportbacks', 'mobile_commons_profile', 'zendesk_profile', 'mailchimp_profile'));
+    $mailchimp_list_id = $northstar_user->mailChimpListFinder();
+    return View::make('users.show')->with(compact('northstar_profile', 'user_roles', 'unassigned_roles', 'campaigns', 'reportbacks', 'mobile_commons_profile', 'zendesk_profile', 'mailchimp_list_id'));
   }
 
   /**
@@ -282,8 +277,9 @@ class UsersController extends \BaseController {
   public function unsubscribeToMailChimp()
   {
     $northstar_id = Input::get('northstar_id');
+    $mailchimp_id = Input::get('mailchimp_id');
     $northstar_user = new NorthstarUser($northstar_id);
-    $northstar_user->mailChimpUnsubscribe();
+    $northstar_user->mailChimpUnsubscribe($mailchimp_id);
     return Redirect::back()->with('flash_message', ['class' => 'messages', 'text' => 'This user has been unsubscribed from MailChimp!']);
   }
 

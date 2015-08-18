@@ -142,26 +142,15 @@ class NorthstarUser {
     return $unassigned_roles;
   }
 
-  public function mailChimpLists() {
-    $profile = $this->mailchimp->lists();
-    return $profile;
-  }
-
-  public function mailChimpSubscribe() {
+  public function mailChimpUnsubscribe($id) {
     $email = $this->profile['email'];
-    $subscribe = $this->mailchimp->subscribe($email);
-    return $subscribe;
-  }
-
-  public function mailChimpUnsubscribe() {
-    $email = $this->profile['email'];
-    $unsubscribe = $this->mailchimp->unsubscribe($email);
+    $unsubscribe = $this->mailchimp->unsubscribe($email, $id);
     return $unsubscribe;
   }
 
-  public function mailChimpMemberInfo() {
+  public function mailChimpListFinder() {
     $email = $this->profile['email'];
-    $memberInfo = $this->mailchimp->memberInfo($email);
-    return $memberInfo;
+    $list_id = $this->mailchimp->listFinder($email);
+    return $list_id;
   }
 }

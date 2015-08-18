@@ -119,6 +119,7 @@ function param_builder($input)
   return $query;
 }
 
+// ended up not needing this function but going to leave it incase we do someday
 function calculate_age_from_birthdate($birthdate)
 {
 	$birthdate = preg_replace('/\s.+/', '', $birthdate);
