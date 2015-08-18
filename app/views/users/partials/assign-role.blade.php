@@ -14,7 +14,7 @@
 @endif
 
 <!-- Remove role in hierarchy -->
-@if(!empty($user_roles))
+@if (!empty($user_roles))
 	<div class="form-item -padded">
 		{{ Form::model($northstar_profile, ['route' => array('users.destroy', $northstar_profile['_id']), 'method' => 'delete']) }}
 		{{ Form::hidden('role', value(array_slice($user_roles, -1, 1)[0]) ) }}
@@ -25,6 +25,9 @@
 
 <br>
 <!-- Unsubscribe User -->
-{{ Form::model($northstar_profile, ['route' => array('users.unsubscribe', 'email' => $northstar_profile['email']), 'method' => 'post']) }}
-{{ Form::submit('Unsubscribe', ['class' => 'button -secondary']) }}
-{{ Form::close() }}
+
+@if (!empty($mailchimp_profile))
+	{{ Form::model($northstar_profile, ['route' => array('users.unsubscribe', 'email' => $northstar_profile['email']), 'method' => 'post']) }}
+	{{ Form::submit('Unsubscribe', ['class' => 'button -secondary']) }}
+	{{ Form::close() }}
+@endif

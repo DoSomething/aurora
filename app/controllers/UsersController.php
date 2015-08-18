@@ -63,9 +63,6 @@ class UsersController extends \BaseController {
    */
   public function show($id)
   { 
-    $email = 'paulhan221@gmail.com';
-    $mailchimp = new Aurora\Services\MailChimp\MailChimpAPI;
-    $info = $mailchimp->memberInfo($email);
     // Finding the user in nortstar DB and getting the informations
     $northstar_user = new NorthstarUser($id);
     $northstar_profile = $northstar_user->profile;
@@ -80,8 +77,9 @@ class UsersController extends \BaseController {
     $reportbacks = $northstar_user->getReportbacks();
     $mobile_commons_profile = $northstar_user->getMobileCommonsProfile();
     $zendesk_profile = $northstar_user->searchZendeskUserByEmail();
+    $mailchimp_profile = $northstar_user->mailChimpMemberInfo();
 
-    return View::make('users.show')->with(compact('northstar_profile', 'user_roles', 'unassigned_roles', 'campaigns', 'reportbacks', 'mobile_commons_profile', 'zendesk_profile'));
+    return View::make('users.show')->with(compact('northstar_profile', 'user_roles', 'unassigned_roles', 'campaigns', 'reportbacks', 'mobile_commons_profile', 'zendesk_profile', 'mailchimp_profile'));
   }
 
   /**
