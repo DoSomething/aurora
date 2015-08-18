@@ -65,6 +65,10 @@ class UsersController extends \BaseController {
   { 
     // Finding the user in nortstar DB and getting the informations
     $northstar_user = new NorthstarUser($id);
+    $waka = $northstar_user->mailChimpLists();
+    $bdate = $northstar_user->profile['birthdate'];
+    $waka = calculate_age_from_birthdate($bdate);
+
     $northstar_profile = $northstar_user->profile;
     // Finding the user assigned roles
     $user_roles = array_pluck($northstar_user->getRoles($id), 'name');

@@ -118,3 +118,13 @@ function param_builder($input)
   }
   return $query;
 }
+
+function calculate_age_from_birthdate($birthdate)
+{
+	$birthdate = preg_replace('/\s.+/', '', $birthdate);
+	$from = new DateTime($birthdate);
+	$to = new DateTime('today');
+	return $from->diff($to)->y;
+}
+
+

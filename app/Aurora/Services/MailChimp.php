@@ -7,24 +7,25 @@ class MailChimpAPI {
 
   public function __construct()
   {
-    // this ID is for "test" users only, production ID for this should be different, can be found in the "lists" function call
-    $this->testID = \Config::get('services.mailchimp.list_id');
+    // this ID is for "test" users only
+    $this->testID = \Config::get('services.mailchimp.test_id');
+    // international members
+    $this->internationalID = \Config::get('services.mailchimp.international_id');
+    // regular dosomething members
+    $this->domesticID = \Config::get('services.mailchimp.domestic_id');
+    // 26+ club members
+    $this->dinosaurID = \Config::get('services.mailchimp.dinosaur_id');
     $this->client = new \Drewm\MailChimp(\Config::get('services.mailchimp.apikey'));
   }
 
-  /**
-   * Send a GET request to return a user mailchimp profile
-   * @return array of Mail Chimp lists
-   */
   public function lists()
   {
     $response = $this->client->call('lists/list');
     return $response['data'];
   }
 
-  public function subscribe($email)
+  public function subscribe($email, $country)
   {
-    $testID = $this->testID;
     $response = $this->client->call('lists/subscribe', array(
       'id' => $testID,
       'email' => ['email' => $email]
@@ -44,7 +45,7 @@ class MailChimpAPI {
 
   public function memberInfo($email)
   {
-    // this ID is for "test" users only, production ID for this should be different, can be found in the "lists" function call
+   
     $testID = $this->testID;
     $response = $this->client->call('lists/member-info', array(
       'id' => $testID,
