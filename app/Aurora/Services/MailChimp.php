@@ -23,8 +23,9 @@ class MailChimpAPI {
 
   public function subscribe($email)
   {
+    $testID = $this->testID;
     $result = $this->client->call('lists/subscribe', array(
-      'id' => $this->testID,
+      'id' => $testID,
       'email' => ['email' => $email]
     ));
     return $result;
@@ -35,6 +36,17 @@ class MailChimpAPI {
     // this ID is for "test" users only, production ID for this should be different, can be found in the "lists" function call
     $testID = $this->testID;
     $result = $this->client->call('lists/unsubscribe', array(
+      'id' => $testID,
+      'email' => ['email' => $email]
+    ));
+    return $result;
+  }
+
+  public function memberInfo($email)
+  {
+    // this ID is for "test" users only, production ID for this should be different, can be found in the "lists" function call
+    $testID = $this->testID;
+    $result = $this->client->call('lists/member-info', array(
       'id' => $testID,
       'email' => ['email' => $email]
     ));

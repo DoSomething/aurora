@@ -62,7 +62,10 @@ class UsersController extends \BaseController {
    * @return Response
    */
   public function show($id)
-  {
+  { 
+    $email = 'paulhan221@gmail.com';
+    $mailchimp = new Aurora\Services\MailChimp\MailChimpAPI;
+    $info = $mailchimp->memberInfo($email);
     // Finding the user in nortstar DB and getting the informations
     $northstar_user = new NorthstarUser($id);
     $northstar_profile = $northstar_user->profile;
