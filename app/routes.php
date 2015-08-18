@@ -56,3 +56,6 @@ Route::get('/advanced-search', 'UsersController@advancedSearch');
 
 # Unauthorized Page
 Route::get('/unauthorized', 'SessionsController@unauthorized');
+
+# Unsubscribe from MobileCommons
+Route::post('unsubscribeMC/{id}', ['as' => 'users.unsubscribeMC', 'uses' => 'UsersController@unsubscribeMC']);

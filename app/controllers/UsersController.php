@@ -270,4 +270,24 @@ class UsersController extends \BaseController {
       $this->northstar->deleteUser($id);
     }
   }
+
+
+  /**
+   * Unsubscribe from Mobile Commons Service
+   *
+   * @param String Mobile
+   * @return Response
+   */
+   public function unsubscribeMC($id)
+   {
+    $northstar_user = new NorthstarUser($id);
+    $response = $northstar_user->unsubscribeFromMobileCommons();
+
+    if ($response == 'true') {
+      return Redirect::route('users.show', $id)->with('flash_message', ['class' => 'messages', 'text' => 'Unsubscribed from MobileCommons service']);
+    } else {
+      return Redirect::route('users.show', $id)->with('flash_message', ['class' => 'messages -error', 'text' => $response]);
+    }
+   }
+
 }

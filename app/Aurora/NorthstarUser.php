@@ -141,4 +141,9 @@ class NorthstarUser {
     return $unassigned_roles;
   }
 
+  public function unsubscribeFromMobileCommons() {
+    $mobile = $this->profile['mobile'];
+    return $this->mobileCommons->unsubscribeUser($mobile);
+  }
+
 }

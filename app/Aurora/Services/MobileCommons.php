@@ -62,4 +62,30 @@ class MobileCommonsAPI {
       return [];
     }
   }
+
+
+  /**
+   * Send a POST request to unsubscribe user from MC
+   *
+   * @param String mobile number
+   * @return String Response
+   */
+  public function unsubscribeUser($mobile)
+  {
+    $response = $this->client->post('profile_opt_out', [
+      'body' => array("phone_number" => $mobile)
+      ]);
+
+      $xml = $response->xml();
+
+      $json = json_encode($xml);
+
+      $array = json_decode($json, TRUE);
+
+      if ($array['@attributes']['success'] === 'true') {
+        return $array['@attributes']['success'];
+      } else {
+        return $array['error']['@attributes']['message'];
+      }
+  }
 }
