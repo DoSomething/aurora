@@ -193,7 +193,6 @@ class UsersController extends \BaseController {
     }
   }
 
-
   /**
    * Assign user to a role
    * @param Int User ID, String role name
@@ -209,7 +208,6 @@ class UsersController extends \BaseController {
     $user = User::firstOrCreate(['_id' => $id])->assignRole($role);
     return Redirect::back()->with('flash_message', ['class' => 'messages', 'text' => 'This user has been assigned a role of ' . $roles[$role]]);
   }
-
 
   /**
    * Display Users roles
@@ -234,7 +232,6 @@ class UsersController extends \BaseController {
     return View::make('users.staff-index')->with(compact('group'));
   }
 
-
   /**
    * Display form to merge duplicate users. Multiple users information is
    * merged into the selected user where blank/different attribute will
@@ -256,7 +253,6 @@ class UsersController extends \BaseController {
     return View::make('search.merge-and-delete-form')->with(compact('user'));
   }
 
-
   /**
    * Making request to NorthstarAPI to delete users marked
    * for deletion from duplication form
@@ -274,12 +270,12 @@ class UsersController extends \BaseController {
    * Making request to MailChimp to unsubscribe
    * @TODO implement unsubscribe to Mobile Commons, Drupal and Message Broker
    */
-  public function unsubscribeToMailChimp()
+  public function unsubscribeFromMailChimp()
   {
     $northstar_id = Input::get('northstar_id');
-    $mailchimp_id = Input::get('mailchimp_id');
+    $mailchimp_id = Input::get('mailchimp_listt_id');
     $northstar_user = new NorthstarUser($northstar_id);
-    $northstar_user->mailChimpUnsubscribe($mailchimp_id);
+    $northstar_user->mailChimpUnsubscribe($mailchimp_list_id);
     return Redirect::back()->with('flash_message', ['class' => 'messages', 'text' => 'This user has been unsubscribed from MailChimp!']);
   }
 

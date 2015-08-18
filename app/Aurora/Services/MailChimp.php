@@ -18,10 +18,10 @@ class MailChimpAPI {
     $this->client = new \Drewm\MailChimp(\Config::get('services.mailchimp.apikey'));
   }
 
-  public function unsubscribe($email, $id)
+  public function unsubscribe($email, $list_id)
   {
     $response = $this->client->call('lists/unsubscribe', array(
-      'id' => $id,
+      'id' => $list_id,
       'email' => ['email' => $email]
     ));
     return $response;

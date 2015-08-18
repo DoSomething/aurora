@@ -142,11 +142,13 @@ class NorthstarUser {
     return $unassigned_roles;
   }
 
-  public function mailChimpUnsubscribe($id) {
-    $email = $this->profile['email'];
-    $unsubscribe = $this->mailchimp->unsubscribe($email, $id);
-  }
 
+/**
+   * Used in UsersController->show()
+   * To get mailchimp list id which this user is subscribed
+   *
+   * @return String list_id or []
+   */
   public function mailChimpListFinder() {
     $email = $this->profile['email'];
     if ($email != null) {
@@ -155,5 +157,18 @@ class NorthstarUser {
     } else {
       return [];
     }
+  }
+
+
+  /**
+   * Used in UsersController->unsubscribeFromMailChimp()
+   * Making post request to unsubscribe user from Mailchimp service
+   *
+   * @param String list_id MailChimp subscription list id
+   *
+   */
+  public function mailChimpUnsubscribe($list_id) {
+    $email = $this->profile['email'];
+    $unsubscribe = $this->mailchimp->unsubscribe($email, $list_id);
   }
 }
