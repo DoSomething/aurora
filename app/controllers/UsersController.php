@@ -277,9 +277,10 @@ class UsersController extends \BaseController {
    */
   public function unsubscribe()
   {
-    $email = Input::get('email');
-    $mailchimp = new Aurora\Services\MailChimp\MailChimpAPI;
-    $mailchimp->unsubscribe($email);
+    $northstar_id = Input::get('northstar_id');
+    $northstar_user = new NorthstarUser($northstar_id);
+    $northstar_user->mailChimpUnsubscribe();
+    return Redirect::back()->with('flash_message', ['class' => 'messages', 'text' => 'This user has been unsubscribed to MailChimp!']);
   }
 
 }

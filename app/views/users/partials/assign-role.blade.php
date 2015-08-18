@@ -27,7 +27,7 @@
 <!-- Unsubscribe User -->
 
 @if (!empty($mailchimp_profile))
-	{{ Form::model($northstar_profile, ['route' => array('users.unsubscribe', 'email' => $northstar_profile['email']), 'method' => 'post']) }}
-	{{ Form::submit('Unsubscribe', ['class' => 'button -secondary']) }}
+	{{ Form::model($northstar_profile, ['route' => array('users.unsubscribe', 'northstar_id' => $northstar_profile['_id']), 'method' => 'post']) }}
+	{{ Form::submit('Unsubscribe to MailChimp', ['class' => 'button -secondary']) }}
 	{{ Form::close() }}
 @endif
