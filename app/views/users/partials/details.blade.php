@@ -1,6 +1,6 @@
-<ul class="gallery -duo">
+<ul class="gallery -triad">
 	<li>
-		<article class="figure -left">
+		<div class="figure">
 			<dl class="profile-settings">
 				<dt>Id:</dt><dd>{{{ $northstar_profile['_id'] }}}</dd>
 				{{ isset($northstar_profile['drupal_id']) ? ('<dt>Drupal Id:</dt><dd>' . e($northstar_profile['drupal_id']) . '</dd>') : "" }}
@@ -14,24 +14,33 @@
 				@endif
 				{{ isset($northstar_profile['country']) ? ('<dt>Country:</dt><dd>' . e($northstar_profile['country']) . '</dd>') : "" }}
 			</dl>
-		</article>
+		</div>
 	</li>
 	<li>
-		<article class="figure -left">
+		<div class="figure">
 			<div class="container -padded">
 				@if(Auth::user()->hasRole('admin'))
 	        @include('users.partials.assign-role')
-					<!-- Mobile Commons Status -->
-
-					@if(!empty($mobile_commons_profile))
+				@endif
+		</div>
+	</li>
+	<li>
+		<div class="figure">
+			<div class="container -padded">
+				<div class="subscription-header">
+					Subscriptions
+				</div>
+				<div class="container__block subscription-container">
+					@if(Auth::user()->hasRole('admin') && !empty($mobile_commons_profile))
 						@if($mobile_commons_profile['status'] === "Active Subscriber")
 						{{ Form::open(['route' => array('users.unsubscribeMC', $northstar_profile['_id'])]) }}
+							{{ Form::label("Mobile Commons") }}
 							{{ Form::submit('Unsubscribe', ['name' => 'type', 'class' => 'button -secondary']) }}
 						{{ Form::close() }}
 						@endif
 					@endif
-
-				@endif
-		</article>
+				</div>
+			</div>
+		</div>
 	</li>
 </ul>

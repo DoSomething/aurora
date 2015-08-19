@@ -155,3 +155,17 @@
 #advanced-search-container {
   display: none;
 }
+
+.subscription-container{
+  border: 1px solid black;
+  line-height: 200%;
+  border-radius: 0 0 5px 5px;
+}
+.subscription-header {
+  font-weight: 900;
+  color: #ffffff ;
+  background: red ;
+  padding: 9px 10px 10px;
+  border: 1px solid black;
+  border-radius: 5px 5px 0 0;
+}
