@@ -27,7 +27,6 @@ Route::resource('users', 'UsersController');
 # Delete Northstar User
 Route::delete('northstar-user-delete/{user}', ['as' => 'northstar.delete', 'uses' => 'UsersController@deleteNorthstarUser']);
 
-
 # Display edit form with merged users
 Route::get('merge', ['as' => 'users.merge', 'uses' => 'UsersController@mergedForm']);
 
@@ -58,4 +57,4 @@ Route::get('/advanced-search', 'UsersController@advancedSearch');
 Route::get('/unauthorized', 'SessionsController@unauthorized');
 
 # Unsubscribe to MailChimp
-Route::post('unsubscribe-mailchimp', ['as' => 'users.unsubscribe-mailchimp', 'uses' => 'UsersController@unsubscribeFromMailChimp']);
+Route::delete('user/{id}/mailchimp', ['as' => 'users.unsubscribe-mailchimp', 'uses' => 'UsersController@unsubscribeFromMailChimp']);

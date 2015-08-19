@@ -270,9 +270,8 @@ class UsersController extends \BaseController {
    * Making request to MailChimp to unsubscribe
    * @TODO implement unsubscribe to Mobile Commons, Drupal and Message Broker
    */
-  public function unsubscribeFromMailChimp()
+  public function unsubscribeFromMailChimp($northstar_id)
   {
-    $northstar_id = Input::get('northstar_id');
     $mailchimp_list_id = Input::get('mailchimp_list_id');
     $northstar_user = new NorthstarUser($northstar_id);
     $northstar_user->mailChimpUnsubscribe($mailchimp_list_id);
