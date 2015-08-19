@@ -8,14 +8,14 @@ class MailChimpAPI {
   public function __construct()
   {
     // for "test" users only
-    $this->testID = \Config::get('services.mailchimp.test_id');
+    $this->testID = config('services.mailchimp.test_id');
     // international members
-    $this->internationalID = \Config::get('services.mailchimp.international_id');
+    $this->internationalID = config('services.mailchimp.international_id');
     // regular dosomething members
-    $this->domesticID = \Config::get('services.mailchimp.domestic_id');
+    $this->domesticID = config('services.mailchimp.domestic_id');
     // 26+ club members
-    $this->dinosaurID = \Config::get('services.mailchimp.dinosaur_id');
-    $this->client = new \Drewm\MailChimp(\Config::get('services.mailchimp.apikey'));
+    $this->dinosaurID = config('services.mailchimp.dinosaur_id');
+    $this->client = new \Drewm\MailChimp(config('services.mailchimp.apikey'));
   }
 
   public function unsubscribe($email, $list_id)

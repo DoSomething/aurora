@@ -128,4 +128,9 @@ function calculate_age_from_birthdate($birthdate)
 	return $from->diff($to)->y;
 }
 
+function config($var)
+{
+ return \Config::get($var);
+}
+
 

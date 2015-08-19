@@ -143,7 +143,7 @@ class NorthstarUser {
   }
 
 
-/**
+  /**
    * Used in UsersController->show()
    * To get mailchimp list id which this user is subscribed
    *
