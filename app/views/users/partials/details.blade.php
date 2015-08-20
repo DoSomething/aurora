@@ -22,6 +22,7 @@
 			<div class="container -padded">
 				@if(Auth::user()->hasRole('admin'))
 	        @include('users.partials.assign-role')
+	        @include('users.partials.unsubscribe')
 				@endif
 		</article>
 	</li>

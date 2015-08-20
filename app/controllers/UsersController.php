@@ -62,11 +62,10 @@ class UsersController extends \BaseController {
    * @return Response
    */
   public function show($id)
-  {
+  { 
     // Finding the user in nortstar DB and getting the informations
     $northstar_user = new NorthstarUser($id);
     $northstar_profile = $northstar_user->profile;
-
     // Finding the user assigned roles
     $user_roles = array_pluck($northstar_user->getRoles($id), 'name');
 
@@ -78,8 +77,8 @@ class UsersController extends \BaseController {
     $reportbacks = $northstar_user->getReportbacks();
     $mobile_commons_profile = $northstar_user->getMobileCommonsProfile();
     $zendesk_profile = $northstar_user->searchZendeskUserByEmail();
-
-    return View::make('users.show')->with(compact('northstar_profile', 'user_roles', 'unassigned_roles', 'campaigns', 'reportbacks', 'mobile_commons_profile', 'zendesk_profile'));
+    $mailchimp_list_id = $northstar_user->mailChimpListFinder();
+    return View::make('users.show')->with(compact('northstar_profile', 'user_roles', 'unassigned_roles', 'campaigns', 'reportbacks', 'mobile_commons_profile', 'zendesk_profile', 'mailchimp_list_id'));
   }
 
   /**
@@ -199,7 +198,6 @@ class UsersController extends \BaseController {
     }
   }
 
-
   /**
    * Assign user to a role
    * @param Int User ID, String role name
@@ -215,7 +213,6 @@ class UsersController extends \BaseController {
     $user = User::firstOrCreate(['_id' => $id])->assignRole($role);
     return Redirect::back()->with('flash_message', ['class' => 'messages', 'text' => 'This user has been assigned a role of ' . $roles[$role]]);
   }
-
 
   /**
    * Display Users roles
@@ -240,7 +237,6 @@ class UsersController extends \BaseController {
     return View::make('users.staff-index')->with(compact('group'));
   }
 
-
   /**
    * Display form to merge duplicate users. Multiple users information is
    * merged into the selected user where blank/different attribute will
@@ -262,7 +258,6 @@ class UsersController extends \BaseController {
     return View::make('search.merge-and-delete-form')->with(compact('user'));
   }
 
-
   /**
    * Making request to NorthstarAPI to delete users marked
    * for deletion from duplication form
@@ -275,4 +270,17 @@ class UsersController extends \BaseController {
       $this->northstar->deleteUser($id);
     }
   }
+
+  /**
+   * Making request to MailChimp to unsubscribe
+   * @TODO implement unsubscribe to Mobile Commons, Drupal and Message Broker
+   */
+  public function unsubscribeFromMailChimp($northstar_id)
+  {
+    $mailchimp_list_id = Input::get('mailchimp_list_id');
+    $northstar_user = new NorthstarUser($northstar_id);
+    $northstar_user->mailChimpUnsubscribe($mailchimp_list_id);
+    return Redirect::back()->with('flash_message', ['class' => 'messages', 'text' => 'This user has been unsubscribed from MailChimp!']);
+  }
+
 }

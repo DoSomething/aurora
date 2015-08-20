@@ -32,4 +32,11 @@
       'username' => getenv('ZENDESK_USERNAME'),
       'password' => getenv('ZENDESK_PASSWORD')
     ),
+    'mailchimp' => array(
+      'apikey' => getenv('MAILCHIMP_API_KEY'),
+      'test_id' => getenv('MAILCHIMP_TEST_ID'),
+      'international_id' => getenv('MAILCHIMP_INTERNATIONAL_ID'),
+      'domestic_id' => getenv('MAILCHIMP_DOMESTIC_ID'),
+      'dinosaur_id' => getenv('MAILCHIMP_DINOSAUR_ID')
+    ),
   );
