@@ -14,6 +14,7 @@ class NorthstarUser {
     $this->drupal = App::make('Aurora\Services\Drupal\DrupalAPI');
     $this->mobileCommons = App::make('Aurora\Services\MobileCommons\MobileCommonsAPI');
     $this->zendesk = App::make('Aurora\Services\Zendesk\ZendeskAPI');
+    $this->mailchimp = App::make('Aurora\Services\MailChimp\MailChimpAPI');
     $this->profile = $this->northstar->getUser('_id', $id);
   }
 
@@ -141,9 +142,46 @@ class NorthstarUser {
     return $unassigned_roles;
   }
 
-  public function unsubscribeFromMobileCommons() {
+
+  /**
+   * Used in UsersController->show()
+   * To get mailchimp list id which this user is subscribed
+   *
+   * @return String list_id or []
+   */
+  public function mailChimpListFinder() {
+    $email = $this->profile['email'];
+    if ($email != null) {
+      $list_id = $this->mailchimp->listFinder($email);
+      return $list_id;
+    } else {
+      return [];
+    }
+  }
+
+
+  /**
+   * Used in UsersController->unsubscribeFromMailChimp()
+   * Making post request to unsubscribe user from Mailchimp service
+   *
+   * @param String list_id MailChimp subscription list id
+   *
+   */
+  public function mailChimpUnsubscribe($list_id) {
+    $email = $this->profile['email'];
+    $unsubscribe = $this->mailchimp->unsubscribe($email, $list_id);
+  }
+
+
+  /**
+   * Used in UsersController->unsubscribeFromMobileCommons
+   * Making post request to unsubscribe user from MobileCommons Service
+   *
+   * @return Response
+   *
+   */
+  public function mobileCommonsUnsubscribe() {
     $mobile = $this->profile['mobile'];
     return $this->mobileCommons->unsubscribeUser($mobile);
   }
-
 }

@@ -7,10 +7,10 @@
 	<div class="wrapper">
 		<div class="container__block">
 			<ul class="gallery -duo">
-				@forelse($northstar_users as $northstar_profile)
+				@forelse($users as $northstar_profile)
 					<li>
 						<article class="figure -left">
-						<div class="container__block results {{ add_class_to_first_result($northstar_users, $northstar_profile) }}">
+						<div class="container__block results {{ add_class_to_first_result($users, $northstar_profile) }}">
 							<dl class="profile-settings">
 							  <dt><a href="{{ url('users/' . $northstar_profile['_id'] . '/edit') }}">Edit User</a></dt>
 								<dt>Id:</dt><dd>{{ link_to_route('users.show', $northstar_profile['_id'], array($northstar_profile['_id'])) }}</dd>

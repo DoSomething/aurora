@@ -66,7 +66,6 @@ class UsersController extends \BaseController {
     // Finding the user in nortstar DB and getting the informations
     $northstar_user = new NorthstarUser($id);
     $northstar_profile = $northstar_user->profile;
-
     // Finding the user assigned roles
     $user_roles = array_pluck($northstar_user->getRoles($id), 'name');
 
@@ -78,8 +77,8 @@ class UsersController extends \BaseController {
     $reportbacks = $northstar_user->getReportbacks();
     $mobile_commons_profile = $northstar_user->getMobileCommonsProfile();
     $zendesk_profile = $northstar_user->searchZendeskUserByEmail();
-
-    return View::make('users.show')->with(compact('northstar_profile', 'user_roles', 'unassigned_roles', 'campaigns', 'reportbacks', 'mobile_commons_profile', 'zendesk_profile'));
+    $mailchimp_list_id = $northstar_user->mailChimpListFinder();
+    return View::make('users.show')->with(compact('northstar_profile', 'user_roles', 'unassigned_roles', 'campaigns', 'reportbacks', 'mobile_commons_profile', 'zendesk_profile', 'mailchimp_list_id'));
   }
 
   /**
@@ -168,6 +167,11 @@ class UsersController extends \BaseController {
     $query = param_builder($inputs);
     $data = $this->northstar->getAllUsers(http_build_query($query));
     $users = $data['data'];
+    if (check_if_email_or_mobile($query)) {
+      if (duplicate_user_check($users)) {
+        return View::make('search.results')->with(compact('users'));
+      }
+    }
     if (!empty($users)) {
       return View::make('users.index')->with(compact('users', 'data', 'inputs'));
     } else {
@@ -194,7 +198,6 @@ class UsersController extends \BaseController {
     }
   }
 
-
   /**
    * Assign user to a role
    * @param Int User ID, String role name
@@ -210,7 +213,6 @@ class UsersController extends \BaseController {
     $user = User::firstOrCreate(['_id' => $id])->assignRole($role);
     return Redirect::back()->with('flash_message', ['class' => 'messages', 'text' => 'This user has been assigned a role of ' . $roles[$role]]);
   }
-
 
   /**
    * Display Users roles
@@ -235,7 +237,6 @@ class UsersController extends \BaseController {
     return View::make('users.staff-index')->with(compact('group'));
   }
 
-
   /**
    * Display form to merge duplicate users. Multiple users information is
    * merged into the selected user where blank/different attribute will
@@ -252,11 +253,10 @@ class UsersController extends \BaseController {
     $user = [];
     foreach($delete_ids as $delete_id){
       $delete_user = $this->northstar->getUser('_id', $delete_id);
-      $user = array_merge($user, $delete_user, $keep_user);
+      $user = array_merge($user, array_filter($delete_user), array_filter($keep_user));
     }
     return View::make('search.merge-and-delete-form')->with(compact('user'));
   }
-
 
   /**
    * Making request to NorthstarAPI to delete users marked
@@ -273,21 +273,33 @@ class UsersController extends \BaseController {
 
 
   /**
+   * Making request to MailChimp to unsubscribe
+   * @TODO implement unsubscribe to Drupal and Message Broker
+   */
+  public function unsubscribeFromMailChimp($northstar_id)
+  {
+    $mailchimp_list_id = Input::get('mailchimp_list_id');
+    $northstar_user = new NorthstarUser($northstar_id);
+    $northstar_user->mailChimpUnsubscribe($mailchimp_list_id);
+    return Redirect::back()->with('flash_message', ['class' => 'messages', 'text' => 'This user has been unsubscribed from MailChimp!']);
+  }
+
+
+  /**
    * Unsubscribe from Mobile Commons Service
    *
    * @param String Mobile
    * @return Response
    */
-   public function unsubscribeMC($id)
+   public function unsubscribeFromMobileCommons($id)
    {
     $northstar_user = new NorthstarUser($id);
-    $response = $northstar_user->unsubscribeFromMobileCommons();
+    $response = $northstar_user->mobileCommonsUnsubscribe();
 
     if ($response == 'true') {
       return Redirect::route('users.show', $id)->with('flash_message', ['class' => 'messages', 'text' => 'Unsubscribed from MobileCommons service']);
     } else {
       return Redirect::route('users.show', $id)->with('flash_message', ['class' => 'messages -error', 'text' => $response]);
     }
-   }
-
+  }
 }
