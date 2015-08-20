@@ -2,17 +2,16 @@
 
 @section('main_content')
 
-@include('layout.header', ['header' => 'Search Results', 'subtitle' => ''])
-
+@include('layout.header', ['header' => 'Duplicate Users', 'subtitle' => ''])
 <div class="container -padded">
 	<div class="wrapper">
 		<div class="container__block">
 			<h3>This appears to be the most recent user!</h3>
 			<ul class="gallery -duo">
-				@forelse($northstar_users as $northstar_profile)
+				@forelse($users as $northstar_profile)
 					<li>
 						<article class="figure -left">
-						<div class="container__block results {{ add_class_to_first_result($northstar_users, $northstar_profile) }}">
+						<div class="container__block results {{ add_class_to_first_result($users, $northstar_profile) }}">
 							<dl class="profile-settings">
 							  <dt><a href="{{ url('users/' . $northstar_profile['_id'] . '/edit') }}">Edit User</a></dt>
 								<dt>Id:</dt><dd>{{ link_to_route('users.show', $northstar_profile['_id'], array($northstar_profile['_id'])) }}</dd>
@@ -28,7 +27,9 @@
 								@endif
 								{{ isset($northstar_profile['country']) ? ('<dt>Country:</dt><dd>' . e($northstar_profile['country']) . '</dd>') : "" }}
 								{{ isset($northstar_profile['campaigns']) ? ('<dt>No. of Campaigns:</dt><dd>' . count($northstar_profile['campaigns']) . '</dd>') : "<dt>This user has no campaigns</dt>" }}
-								<dt>{{ Form::radio('keep', $northstar_profile['_id'], false, ['class' => 'js-keep']) }}</dt><dd>{{ Form::label('Keep this user')}}</dd>
+								@if (Auth::user()->hasRole('admin'))
+									<dt>{{ Form::radio('keep', $northstar_profile['_id'], false, ['class' => 'js-keep']) }}</dt><dd>{{ Form::label('Keep this user')}}</dd>
+								@endif
 							</dl>
 						</div>
 						</article>

@@ -27,9 +27,6 @@ Route::resource('users', 'UsersController');
 # Delete Northstar User
 Route::delete('northstar-user-delete/{user}', ['as' => 'northstar.delete', 'uses' => 'UsersController@deleteNorthstarUser']);
 
-# Search
-Route::post('users', ['as' => 'users.search', 'uses' => 'UsersController@search', 'before' =>'auth']);
-
 # Display edit form with merged users
 Route::get('merge', ['as' => 'users.merge', 'uses' => 'UsersController@mergedForm']);
 
@@ -37,9 +34,9 @@ Route::get('merge', ['as' => 'users.merge', 'uses' => 'UsersController@mergedFor
 Route::post('merge', ['as' => 'users.merge-and-delete', 'uses' => 'UsersController@deleteUnmergedUsers']);
 
 # Create admins.
-Route::post('admin/{user}', ['as' => 'admin.create', 'uses' => 'UsersController@adminCreate']);
+Route::post('role/{user}', ['as' => 'role.create', 'uses' => 'UsersController@roleCreate']);
 
-Route::get('/admins', 'UsersController@adminIndex');
+Route::get('/admins', 'UsersController@staffIndex');
 
 # Key
 Route::resource('keys', 'KeyController');
@@ -49,3 +46,15 @@ Route::get('/users/{user}/mobile-commons-messages', 'UsersController@mobileCommo
 
 # Zendesk Requested Tickets Backlog
 Route::get('/users/{user}/zendesk-tickets', 'UsersController@zendeskTickets');
+
+# Search
+Route::get('search', ['as' => 'users.search', 'uses' => 'UsersController@search', 'before' =>'auth']);
+
+# Advanced Search
+Route::get('/advanced-search', 'UsersController@advancedSearch');
+
+# Unauthorized Page
+Route::get('/unauthorized', 'SessionsController@unauthorized');
+
+# Unsubscribe to MailChimp
+Route::delete('user/{id}/mailchimp', ['as' => 'users.unsubscribe-mailchimp', 'uses' => 'UsersController@unsubscribeFromMailChimp']);

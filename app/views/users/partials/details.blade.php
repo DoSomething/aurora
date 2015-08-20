@@ -4,6 +4,7 @@
 			<dl class="profile-settings">
 				<dt>Id:</dt><dd>{{{ $northstar_profile['_id'] }}}</dd>
 				{{ isset($northstar_profile['drupal_id']) ? ('<dt>Drupal Id:</dt><dd>' . e($northstar_profile['drupal_id']) . '</dd>') : "" }}
+				{{ isset($northstar_profile['source']) ? ('<dt>Sign Up Source:</dt><dd>' . e($northstar_profile['source']) . '</dd>') : "" }}
 				{{ isset($northstar_profile['first_name']) ? ('<dt>First Name:</dt><dd>' . e($northstar_profile['first_name']) . '</dd>') : "" }}
 				{{ isset($northstar_profile['last_name']) ? ('<dt>Last Name:</dt><dd>' . e($northstar_profile['last_name']) . '</dd>') : "" }}
 				{{ isset($northstar_profile['email']) ? ('<dt>Email:</dt><dd>' . e($northstar_profile['email']) . '</dd>') : "" }}
@@ -19,11 +20,10 @@
 	<li>
 		<article class="figure -left">
 			<div class="container -padded">
-	      @if (!$aurora_user or !$aurora_user->hasRole('admin'))
-	        @include('users.partials.make-admin')
-	      @else
-					@include('users.partials.remove-admin')
-	      @endif
+				@if(Auth::user()->hasRole('admin'))
+	        @include('users.partials.assign-role')
+	        @include('users.partials.unsubscribe')
+				@endif
 		</article>
 	</li>
 </ul>
