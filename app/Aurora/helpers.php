@@ -152,3 +152,9 @@ function config($var)
  return \Config::get($var);
 }
 
+function  xmlToJson($response)
+{
+  $xml = $response->xml();
+  $json = json_encode($xml);
+  return json_decode($json, TRUE);
+}
