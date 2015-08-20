@@ -1,6 +1,6 @@
-<ul class="gallery -duo">
+<ul class="gallery -triad">
 	<li>
-		<article class="figure -left">
+		<div class="figure">
 			<dl class="profile-settings">
 				<dt>Id:</dt><dd>{{{ $northstar_profile['_id'] }}}</dd>
 				{{ isset($northstar_profile['drupal_id']) ? ('<dt>Drupal Id:</dt><dd>' . e($northstar_profile['drupal_id']) . '</dd>') : "" }}
@@ -15,15 +15,21 @@
 				@endif
 				{{ isset($northstar_profile['country']) ? ('<dt>Country:</dt><dd>' . e($northstar_profile['country']) . '</dd>') : "" }}
 			</dl>
-		</article>
+		</div>
+	</li>
+	@if(Auth::user()->hasRole('admin'))
+	<li>
+		<div class="figure">
+			<div class="container -padded">
+	        @include('users.partials.unsubscribe')
+		</div>
 	</li>
 	<li>
-		<article class="figure -left">
+		<div class="figure">
 			<div class="container -padded">
-				@if(Auth::user()->hasRole('admin'))
 	        @include('users.partials.assign-role')
-	        @include('users.partials.unsubscribe')
-				@endif
-		</article>
+			</div>
+		</div>
 	</li>
+	@endif
 </ul>

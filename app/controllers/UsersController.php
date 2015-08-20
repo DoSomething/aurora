@@ -62,7 +62,7 @@ class UsersController extends \BaseController {
    * @return Response
    */
   public function show($id)
-  { 
+  {
     // Finding the user in nortstar DB and getting the informations
     $northstar_user = new NorthstarUser($id);
     $northstar_profile = $northstar_user->profile;
@@ -271,9 +271,10 @@ class UsersController extends \BaseController {
     }
   }
 
+
   /**
    * Making request to MailChimp to unsubscribe
-   * @TODO implement unsubscribe to Mobile Commons, Drupal and Message Broker
+   * @TODO implement unsubscribe to Drupal and Message Broker
    */
   public function unsubscribeFromMailChimp($northstar_id)
   {
@@ -283,4 +284,22 @@ class UsersController extends \BaseController {
     return Redirect::back()->with('flash_message', ['class' => 'messages', 'text' => 'This user has been unsubscribed from MailChimp!']);
   }
 
+
+  /**
+   * Unsubscribe from Mobile Commons Service
+   *
+   * @param String Mobile
+   * @return Response
+   */
+   public function unsubscribeFromMobileCommons($id)
+   {
+    $northstar_user = new NorthstarUser($id);
+    $response = $northstar_user->mobileCommonsUnsubscribe();
+
+    if ($response == 'true') {
+      return Redirect::route('users.show', $id)->with('flash_message', ['class' => 'messages', 'text' => 'Unsubscribed from MobileCommons service']);
+    } else {
+      return Redirect::route('users.show', $id)->with('flash_message', ['class' => 'messages -error', 'text' => $response]);
+    }
+  }
 }

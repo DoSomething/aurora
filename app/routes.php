@@ -56,5 +56,8 @@ Route::get('/advanced-search', 'UsersController@advancedSearch');
 # Unauthorized Page
 Route::get('/unauthorized', 'SessionsController@unauthorized');
 
-# Unsubscribe to MailChimp
+# Unsubscribe From MailChimp
 Route::delete('user/{id}/mailchimp', ['as' => 'users.unsubscribe-mailchimp', 'uses' => 'UsersController@unsubscribeFromMailChimp']);
+
+# Unsubscribe from MobileCommons
+Route::delete('user/{id}/mobilecommons', ['as' => 'users.unsubscribe-mobilecommons', 'uses' => 'UsersController@unsubscribeFromMobileCommons']);

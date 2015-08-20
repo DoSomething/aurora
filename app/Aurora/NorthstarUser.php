@@ -171,4 +171,17 @@ class NorthstarUser {
     $email = $this->profile['email'];
     $unsubscribe = $this->mailchimp->unsubscribe($email, $list_id);
   }
+
+
+  /**
+   * Used in UsersController->unsubscribeFromMobileCommons
+   * Making post request to unsubscribe user from MobileCommons Service
+   *
+   * @return Response
+   *
+   */
+  public function mobileCommonsUnsubscribe() {
+    $mobile = $this->profile['mobile'];
+    return $this->mobileCommons->unsubscribeUser($mobile);
+  }
 }
