@@ -62,7 +62,7 @@ class UsersController extends \BaseController {
    * @return Response
    */
   public function show($id)
-  { 
+  {
     // Finding the user in nortstar DB and getting the informations
     $northstar_user = new NorthstarUser($id);
     $northstar_profile = $northstar_user->profile;
@@ -198,6 +198,7 @@ class UsersController extends \BaseController {
     }
   }
 
+
   /**
    * Assign user to a role
    * @param Int User ID, String role name
@@ -213,6 +214,7 @@ class UsersController extends \BaseController {
     $user = User::firstOrCreate(['_id' => $id])->assignRole($role);
     return Redirect::back()->with('flash_message', ['class' => 'messages', 'text' => 'This user has been assigned a role of ' . $roles[$role]]);
   }
+
 
   /**
    * Display Users roles
@@ -237,6 +239,7 @@ class UsersController extends \BaseController {
     return View::make('users.staff-index')->with(compact('group'));
   }
 
+
   /**
    * Display form to merge duplicate users. Multiple users information is
    * merged into the selected user where blank/different attribute will
@@ -251,12 +254,15 @@ class UsersController extends \BaseController {
     $delete_ids = $inputs['delete'];
     $keep_user = $this->northstar->getUser('_id', $keep_id);
     $user = [];
+    $different_tags = [];
     foreach($delete_ids as $delete_id){
       $delete_user = $this->northstar->getUser('_id', $delete_id);
+      $different_tags = find_diff_tags($different_tags, $delete_user, $keep_user );
       $user = array_merge($user, array_filter($delete_user), array_filter($keep_user));
     }
-    return View::make('search.merge-and-delete-form')->with(compact('user'));
+    return View::make('search.merge-and-delete-form')->with(compact('user', 'different_tags'));
   }
+
 
   /**
    * Making request to NorthstarAPI to delete users marked
@@ -271,6 +277,7 @@ class UsersController extends \BaseController {
     }
   }
 
+
   /**
    * Making request to MailChimp to unsubscribe
    * @TODO implement unsubscribe to Mobile Commons, Drupal and Message Broker
@@ -282,5 +289,4 @@ class UsersController extends \BaseController {
     $northstar_user->mailChimpUnsubscribe($mailchimp_list_id);
     return Redirect::back()->with('flash_message', ['class' => 'messages', 'text' => 'This user has been unsubscribed from MailChimp!']);
   }
-
 }

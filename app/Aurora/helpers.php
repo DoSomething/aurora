@@ -56,6 +56,33 @@ function sanitize_phone_number($number, $countryName = 'US')
 	}
 }
 
+/**
+ * Used in UsersController->mergedForm()
+ * When there is a duplicate of the same user from Northstar DB
+ * This function finds if the value of the user attributes is different
+ * and return an array attributes of which user is difference
+ */
+function find_diff_tags($array, $delete_user, $keep_user)
+{
+  foreach ($delete_user as $k => $v){
+    if (empty($keep_user[$k]) && !in_array($k, $array)){
+      array_push($array, $k);
+    }elseif (!empty($keep_user[$k])&& $keep_user[$k] != $delete_user[$k]){
+      array_push($array, $k);
+    }
+  }
+
+  foreach ($keep_user as $k => $v){
+    if (empty($delete_user[$k]) && !in_array($k, $array)){
+      array_push($array, $k);
+    }elseif (!empty($delete_user[$k]) && $keep_user[$k] != $delete_user[$k]){
+      array_push($array, $k);
+    }
+  }
+
+  return $array;
+}
+
 
 /**
  * When duplicate users occur, this function is called to add a class to html
@@ -90,7 +117,6 @@ function ticket_state_class($status)
 		echo 'is-pending';
 	}
 }
-
 
 /**
  * To Check input type and return an array
@@ -151,4 +177,3 @@ function config($var)
 {
  return \Config::get($var);
 }
-

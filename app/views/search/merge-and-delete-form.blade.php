@@ -6,6 +6,10 @@
   </div>
 </div>
 
-<script>	
+<script>
+@forelse($different_tags as $tag)
+  $('input[name={{ $tag }}]').addClass("has-difference")
+@empty
+@endforelse
 	confirm_submit("CAUTION! This will delete other users that were not specified. Are you sure you want to proceed?", ajax_delete_unmerged_users);
 </script>

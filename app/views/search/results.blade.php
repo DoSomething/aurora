@@ -2,10 +2,11 @@
 
 @section('main_content')
 
-@include('layout.header', ['header' => 'Search Results', 'subtitle' => ''])
+@include('layout.header', ['header' => 'Duplicate Users', 'subtitle' => ''])
 <div class="container -padded">
 	<div class="wrapper">
 		<div class="container__block">
+			<h3>This appears to be the most recent user!</h3>
 			<ul class="gallery -duo">
 				@forelse($users as $northstar_profile)
 					<li>
@@ -30,7 +31,6 @@
 									<dt>{{ Form::radio('keep', $northstar_profile['_id'], false, ['class' => 'js-keep']) }}</dt><dd>{{ Form::label('Keep this user')}}</dd>
 								@endif
 							</dl>
-
 						</div>
 						</article>
 					</li>
@@ -46,7 +46,6 @@
 
 <script>
 	$(document).ready(function(){
-
 		ajax_edit_merge_form();
 	});
 </script>

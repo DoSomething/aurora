@@ -5,6 +5,7 @@ composer.lock
 .env.*.php
 .env.php
 .env
+/swp
 .DS_Store
 Thumbs.db
 /node_modules

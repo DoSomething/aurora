@@ -155,3 +155,7 @@
 #advanced-search-container {
   display: none;
 }
+
+.has-difference {
+  border-color : #FCD116;
+}
