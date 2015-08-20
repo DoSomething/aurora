@@ -167,6 +167,11 @@ class UsersController extends \BaseController {
     $query = param_builder($inputs);
     $data = $this->northstar->getAllUsers(http_build_query($query));
     $users = $data['data'];
+    if (check_if_email_or_mobile($query)) {
+      if (duplicate_user_check($users)) {
+        return View::make('search.results')->with(compact('users'));
+      }
+    }
     if (!empty($users)) {
       return View::make('users.index')->with(compact('users', 'data', 'inputs'));
     } else {
@@ -248,7 +253,7 @@ class UsersController extends \BaseController {
     $user = [];
     foreach($delete_ids as $delete_id){
       $delete_user = $this->northstar->getUser('_id', $delete_id);
-      $user = array_merge($user, $delete_user, $keep_user);
+      $user = array_merge($user, array_filter($delete_user), array_filter($keep_user));
     }
     return View::make('search.merge-and-delete-form')->with(compact('user'));
   }

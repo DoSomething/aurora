@@ -119,6 +119,25 @@ function param_builder($input)
   return $query;
 }
 
+function check_if_email_or_mobile($query)
+{
+	if (key($query) == 'email' || key($query) == 'mobile') {
+		return TRUE;
+	} else {
+		return FALSE;
+	}
+}
+
+function duplicate_user_check($array)
+{
+  foreach ($array as $element) {
+    if ($element['email'] == next($array)['email']) {
+    	return TRUE;
+    } else if ($element['mobile'] == next($array)['mobile']) {
+    	return TRUE;
+    }
+  }
+}
 // ended up not needing this function but going to leave it incase we do someday
 function calculate_age_from_birthdate($birthdate)
 {
@@ -132,5 +151,4 @@ function config($var)
 {
  return \Config::get($var);
 }
-
 
