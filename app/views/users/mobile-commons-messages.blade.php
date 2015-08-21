@@ -34,15 +34,16 @@
 				  			<div class="container__block">
 					  			<dl class="profile-settings">
 							  		<dt>Content: </dt><dd>{{{ !empty($message['body']) ? $message['body'] : "" }}}</dd>
-                    @if ($message['@attributes']['status'] != 'failed_permanently' && $message['@attributes']['status'] != 'sent' )
-                      @if (!empty($subscriptions[$campaign['@attributes']['id']] ))
+                    <!-- if ($message['@attributes']['status'] != 'failed_permanently' && $message['@attributes']['status'] != 'sent' ) -->
+                    <!-- conditional above is to make opt_in_path_link to MobileCommons only appear for user sent messages -->
+                      @if (!empty($opt_in_path_ids[$campaign['@attributes']['id']] ))
                       <dt>Involved Opt In Path Id:</dt>
-                      <?php $campaign_id = array_search($subscriptions[$campaign['@attributes']['id']], $subscriptions)?>
-                        @foreach( $subscriptions[$campaign['@attributes']['id']] as $opt_in_path_id )
+                      <?php $campaign_id = array_search($opt_in_path_ids[$campaign['@attributes']['id']], $opt_in_path_ids)?>
+                        @foreach( array_unique($opt_in_path_ids[$campaign['@attributes']['id']]) as $opt_in_path_id )
                           <dt>{{  link_to('https://secure.mcommons.com/campaigns/'. $campaign_id . '/opt_in_paths/' . $opt_in_path_id, $opt_in_path_id)  }}</dt>
                         @endforeach
                       @endif
-                    @endif
+                    <!-- endif -->
 					  			</dl>
 				  			</div>
 			  			</article>

@@ -33,7 +33,7 @@ class MobileCommonsAPI {
    */
   public function userProfile($mobile)
   {
-    $response = $this->client->get('?phone_number=' . 6466675480 . '&include_messages=true');
+    $response = $this->client->get('?phone_number=' . $mobile . '&include_messages=true');
 
     $xml = $response->xml();
 

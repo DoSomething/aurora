@@ -91,12 +91,10 @@ class UsersController extends \BaseController {
     $northstar_user = new NorthstarUser($id);
     $profile = $northstar_user->getMobileCommonsProfile();
     $messages = $northstar_user->getMobileCommonsMessages();
-    // dd($profile['subscriptions']['subscription']);
     foreach ($profile['subscriptions']['subscription'] as $subscription){
-      $subscriptions[$subscription['@attributes']['campaign_id']][] = $subscription['@attributes']['opt_in_path_id'];
+      $opt_in_path_ids[$subscription['@attributes']['campaign_id']][] = $subscription['@attributes']['opt_in_path_id'];
     }
-
-    return View::make('users.mobile-commons-messages')->with(compact('messages', 'subscriptions'));
+    return View::make('users.mobile-commons-messages')->with(compact('messages', 'opt_in_path_ids'));
   }
 
 
