@@ -1,0 +1,5 @@
+suites:
+    main:
+        namespace: Aurora
+        psr4_prefix: Aurora
+        src_path: app
