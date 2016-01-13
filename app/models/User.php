@@ -1,101 +1,102 @@
 <?php
 
-use Illuminate\Auth\UserTrait;
-use Illuminate\Auth\UserInterface;
-use Illuminate\Auth\Reminders\RemindableTrait;
-use Illuminate\Auth\Reminders\RemindableInterface;
+namespace Aurora\Models;
 
-class User extends Eloquent implements UserInterface, RemindableInterface {
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Auth\Authenticatable;
+use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 
-  use UserTrait, RemindableTrait;
+class User extends Model implements AuthenticatableContract {
 
-  /**
-   * The database table used by the model.
-   *
-   * @var string
-   */
-  protected $table = 'users';
+    use Authenticatable;
 
-  /**
-   * The attributes excluded from the model's JSON form.
-   *
-   * @var array
-   */
-  protected $hidden = array('remember_token');
+    /**
+     * The database table used by the model.
+     *
+     * @var string
+     */
+    protected $table = 'users';
 
-  protected $fillable = ['_id'];
+    /**
+     * The attributes excluded from the model's JSON form.
+     *
+     * @var array
+     */
+    protected $hidden = array('remember_token');
 
-  /**
-   * This table does not have timestamps.
-   */
-  public $timestamps = false;
+    protected $fillable = ['_id'];
 
-  /**
-   * Define relationship with roles.
-   *
-   * @return Object Role
-   */
-  public function roles()
-  {
-    return $this->belongsToMany('Role');
-  }
+    /**
+     * This table does not have timestamps.
+     */
+    public $timestamps = false;
 
-
-  /**
-   * Assign a specific role to user.
-   *
-   * @param Object Role or Integer ID
-   */
-  public function assignRole($role)
-  {
-    $this->roles()->attach($role);
-  }
-
-
-  /**
-   * Remove a specific role from user.
-   *
-   * @param Object Role or Integer ID
-   * @return Integer role ID
-   */
-  public function removeRole($role)
-  {
-    return $this->roles()->detach($role);
-  }
-
-  /**
-   * Check to see if User has a Role.
-   *
-   * @param String role's name
-   * @return boolean
-   */
-  public function hasRole($name)
-  {
-    foreach ($this->roles as $role) {
-      if ($role->name === $name) return true;
+    /**
+     * Define relationship with roles.
+     *
+     * @return Object Role
+     */
+    public function roles()
+    {
+        return $this->belongsToMany('\Aurora\Models\Role');
     }
-    return false;
-  }
-  /**
-   * Used in filters.php
-   * @return string
-   */
-  public function findRole() {
-    if($this->roles()->first()){
-      return $this->roles()->first()['name'];
+
+
+    /**
+     * Assign a specific role to user.
+     *
+     * @param Object Role or Integer ID
+     */
+    public function assignRole($role)
+    {
+        $this->roles()->attach($role);
     }
-    return NULL;
-  }
-  /**
-   * Used in UsersController
-   * @return eloquent collection
-   */
-  public static function usersWithRole($role)
-  {
-    $users = User::whereHas('roles', function($query) use($role){
-      $query->where('name', $role);
-    })->get();
-    return $users;
-  }
+
+
+    /**
+     * Remove a specific role from user.
+     *
+     * @param Object Role or Integer ID
+     * @return Integer role ID
+     */
+    public function removeRole($role)
+    {
+        return $this->roles()->detach($role);
+    }
+
+    /**
+     * Check to see if User has a Role.
+     *
+     * @param String role's name
+     * @return boolean
+     */
+    public function hasRole($name)
+    {
+        foreach ($this->roles as $role) {
+            if ($role->name === $name) return true;
+        }
+        return false;
+    }
+    /**
+     * Used in filters.php
+     * @return string
+     */
+    public function findRole() {
+        if($this->roles()->first()){
+            return $this->roles()->first()['name'];
+        }
+        return NULL;
+    }
+    /**
+     * Used in UsersController
+     * @return eloquent collection
+     */
+    public static function usersWithRole($role)
+    {
+        $users = static::whereHas('roles', function($query) use($role){
+            $query->where('name', $role);
+        })->get();
+        return $users;
+    }
 
 }
