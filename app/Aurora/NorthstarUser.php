@@ -12,10 +12,13 @@ class NorthstarUser {
   {
     $this->northstar = App::make('Aurora\Services\Northstar\NorthstarAPI');
     $this->drupal = App::make('Aurora\Services\Drupal\DrupalAPI');
-    $this->mobileCommons = App::make('Aurora\Services\MobileCommons\MobileCommonsAPI');
-    $this->zendesk = App::make('Aurora\Services\Zendesk\ZendeskAPI');
-    $this->mailchimp = App::make('Aurora\Services\MailChimp\MailChimpAPI');
+
     $this->profile = $this->northstar->getUser('_id', $id);
+
+    // @TODO Temporarily removing third-party services for now.
+//    $this->mobileCommons = App::make('Aurora\Services\MobileCommons\MobileCommonsAPI');
+//    $this->zendesk = App::make('Aurora\Services\Zendesk\ZendeskAPI');
+//    $this->mailchimp = App::make('Aurora\Services\MailChimp\MailChimpAPI');
   }
 
 

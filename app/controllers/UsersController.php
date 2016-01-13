@@ -62,7 +62,7 @@ class UsersController extends \BaseController {
    * @return Response
    */
   public function show($id)
-  { 
+  {
     // Finding the user in nortstar DB and getting the informations
     $northstar_user = new NorthstarUser($id);
     $northstar_profile = $northstar_user->profile;
@@ -75,9 +75,6 @@ class UsersController extends \BaseController {
     //Calling other APIs related to the user.
     $campaigns = $northstar_user->getCampaigns();
     $reportbacks = $northstar_user->getReportbacks();
-    $mobile_commons_profile = $northstar_user->getMobileCommonsProfile();
-    $zendesk_profile = $northstar_user->searchZendeskUserByEmail();
-    $mailchimp_list_id = $northstar_user->mailChimpListFinder();
     return View::make('users.show')->with(compact('northstar_profile', 'user_roles', 'unassigned_roles', 'campaigns', 'reportbacks', 'mobile_commons_profile', 'zendesk_profile', 'mailchimp_list_id'));
   }
 

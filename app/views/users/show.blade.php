@@ -40,23 +40,4 @@
   </div>
 </div>
 
-<h1 class="heading -banner"><span>Mobile Commons Activity</span></h1>
-<div class="container -padded">
-  <div class="wrapper">
-    <div class="container__block">
-      @include('users.partials.mobile-commons')
-    </div>
-  </div>
-</div>
-
-<h1 class="heading -banner"><span>Zendesk Activity</span></h1>
-<div class="container -padded">
-  <div class="wrapper">
-    <div class="container__block">
-      @include('users.partials.zendesk')
-    </div>
-  </div>
-</div>
-
-
 @stop
