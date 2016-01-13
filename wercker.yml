@@ -12,9 +12,6 @@ build:
           name: update packages list
           code: sudo apt-get update
       - script:
-          name: install php mongo extension
-          code: sudo apt-get install php5-mongo
-      - script:
           name: npm install
           code: |-
             mkdir -p $WERCKER_CACHE_DIR/wercker/npm
