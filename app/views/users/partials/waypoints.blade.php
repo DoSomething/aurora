@@ -1,6 +1,6 @@
 <ul class = "waypoints -primary" id="pagination-buttons">
   @if ($data['meta']['pagination']['current_page'] > 1)
-    <?php $prev = $data['current_page'] - 1 ?>
+    <?php $prev = $data['meta']['pagination']['current_page'] - 1 ?>
     <li> {{ link_to_route('users.index', 'First', array($inputs . '&page=1')) }} </li>
     <li> {{ link_to_route('users.index', 'Previous', array($inputs . '&page=' . $prev)) }} </li>
   @endif
@@ -24,6 +24,6 @@
   @if ($data['meta']['pagination']['current_page'] < $data['meta']['pagination']['total_pages'])
     <?php $next =  $data['meta']['pagination']['current_page'] + 1 ?>
     <li> {{ link_to_route('users.index', 'Next', array($inputs . '&page=' . $next)) }} </li>
-    <li> {{ link_to_route('users.index', 'Last', array($inputs . '&page='. $data['last_page'])) }} </li>
+    <li> {{ link_to_route('users.index', 'Last', array($inputs . '&page='. $data['meta']['pagination']['total_pages'])) }} </li>
   @endif
 </ul>
