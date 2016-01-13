@@ -11,7 +11,7 @@
 
     @include('search.search')
     @if ($users)
-      <h3 class="heading -gamma">Total members : {{{ number_format($data['total']) }}}</h3>
+      <h3 class="heading -gamma">Total members : {{{ number_format($data['meta']['pagination']['total']) }}}</h3>
 
       @include('users.partials.index-table', ['users' => $users])
 
