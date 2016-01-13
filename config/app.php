@@ -145,7 +145,7 @@ return [
         Aurora\Providers\EventServiceProvider::class,
         Aurora\Providers\RouteServiceProvider::class,
 
-        /**
+        /*
          * Third-party Service Providers...
          */
         Collective\Html\HtmlServiceProvider::class,
@@ -199,7 +199,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View'      => Illuminate\Support\Facades\View::class,
 
-        /**
+        /*
          * Third-Party Aliases...
          */
         'Form' => Collective\Html\FormFacade::class,

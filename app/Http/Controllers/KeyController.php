@@ -2,8 +2,8 @@
 
 namespace Aurora\Http\Controllers;
 
-class KeyController extends Controller {
-
+class KeyController extends Controller
+{
     public function __construct()
     {
         $this->middleware('auth');
@@ -21,8 +21,8 @@ class KeyController extends Controller {
             // Attempt to fetch all users.
             $northstar = new \Aurora\Services\Northstar;
             $keys = $northstar->getAllApiKeys();
-            return \View::make('keys.index')->with(compact('keys'));
 
+            return \View::make('keys.index')->with(compact('keys'));
         } catch (\Exception $e) {
             return \View::make('keys.index')->with('flash_message', ['class' => 'alert alert-warning', 'text' => 'Looks like there is something wrong with the connection!']);
         }
@@ -42,11 +42,8 @@ class KeyController extends Controller {
             $key = $northstar->createNewApiKey($input);
             // return to index page with new info.
             return \Redirect::route('keys.index')->with('flash_message', ['class' => 'alert alert-success', 'text' => 'Cool, new app added!']);
-
         } catch (\Exception $e) {
             return \Redirect::route('keys.index')->with('flash_message', ['class' => 'alert alert-warning', 'text' => 'Looks like there is something wrong with the connection!']);
         }
     }
-
-
 }

@@ -4,12 +4,11 @@ namespace Aurora\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Role extends Model {
+class Role extends Model
+{
+    protected $fillable = ['name'];
 
-  protected $fillable = ['name'];
-
-  public $timestamps = false;
-
+    public $timestamps = false;
 
   /**
    * Get the Users of a specific Role.
@@ -17,7 +16,6 @@ class Role extends Model {
    */
   public function users()
   {
-    return $this->belongsToMany('User');
+      return $this->belongsToMany('User');
   }
-
 }

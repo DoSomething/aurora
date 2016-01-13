@@ -34,13 +34,13 @@ class CheckRole
     public function handle($request, Closure $next, $role)
     {
         // If user is a guest (e.g. no role), or is missing the provided role... get out!
-        if ($this->auth->guest() || !$this->auth->user()->hasRole($role)) {
+        if ($this->auth->guest() || ! $this->auth->user()->hasRole($role)) {
             if ($request->ajax()) {
                 return response('Unauthorized.', 401);
             } else {
                 return redirect()->back()->with('flash_message', [
                     'class' => 'messages -error',
-                    'text' => 'Unauthorized.'
+                    'text' => 'Unauthorized.',
                 ]);
             }
         }
