@@ -2,8 +2,8 @@
 
 namespace Aurora\Http\Controllers;
 
-class SessionsController extends Controller {
-
+class SessionsController extends Controller
+{
     /**
      * Show the form for creating a new resource.
      *
@@ -14,6 +14,7 @@ class SessionsController extends Controller {
         if (\Auth::check()) {
             // Already loged in.
         }
+
         return \View::make('sessions.login');
     }
 
@@ -35,13 +36,15 @@ class SessionsController extends Controller {
             return \Redirect::route('users.index');
         } catch (\Exception $e) {
             dd($e);
+
             return \Redirect::back()->with('trigger_modal', ['class' => 'messages -error', 'text' => 'Login Failed']);
         }
     }
 
     public function mapToUser($response)
     {
-        $user = \Aurora\Models\User::firstOrCreate(array('_id' => $response['_id']));
+        $user = \Aurora\Models\User::firstOrCreate(['_id' => $response['_id']]);
+
         return $user;
     }
 
@@ -54,13 +57,15 @@ class SessionsController extends Controller {
     public function destroy($id = null)
     {
         \Auth::logout();
+
         return \Redirect::to('/')->with('flash_message', ['text' => 'You have been logged out!', 'class' => 'messages']);
     }
 
     public function unauthorized()
     {
-        $gifs = ["yPBHuNVGsrrxK", "DKclRd6n3KGD6", "777J8bECVBEOs", "FYy4Efj2hyZBm", "EMxy32NDE3Mac", "9LkjuISavFFXG"];
-        $gif = $gifs[rand(0,count($gifs) - 1)];
+        $gifs = ['yPBHuNVGsrrxK', 'DKclRd6n3KGD6', '777J8bECVBEOs', 'FYy4Efj2hyZBm', 'EMxy32NDE3Mac', '9LkjuISavFFXG'];
+        $gif = $gifs[rand(0, count($gifs) - 1)];
+
         return \View::make('sessions.unauthorized')->with(compact('gif'));
     }
 }

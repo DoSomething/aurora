@@ -1,9 +1,11 @@
-<?php namespace Aurora\Services;
+<?php
+
+namespace Aurora\Services;
 
 use GuzzleHttp\Client;
 
-class Northstar {
-
+class Northstar
+{
     protected $client;
 
     public function __construct()
@@ -12,35 +14,33 @@ class Northstar {
         $version = config('services.northstar.version');
 
         $client = new Client([
-            'base_url' => [$base_url . '/{version}/', ['version' => $version]],
+            'base_url' => [$base_url.'/{version}/', ['version' => $version]],
             'defaults' => [
                 'headers' => [
-                    'X-DS-Application-Id' => config('services.northstar.app_id') ,
+                    'X-DS-Application-Id' => config('services.northstar.app_id'),
                     'X-DS-REST-API-Key' => config('services.northstar.api_key'),
                     'Content-Type' => 'application/json',
-                    'Accept' => 'application/json'
-                ]
+                    'Accept' => 'application/json',
+                ],
             ],
         ]);
 
         $this->client = $client;
     }
 
-
     /**
      * Send a POST request to login the user.
      *
      * @param array - input
-     *
      */
     public function login($input)
     {
         $response = $this->client->post('login', [
-            'body' => json_encode($input)
+            'body' => json_encode($input),
         ]);
+
         return $response->json()['data'];
     }
-
 
     /**
      * Send a GET request to return all users with given query
@@ -50,10 +50,10 @@ class Northstar {
      */
     public function getAllUsers($inputs)
     {
-        $response = $this->client->get('users?' . $inputs);
+        $response = $this->client->get('users?'.$inputs);
+
         return $response->json();
     }
-
 
     /**
      * Send a GET request to return a user with that id.
@@ -63,10 +63,10 @@ class Northstar {
      */
     public function getUser($type, $id)
     {
-        $response = $this->client->get('users' . '/' .  $type  . '/' . $id);
+        $response = $this->client->get('users'.'/'.$type.'/'.$id);
+
         return $response->json()['data'];
     }
-
 
     /**
      * Send a PUT request to update a user
@@ -75,11 +75,10 @@ class Northstar {
      */
     public function updateUser($id, $input)
     {
-        $response = $this->client->put('users' . '/_id/' . $id, [
-            'body' => json_encode($input)
+        $response = $this->client->put('users'.'/_id/'.$id, [
+            'body' => json_encode($input),
         ]);
     }
-
 
     /**
      * Send a GET request to return all northstar keys
@@ -89,13 +88,14 @@ class Northstar {
     public function getAllApiKeys()
     {
         $response = $this->client->get('keys');
+
         return $response->json()['data'];
     }
 
     /**
      * Send a POST request to generate new keys to northstar
      *
-     * @param String input
+     * @param string input
      * @return JSON file
      */
     public function createNewApiKey($input)
@@ -104,9 +104,9 @@ class Northstar {
         $response = $this->client->post('keys', [
             'body' => json_encode($input),
         ]);
+
         return $response->json();
     }
-
 
     /**
      * Send a GET request to return all users matching $type
@@ -117,18 +117,19 @@ class Northstar {
      */
     public function getUsers($type, $id)
     {
-        $response = $this->client->get('users' . '/' .  $type  . '/' . $id);
+        $response = $this->client->get('users'.'/'.$type.'/'.$id);
         $northstar_users = $response->json()['data'];
         // sort users by "updated_at" attribute
         uasort($northstar_users, function ($a, $b) {
             if ($a['updated_at'] == $b['updated_at']) {
                 return 0;
             }
+
             return ($a['updated_at'] > $b['updated_at']) ? -1 : 1;
         });
+
         return $northstar_users;
     }
-
 
     /**
      * Send a DELETE request to delete an user from northstar database
@@ -137,6 +138,6 @@ class Northstar {
      */
     public function deleteUser($id)
     {
-        $response = $this->client->delete('users/' . $id);
+        $response = $this->client->delete('users/'.$id);
     }
 }

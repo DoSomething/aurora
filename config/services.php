@@ -14,20 +14,20 @@ return [
     |
     */
 
-    'northstar' => array(
+    'northstar' => [
         'url'     => env('NORTHSTAR_URL'),
         'version' => 'v1',
         'app_id'  => env('NORTHSTAR_APP_ID'),
-        'api_key' => env('NORTHSTAR_API_KEY')
-    ),
+        'api_key' => env('NORTHSTAR_API_KEY'),
+    ],
 
     'drupal' => [
-        'url' => env('DRUPAL_URL')
+        'url' => env('DRUPAL_URL'),
     ],
 
     'mobile_commons' => [
         'username' => env('MOBILE_COMMONS_USERNAME'),
-        'password' => env('MOBILE_COMMONS_PASSWORD')
-    ]
+        'password' => env('MOBILE_COMMONS_PASSWORD'),
+    ],
 
 ];

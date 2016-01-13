@@ -11,51 +11,49 @@
 |
 */
 
-Route::get('/', function()
-{
+Route::get('/', function () {
     return View::make('hello');
 });
 
-# Authentication
+// Authentication
 Route::get('login', ['as' => 'login', 'uses' => 'SessionsController@create']);
 Route::get('logout', ['as' => 'logout', 'uses' => 'SessionsController@destroy']);
 Route::resource('sessions', 'SessionsController', ['only' => ['create', 'store', 'destroy']]);
 
-# Users
+// Users
 Route::resource('users', 'UsersController');
 
-# Delete Northstar User
+// Delete Northstar User
 Route::delete('northstar-user-delete/{user}', ['as' => 'northstar.delete', 'uses' => 'UsersController@deleteNorthstarUser']);
 
-# Display edit form with merged users
+// Display edit form with merged users
 Route::get('merge', ['as' => 'users.merge', 'uses' => 'UsersController@mergedForm']);
 
-# Delete other users that were not selected
+// Delete other users that were not selected
 Route::post('merge', ['as' => 'users.merge-and-delete', 'uses' => 'UsersController@deleteUnmergedUsers']);
 
-# Create admins.
+// Create admins.
 Route::post('role/{user}', ['as' => 'role.create', 'uses' => 'UsersController@roleCreate']);
 
 Route::get('/admins', 'UsersController@staffIndex');
 
-# Key
+// Key
 Route::resource('keys', 'KeyController');
 
-# Mobile Commons Message Backlog
+// Mobile Commons Message Backlog
 Route::get('/users/{user}/mobile-commons-messages', 'UsersController@mobileCommonsMessages');
 
-# Zendesk Requested Tickets Backlog
+// Zendesk Requested Tickets Backlog
 Route::get('/users/{user}/zendesk-tickets', 'UsersController@zendeskTickets');
 
-# Search
-Route::get('search', ['as' => 'users.search', 'uses' => 'UsersController@search', 'before' =>'auth']);
+// Search
+Route::get('search', ['as' => 'users.search', 'uses' => 'UsersController@search', 'before' => 'auth']);
 
-# Advanced Search
+// Advanced Search
 Route::get('/advanced-search', 'UsersController@advancedSearch');
 
-# Unauthorized Page
+// Unauthorized Page
 Route::get('/unauthorized', 'SessionsController@unauthorized');
 
-# Unsubscribe to MailChimp
+// Unsubscribe to MailChimp
 Route::delete('user/{id}/mailchimp', ['as' => 'users.unsubscribe-mailchimp', 'uses' => 'UsersController@unsubscribeFromMailChimp']);
-

@@ -2,9 +2,9 @@
 
 namespace Aurora\Http\Controllers;
 
-class HomeController extends Controller {
-
-  /*
+class HomeController extends Controller
+{
+    /*
   |--------------------------------------------------------------------------
   | Default Home Controller
   |--------------------------------------------------------------------------
@@ -19,7 +19,6 @@ class HomeController extends Controller {
 
   public function showWelcome()
   {
-    return \View::make('hello');
+      return \View::make('hello');
   }
-
 }

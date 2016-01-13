@@ -1,132 +1,127 @@
-<?php namespace Aurora;
+<?php
+
+namespace Aurora;
 
 use App;
 use Aurora\Models\User;
-use Aurora\Services\Drupal\DrupalAPI;
-use Aurora\Services\Northstar\NorthstarAPI;
-use Aurora\Services\MobileCommons\MobileCommonsAPI;
-use Aurora\Services\Zendesk\ZendeskAPI;
 
-class NorthstarUser {
+class NorthstarUser
+{
+    public function __construct($id)
+    {
+        $this->northstar = App::make('Aurora\Services\Northstar');
+        $this->drupal = App::make('Aurora\Services\Drupal');
 
-  public function __construct($id)
-  {
-    $this->northstar = App::make('Aurora\Services\Northstar');
-    $this->drupal = App::make('Aurora\Services\Drupal');
-
-    $this->profile = $this->northstar->getUser('_id', $id);
+        $this->profile = $this->northstar->getUser('_id', $id);
 
     // @TODO Temporarily removing third-party services for now.
 //    $this->mobileCommons = App::make('Aurora\Services\MobileCommons\MobileCommonsAPI');
 //    $this->zendesk = App::make('Aurora\Services\Zendesk\ZendeskAPI');
 //    $this->mailchimp = App::make('Aurora\Services\MailChimp\MailChimpAPI');
-  }
-
+    }
 
   /**
    * Get all user's campaigns
    *
-   * @return Array user's campaigns
+   * @return array user's campaigns
    */
-  public function getCampaigns() {
-    $campaigns = [];
-    $profile = $this->profile;
+  public function getCampaigns()
+  {
+      $campaigns = [];
+      $profile = $this->profile;
 
-    if(isset($profile['campaigns'])){
-      foreach($profile['campaigns'] as $campaign){
-        if (isset($campaign['drupal_id'])) {
-          array_push($campaigns, $this->drupal->getCampaignFromDrupal($campaign['drupal_id']));
-        }
+      if (isset($profile['campaigns'])) {
+          foreach ($profile['campaigns'] as $campaign) {
+              if (isset($campaign['drupal_id'])) {
+                  array_push($campaigns, $this->drupal->getCampaignFromDrupal($campaign['drupal_id']));
+              }
+          }
       }
-    }
-    return array_filter($campaigns);
-  }
 
+      return array_filter($campaigns);
+  }
 
   /**
    * Get all user's reportbacks
    *
-   * @return Array user's reportbacks
+   * @return array user's reportbacks
    */
   public function getReportbacks()
   {
-    $reportbacks = [];
-    $profile = $this->profile;
+      $reportbacks = [];
+      $profile = $this->profile;
 
-    if(isset($profile['campaigns'])){
-      foreach($profile['campaigns'] as $campaign){
-        if(isset($campaign["reportback_id"])) {
-          array_push($reportbacks, $this->drupal->getReportbacksFromDrupal($campaign['reportback_id']));
-        }
+      if (isset($profile['campaigns'])) {
+          foreach ($profile['campaigns'] as $campaign) {
+              if (isset($campaign['reportback_id'])) {
+                  array_push($reportbacks, $this->drupal->getReportbacksFromDrupal($campaign['reportback_id']));
+              }
+          }
       }
-    }
-    return array_filter($reportbacks);
-  }
 
+      return array_filter($reportbacks);
+  }
 
   /**
    * Get user's mobile commons profile
    *
-   * @return Array user's mobile commons profile
+   * @return array user's mobile commons profile
    */
   public function getMobileCommonsProfile()
   {
-    if(isset($this->profile['mobile']))
-    {
-      return $this->mobileCommons->userProfile($this->profile['mobile']);
-    }
+      if (isset($this->profile['mobile'])) {
+          return $this->mobileCommons->userProfile($this->profile['mobile']);
+      }
   }
-
 
   /**
    * Get all user's mobile commons message backlogs
    *
-   * @return Array user's mobile commons message backlogs
+   * @return array user's mobile commons message backlogs
    */
   public function getMobileCommonsMessages()
   {
-    return $this->mobileCommons->userMessages($this->profile['mobile']);
+      return $this->mobileCommons->userMessages($this->profile['mobile']);
   }
-
 
   /**
    * Get user's zendesk profile
    *
-   * @return Array user's zendesk profile infomation
+   * @return array user's zendesk profile infomation
    */
   public function searchZendeskUserByEmail()
   {
-    return $this->zendesk->searchByEmail($this->profile['email']);
+      return $this->zendesk->searchByEmail($this->profile['email']);
   }
-
 
   /**
    * Get user's zendesk tickets
    *
-   * @return Array user's zendesk tickets
+   * @return array user's zendesk tickets
    */
   public function zendeskRequestedTickets()
   {
-    $zendeskID = $this->zendesk->searchByEmail($this->profile['email'])['id'];
+      $zendeskID = $this->zendesk->searchByEmail($this->profile['email'])['id'];
 
-    return $this->zendesk->requestedTickets($zendeskID)['tickets'];
+      return $this->zendesk->requestedTickets($zendeskID)['tickets'];
   }
-
 
   /**
    * Used in UsersController->show()
    *
    * @var array of roles this user has
    */
-  public function getRoles($id) {
-    $roles = [];
-    $user = User::where('_id', $id)->first();
-    if(!empty($user)){
-      foreach ($user->roles as $role) {
-        $roles[] = $role->getAttributes();
+  public function getRoles($id)
+  {
+      $roles = [];
+      $user = User::where('_id', $id)->first();
+      if (! empty($user)) {
+          foreach ($user->roles as $role) {
+              $roles[] = $role->getAttributes();
+          }
       }
-    }
-    return $roles;
+
+      return $roles;
   }
 
   /**
@@ -134,45 +129,47 @@ class NorthstarUser {
    *
    * @var array of roles this user doesnt have
    */
-  public function unassignedRoles($user_roles) {
-    $all_roles = ['1' => 'admin', '2' => 'staff', '3' => 'intern'];
-    $unassigned_roles = array_diff($all_roles, $user_roles);
-    if (!in_array('staff', $unassigned_roles)){
-      $unassigned_roles = ['1' => 'ADMIN'];
-    }
-    foreach($unassigned_roles as $key => $value){
-      $unassigned_roles[$key] = ucfirst($value);
-    }
-    return $unassigned_roles;
-  }
+  public function unassignedRoles($user_roles)
+  {
+      $all_roles = ['1' => 'admin', '2' => 'staff', '3' => 'intern'];
+      $unassigned_roles = array_diff($all_roles, $user_roles);
+      if (! in_array('staff', $unassigned_roles)) {
+          $unassigned_roles = ['1' => 'ADMIN'];
+      }
+      foreach ($unassigned_roles as $key => $value) {
+          $unassigned_roles[$key] = ucfirst($value);
+      }
 
+      return $unassigned_roles;
+  }
 
   /**
    * Used in UsersController->show()
    * To get mailchimp list id which this user is subscribed
    *
-   * @return String list_id or []
+   * @return string list_id or []
    */
-  public function mailChimpListFinder() {
-    $email = $this->profile['email'];
-    if ($email != null) {
-      $list_id = $this->mailchimp->listFinder($email);
-      return $list_id;
-    } else {
-      return [];
-    }
-  }
+  public function mailChimpListFinder()
+  {
+      $email = $this->profile['email'];
+      if ($email != null) {
+          $list_id = $this->mailchimp->listFinder($email);
 
+          return $list_id;
+      } else {
+          return [];
+      }
+  }
 
   /**
    * Used in UsersController->unsubscribeFromMailChimp()
    * Making post request to unsubscribe user from Mailchimp service
    *
-   * @param String list_id MailChimp subscription list id
-   *
+   * @param string list_id MailChimp subscription list id
    */
-  public function mailChimpUnsubscribe($list_id) {
-    $email = $this->profile['email'];
-    $unsubscribe = $this->mailchimp->unsubscribe($email, $list_id);
+  public function mailChimpUnsubscribe($list_id)
+  {
+      $email = $this->profile['email'];
+      $unsubscribe = $this->mailchimp->unsubscribe($email, $list_id);
   }
 }
