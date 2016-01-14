@@ -92,6 +92,21 @@ class Northstar
         return $response->json()['data'];
     }
 
+    public function getApiKey($api_key)
+    {
+        $response = $this->client->get('keys/'.$api_key);
+
+        return $response->json()['data'];
+    }
+
+    public function deleteApiKey($api_key)
+    {
+        $response = $this->client->delete('keys/'.$api_key);
+        $data = $response->json();
+
+        return isset($data['success']) ? true : false;
+    }
+
     /**
      * Send a POST request to generate new keys to northstar
      *
@@ -100,8 +115,22 @@ class Northstar
      */
     public function createNewApiKey($input)
     {
-        $input['scope'] = ['user'];
         $response = $this->client->post('keys', [
+            'body' => json_encode($input),
+        ]);
+
+        return $response->json();
+    }
+
+    /**
+     * Send a POST request to generate new keys to northstar
+     *
+     * @param string input
+     * @return JSON file
+     */
+    public function updateApiKey($api_key, $input)
+    {
+        $response = $this->client->put('keys/'.$api_key, [
             'body' => json_encode($input),
         ]);
 
@@ -139,5 +168,10 @@ class Northstar
     public function deleteUser($id)
     {
         $response = $this->client->delete('users/'.$id);
+    }
+
+    public function scopes()
+    {
+        return $this->client->get('scopes')->json();
     }
 }
