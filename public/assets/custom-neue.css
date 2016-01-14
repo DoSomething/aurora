@@ -1,3 +1,18 @@
+pre {
+  font-family: "Menlo", "Consolas", "Courier New", serif;
+  font-size: 0.8em;
+  background: #efefef;
+  border: 1px solid #ccc;
+  border-radius: 2px;
+  padding: 24px;
+  margin: 12px 0;
+}
+
+
+.button.-danger, .button.-danger:hover {
+  background: #ff4747;
+}
+
 /* Users Table */
 .table {
  margin: 0 0 40px 0;
