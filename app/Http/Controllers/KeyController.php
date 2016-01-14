@@ -55,6 +55,7 @@ class KeyController extends Controller
     public function create()
     {
         $scopes = $this->northstar->scopes();
+
         return view('keys.create', compact('scopes'));
     }
 
@@ -110,7 +111,7 @@ class KeyController extends Controller
     {
         $deleted = $this->northstar->deleteApiKey($api_key);
 
-        if(!$deleted) {
+        if (! $deleted) {
             return redirect()->route('keys.index')->with('flash_message', ['class' => 'messages -error', 'text' => 'Could not delete key.']);
         }
 
