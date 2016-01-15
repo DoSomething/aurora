@@ -13,9 +13,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        app('auth')->extend('northstar', function () {
-            return new \Aurora\Auth\NorthstarUserProvider($this->app['hash'], config('auth.model'));
-        });
+        //
     }
 
     /**
