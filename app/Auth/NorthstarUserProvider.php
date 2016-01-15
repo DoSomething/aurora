@@ -39,12 +39,12 @@ class NorthstarUserProvider extends EloquentUserProvider implements UserProvider
         $northstar = new \Aurora\Services\Northstar;
         try {
             $northstar->login($credentials);
+
             return true;
-        } catch(ClientException $e) {
+        } catch (ClientException $e) {
             // If an exception is returned, we couldn't log in...
         }
 
         return false;
     }
-
 }

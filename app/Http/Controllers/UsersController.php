@@ -159,7 +159,7 @@ class UsersController extends Controller
             $inputs = http_build_query($request->all());
             $users = $data['data'];
 
-            if(count($users) === 1) {
+            if (count($users) === 1) {
                 return redirect()->route('users.show', $users[0]['_id']);
             }
 
