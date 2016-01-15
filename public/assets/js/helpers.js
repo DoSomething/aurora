@@ -1,10 +1,3 @@
-function auto_open_modal()
-{
-	$(document).ready(function () {
-		window.DSModal.open($("#signin-modal"));
-	});
-}
-
 function get_delete_ids()
 {
 	var delete_ids = [];

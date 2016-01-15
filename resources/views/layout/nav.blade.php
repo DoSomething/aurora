@@ -26,16 +26,9 @@
             @endif
         </ul>
         <ul class="navigation__secondary">
-            <li>
             @if (Auth::user())
-                <li><a href="{ route('logout') }}">Logout</a> </li>
-            @else
-                <li>
-                    <a href="#" data-modal-href="#signin-modal" class="signinModal">Login</a>
-                </li>
+                <li><a href="/auth/logout">Logout</a> </li>
             @endif
         </ul>
     </div>
 </nav>
-
-@include('sessions.signin-modal')

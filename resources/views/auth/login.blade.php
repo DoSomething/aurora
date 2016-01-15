@@ -1,0 +1,49 @@
+@extends('layout.master')
+
+@section('main_content')
+
+@include('layout.header', ['header' => 'Log In', 'subtitle' => ''])
+
+<div class="container -padded">
+	<div class="wrapper">
+		<div class="container__block -narrow">
+            <p>
+                This is <strong>Aurora</strong>, our user admin tool. It's the graphical front-end to
+                <a href="https://github.com/DoSomething/northstar">Northstar</a>, our user & activity API.
+                Aurora is only available to DoSomething.org staff members.
+                </p>
+            <p>Drop a message in the <code>#api</code> Slack room if you can't log in!</p>
+
+            @if (count($errors) > 0)
+                <ul class="list validation-errors">
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            @endif
+
+            {!! Form::open(['url' => '/auth/login', 'method' => 'POST', 'class' => 'form-signin']) !!}
+            <div class="form-item -padded">
+                {!! Form::label('email', 'Email', array('class' => 'field-label')) !!}
+                {!! Form::text('email', NULL, array('class' => 'text-field', 'placeholder' => 'puppet-sloth@dosomething.org')) !!}
+            </div>
+            <div class="form-item -padded">
+                {!! Form::label('password', 'Password', array('class' => 'field-label')) !!}
+                {!! Form::password('password', array('class' => 'text-field', 'placeholder' => '•••••••')) !!}
+            </div>
+            <ul class="form-actions -inline -padded">
+                <li>{!! Form::submit('Log In', array('class' => 'button')) !!}</li>
+                <li>
+                    <div class="message-callout -right">
+                        <div class="message-callout__copy">
+                            <p>Staff only!</p>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            {!! Form::close() !!}
+		</div>
+	</div>
+</div>
+
+@stop
