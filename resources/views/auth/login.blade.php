@@ -2,7 +2,7 @@
 
 @section('main_content')
 
-@include('layout.header', ['header' => 'Log In', 'subtitle' => ''])
+@include('layout.header', ['header' => 'Aurora', 'subtitle' => 'Please log in to continue.'])
 
 <div class="container -padded">
 	<div class="wrapper">
