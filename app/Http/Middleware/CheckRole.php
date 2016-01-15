@@ -38,10 +38,7 @@ class CheckRole
             if ($request->ajax()) {
                 return response('Unauthorized.', 401);
             } else {
-                return redirect()->back()->with('flash_message', [
-                    'class' => 'messages -error',
-                    'text' => 'Unauthorized.',
-                ]);
+                return view('auth.unauthorized');
             }
         }
 

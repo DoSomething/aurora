@@ -2,11 +2,13 @@
 
 @section('main_content')
 
-@include('layout.header', ['header' => 'Permission denied', 'subtitle' => 'You need admin privileges to view this page!'])
+@include('layout.header', ['header' => 'Permission denied', 'subtitle' => 'You don\'t have the proper privileges to do this!'])
 	<div class="container -padded">
 		<div class="wrapper">
-			<div class="container__block">
-				<center><iframe src="//giphy.com/embed/{{ $gif }}" width="480" height="384" frameBorder="0" style="max-width: 100%" class="giphy-embed" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe><center>
+			<div class="container__block -narrow">
+                <p><strong>Aurora is only accessible to DoSomething.org staff members.</strong> It doesn't look like your
+                user account has been granted permission to continue. If you think you should, ask in the <code>#api</code>
+                Slack room.</p>
 			</div>
 		</div>
 	</div>
