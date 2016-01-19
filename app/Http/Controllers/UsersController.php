@@ -33,7 +33,7 @@ class UsersController extends Controller
         try {
             // Attempt to fetch all users.
             $data = $this->northstar->getAllUsers($request->all());
-            $inputs = http_build_query($request->all());
+            $inputs = http_build_query($request->except('page'));
             $users = $data['data'];
 
             return \View::make('users.index')->with(compact('users', 'data', 'inputs'));

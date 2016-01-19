@@ -51,7 +51,7 @@ class Northstar
     public function getAllUsers($inputs)
     {
         $response = $this->client->get('users', [
-            'query' => ['filter' => $inputs],
+            'query' => $inputs,
         ]);
 
         return $response->json();
