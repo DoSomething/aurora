@@ -1,4 +1,4 @@
-<table id="user-table">
+<table id="user-table" class="table">
 	<thead>
 		<tr class="row table-header">
 			<th class="table-cell">User Id</th>
