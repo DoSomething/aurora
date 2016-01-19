@@ -15,6 +15,6 @@
 			</div>
 		</li>
 	@empty
-		<h3>This user has no campaigns</h3>
+		<p>This user has no campaigns.</p>
 	@endforelse
 </ul>
