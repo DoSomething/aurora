@@ -12,16 +12,16 @@
 */
 
 Route::get('/', function () {
-    return View::make('hello');
+    return redirect()->route('users.index');
 });
 
 // Authentication
-Route::get('login', ['as' => 'login', 'uses' => 'SessionsController@create']);
-Route::get('logout', ['as' => 'logout', 'uses' => 'SessionsController@destroy']);
-Route::resource('sessions', 'SessionsController', ['only' => ['create', 'store', 'destroy']]);
+Route::get('auth/login', 'Auth\AuthController@getLogin');
+Route::post('auth/login', 'Auth\AuthController@postLogin');
+Route::get('auth/logout', 'Auth\AuthController@getLogout');
 
 // Users
-Route::resource('users', 'UsersController');
+Route::resource('users', 'UsersController', ['except' => ['create', 'store']]);
 
 // Delete Northstar User
 Route::delete('northstar-user-delete/{user}', ['as' => 'northstar.delete', 'uses' => 'UsersController@deleteNorthstarUser']);
