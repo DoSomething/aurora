@@ -37,10 +37,7 @@ class Authenticate
             if ($request->ajax()) {
                 return response('Unauthorized.', 401);
             } else {
-                return redirect()->guest('auth/login')->with('flash_message', [
-                    'class' => 'messages -error',
-                    'text' => 'You need to log in to do that.',
-                ]);
+                return redirect()->guest('auth/login');
             }
         }
 

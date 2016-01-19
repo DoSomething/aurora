@@ -2,42 +2,48 @@
 
 @section('main_content')
 
-@include('layout.header', ["header" => ((isset($northstar_profile['first_name']) ? $northstar_profile['first_name'] : "") . " " . (isset($northstar_profile['last_name']) ? $northstar_profile['last_name'] : "")), "subtitle" => ""])
+    @include('layout.header', ['header' => 'Users', 'subtitle' => 'View & edit member profiles.']);
 
-<h1 class="heading -banner"><span>Account Info</span></h1>
-<div class="container -padded">
-  <div class="wrapper">
-    <div class="container__block">
-      <dl class="profile-settings">
-        @if(Auth::user()->hasRole('admin') || Auth::user()->hasRole('staff'))
-          <dt><a href="{{ url('users/' . $northstar_profile['_id'] . '/edit') }}">Edit User</a></dt>
-          <!-- this checking if this user exist in the database -->
-          @if((\Aurora\Models\User::where('_id',$northstar_profile['_id'])->first()))
-              <dt>Aurora Role:</dt> <dd>{{ value(array_slice($user_roles, -1, 1)[0]) }}</dd>
-          @endif
-        @endif
-      </dl>
-      @include('users.partials.details')
-    </div>
-  </div>
-</div>
+    <div class="container -padded">
+        <div class="wrapper">
+            <div class="container__block">
+                <h1>{{ $northstar_profile['first_name'] or $northstar_profile['_id'] }}</h1>
+                @if(Auth::user()->hasRole('admin') || Auth::user()->hasRole('staff'))
+                    <dt><a href="{{ url('users/' . $northstar_profile['_id'] . '/edit') }}">Edit User</a></dt>
+                @endif
+            </div>
 
-<h1 class="heading -banner"><span>Campaigns</span></h1>
-<div class="container -padded">
-  <div class="wrapper">
-    <div class="container__block">
-      @include('users.partials.campaigns')
+            @include('users.partials.details')
+        </div>
     </div>
-  </div>
-</div>
 
-<h1 class="heading -banner"><span>Reportbacks</span></h1>
-<div class="container -padded">
-  <div class="wrapper">
-    <div class="container__block">
-      @include('users.partials.reportbacks')
+    <div class="container -padded">
+        <div class="wrapper">
+            @if((\Aurora\Models\User::where('_id',$northstar_profile['_id'])->first()))
+                <div class="container__block profile-settings">
+                    <h3>Aurora Profile</h3>
+                    <dt>Role:</dt> <dd>{{ value(array_slice($user_roles, -1, 1)[0]) }}</dd>
+                </div>
+            @endif
+        </div>
     </div>
-  </div>
-</div>
+
+    <div class="container -padded">
+        <div class="wrapper">
+            <div class="container__block">
+                <h3>Campaigns</h3>
+                @include('users.partials.campaigns')
+            </div>
+        </div>
+    </div>
+
+    <div class="container -padded">
+        <div class="wrapper">
+            <div class="container__block">
+                <h3>Reportbacks</h3>
+                @include('users.partials.reportbacks')
+            </div>
+        </div>
+    </div>
 
 @stop

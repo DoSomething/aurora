@@ -2,22 +2,23 @@
 
 @section('main_content')
 
-@include('layout.header', ['header' => 'User Index', 'subtitle' => 'Listing of all users'])
-
-
+@include('layout.header', ['header' => 'Users', 'subtitle' => 'View & edit member profiles.']);
 
 <div class="container -padded">
   <div class="wrapper">
+      <div class="container__block">
+          <h1>All Users</h1>
+          <p>We currently have <strong>{{ number_format($data['meta']['pagination']['total']) }} members</strong> in Northstar.</p>
+          @include('search.search')
+      </div>
 
-    @include('search.search')
-    @if ($users)
-      <h3 class="heading -gamma">Total members : {{ number_format($data['meta']['pagination']['total']) }}</h3>
+      <div class="container__block">
+          @if ($users)
+              @include('users.partials.index-table', ['users' => $users])
+              @include('users.partials.waypoints')
+          @endif
+      </div>
 
-      @include('users.partials.index-table', ['users' => $users])
-
-      @include('users.partials.waypoints')
-
-    @endif
   </div>
 </div>
 <script>

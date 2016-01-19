@@ -14,6 +14,6 @@
 			</div>
 		</li>
 	@empty
-		<h3>This user has no reportbacks</h3>
+		<p>This user has no reportbacks</p>
 	@endforelse
 </ul>
