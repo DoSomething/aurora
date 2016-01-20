@@ -8,7 +8,7 @@
   <div class="wrapper">
       <div class="container__block -narrow">
           <h1>Edit Profile</h1>
-          {!! Form::model($user, [ 'method' => 'PATCH', 'route' => ['users.update', $user['_id']]]) !!}
+          {!! Form::model($user, [ 'method' => 'PATCH', 'route' => ['users.update', $user->id]]) !!}
           <div class="form-item -padded">
               {!! Form::label('_id', 'Northstar ID', ['class' => 'field-label']) !!}
               {!! Form::text('_id', NULL, ['class' => 'text-field', 'disabled' => 'true']) !!}

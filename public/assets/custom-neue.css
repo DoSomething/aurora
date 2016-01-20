@@ -1,3 +1,13 @@
+/**
+ * Overrides and custom styles for Aurora.
+ * Built on Neue 6.4.9.
+ */
+
+
+/**
+ * Pre-formatted text for code examples. Used
+ * for displaying API key request headers.
+ */
 pre {
   font-family: "Menlo", "Consolas", "Courier New", serif;
   font-size: 0.8em;
@@ -8,64 +18,76 @@ pre {
   margin: 12px 0;
 }
 
-
+/**
+ * Button: danger modifier
+ */
 .button.-danger, .button.-danger:hover {
   background: #ff4747;
 }
 
-/* Users Table */
+/**
+ * Table
+ */
 .table {
- margin: 0 0 40px 0;
- width: 100%;
- box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
- display: table;
+  display: table;
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 2px;
+  border-collapse: separate; /* needed to display border radius on table */
 }
+
 @media screen and (max-width: 580px) {
  .table {
    display: block;
  }
 }
 
+.table-header {
+  background: #ffffff ;
+  color: #4e2b63 ;
+  font-weight: 700;
+  text-align: left;
+}
+
 .table-row {
  display: table-row;
  background: white;
 }
+
 .table-row:nth-of-type(odd) {
- background: #ddd;
+ background: #efefef;
 }
-.table-header {
- font-weight: 900;
- color: #ffffff ;
- background: #4e2b63 ;
-  text-align: left;
-}
+
 @media screen and (max-width: 580px) {
  .row {
    padding: 8px 0;
    display: block;
  }
 }
+
 .table-cell {
  padding: 6px 12px;
  display: table-cell;
 }
+
 @media screen and (max-width: 580px) {
  .cell {
    padding: 2px 12px;
    display: block;
  }
 }
-#user-table{
-	width: 100%;
-	margin-top: 1%
-}
 
-/* pagination buttson */
-#pagination-buttons {
+/**
+ * Waypoints: pagination modifier
+ */
+.waypoints.-pagination {
   text-align: center;
+  background: #fff;
 }
 
-/* tier roles */
+/**
+ * Danger Zone container
+ */
 .danger-zone {
   background: #ffffff;
   padding: 12px;
@@ -78,6 +100,9 @@ pre {
   margin-bottom: 12px;
 }
 
+/**
+ * Profiles
+ */
 .profile-settings dt{
   float: left;
   clear: both;

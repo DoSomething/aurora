@@ -1,4 +1,4 @@
-<ul class = "waypoints -primary" id="pagination-buttons">
+<ul class = "waypoints -primary -pagination">
   @if ($data['meta']['pagination']['current_page'] > 1)
     <?php $prev = $data['meta']['pagination']['current_page'] - 1 ?>
     <li><a href="{{ route('users.index', [$inputs . '&page=1']) }}">First</a> </li>
@@ -15,7 +15,7 @@
 <!-- Iteration through the number and making api calls when page is clicked requesting for user on particular page -->
   @foreach(range($first_left, $last_right) as $page)
     @if($data['meta']['pagination']['current_page'] == $page)
-      <li class="is-active">{{ $data['meta']['pagination']['current_page'] }}</li>
+      <li class="is-active"><a href="#">{{ $data['meta']['pagination']['current_page'] }}</a></li>
     @else
       <li><a href="{{ route('users.index', [$inputs . '&page='. $page]) }}">{{ $page }}</a></li>
     @endif

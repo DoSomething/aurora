@@ -5,7 +5,6 @@ namespace Aurora\Http\Controllers;
 use Aurora\NorthstarUser;
 use Aurora\Services\Northstar;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Input;
 
 class UsersController extends Controller
 {
@@ -33,12 +32,16 @@ class UsersController extends Controller
         try {
             // Attempt to fetch all users.
             $data = $this->northstar->getAllUsers($request->all());
-            $inputs = http_build_query($request->all());
-            $users = $data['data'];
+            $inputs = http_build_query($request->except('page'));
 
-            return \View::make('users.index')->with(compact('users', 'data', 'inputs'));
+            $users = [];
+            foreach ($data['data'] as $user) {
+                $users[] = new NorthstarUser($user);
+            }
+
+            return view('users.index')->with(compact('users', 'data', 'inputs'));
         } catch (\Exception $e) {
-            return \View::make('users.index')->with('flash_message', ['class' => 'messages -error', 'text' => 'Looks like there is something wrong with the connection!']);
+            return view('users.index')->with('flash_message', ['class' => 'messages -error', 'text' => 'Looks like there is something wrong with the connection!']);
         }
     }
 
@@ -46,88 +49,59 @@ class UsersController extends Controller
      * Display the specified resource.
      *
      * @param  string  $id
-     * @return Response
+     * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        // Finding the user in nortstar DB and getting the informations
-        $northstar_user = new NorthstarUser($id);
-        $northstar_profile = $northstar_user->profile;
+        $user = $this->northstar->getUser('_id', $id);
+
         // Finding the user assigned roles
-        $user_roles = array_pluck($northstar_user->getRoles($id), 'name');
+        $user_roles = array_pluck($user->getRoles($id), 'name');
 
         // Getting roles that haven't been assigned to the user
-        $unassigned_roles = $northstar_user->unassignedRoles($user_roles);
+        $unassigned_roles = $user->unassignedRoles($user_roles);
 
         //Calling other APIs related to the user.
-        $campaigns = $northstar_user->getCampaigns();
-        $reportbacks = $northstar_user->getReportbacks();
+        $campaigns = $user->getCampaigns();
+        $reportbacks = $user->getReportbacks();
 
-        return \View::make('users.show')->with(compact('northstar_profile', 'user_roles', 'unassigned_roles', 'campaigns', 'reportbacks', 'mobile_commons_profile', 'zendesk_profile', 'mailchimp_list_id'));
-    }
-
-    /**
-     * Display user's mobile commons messages
-     *
-     * @param  string  $id
-     * @return Response
-     */
-    public function mobileCommonsMessages($id)
-    {
-        $northstar_user = new NorthstarUser($id);
-
-        $mobile_commons_messages = $northstar_user->getMobileCommonsMessages();
-
-        return \View::make('users.mobile-commons-messages')->with(compact('mobile_commons_messages'));
-    }
-
-    /**
-     * Display user's zendesk tickets
-     *
-     * @param  string  $id
-     * @return Response
-     */
-    public function zendeskTickets($id)
-    {
-        $northstar_user = new NorthstarUser($id);
-
-        $requested_tickets = $northstar_user->zendeskRequestedTickets();
-
-        return \View::make('users.zendesk-tickets')->with(compact('requested_tickets'));
+        return view('users.show')->with(compact('user', 'user_roles', 'unassigned_roles', 'campaigns', 'reportbacks'));
     }
 
     /**
      * Display the form for editing user information
      *
      * @param  string  $id
-     * @return Response
+     * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
         $user = $this->northstar->getUser('_id', $id);
 
-        return \View::make('users.edit')->with(compact('user'));
+        return view('users.edit')->with(compact('user'));
     }
 
     /**
      * Making request to NorthstarAPI to update user's information
      *
-     * @param  string  $id
-     * @return Response
+     * @param string $id
+     * @param Request $request
+     * @return \Illuminate\Http\Response
      */
-    public function update($id)
+    public function update($id, Request $request)
     {
-        $input = \Input::except('_token', '_id', 'drupal_uid');
-        $user = $this->northstar->updateUser($id, $input);
+        $input = $request->except('_token', '_id', 'drupal_uid');
 
-        return \Redirect::route('users.show', $id)->with('flash_message', ['class' => 'messages', 'text' => 'Sweet, look at you updating that user.']);
+        $this->northstar->updateUser($id, $input);
+
+        return redirect()->route('users.show', $id)->with('flash_message', ['class' => 'messages', 'text' => 'Sweet, look at you updating that user.']);
     }
 
     /**
      * Remove a role from user in database
      *
-     * @param  string  $id
-     * @return Response
+     * @param string $id
+     * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
@@ -165,7 +139,7 @@ class UsersController extends Controller
 
             return view('users.index')->with(compact('users', 'data', 'inputs'));
         } catch (\Exception $e) {
-            return \View::make('users.index')->with('flash_message', ['class' => 'messages -error', 'text' => 'Looks like there is something wrong with the connection!']);
+            return view('users.index')->with('flash_message', ['class' => 'messages -error', 'text' => 'Looks like there is something wrong with the connection!']);
         }
     }
 
@@ -184,30 +158,6 @@ class UsersController extends Controller
         $user = \Aurora\Models\User::firstOrCreate(['_id' => $id])->assignRole($role);
 
         return \Redirect::back()->with('flash_message', ['class' => 'messages', 'text' => 'This user has been assigned a role of '.$roles[$role]]);
-    }
-
-    /**
-     * Display Users roles
-     *
-     * @return Response
-     */
-    public function staffIndex()
-    {
-        $employee['admin'] = \Aurora\Models\User::usersWithRole('admin');
-
-        $employee['staff'] = \Aurora\Models\User::usersWithRole('staff');
-
-        $employee['intern'] = \Aurora\Models\User::usersWithRole('intern');
-        // users that tried to sign in but has no role or unauthorized
-        $employee['unassigned'] = \Aurora\Models\User::leftJoin('role_user', 'users.id', '=', 'role_user.user_id')->whereNull('role_user.user_id')->get();
-
-        foreach ($employee as $role => $users) {
-            foreach ($users as $user) {
-                $group[$role][] = $this->northstar->getUser('_id', $user['_id']);
-            }
-        }
-
-        return \View::make('users.staff-index')->with(compact('group'));
     }
 
     /**
@@ -243,18 +193,5 @@ class UsersController extends Controller
         foreach ($delete_ids as $id) {
             $this->northstar->deleteUser($id);
         }
-    }
-
-    /**
-     * Making request to MailChimp to unsubscribe
-     * @TODO implement unsubscribe to Mobile Commons, Drupal and Message Broker
-     */
-    public function unsubscribeFromMailChimp($northstar_id)
-    {
-        $mailchimp_list_id = Input::get('mailchimp_list_id');
-        $northstar_user = new NorthstarUser($northstar_id);
-        $northstar_user->mailChimpUnsubscribe($mailchimp_list_id);
-
-        return \Redirect::back()->with('flash_message', ['class' => 'messages', 'text' => 'This user has been unsubscribed from MailChimp!']);
     }
 }

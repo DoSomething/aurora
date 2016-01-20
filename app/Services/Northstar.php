@@ -2,6 +2,7 @@
 
 namespace Aurora\Services;
 
+use Aurora\NorthstarUser;
 use GuzzleHttp\Client;
 
 class Northstar
@@ -51,7 +52,7 @@ class Northstar
     public function getAllUsers($inputs)
     {
         $response = $this->client->get('users', [
-            'query' => ['filter' => $inputs],
+            'query' => $inputs,
         ]);
 
         return $response->json();
@@ -60,14 +61,16 @@ class Northstar
     /**
      * Send a GET request to return a user with that id.
      *
-     * @param mixed ID, email, id, phone
-     * @return JSON user
+     * @param string $type - '_id', 'email', 'mobile'
+     * @param string $id - ID, email, id, phone
+     * @return NorthstarUser
      */
     public function getUser($type, $id)
     {
         $response = $this->client->get('users'.'/'.$type.'/'.$id);
+        $data = $response->json()['data'];
 
-        return $response->json()['data'];
+        return new NorthstarUser($data);
     }
 
     /**
