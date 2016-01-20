@@ -23,6 +23,9 @@ Route::get('auth/logout', 'Auth\AuthController@getLogout');
 // Users
 Route::resource('users', 'UsersController', ['except' => ['create', 'store']]);
 
+// Aurora Users
+Route::resource('aurora-users', 'AuroraUsersController', ['only' => ['index']]);
+
 // Delete Northstar User
 Route::delete('northstar-user-delete/{user}', ['as' => 'northstar.delete', 'uses' => 'UsersController@deleteNorthstarUser']);
 
@@ -35,7 +38,6 @@ Route::post('merge', ['as' => 'users.merge-and-delete', 'uses' => 'UsersControll
 // Create admins.
 Route::post('role/{user}', ['as' => 'role.create', 'uses' => 'UsersController@roleCreate']);
 
-Route::get('/admins', 'UsersController@staffIndex');
 
 // Key
 Route::resource('keys', 'KeyController');

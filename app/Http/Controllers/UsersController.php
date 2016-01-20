@@ -187,30 +187,6 @@ class UsersController extends Controller
     }
 
     /**
-     * Display Users roles
-     *
-     * @return Response
-     */
-    public function staffIndex()
-    {
-        $employee['admin'] = \Aurora\Models\User::usersWithRole('admin');
-
-        $employee['staff'] = \Aurora\Models\User::usersWithRole('staff');
-
-        $employee['intern'] = \Aurora\Models\User::usersWithRole('intern');
-        // users that tried to sign in but has no role or unauthorized
-        $employee['unassigned'] = \Aurora\Models\User::leftJoin('role_user', 'users.id', '=', 'role_user.user_id')->whereNull('role_user.user_id')->get();
-
-        foreach ($employee as $role => $users) {
-            foreach ($users as $user) {
-                $group[$role][] = $this->northstar->getUser('_id', $user['_id']);
-            }
-        }
-
-        return \View::make('users.staff-index')->with(compact('group'));
-    }
-
-    /**
      * Display form to merge duplicate users. Multiple users information is
      * merged into the selected user where blank/different attribute will
      * be filled or overwritten by the selected keep user.
