@@ -64,8 +64,6 @@ class APIResponseModel
         if (array_key_exists($key, $this->attributes) || $this->hasGetMutator($key)) {
             return $this->getAttributeValue($key);
         }
-
-        return null;
     }
 
     /**

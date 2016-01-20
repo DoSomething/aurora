@@ -39,15 +39,23 @@ class NorthstarUser extends APIResponseModel
         $this->attributes = $attributes;
     }
 
+    /**
+     * Get the user's display name.
+     * @return mixed|string
+     */
     public function displayName()
     {
-        if(isset($this->first_name) && isset($this->last_initial)) {
+        if (isset($this->first_name) && isset($this->last_initial)) {
             return $this->first_name.' '.$this->last_initial.'.';
         }
 
         return $this->id;
     }
 
+    /**
+     * Get the Aurora user account for this user.
+     * @return mixed
+     */
     public function auroraUser()
     {
         return AuroraUser::find($this->id);

@@ -38,24 +38,11 @@ Route::post('merge', ['as' => 'users.merge-and-delete', 'uses' => 'UsersControll
 // Create admins.
 Route::post('role/{user}', ['as' => 'role.create', 'uses' => 'UsersController@roleCreate']);
 
-
 // Key
 Route::resource('keys', 'KeyController');
-
-// Mobile Commons Message Backlog
-Route::get('/users/{user}/mobile-commons-messages', 'UsersController@mobileCommonsMessages');
-
-// Zendesk Requested Tickets Backlog
-Route::get('/users/{user}/zendesk-tickets', 'UsersController@zendeskTickets');
 
 // Search
 Route::get('search', ['as' => 'users.search', 'uses' => 'UsersController@search', 'before' => 'auth']);
 
 // Advanced Search
 Route::get('/advanced-search', 'UsersController@advancedSearch');
-
-// Unauthorized Page
-Route::get('/unauthorized', 'SessionsController@unauthorized');
-
-// Unsubscribe to MailChimp
-Route::delete('user/{id}/mailchimp', ['as' => 'users.unsubscribe-mailchimp', 'uses' => 'UsersController@unsubscribeFromMailChimp']);

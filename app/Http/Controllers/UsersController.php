@@ -35,7 +35,7 @@ class UsersController extends Controller
             $inputs = http_build_query($request->except('page'));
 
             $users = [];
-            foreach($data['data'] as $user) {
+            foreach ($data['data'] as $user) {
                 $users[] = new NorthstarUser($user);
             }
 
@@ -194,5 +194,4 @@ class UsersController extends Controller
             $this->northstar->deleteUser($id);
         }
     }
-
 }
