@@ -5,7 +5,7 @@
     <li><a href="{{ route('users.index', [$inputs . '&page=' . $prev]) }}">Previous</a> </li>
   @endif
   <!-- $first_left is the first number being shown on  left pagination from current_page, ex: current page is 8 then first_left is 3 -->
-  <?php $first_left = ($data['meta']['pagination']['current_page'] - 5 >= 1) ? $data['current_page'] - 5 : 1 ?>
+  <?php $first_left = ($data['meta']['pagination']['current_page'] - 5 >= 1) ? $data['meta']['pagination']['current_page'] - 5 : 1 ?>
   <!--  $last_right is the last number being show on the right pagination from current_page, ex: current page is 8 then last_right is 12-->
   <?php $last_right = ($data['meta']['pagination']['current_page'] + 4 <= $data['meta']['pagination']['total_pages']) ? $data['meta']['pagination']['current_page'] + 4 : $data['meta']['pagination']['total_pages'] ?>
   <!-- this last 2 is just making sure that the pagination always has 10 numbers constantly.  -->
