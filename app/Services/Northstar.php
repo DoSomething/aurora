@@ -2,6 +2,7 @@
 
 namespace Aurora\Services;
 
+use Aurora\APIResponseCollection;
 use Aurora\NorthstarUser;
 use GuzzleHttp\Client;
 
@@ -55,7 +56,9 @@ class Northstar
             'query' => $inputs,
         ]);
 
-        return $response->json();
+        $users = new APIResponseCollection($response->json(), ['path' => '/users']);
+
+        return $users;
     }
 
     /**

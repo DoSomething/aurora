@@ -2,7 +2,6 @@
 
 namespace Aurora\Http\Controllers;
 
-use Aurora\NorthstarUser;
 use Aurora\Services\Northstar;
 use Illuminate\Http\Request;
 
@@ -29,20 +28,9 @@ class UsersController extends Controller
      */
     public function index(Request $request)
     {
-        try {
-            // Attempt to fetch all users.
-            $data = $this->northstar->getAllUsers($request->all());
-            $inputs = http_build_query($request->except('page'));
+        $users = $this->northstar->getAllUsers($request->all());
 
-            $users = [];
-            foreach ($data['data'] as $user) {
-                $users[] = new NorthstarUser($user);
-            }
-
-            return view('users.index')->with(compact('users', 'data', 'inputs'));
-        } catch (\Exception $e) {
-            return view('users.index')->with('flash_message', ['class' => 'messages -error', 'text' => 'Looks like there is something wrong with the connection!']);
-        }
+        return view('users.index')->with(compact('users'));
     }
 
     /**
