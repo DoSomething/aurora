@@ -5,7 +5,6 @@ namespace Aurora\Http\Controllers;
 use Aurora\NorthstarUser;
 use Aurora\Services\Northstar;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Input;
 
 class UsersController extends Controller
 {
@@ -66,34 +65,6 @@ class UsersController extends Controller
         return \View::make('users.show')->with(compact('northstar_profile', 'user_roles', 'unassigned_roles', 'campaigns', 'reportbacks', 'mobile_commons_profile', 'zendesk_profile', 'mailchimp_list_id'));
     }
 
-    /**
-     * Display user's mobile commons messages
-     *
-     * @param  string  $id
-     * @return Response
-     */
-    public function mobileCommonsMessages($id)
-    {
-        $northstar_user = new NorthstarUser($id);
-
-        $mobile_commons_messages = $northstar_user->getMobileCommonsMessages();
-
-        return \View::make('users.mobile-commons-messages')->with(compact('mobile_commons_messages'));
-    }
-
-    /**
-     * Display user's zendesk tickets
-     *
-     * @param  string  $id
-     * @return Response
-     */
-    public function zendeskTickets($id)
-    {
-        $northstar_user = new NorthstarUser($id);
-
-        $requested_tickets = $northstar_user->zendeskRequestedTickets();
-
-        return \View::make('users.zendesk-tickets')->with(compact('requested_tickets'));
     }
 
     /**
@@ -221,16 +192,4 @@ class UsersController extends Controller
         }
     }
 
-    /**
-     * Making request to MailChimp to unsubscribe
-     * @TODO implement unsubscribe to Mobile Commons, Drupal and Message Broker
-     */
-    public function unsubscribeFromMailChimp($northstar_id)
-    {
-        $mailchimp_list_id = Input::get('mailchimp_list_id');
-        $northstar_user = new NorthstarUser($northstar_id);
-        $northstar_user->mailChimpUnsubscribe($mailchimp_list_id);
-
-        return \Redirect::back()->with('flash_message', ['class' => 'messages', 'text' => 'This user has been unsubscribed from MailChimp!']);
-    }
 }
