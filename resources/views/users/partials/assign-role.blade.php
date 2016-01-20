@@ -3,7 +3,7 @@
     <div class="danger-zone">
         <h4 class="danger-zone__heading">Danger Zone</h4>
 
-        {!! Form::open(['route' => ['role.create', $northstar_profile['_id']]]) !!}
+        {!! Form::open(['route' => ['role.create', $user->id]]) !!}
         <div class="form-item">
             <label for="role" class="field-label">Assign Aurora Role</label>
             <div class="select">
@@ -23,7 +23,7 @@
         <h4 class="danger-zone__heading">Danger Zone</h4>
         <p>This user is assigned the <strong>{{ value(array_slice($user_roles, -1, 1)[0]) }}</strong> role.</p>
         <div class="form-item -padded">
-            {!! Form::model($northstar_profile, ['route' => array('users.destroy', $northstar_profile['_id']), 'method' => 'delete']) !!}
+            {!! Form::model($user, ['route' => array('users.destroy', $user->id), 'method' => 'delete']) !!}
             {!! Form::hidden('role', value(array_slice($user_roles, -1, 1)[0]) ) !!}
             {!! Form::submit('Remove Aurora role', ['name' => 'type', 'class' => 'button -secondary']) !!}
             {!! Form::close() !!}
