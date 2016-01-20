@@ -2,7 +2,7 @@
 
 @section('main_content')
 
-    @include('layout.header', ['header' => 'Users', 'subtitle' => 'View & edit member profiles.']);
+    @include('layout.header', ['header' => 'Users', 'subtitle' => 'View & edit member profiles.'])
 
     <div class="container">
         <div class="wrapper">
