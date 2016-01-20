@@ -7,7 +7,6 @@ use Illuminate\Support\Collection;
 
 class APIResponseCollection extends Collection
 {
-
     /**
      * The collection's paginator.
      *
@@ -55,6 +54,4 @@ class APIResponseCollection extends Collection
     {
         return $this->paginator->total();
     }
-
-
 }

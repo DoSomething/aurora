@@ -2,7 +2,6 @@
 
 namespace Aurora\Http\Controllers;
 
-use Aurora\NorthstarUser;
 use Aurora\Services\Northstar;
 use Illuminate\Http\Request;
 
