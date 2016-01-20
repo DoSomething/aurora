@@ -43,6 +43,10 @@
                 @if(Auth::user()->hasRole('admin') || Auth::user()->hasRole('staff'))
                     <a class="secondary" href="{{ url('users/' . $user->id . '/edit') }}">Update user's profile</a>
                 @endif
+                <p class="footnote">
+                    Last updated: {{ $user->updated_at->format('F d, Y g:ia') }}<br />
+                    Created: {{ $user->created_at->format('F d, Y g:ia') }}
+                </p>
             </div>
         </div>
     </div>
