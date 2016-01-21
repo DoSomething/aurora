@@ -102,26 +102,26 @@ class UsersController extends Controller
      */
     public function search(Request $request)
     {
-        try {
-            $filters = [
-                '_id' => $request->query('search'),
-                'email' => $request->query('search'),
-                'mobile' => $request->query('search'),
-            ];
+        $query = $request->query('query');
 
-            // Attempt to fetch all users.
-            $data = $this->northstar->getAllUsers($filters);
-            $inputs = http_build_query($request->all());
-            $users = $data['data'];
-
-            if (count($users) === 1) {
-                return redirect()->route('users.show', $users[0]['_id']);
-            }
-
-            return view('users.index')->with(compact('users', 'data', 'inputs'));
-        } catch (\Exception $e) {
-            return view('users.index')->with('flash_message', ['class' => 'messages -error', 'text' => 'Looks like there is something wrong with the connection!']);
+        // Redirect empty queries to the user index.
+        if($query === '') {
+            return redirect()->route('users.index');
         }
+
+        // Attempt to fetch all users.
+        $users = $this->northstar->getAllUsers(['search' => [
+            '_id' => $query,
+            'email' => $query,
+            'mobile' => $query,
+        ]]);
+
+        // If only one user is matched, let's just redirect there.
+        if ($users->total() === 1) {
+            return redirect()->route('users.show', [$users->first()->id]);
+        }
+
+        return view('users.search')->with(compact('users', 'query'));
     }
 
     /**

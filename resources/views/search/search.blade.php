@@ -1,6 +1,6 @@
-<div class="form-item -inline -padded" id="normal-search-container">
-  {!! Form::open(['action' => 'UsersController@search', 'method' => 'get']) !!}
-    {!! Form::text('search', NULL, ['class' => 'text-field -search', 'placeholder' => 'Find by email, mobile, Drupal ID…', 'style' => 'min-width: 400px']) !!}
-    {!! Form::submit('Search', ['class' => 'button -secondary']) !!}
-  {!! Form::close () !!}
+{!! Form::open(['action' => 'UsersController@search', 'method' => 'GET']) !!}
+<div class="form-actions -inline">
+    <li>{!! Form::text('query', request()->get('query'), ['class' => 'text-field -search', 'placeholder' => 'Search by email, mobile, Drupal ID…', 'style' => 'min-width: 400px']) !!}</li>
+    <li>{!! Form::submit('Search', ['class' => 'button']) !!}</li>
 </div>
+{!! Form::close () !!}
