@@ -28,12 +28,25 @@
                 <dt>Country:</dt><dd>{{ $user->country or '&mdash;' }}</dd>
             </div>
             <div class="container__block -half">
-                <article class="figure -left">
-                    <div class="container -padded">
+                <div class="container -padded">
                     @if(Auth::user()->hasRole('admin'))
-                        @include('users.partials.assign-role')
+                        <div class="danger-zone">
+                            <h4 class="danger-zone__heading">Danger Zone&#8482;</h4>
+                            <div class="danger-zone__block">
+                                {!! Form::open(['route' => ['users.destroy', $user->id], 'method' => 'DELETE']) !!}
+                                <div class="form-item">
+                                    <label for="role" class="field-label">Delete Account</label>
+                                    <p class="footnote">This will <strong>permanently remove</strong> a user's account from Northstar.
+                                        This is the point of no return! Beware!</p>
+                                </div>
+                                <div class="form-actions">
+                                    {!! Form::submit('Delete User', ['class' => 'button -secondary -danger']) !!}
+                                </div>
+                                {!! Form::close() !!}
+                            </div>
+                        </div>
                     @endif
-                </article>
+                </div>
             </div>
         </div>
     </div>
@@ -53,11 +66,18 @@
 
     <div class="container -padded">
         <div class="wrapper">
-            @if($user->auroraUser())
+            @if($auroraUser)
                 <div class="container__block profile-settings">
                     <h3>Aurora Profile</h3>
-                    <dt>Role:</dt> <dd>{{ value(array_slice($user_roles, -1, 1)[0]) }}</dd>
+                    <dt>Role:</dt> <dd>{{ !empty($auroraUser->role) ? $auroraUser->role : '&mdash;' }}</dd>
                 </div>
+
+                @if(Auth::user()->hasRole('admin') || Auth::user()->hasRole('staff'))
+                    <div class="container__block">
+                        <a class="secondary" href="{{ url('aurora-users/' . $auroraUser->id . '/edit') }}">Update Aurora profile</a>
+                    </div>
+                @endif
+
             @endif
         </div>
     </div>

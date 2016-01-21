@@ -24,7 +24,7 @@ Route::get('auth/logout', 'Auth\AuthController@getLogout');
 Route::resource('users', 'UsersController', ['except' => ['create', 'store']]);
 
 // Aurora Users
-Route::resource('aurora-users', 'AuroraUsersController', ['only' => ['index']]);
+Route::resource('aurora-users', 'AuroraUsersController', ['only' => ['index', 'edit', 'update']]);
 
 // Delete Northstar User
 Route::delete('northstar-user-delete/{user}', ['as' => 'northstar.delete', 'uses' => 'UsersController@deleteNorthstarUser']);

@@ -45,20 +45,11 @@ class NorthstarUser extends APIResponseModel
      */
     public function displayName()
     {
-        if (isset($this->first_name) && isset($this->last_initial)) {
+        if (!empty($this->first_name) && !empty($this->last_initial)) {
             return $this->first_name.' '.$this->last_initial.'.';
         }
 
         return $this->id;
-    }
-
-    /**
-     * Get the Aurora user account for this user.
-     * @return mixed
-     */
-    public function auroraUser()
-    {
-        return AuroraUser::find($this->id);
     }
 
     /**
@@ -101,42 +92,5 @@ class NorthstarUser extends APIResponseModel
         }
 
         return array_filter($reportbacks);
-    }
-
-    /**
-     * Used in UsersController->show()
-     *
-     * @return array - roles this user has
-     */
-    public function getRoles($id)
-    {
-        $roles = [];
-        $user = $this->auroraUser();
-        if (! empty($user)) {
-            foreach ($user->roles as $role) {
-                $roles[] = $role->getAttributes();
-            }
-        }
-
-        return $roles;
-    }
-
-    /**
-     * Used in UsersController->show()
-     *
-     * @return array - roles this user doesn't have
-     */
-    public function unassignedRoles($user_roles)
-    {
-        $all_roles = ['1' => 'admin', '2' => 'staff', '3' => 'intern'];
-        $unassigned_roles = array_diff($all_roles, $user_roles);
-        if (! in_array('staff', $unassigned_roles)) {
-            $unassigned_roles = ['1' => 'ADMIN'];
-        }
-        foreach ($unassigned_roles as $key => $value) {
-            $unassigned_roles[$key] = ucfirst($value);
-        }
-
-        return $unassigned_roles;
     }
 }
