@@ -47,14 +47,19 @@ class User extends Model implements AuthenticatableContract
     }
 
     /**
-     * Check to see if User has a Role.
+     * Check to see if this user matches one of the given roles.
      *
-     * @param string role's name
+     * @param  array|mixed $roles - role(s) to check
      * @return bool
      */
-    public function hasRole($name)
+    public function hasRole($roles)
     {
-        return $this->role === $name;
+        // Prepare an array of roles to check.
+        // e.g. $user->hasRole('admin') => ['admin']
+        //      $user->hasRole('admin, 'staff') => ['admin', 'staff']
+        $roles = is_array($roles) ? $roles : func_get_args();
+
+        return in_array($this->role, $roles);
     }
 
     /**

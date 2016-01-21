@@ -27,14 +27,17 @@ class CheckRole
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
+     * @param  \Illuminate\Http\Request $request
+     * @param  \Closure $next
+     * @param $roles
      * @return mixed
      */
-    public function handle($request, Closure $next, $role)
+    public function handle($request, Closure $next)
     {
+        $roles = array_slice(func_get_args(), 2);
+
         // If user is a guest (e.g. no role), or is missing the provided role... get out!
-        if ($this->auth->guest() || ! $this->auth->user()->role === $role) {
+        if ($this->auth->guest() || ! $this->auth->user()->hasRole($roles)) {
             if ($request->ajax()) {
                 return response('Unauthorized.', 401);
             } else {
