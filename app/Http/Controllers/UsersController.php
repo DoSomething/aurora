@@ -18,7 +18,7 @@ class UsersController extends Controller
         $this->northstar = $northstar;
 
         $this->middleware('auth');
-        $this->middleware('role:admin');
+        $this->middleware('role:admin,staff,intern');
     }
 
     /**
