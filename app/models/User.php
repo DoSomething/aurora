@@ -68,7 +68,7 @@ class User extends Model implements AuthenticatableContract
             null => '--',
             'admin' => 'Administrator',
             'staff' => 'Staff',
-            'intern' => 'Intern'
+            'intern' => 'Intern',
         ];
     }
 }

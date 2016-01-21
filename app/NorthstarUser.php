@@ -2,8 +2,6 @@
 
 namespace Aurora;
 
-use Aurora\Models\User as AuroraUser;
-
 class NorthstarUser extends APIResponseModel
 {
     /**
@@ -45,7 +43,7 @@ class NorthstarUser extends APIResponseModel
      */
     public function displayName()
     {
-        if (!empty($this->first_name) && !empty($this->last_initial)) {
+        if (! empty($this->first_name) && ! empty($this->last_initial)) {
             return $this->first_name.' '.$this->last_initial.'.';
         }
 
