@@ -4,6 +4,7 @@ namespace Aurora\Http\Controllers;
 
 use Aurora\Models\User;
 use Aurora\Services\Northstar;
+use Illuminate\Http\Request;
 
 class AuroraUsersController extends Controller
 {
@@ -27,20 +28,56 @@ class AuroraUsersController extends Controller
      */
     public function index()
     {
-        $employee['admin'] = User::usersWithRole('admin');
+        $users = [
+            'admin' => User::where('role', 'admin')->get(),
+            'staff' => User::where('role', 'staff')->get(),
+            'intern' => User::where('role', 'intern')->get(),
 
-        $employee['staff'] = User::usersWithRole('staff');
+            // Users that have tried to sign in but has no role assigned.
+            'unauthorized' => User::where('role', '')->get(),
+        ];
 
-        $employee['intern'] = User::usersWithRole('intern');
-        // users that tried to sign in but has no role or unauthorized
-        $employee['unassigned'] = User::leftJoin('role_user', 'users.id', '=', 'role_user.user_id')->whereNull('role_user.user_id')->get();
-
-        foreach ($employee as $role => $users) {
-            foreach ($users as $user) {
-                $group[$role][] = $this->northstar->getUser('_id', $user['_id']);
+        foreach ($users as $role => $subsetUsers) {
+            foreach ($subsetUsers as $user) {
+                $group[$role][] = $this->northstar->getUser('_id', $user->northstar_id);
             }
         }
 
-        return \View::make('aurora-users.index')->with(compact('group'));
+        return view('aurora-users.index')->with(compact('group'));
+    }
+
+    /**
+     * Display the form for editing user information
+     *
+     * @param  string  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        $auroraUser = User::where('id', $id)->firstOrFail();
+
+        // Get the list of all roles
+        $roles = User::allRoles();
+
+        return view('aurora-users.edit')->with(compact('auroraUser', 'roles'));
+    }
+
+    /**
+     * Update the user's Aurora profile.
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function update($id, Request $request)
+    {
+        $auroraUser = User::where('id', $id)->firstOrFail();
+        $auroraUser->fill($request->all());
+
+        $auroraUser->save();
+
+        return redirect()->route('users.show', [$auroraUser->northstar_id])->with('flash_message', [
+            'class' => 'messages',
+            'text' => 'Updated!',
+        ]);
     }
 }

@@ -2,6 +2,7 @@
 
 namespace Aurora\Http\Controllers;
 
+use Aurora\Models\User;
 use Aurora\Services\Northstar;
 use Illuminate\Http\Request;
 
@@ -42,18 +43,13 @@ class UsersController extends Controller
     public function show($id)
     {
         $user = $this->northstar->getUser('_id', $id);
-
-        // Finding the user assigned roles
-        $user_roles = array_pluck($user->getRoles($id), 'name');
-
-        // Getting roles that haven't been assigned to the user
-        $unassigned_roles = $user->unassignedRoles($user_roles);
+        $auroraUser = User::where('northstar_id', $user->id)->first();
 
         //Calling other APIs related to the user.
         $campaigns = $user->getCampaigns();
         $reportbacks = $user->getReportbacks();
 
-        return view('users.show')->with(compact('user', 'user_roles', 'unassigned_roles', 'campaigns', 'reportbacks'));
+        return view('users.show')->with(compact('user', 'auroraUser', 'campaigns', 'reportbacks'));
     }
 
     /**
@@ -86,18 +82,15 @@ class UsersController extends Controller
     }
 
     /**
-     * Remove a role from user in database
+     * Delete a user from Northstar.
      *
      * @param string $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        $type = \Input::get('role');
-        $role = \Aurora\Models\Role::where('name', $type)->first();
-        \User::where(['_id' => $id])->firstOrFail()->removeRole($role);
-
-        return \Redirect::back()->with('flash_message', ['class' => 'messages', 'text' => "This user's role as ".$type.' has been removed']);
+        // @TODO!
+        return redirect()->back()->with('flash_message', ['class' => 'messages', 'text' => 'Not yet implemented.']);
     }
 
     /**
@@ -129,23 +122,6 @@ class UsersController extends Controller
         } catch (\Exception $e) {
             return view('users.index')->with('flash_message', ['class' => 'messages -error', 'text' => 'Looks like there is something wrong with the connection!']);
         }
-    }
-
-    /**
-     * Assign user to a role
-     * @param int User ID, String role name
-     *
-     * @return Response
-     */
-    public function roleCreate($id)
-    {
-        $role = \Input::get('role');
-        $roles = ['1' => 'admin', '2' => 'staff', '3' => 'intern'];
-
-        // Create a new user in database with type of role
-        $user = \Aurora\Models\User::firstOrCreate(['_id' => $id])->assignRole($role);
-
-        return \Redirect::back()->with('flash_message', ['class' => 'messages', 'text' => 'This user has been assigned a role of '.$roles[$role]]);
     }
 
     /**

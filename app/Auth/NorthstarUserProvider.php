@@ -23,7 +23,7 @@ class NorthstarUserProvider extends EloquentUserProvider implements UserProvider
 
         // If a matching user is found, find or create local Aurora user.
         return $this->createModel()->firstOrCreate([
-            '_id' => $response->id,
+            'northstar_id' => $response->id,
         ]);
     }
 

@@ -24,42 +24,26 @@ class User extends Model implements AuthenticatableContract
      */
     protected $hidden = ['remember_token'];
 
-    protected $fillable = ['_id'];
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = ['northstar_id', 'role'];
 
     /**
-     * This table does not have timestamps.
+     * Indicates if the model should be timestamped.
+     *
+     * @var bool
      */
     public $timestamps = false;
 
     /**
-     * Define relationship with roles.
-     *
-     * @return object Role
+     * Get the associated Northstar user.
      */
-    public function roles()
+    public function northstarUser()
     {
-        return $this->belongsToMany('\Aurora\Models\Role');
-    }
-
-    /**
-     * Assign a specific role to user.
-     *
-     * @param object Role or Integer ID
-     */
-    public function assignRole($role)
-    {
-        $this->roles()->attach($role);
-    }
-
-    /**
-     * Remove a specific role from user.
-     *
-     * @param object Role or Integer ID
-     * @return int role ID
-     */
-    public function removeRole($role)
-    {
-        return $this->roles()->detach($role);
+        return $this->northstar->getUser('_id', $this->northstar_id);
     }
 
     /**
@@ -70,38 +54,21 @@ class User extends Model implements AuthenticatableContract
      */
     public function hasRole($name)
     {
-        foreach ($this->roles as $role) {
-            if ($role->name === $name) {
-                return true;
-            }
-        }
-
-        return false;
+        return $this->role === $name;
     }
 
     /**
-     * Used in filters.php
-     * @return string
+     * Used in UsersController->show()
+     *
+     * @return array - all possible values for user roles
      */
-    public function findRole()
+    public static function allRoles()
     {
-        if ($this->roles()->first()) {
-            return $this->roles()->first()['name'];
-        }
-
-        return;
-    }
-
-    /**
-     * Used in UsersController
-     * @return eloquent collection
-     */
-    public static function usersWithRole($role)
-    {
-        $users = static::whereHas('roles', function ($query) use ($role) {
-            $query->where('name', $role);
-        })->get();
-
-        return $users;
+        return [
+            null => '--',
+            'admin' => 'Administrator',
+            'staff' => 'Staff',
+            'intern' => 'Intern',
+        ];
     }
 }

@@ -18,6 +18,12 @@ pre {
   margin: 12px 0;
 }
 
+.form-item .field-label + .footnote {
+  line-height: 1.2;
+  margin-top: -6px;
+  margin-bottom: 6px;
+}
+
 /**
  * Button: danger modifier
  */
@@ -98,6 +104,10 @@ pre {
 .danger-zone__heading {
   color: #ff4747;
   margin-bottom: 12px;
+}
+
+.danger-zone__block + .danger-zone__block {
+  margin-top: 48px;
 }
 
 /**
