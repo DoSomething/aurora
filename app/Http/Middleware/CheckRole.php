@@ -29,11 +29,11 @@ class CheckRole
      *
      * @param  \Illuminate\Http\Request $request
      * @param  \Closure $next
-     * @param $roles
      * @return mixed
      */
     public function handle($request, Closure $next)
     {
+        // e.g. $this->middleware('role:admin,intern') => ['admin', 'intern']
         $roles = array_slice(func_get_args(), 2);
 
         // If user is a guest (e.g. no role), or is missing the provided role... get out!
