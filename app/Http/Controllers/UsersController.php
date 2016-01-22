@@ -112,6 +112,7 @@ class UsersController extends Controller
         // Attempt to fetch all users.
         $users = $this->northstar->getAllUsers(['search' => [
             '_id' => $query,
+            'drupal_id' => $query,
             'email' => $query,
             'mobile' => $query,
         ]]);
