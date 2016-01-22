@@ -105,7 +105,7 @@ class UsersController extends Controller
         $query = $request->query('query');
 
         // Redirect empty queries to the user index.
-        if($query === '') {
+        if ($query === '') {
             return redirect()->route('users.index');
         }
 
