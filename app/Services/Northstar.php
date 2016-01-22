@@ -48,7 +48,7 @@ class Northstar
      * Send a GET request to return all users with given query
      * from northstar database
      *
-     * @return JSON users
+     * @return APIResponseCollection
      */
     public function getAllUsers($inputs)
     {
@@ -56,9 +56,7 @@ class Northstar
             'query' => $inputs,
         ]);
 
-        $users = new APIResponseCollection($response->json(), ['path' => '/users']);
-
-        return $users;
+        return new APIResponseCollection($response->json());
     }
 
     /**
