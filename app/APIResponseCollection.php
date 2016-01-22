@@ -14,7 +14,7 @@ class APIResponseCollection extends Collection
      */
     protected $paginator;
 
-    public function __construct($response, $paginationOptions = [])
+    public function __construct($response)
     {
         $items = [];
         foreach ($response['data'] as $item) {
@@ -26,10 +26,32 @@ class APIResponseCollection extends Collection
             $response['meta']['pagination']['total'],
             $response['meta']['pagination']['per_page'],
             $response['meta']['pagination']['current_page'],
-            $paginationOptions
+            ['path' => request()->path()]
         );
 
         parent::__construct($items);
+    }
+
+    /**
+     * Set the base path for the paginator.
+     * @param $path
+     */
+    public function setPaginationPath($path)
+    {
+        $this->paginator->setPath($path);
+
+        return $this;
+    }
+
+    /**
+     * Append a query string to pagination links.
+     * @param array $query
+     */
+    public function appendPaginationQuery($query)
+    {
+        $this->paginator->appends($query);
+
+        return $this;
     }
 
     /**
