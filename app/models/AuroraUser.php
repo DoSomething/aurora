@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 
-class User extends Model implements AuthenticatableContract
+class AuroraUser extends Model implements AuthenticatableContract
 {
     use Authenticatable;
 
@@ -43,7 +43,7 @@ class User extends Model implements AuthenticatableContract
      */
     public function northstarUser()
     {
-        return $this->northstar->getUser('_id', $this->northstar_id);
+        return app('\Aurora\Services\Northstar')->getUser('_id', $this->northstar_id);
     }
 
     /**

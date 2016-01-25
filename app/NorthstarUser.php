@@ -11,12 +11,6 @@ class NorthstarUser extends APIResponseModel
     protected $drupal;
 
     /**
-     * Raw profile data from Northstar.
-     * @var array
-     */
-    protected $attributes;
-
-    /**
      * The attributes that should be cast to native types.
      *
      * @var array
@@ -34,7 +28,7 @@ class NorthstarUser extends APIResponseModel
     {
         $this->drupal = app('Aurora\Services\Drupal');
 
-        $this->attributes = $attributes;
+        parent::__construct($attributes);
     }
 
     /**

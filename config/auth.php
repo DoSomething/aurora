@@ -28,7 +28,7 @@ return [
     |
     */
 
-    'model' => Aurora\Models\User::class,
+    'model' => Aurora\Models\AuroraUser::class,
 
     /*
     |--------------------------------------------------------------------------

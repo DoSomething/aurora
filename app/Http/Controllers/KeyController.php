@@ -2,6 +2,7 @@
 
 namespace Aurora\Http\Controllers;
 
+use Aurora\NorthstarKey;
 use Aurora\Services\Northstar;
 use Illuminate\Http\Request;
 
@@ -24,7 +25,7 @@ class KeyController extends Controller
      * Display a listing of the resource.
      * GET /keys
      *
-     * @return Response
+     * @return \Illuminate\Http\Response
      */
     public function index()
     {
@@ -37,12 +38,11 @@ class KeyController extends Controller
      * Show key details.
      * GET /keys/:api_key
      *
+     * @param NorthstarKey $key
      * @return \Illuminate\Http\Response
      */
-    public function show($api_key)
+    public function show(NorthstarKey $key)
     {
-        $key = $this->northstar->getApiKey($api_key);
-
         return view('keys.show')->with(compact('key'));
     }
 
@@ -77,11 +77,11 @@ class KeyController extends Controller
      * Edit key details.
      * GET /keys/:api_key/edit
      *
+     * @param NorthstarKey $key
      * @return \Illuminate\Http\Response
      */
-    public function edit($api_key)
+    public function edit(NorthstarKey $key)
     {
-        $key = $this->northstar->getApiKey($api_key);
         $scopes = $this->northstar->scopes();
 
         return view('keys.edit')->with(compact('key', 'scopes'));
@@ -91,25 +91,27 @@ class KeyController extends Controller
      * Update an existing key's details.
      * PUT /keys/:api_key
      *
+     * @param NorthstarKey $key
      * @param Request $request
      * @return \Illuminate\Http\Response
      */
-    public function update($api_key, Request $request)
+    public function update(NorthstarKey $key, Request $request)
     {
-        $this->northstar->updateApiKey($api_key, $request->all());
+        $this->northstar->updateApiKey($key->api_key, $request->all());
 
-        return redirect()->route('keys.index')->with('flash_message', ['class' => 'messages', 'text' => 'Cool, new app added!']);
+        return redirect()->route('keys.index')->with('flash_message', ['class' => 'messages', 'text' => 'Cool, saved those changes!']);
     }
 
     /**
      * Destroy an existing key.
      * DELETE /keys/:api_key
      *
+     * @param NorthstarKey $key
      * @return \Illuminate\Http\Response
      */
-    public function destroy($api_key)
+    public function destroy(NorthstarKey $key)
     {
-        $deleted = $this->northstar->deleteApiKey($api_key);
+        $deleted = $this->northstar->deleteApiKey($key->api_key);
 
         if (! $deleted) {
             return redirect()->route('keys.index')->with('flash_message', ['class' => 'messages -error', 'text' => 'Could not delete key.']);

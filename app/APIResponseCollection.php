@@ -35,6 +35,7 @@ class APIResponseCollection extends Collection
     /**
      * Set the base path for the paginator.
      * @param $path
+     * @return self
      */
     public function setPaginationPath($path)
     {
@@ -46,6 +47,7 @@ class APIResponseCollection extends Collection
     /**
      * Append a query string to pagination links.
      * @param array $query
+     * @return self
      */
     public function appendPaginationQuery($query)
     {
