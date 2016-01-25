@@ -3,6 +3,7 @@
 namespace Aurora\Services;
 
 use Aurora\APIResponseCollection;
+use Aurora\NorthstarKey;
 use Aurora\NorthstarUser;
 use GuzzleHttp\Client;
 
@@ -101,8 +102,9 @@ class Northstar
     public function getApiKey($api_key)
     {
         $response = $this->client->get('keys/'.$api_key);
+        $key = new NorthstarKey($response->json()['data']);
 
-        return $response->json()['data'];
+        return $key;
     }
 
     public function deleteApiKey($api_key)
@@ -124,8 +126,9 @@ class Northstar
         $response = $this->client->post('keys', [
             'body' => json_encode($input),
         ]);
+        $key = new NorthstarKey($response->json()['data']);
 
-        return $response->json();
+        return $key;
     }
 
     /**
@@ -140,7 +143,9 @@ class Northstar
             'body' => json_encode($input),
         ]);
 
-        return $response->json();
+        $key = new NorthstarKey($response->json()['data']);
+
+        return $key;
     }
 
     /**
