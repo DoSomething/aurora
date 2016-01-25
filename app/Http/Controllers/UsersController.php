@@ -2,7 +2,8 @@
 
 namespace Aurora\Http\Controllers;
 
-use Aurora\Models\User;
+use Aurora\Models\AuroraUser;
+use Aurora\NorthstarUser;
 use Aurora\Services\Northstar;
 use Illuminate\Http\Request;
 
@@ -37,13 +38,12 @@ class UsersController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  string  $id
+     * @param NorthstarUser $user
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(NorthstarUser $user)
     {
-        $user = $this->northstar->getUser('_id', $id);
-        $auroraUser = User::where('northstar_id', $user->id)->first();
+        $auroraUser = AuroraUser::where('northstar_id', $user->id)->first();
 
         //Calling other APIs related to the user.
         $campaigns = $user->getCampaigns();

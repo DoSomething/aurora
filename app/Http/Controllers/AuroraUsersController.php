@@ -49,15 +49,12 @@ class AuroraUsersController extends Controller
     /**
      * Display the form for editing user information
      *
-     * @param  string  $id
+     * @param AuroraUser $auroraUser
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(AuroraUser $auroraUser)
     {
-        $auroraUser = User::where('id', $id)->firstOrFail();
-
-        // Get the list of all roles
-        $roles = User::allRoles();
+        $roles = AuroraUser::allRoles();
 
         return view('aurora-users.edit')->with(compact('auroraUser', 'roles'));
     }
@@ -65,12 +62,12 @@ class AuroraUsersController extends Controller
     /**
      * Update the user's Aurora profile.
      *
+     * @param AuroraUser $auroraUser
      * @param Request $request
      * @return \Illuminate\Http\Response
      */
-    public function update($id, Request $request)
+    public function update(AuroraUser $auroraUser, Request $request)
     {
-        $auroraUser = User::where('id', $id)->firstOrFail();
         $auroraUser->fill($request->all());
 
         $auroraUser->save();
