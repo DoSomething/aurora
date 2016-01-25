@@ -2,7 +2,7 @@
 
 namespace Aurora\Http\Controllers;
 
-use Aurora\Models\User;
+use Aurora\Models\AuroraUser;
 use Aurora\Services\Northstar;
 use Illuminate\Http\Request;
 
@@ -29,12 +29,12 @@ class AuroraUsersController extends Controller
     public function index()
     {
         $users = [
-            'admin' => User::where('role', 'admin')->get(),
-            'staff' => User::where('role', 'staff')->get(),
-            'intern' => User::where('role', 'intern')->get(),
+            'admin' => AuroraUser::where('role', 'admin')->get(),
+            'staff' => AuroraUser::where('role', 'staff')->get(),
+            'intern' => AuroraUser::where('role', 'intern')->get(),
 
             // Users that have tried to sign in but has no role assigned.
-            'unauthorized' => User::where('role', '')->get(),
+            'unauthorized' => AuroraUser::where('role', '')->get(),
         ];
 
         foreach ($users as $role => $subsetUsers) {
