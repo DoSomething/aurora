@@ -42,6 +42,15 @@ class APIResponseModel
     const UPDATED_AT = 'updated_at';
 
     /**
+     * Create a new API response model.
+     * @param $attributes
+     */
+    public function __construct($attributes)
+    {
+        $this->attributes = $attributes;
+    }
+
+    /**
      * Determine if an attribute exists on the model.
      *
      * @param  string  $key
