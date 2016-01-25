@@ -7,6 +7,7 @@
  * @see \Northstar\Providers\RouteServiceProvider
  */
 
+// Redirect to the users index from the homepage
 $router->get('/', function () {
     return redirect()->route('users.index');
 });
