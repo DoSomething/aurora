@@ -55,39 +55,36 @@ class UsersController extends Controller
     /**
      * Display the form for editing user information
      *
-     * @param  string  $id
+     * @param NorthstarUser $user
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(NorthstarUser $user)
     {
-        $user = $this->northstar->getUser('_id', $id);
-
         return view('users.edit')->with(compact('user'));
     }
 
     /**
      * Making request to NorthstarAPI to update user's information
      *
-     * @param string $id
+     * @param NorthstarUser $user
      * @param Request $request
      * @return \Illuminate\Http\Response
      */
-    public function update($id, Request $request)
+    public function update(NorthstarUser $user, Request $request)
     {
         $input = $request->except('_token', '_id', 'drupal_uid');
+        $this->northstar->updateUser($user->id, $input);
 
-        $this->northstar->updateUser($id, $input);
-
-        return redirect()->route('users.show', $id)->with('flash_message', ['class' => 'messages', 'text' => 'Sweet, look at you updating that user.']);
+        return redirect()->route('users.show', $user->id)->with('flash_message', ['class' => 'messages', 'text' => 'Sweet, look at you updating that user.']);
     }
 
     /**
      * Delete a user from Northstar.
      *
-     * @param string $id
+     * @param NorthstarUser $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(NorthstarUser $user)
     {
         // @TODO!
         return redirect()->back()->with('flash_message', ['class' => 'messages', 'text' => 'Not yet implemented.']);
