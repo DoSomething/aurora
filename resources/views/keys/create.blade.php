@@ -8,6 +8,9 @@
         <div class="wrapper">
             <div class="container__block -narrow">
                 <h1>Create API Key</h1>
+
+                @include('layout.errors')
+
                 {!! Form::open(['route' => 'keys.store', 'method' => 'post']) !!}
                     <div class="form-item -padded">
                         {!! Form::label('app_id', 'Application ID', ['class' => 'field-label']) !!}

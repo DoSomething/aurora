@@ -4,6 +4,8 @@ namespace Aurora\Services;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Message\Response;
+use Illuminate\Contracts\Validation\ValidationException;
+use Illuminate\Support\MessageBag;
 
 class RestAPIClient
 {
@@ -41,7 +43,7 @@ class RestAPIClient
      */
     public function get($path, $query = [])
     {
-        $response = $this->client->get($path, [
+        $response = $this->raw('GET', $path, [
             'query' => $query,
         ]);
 
@@ -57,7 +59,7 @@ class RestAPIClient
      */
     public function post($path, $body = [])
     {
-        $response = $this->client->post($path, [
+        $response = $this->raw('POST', $path, [
             'body' => json_encode($body),
         ]);
 
@@ -73,7 +75,7 @@ class RestAPIClient
      */
     public function put($path, $body = [])
     {
-        $response = $this->client->post($path, [
+        $response = $this->raw('PUT', $path, [
             'body' => json_encode($body),
         ]);
 
@@ -88,9 +90,39 @@ class RestAPIClient
      */
     public function delete($path)
     {
-        $response = $this->client->delete($path);
+        $response = $this->raw('DELETE', $path);
 
         return $this->responseSuccessful($response);
+    }
+
+    /**
+     * @param $method
+     * @param $path
+     * @param array $options
+     * @return Response|null
+     */
+    public function raw($method, $path, $options = [])
+    {
+        try {
+            return $this->client->send($this->client->createRequest($method, $path, $options));
+        } catch (\GuzzleHttp\Exception\ClientException $e) {
+            // If it's a validation error, loop through the error response and present as
+            // a standard Laravel validation error, so the user can fix their mistakes!
+            if($e->getCode() === 422) {
+                $fields = json_decode($e->getResponse()->getBody()->getContents())->errors;
+                $messages = new MessageBag;
+
+                foreach ($fields as $attribute => $errors) {
+                    foreach ($errors as $error) {
+                        $messages->add($attribute, $error);
+                    }
+                }
+
+                throw new ValidationException($messages);
+            }
+        }
+
+        return null;
     }
 
     /**

@@ -32,6 +32,17 @@ pre {
 }
 
 /**
+ * Validation
+ */
+.validation-error {
+  margin: 12px 0;
+}
+
+.validation-error, .validation-error h4 {
+  color: #ff4747;
+}
+
+/**
  * Table
  */
 .table {

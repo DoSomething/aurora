@@ -14,13 +14,7 @@
                 </p>
             <p>Drop a message in the <code>#api</code> Slack room if you can't log in!</p>
 
-            @if (count($errors) > 0)
-                <ul class="list validation-errors">
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            @endif
+            @include('layout.errors')
 
             {!! Form::open(['url' => '/auth/login', 'method' => 'POST', 'class' => 'form-signin']) !!}
             <div class="form-item -padded">
