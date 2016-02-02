@@ -14,20 +14,28 @@ class APIResponseCollection extends Collection
      */
     protected $paginator;
 
-    public function __construct($response)
+    /**
+     * APIResponseCollection constructor.
+     * @param array $response - Array of raw API responses
+     * @param string $class - Class to create for contents
+     */
+    public function __construct($response, $class)
     {
         $items = [];
         foreach ($response['data'] as $item) {
-            array_push($items, new NorthstarUser($item));
+            array_push($items, new $class($item));
         }
 
-        $this->paginator = new \Illuminate\Pagination\LengthAwarePaginator(
-            $response['data'],
-            $response['meta']['pagination']['total'],
-            $response['meta']['pagination']['per_page'],
-            $response['meta']['pagination']['current_page'],
-            ['path' => request()->path()]
-        );
+        // If the response is paginated, create a Paginator.
+        if (isset($response['meta']['pagination'])) {
+            $this->paginator = new \Illuminate\Pagination\LengthAwarePaginator(
+                $response['data'],
+                $response['meta']['pagination']['total'],
+                $response['meta']['pagination']['per_page'],
+                $response['meta']['pagination']['current_page'],
+                ['path' => request()->path()]
+            );
+        }
 
         parent::__construct($items);
     }

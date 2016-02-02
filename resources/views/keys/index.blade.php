@@ -13,13 +13,13 @@
                   <li>
                       <article class="figure -left">
                           <div class="figure__media">
-                              <a href="{{ route('keys.show', [$key['api_key']]) }}">
-                                  <img alt="key" src="/assets/key{{ in_array('admin', $key['scope']) ? '-admin' : '' }}.svg" />
+                              <a href="{{ route('keys.show', [$key->api_key]) }}">
+                                  <img alt="key" src="/assets/key{{ in_array('admin', $key->scope) ? '-admin' : '' }}.svg" />
                               </a>
                           </div>
                           <div class="figure__body">
-                              <h4><a href="{{ route('keys.show', [$key['api_key']]) }}">{{ $key['app_id'] }}</a></h4>
-                              <span class="footnote">{{ implode(', ', $key['scope']) }}</span>
+                              <h4><a href="{{ route('keys.show', [$key->api_key]) }}">{{ $key->app_id }}</a></h4>
+                              <span class="footnote">{{ implode(', ', $key->scope) }}</span>
                           </div>
                       </article>
                   </li>
