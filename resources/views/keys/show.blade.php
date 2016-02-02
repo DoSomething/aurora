@@ -12,9 +12,8 @@
 
             <div class="container__block">
                 <h4>Credentials:</h4>
-                <!-- Strange indentation due to `<pre>` tag respecting all whitespace. -->
-          <pre>  X-DS-Application-Id: {{ $key->app_id }}
-  X-DS-REST-API-Key: {{ $key->api_key }}</pre>
+                <pre>X-DS-REST-API-Key: {{ $key->api_key }}</pre>
+                <p class="footnote">Send this header with any requests to use this API key.</p>
             </div>
 
             <div class="container__block">
