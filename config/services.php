@@ -17,7 +17,6 @@ return [
     'northstar' => [
         'url'     => env('NORTHSTAR_URL'),
         'version' => 'v1',
-        'app_id'  => env('NORTHSTAR_APP_ID'),
         'api_key' => env('NORTHSTAR_API_KEY'),
     ],
 

@@ -8,6 +8,9 @@
   <div class="wrapper">
       <div class="container__block -narrow">
           <h1>Edit Profile</h1>
+
+          @include('layout.errors')
+
           {!! Form::model($user, [ 'method' => 'PATCH', 'route' => ['users.update', $user->id]]) !!}
           <div class="form-item -padded">
               {!! Form::label('_id', 'Northstar ID', ['class' => 'field-label']) !!}

@@ -8,6 +8,9 @@
         <div class="wrapper">
             <div class="container__block -narrow">
                 <h1>{{ $key->app_id }}</h1>
+
+                @include('layout.errors')
+
                 {!! Form::open(['route' => ['keys.update', $key->api_key], 'method' => 'PUT']) !!}
                     <div class="form-item -padded">
                         {!! Form::label('app_id', 'Application ID', ['class' => 'field-label']) !!}

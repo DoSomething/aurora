@@ -3,6 +3,7 @@
 namespace Aurora\Exceptions;
 
 use Exception;
+use Illuminate\Contracts\Validation\ValidationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -18,6 +19,7 @@ class Handler extends ExceptionHandler
     protected $dontReport = [
         HttpException::class,
         ModelNotFoundException::class,
+        ValidationException::class,
     ];
 
     /**
@@ -30,7 +32,7 @@ class Handler extends ExceptionHandler
      */
     public function report(Exception $e)
     {
-        return parent::report($e);
+        parent::report($e);
     }
 
     /**
@@ -42,6 +44,12 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $e)
     {
+        if ($e instanceof ValidationException) {
+            return redirect()->back()
+                ->withInput($request->input())
+                ->withErrors($e->errors());
+        }
+
         if ($e instanceof ModelNotFoundException) {
             $e = new NotFoundHttpException($e->getMessage(), $e);
         }
