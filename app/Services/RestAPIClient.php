@@ -6,6 +6,7 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Message\Response;
 use Illuminate\Contracts\Validation\ValidationException;
 use Illuminate\Support\MessageBag;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class RestAPIClient
 {
@@ -99,7 +100,7 @@ class RestAPIClient
      * @param $method
      * @param $path
      * @param array $options
-     * @return Response|null
+     * @return Response|void
      */
     public function raw($method, $path, $options = [])
     {
@@ -108,7 +109,7 @@ class RestAPIClient
         } catch (\GuzzleHttp\Exception\ClientException $e) {
             // If it's a validation error, loop through the error response and present as
             // a standard Laravel validation error, so the user can fix their mistakes!
-            if($e->getCode() === 422) {
+            if ($e->getCode() === 422) {
                 $fields = json_decode($e->getResponse()->getBody()->getContents())->errors;
                 $messages = new MessageBag;
 
@@ -120,9 +121,9 @@ class RestAPIClient
 
                 throw new ValidationException($messages);
             }
-        }
 
-        return null;
+            throw new HttpException(500, 'Northstar returned an error for that request.');
+        }
     }
 
     /**
