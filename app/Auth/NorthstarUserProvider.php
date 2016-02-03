@@ -37,14 +37,7 @@ class NorthstarUserProvider extends EloquentUserProvider implements UserProvider
     public function validateCredentials(Authenticatable $user, array $credentials)
     {
         $northstar = new \Aurora\Services\Northstar;
-        try {
-            $northstar->login($credentials);
 
-            return true;
-        } catch (ClientException $e) {
-            // If an exception is returned, we couldn't log in...
-        }
-
-        return false;
+        return ! is_null($northstar->verify($credentials));
     }
 }

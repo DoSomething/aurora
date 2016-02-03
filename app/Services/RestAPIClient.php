@@ -44,7 +44,7 @@ class RestAPIClient
      */
     public function get($path, $query = [])
     {
-        $response = $this->raw('GET', $path, [
+        $response = $this->send('GET', $path, [
             'query' => $query,
         ]);
 
@@ -60,7 +60,7 @@ class RestAPIClient
      */
     public function post($path, $body = [])
     {
-        $response = $this->raw('POST', $path, [
+        $response = $this->send('POST', $path, [
             'body' => json_encode($body),
         ]);
 
@@ -76,7 +76,7 @@ class RestAPIClient
      */
     public function put($path, $body = [])
     {
-        $response = $this->raw('PUT', $path, [
+        $response = $this->send('PUT', $path, [
             'body' => json_encode($body),
         ]);
 
@@ -91,7 +91,7 @@ class RestAPIClient
      */
     public function delete($path)
     {
-        $response = $this->raw('DELETE', $path);
+        $response = $this->send('DELETE', $path);
 
         return $this->responseSuccessful($response);
     }
@@ -102,11 +102,12 @@ class RestAPIClient
      * @param array $options
      * @return Response|void
      */
-    public function raw($method, $path, $options = [])
+    public function send($method, $path, $options = [])
     {
         try {
             return $this->client->send($this->client->createRequest($method, $path, $options));
         } catch (\GuzzleHttp\Exception\ClientException $e) {
+            dd($e);
             // If it's a validation error, loop through the error response and present as
             // a standard Laravel validation error, so the user can fix their mistakes!
             if ($e->getCode() === 422) {
@@ -124,6 +125,17 @@ class RestAPIClient
 
             throw new HttpException(500, 'Northstar returned an error for that request.');
         }
+    }
+
+    /**
+     * @param $method
+     * @param $path
+     * @param array $options
+     * @return Response|void
+     */
+    public function raw($method, $path, $options)
+    {
+        return $this->client->send($this->client->createRequest($method, $path, $options));
     }
 
     /**

@@ -5,6 +5,8 @@ namespace Aurora\Services;
 use Aurora\APIResponseCollection;
 use Aurora\NorthstarKey;
 use Aurora\NorthstarUser;
+use GuzzleHttp\Exception\ClientException;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class Northstar extends RestAPIClient
 {
@@ -17,15 +19,32 @@ class Northstar extends RestAPIClient
     }
 
     /**
-     * Send a POST request to login the user.
+     * Send a POST request to verify the user's credentials.
      *
-     * @param array - input
+     * @param array $credentials
+     *   ex: ['email' => '...', 'password' => '...']
+     *       ['mobile' => '...', 'password' => '...']
+     * @return NorthstarUser|null
      */
-    public function login($input)
+    public function verify($credentials)
     {
-        $response = $this->post('login', $input);
+        try {
+            $response = $this->raw('POST', 'auth/verify', [
+                'body' => json_encode($credentials),
+            ]);
 
-        return $response['data'];
+            return new NorthstarUser($response->json()['data']);
+        } catch (ClientException $e) {
+            $code = $e->getCode();
+            if($code === 401 || $code === 422) {
+                // If 401 Unauthorized or 422 Unprocessable Entity, then
+                // these are invalid credentials.
+                return null;
+            }
+
+            // Otherwise, something unexpected went wrong.
+            throw new HttpException(500, 'Northstar returned an error for that request.');
+        }
     }
 
     /**
@@ -84,7 +103,7 @@ class Northstar extends RestAPIClient
     }
 
     /**
-     * Send a GET request to return all northstar keys
+     * Send a GET request to return all Northstar keys.
      *
      * @return array - keys
      */
@@ -96,19 +115,6 @@ class Northstar extends RestAPIClient
     }
 
     /**
-     * Send a POST request to generate new keys to northstar
-     *
-     * @param string $api_key - API key
-     * @return NorthstarKey
-     */
-    public function getApiKey($api_key)
-    {
-        $response = $this->get('keys/'.$api_key);
-
-        return new NorthstarKey($response['data']);
-    }
-
-    /**
      * Send a POST request to create a new API key.
      *
      * @param array $input - key values
@@ -117,6 +123,19 @@ class Northstar extends RestAPIClient
     public function createNewApiKey($input)
     {
         $response = $this->post('keys', $input);
+
+        return new NorthstarKey($response['data']);
+    }
+
+    /**
+     * Send a GET request to get the specified key.
+     *
+     * @param string $api_key - API key
+     * @return NorthstarKey
+     */
+    public function getApiKey($api_key)
+    {
+        $response = $this->get('keys/'.$api_key);
 
         return new NorthstarKey($response['data']);
     }
