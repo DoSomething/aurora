@@ -14,18 +14,18 @@ class APIResponseModel
     protected $attributes = [];
 
     /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
-    protected $casts = [];
-
-    /**
      * The attributes that should be mutated to dates.
      *
      * @var array
      */
     protected $dates = [];
+
+    /**
+     * Indicates if the includes timestamps.
+     *
+     * @var bool
+     */
+    protected $timestamps = true;
 
     /**
      * The name of the "created at" column.
@@ -92,13 +92,6 @@ class APIResponseModel
             return $this->mutateAttribute($key, $value);
         }
 
-        // If the attribute exists within the cast array, we will convert it to
-        // an appropriate native PHP type dependant upon the associated value
-        // given with the key in the pair. Dayle made this comment line up.
-        if ($this->hasCast($key)) {
-            $value = $this->castAttribute($key, $value);
-        }
-
         // If the attribute is listed as a date, we will convert it to a DateTime
         // instance on retrieval, which makes it quite convenient to work with
         // date fields without having to create a mutator for each property.
@@ -145,81 +138,6 @@ class APIResponseModel
     protected function mutateAttribute($key, $value)
     {
         return $this->{'get'.Str::studly($key).'Attribute'}($value);
-    }
-
-    /**
-     * Determine whether an attribute should be cast to a native type.
-     *
-     * @param  string  $key
-     * @return bool
-     */
-    protected function hasCast($key)
-    {
-        return array_key_exists($key, $this->casts);
-    }
-
-    /**
-     * Determine whether a value is Date / DateTime castable for inbound manipulation.
-     *
-     * @param  string  $key
-     * @return bool
-     */
-    protected function isDateCastable($key)
-    {
-        return $this->hasCast($key) &&
-        in_array($this->getCastType($key), ['date', 'datetime'], true);
-    }
-
-    /**
-     * Get the type of cast for a model attribute.
-     *
-     * @param  string  $key
-     * @return string
-     */
-    protected function getCastType($key)
-    {
-        return trim(strtolower($this->casts[$key]));
-    }
-
-    /**
-     * Cast an attribute to a native PHP type.
-     *
-     * @param  string  $key
-     * @param  mixed  $value
-     * @return mixed
-     */
-    protected function castAttribute($key, $value)
-    {
-        if (is_null($value)) {
-            return $value;
-        }
-
-        switch ($this->getCastType($key)) {
-            case 'int':
-            case 'integer':
-                return (int) $value;
-            case 'real':
-            case 'float':
-            case 'double':
-                return (float) $value;
-            case 'string':
-                return (string) $value;
-            case 'bool':
-            case 'boolean':
-                return (bool) $value;
-            // case 'object':
-            //     return $this->fromJson($value, true);
-            // case 'array':
-            // case 'json':
-            //     return $this->fromJson($value);
-            // case 'collection':
-            //    return new BaseCollection($this->fromJson($value));
-            case 'date':
-            case 'datetime':
-                return $this->asDateTime($value);
-            default:
-                return $value;
-        }
     }
 
     /**

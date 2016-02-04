@@ -10,12 +10,6 @@ class NorthstarUser extends APIResponseModel
      */
     protected $drupal;
 
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
-    protected $casts = [];
 
     /**
      * The attributes that should be mutated to dates.
