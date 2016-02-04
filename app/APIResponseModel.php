@@ -18,14 +18,7 @@ class APIResponseModel
      *
      * @var array
      */
-    protected $dates = [];
-
-    /**
-     * Indicates if the includes timestamps.
-     *
-     * @var bool
-     */
-    protected $timestamps = true;
+    protected $dates = [self::CREATED_AT, self::UPDATED_AT];
 
     /**
      * The name of the "created at" column.
@@ -95,7 +88,7 @@ class APIResponseModel
         // If the attribute is listed as a date, we will convert it to a DateTime
         // instance on retrieval, which makes it quite convenient to work with
         // date fields without having to create a mutator for each property.
-        elseif (in_array($key, $this->getDates())) {
+        elseif (in_array($key, $this->dates)) {
             if (! is_null($value)) {
                 return $this->asDateTime($value);
             }
@@ -138,18 +131,6 @@ class APIResponseModel
     protected function mutateAttribute($key, $value)
     {
         return $this->{'get'.Str::studly($key).'Attribute'}($value);
-    }
-
-    /**
-     * Get the attributes that should be converted to dates.
-     *
-     * @return array
-     */
-    public function getDates()
-    {
-        $defaults = [static::CREATED_AT, static::UPDATED_AT];
-
-        return $this->timestamps ? array_merge($this->dates, $defaults) : $this->dates;
     }
 
     /**
