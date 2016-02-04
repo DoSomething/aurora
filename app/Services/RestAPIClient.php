@@ -7,6 +7,7 @@ use GuzzleHttp\Message\Response;
 use Illuminate\Contracts\Validation\ValidationException;
 use Illuminate\Support\MessageBag;
 use Symfony\Component\HttpKernel\Exception\HttpException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class RestAPIClient
 {
@@ -48,14 +49,14 @@ class RestAPIClient
             'query' => $query,
         ]);
 
-        return $response->json();
+        return is_null($response) ? null : $response->json();
     }
 
     /**
      * Send a POST request to the given URL.
      *
      * @param string $path - URL to make request to (relative to base URL)
-     * @param array $body
+     * @param array $body - Body of the POST request
      * @return array
      */
     public function post($path, $body = [])
@@ -64,14 +65,14 @@ class RestAPIClient
             'body' => json_encode($body),
         ]);
 
-        return $response->json();
+        return is_null($response) ? null : $response->json();
     }
 
     /**
      * Send a PUT request to the given URL.
      *
      * @param string $path - URL to make request to (relative to base URL)
-     * @param array $body
+     * @param array $body - Body of the PUT request
      * @return array
      */
     public function put($path, $body = [])
@@ -80,7 +81,7 @@ class RestAPIClient
             'body' => json_encode($body),
         ]);
 
-        return $response->json();
+        return is_null($response) ? null : $response->json();
     }
 
     /**
@@ -97,17 +98,24 @@ class RestAPIClient
     }
 
     /**
-     * @param $method
-     * @param $path
-     * @param array $options
+     * Send a Northstar API request, and parse any returned validation
+     * errors or status codes to present to the user.
+     *
+     * @param string $method - 'GET', 'POST', 'PUT', or 'DELETE'
+     * @param string $path - URL to make request to (relative to base URL)
+     * @param array $options - Guzzle options (http://guzzle.readthedocs.org/en/latest/request-options.html)
      * @return Response|void
      */
     public function send($method, $path, $options = [])
     {
         try {
-            return $this->client->send($this->client->createRequest($method, $path, $options));
+            return $this->raw($method, $path, $options);
         } catch (\GuzzleHttp\Exception\ClientException $e) {
-            dd($e);
+            // If the resource doesn't exist, return null.
+            if($e->getCode() === 404) {
+                return null;
+            }
+
             // If it's a validation error, loop through the error response and present as
             // a standard Laravel validation error, so the user can fix their mistakes!
             if ($e->getCode() === 422) {
@@ -128,6 +136,8 @@ class RestAPIClient
     }
 
     /**
+     * Send a raw API request, without attempting to handle error responses.
+     *
      * @param $method
      * @param $path
      * @param array $options

@@ -2,7 +2,6 @@
 
 namespace Aurora\Auth;
 
-use GuzzleHttp\Exception\ClientException;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Contracts\Auth\UserProvider;
 use Illuminate\Auth\EloquentUserProvider;
@@ -17,13 +16,16 @@ class NorthstarUserProvider extends EloquentUserProvider implements UserProvider
      */
     public function retrieveByCredentials(array $credentials)
     {
-        // Get the Northstar user
-        $northstar = new \Aurora\Services\Northstar;
-        $response = $northstar->getUser('email', $credentials['email']);
+        $northstar = app('\Aurora\Services\Northstar');
+        $user = $northstar->getUser('email', $credentials['email']);
+
+        if (! $user) {
+            return null;
+        }
 
         // If a matching user is found, find or create local Aurora user.
         return $this->createModel()->firstOrCreate([
-            'northstar_id' => $response->id,
+            'northstar_id' => $user->id,
         ]);
     }
 
@@ -36,8 +38,9 @@ class NorthstarUserProvider extends EloquentUserProvider implements UserProvider
      */
     public function validateCredentials(Authenticatable $user, array $credentials)
     {
-        $northstar = new \Aurora\Services\Northstar;
+        $northstar = app('\Aurora\Services\Northstar');
+        $user = $northstar->verify($credentials);
 
-        return ! is_null($northstar->verify($credentials));
+        return ! is_null($user);
     }
 }

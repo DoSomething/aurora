@@ -76,6 +76,10 @@ class Northstar extends RestAPIClient
     {
         $response = $this->get('users/'.$type.'/'.$id);
 
+        if(is_null($response)) {
+            return null;
+        }
+
         return new NorthstarUser($response['data']);
     }
 
