@@ -7,7 +7,6 @@ use GuzzleHttp\Message\Response;
 use Illuminate\Contracts\Validation\ValidationException;
 use Illuminate\Support\MessageBag;
 use Symfony\Component\HttpKernel\Exception\HttpException;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class RestAPIClient
 {
@@ -112,7 +111,7 @@ class RestAPIClient
             return $this->raw($method, $path, $options);
         } catch (\GuzzleHttp\Exception\ClientException $e) {
             // If the resource doesn't exist, return null.
-            if($e->getCode() === 404) {
+            if ($e->getCode() === 404) {
                 return null;
             }
 

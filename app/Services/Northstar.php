@@ -40,7 +40,7 @@ class Northstar extends RestAPIClient
             return new NorthstarUser($response->json()['data']);
         } catch (ClientException $e) {
             $code = $e->getCode();
-            if($code === 401 || $code === 422) {
+            if ($code === 401 || $code === 422) {
                 // If 401 Unauthorized or 422 Unprocessable Entity, then
                 // these are invalid credentials.
                 return null;
@@ -76,7 +76,7 @@ class Northstar extends RestAPIClient
     {
         $response = $this->get('users/'.$type.'/'.$id);
 
-        if(is_null($response)) {
+        if (is_null($response)) {
             return null;
         }
 

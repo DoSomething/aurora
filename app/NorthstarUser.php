@@ -46,7 +46,7 @@ class NorthstarUser extends APIResponseModel
      */
     public function prettyMobile($fallback = '')
     {
-        if(isset($this->mobile)) {
+        if (isset($this->mobile)) {
             $phoneUtil = PhoneNumberUtil::getInstance();
             try {
                 $formattedNumber = $phoneUtil->parse($this->mobile, 'US');
