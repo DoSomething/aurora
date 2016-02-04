@@ -27,6 +27,10 @@ class NorthstarUser extends APIResponseModel
      */
     public function displayName()
     {
+        if (! empty($this->first_name) && ! empty($this->last_name)) {
+            return $this->first_name.' '.$this->last_name;
+        }
+
         if (! empty($this->first_name) && ! empty($this->last_initial)) {
             return $this->first_name.' '.$this->last_initial.'.';
         }
@@ -58,6 +62,7 @@ class NorthstarUser extends APIResponseModel
         return $fallback;
     }
 
+    /**
      * Get all user's campaigns
      *
      * @return array user's campaigns
