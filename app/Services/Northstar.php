@@ -10,10 +10,14 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class Northstar extends RestAPIClient
 {
-    public function __construct()
+    /**
+     * Northstar constructor.
+     * @param array $config
+     */
+    public function __construct($config = [])
     {
-        $base_url = config('services.northstar.url').'/'.config('services.northstar.version').'/';
-        $api_key = config('services.northstar.api_key');
+        $base_url = $config['url'].'/'.$config['version'].'/';
+        $api_key = $config['api_key'];
 
         parent::__construct($base_url, ['X-DS-REST-API-Key' => $api_key]);
     }
