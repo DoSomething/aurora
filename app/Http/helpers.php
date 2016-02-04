@@ -36,28 +36,6 @@ function message_state_class($status)
 }
 
 /**
- * Modify phone number given into the the origin country format
- * https://github.com/giggsey/libphonenumber-for-php
- *
- * @param string number
- * @param string country name(set to US by default)
- * @return string of formatted phone number
- */
-function sanitize_phone_number($number, $countryName = 'US')
-{
-    $phoneUtil = \libphonenumber\PhoneNumberUtil::getInstance();
-    try {
-        $formattedNumber = $phoneUtil->parse($number, $countryName);
-
-        return $phoneUtil->format($formattedNumber, \libphonenumber\PhoneNumberFormat::INTERNATIONAL);
-    } catch (\libphonenumber\NumberParseException $e) {
-        Log::error($e);
-
-        return $number;
-    }
-}
-
-/**
  * When duplicate users occur, this function is called to add a class to html
  * markup
  *

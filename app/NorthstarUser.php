@@ -2,6 +2,10 @@
 
 namespace Aurora;
 
+use libphonenumber\PhoneNumberFormat;
+use libphonenumber\PhoneNumberUtil;
+use Log;
+
 class NorthstarUser extends APIResponseModel
 {
     /**
@@ -31,6 +35,29 @@ class NorthstarUser extends APIResponseModel
     }
 
     /**
+     * Get the user's formatted mobile number.
+     *
+     * @param string $fallback - Text to display if no mobile is set
+     * @return mixed|string
+     */
+    public function prettyMobile($fallback = '')
+    {
+        if(isset($this->mobile)) {
+            $phoneUtil = PhoneNumberUtil::getInstance();
+            try {
+                $formattedNumber = $phoneUtil->parse($this->mobile, 'US');
+
+                return $phoneUtil->format($formattedNumber, PhoneNumberFormat::INTERNATIONAL);
+            } catch (\libphonenumber\NumberParseException $e) {
+                Log::error($e);
+
+                return $this->number;
+            }
+        }
+
+        return $fallback;
+    }
+
      * Get all user's campaigns
      *
      * @return array user's campaigns
