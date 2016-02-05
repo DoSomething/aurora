@@ -2,6 +2,10 @@
 
 namespace Aurora;
 
+use libphonenumber\PhoneNumberFormat;
+use libphonenumber\PhoneNumberUtil;
+use Log;
+
 class NorthstarUser extends APIResponseModel
 {
     /**
@@ -9,20 +13,6 @@ class NorthstarUser extends APIResponseModel
      * @var \Aurora\Services\Drupal
      */
     protected $drupal;
-
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
-    protected $casts = [];
-
-    /**
-     * The attributes that should be mutated to dates.
-     *
-     * @var array
-     */
-    protected $dates = ['created_at', 'updated_at'];
 
     public function __construct($attributes)
     {
@@ -37,11 +27,39 @@ class NorthstarUser extends APIResponseModel
      */
     public function displayName()
     {
+        if (! empty($this->first_name) && ! empty($this->last_name)) {
+            return $this->first_name.' '.$this->last_name;
+        }
+
         if (! empty($this->first_name) && ! empty($this->last_initial)) {
             return $this->first_name.' '.$this->last_initial.'.';
         }
 
         return $this->id;
+    }
+
+    /**
+     * Get the user's formatted mobile number.
+     *
+     * @param string $fallback - Text to display if no mobile is set
+     * @return mixed|string
+     */
+    public function prettyMobile($fallback = '')
+    {
+        if (isset($this->mobile)) {
+            $phoneUtil = PhoneNumberUtil::getInstance();
+            try {
+                $formattedNumber = $phoneUtil->parse($this->mobile, 'US');
+
+                return $phoneUtil->format($formattedNumber, PhoneNumberFormat::INTERNATIONAL);
+            } catch (\libphonenumber\NumberParseException $e) {
+                Log::error($e);
+
+                return $this->number;
+            }
+        }
+
+        return $fallback;
     }
 
     /**

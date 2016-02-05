@@ -2,7 +2,6 @@
 
 namespace Aurora\Providers;
 
-use GuzzleHttp\Exception\ClientException;
 use Illuminate\Routing\Router;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -27,23 +26,23 @@ class RouteServiceProvider extends ServiceProvider
     public function boot(Router $router)
     {
         $router->bind('users', function ($id) {
-            try {
-                $user = app('\Aurora\Services\Northstar')->getUser('_id', $id);
+            $user = app('\Aurora\Services\Northstar')->getUser('_id', $id);
 
-                return $user;
-            } catch (ClientException $e) {
+            if (! $user) {
                 throw new NotFoundHttpException;
             }
+
+            return $user;
         });
 
         $router->bind('keys', function ($id) {
-            try {
-                $key = app('\Aurora\Services\Northstar')->getApiKey($id);
+            $key = app('\Aurora\Services\Northstar')->getApiKey($id);
 
-                return $key;
-            } catch (ClientException $e) {
+            if (! $key) {
                 throw new NotFoundHttpException;
             }
+
+            return $key;
         });
 
         $router->model('aurora-users', '\Aurora\Models\AuroraUser');
