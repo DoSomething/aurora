@@ -9,8 +9,8 @@
         "laravel/framework": "5.1.*",
         "laravelcollective/html": "5.1.*",
         "guzzlehttp/guzzle": "5.1.*",
-        "giggsey/libphonenumber-for-php": "~7.0",
-        "doctrine/dbal": "^2.5"
+        "doctrine/dbal": "^2.5",
+        "dosomething/northstar": "dev-master"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

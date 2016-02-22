@@ -138,18 +138,18 @@ return [
         Illuminate\View\ViewServiceProvider::class,
 
         /*
+         * Third-party Service Providers...
+         */
+        DoSomething\Northstar\NorthstarServiceProvider::class,
+        Collective\Html\HtmlServiceProvider::class,
+
+        /*
          * Application Service Providers...
          */
         Aurora\Providers\AppServiceProvider::class,
         Aurora\Providers\AuthServiceProvider::class,
         Aurora\Providers\EventServiceProvider::class,
         Aurora\Providers\RouteServiceProvider::class,
-
-        /*
-         * Third-party Service Providers...
-         */
-        Collective\Html\HtmlServiceProvider::class,
-
     ],
 
     /*

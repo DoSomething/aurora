@@ -23,8 +23,12 @@ class Drupal
    * @param string campaign ID
    * @return JSON file
    */
-  public function getCampaignFromDrupal($id)
+  public function getCampaigns($id)
   {
+      if (! $id) {
+          return [];
+      }
+
       $response = $this->client->get('campaigns/'.$id);
       if (isset($response->json()['data'])) {
           return $response->json()['data'];
@@ -37,8 +41,12 @@ class Drupal
    * @param string reportback ID
    * @return JSON file
    */
-  public function getReportbacksFromDrupal($id)
+  public function getReportbacks($id)
   {
+      if (! $id) {
+          return [];
+      }
+
       $response = $this->client->get('reportbacks/'.$id.'.json');
       if (isset($response->json()['data'])) {
           return $response->json()['data'];

@@ -3,17 +3,18 @@
 namespace Aurora\Http\Controllers;
 
 use Aurora\Models\AuroraUser;
-use Aurora\Services\Northstar;
+use DoSomething\Northstar\NorthstarClient;
 use Illuminate\Http\Request;
 
 class AuroraUsersController extends Controller
 {
     /**
-     * @var Northstar
+     * Northstar API client.
+     * @var NorthstarClient
      */
     protected $northstar;
 
-    public function __construct(Northstar $northstar)
+    public function __construct(NorthstarClient $northstar)
     {
         $this->northstar = $northstar;
 
