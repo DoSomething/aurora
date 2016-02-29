@@ -17,16 +17,9 @@ class UsersController extends Controller
      */
     protected $northstar;
 
-    /**
-     * The Phoenix API client.
-     * @var Drupal
-     */
-    protected $drupal;
-
-    public function __construct(NorthstarClient $northstar, Drupal $drupal)
+    public function __construct(NorthstarClient $northstar)
     {
         $this->northstar = $northstar;
-        $this->drupal = $drupal;
 
         $this->middleware('auth');
         $this->middleware('role:admin,staff,intern');
@@ -58,11 +51,7 @@ class UsersController extends Controller
     {
         $auroraUser = AuroraUser::where('northstar_id', $user->id)->first();
 
-        // Calling other APIs related to the user.
-        $campaigns = $this->drupal->getCampaigns($user->drupal_id);
-        $reportbacks = $this->drupal->getReportbacks($user->drupal_id);
-
-        return view('users.show')->with(compact('user', 'auroraUser', 'campaigns', 'reportbacks'));
+        return view('users.show')->with(compact('user', 'auroraUser'));
     }
 
     /**
