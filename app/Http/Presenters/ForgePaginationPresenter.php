@@ -2,7 +2,6 @@
 
 namespace Aurora\Http\Presenters;
 
-use Illuminate\Contracts\Pagination\Paginator as PaginatorContract;
 use Illuminate\Contracts\Pagination\Presenter as PresenterContract;
 use Illuminate\Pagination\UrlWindow;
 use Illuminate\Pagination\UrlWindowPresenterTrait;
@@ -31,7 +30,7 @@ class ForgePaginationPresenter implements PresenterContract
      * @param  \Illuminate\Contracts\Pagination\Paginator  $paginator
      * @param  \Illuminate\Pagination\UrlWindow|null  $window
      */
-    public function __construct(PaginatorContract $paginator, UrlWindow $window = null)
+    public function __construct($paginator, UrlWindow $window = null)
     {
         $this->paginator = $paginator;
         $this->window = is_null($window) ? UrlWindow::make($paginator) : $window->get();

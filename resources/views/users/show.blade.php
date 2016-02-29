@@ -83,23 +83,4 @@
             @endif
         </div>
     </div>
-
-    <div class="container -padded">
-        <div class="wrapper">
-            <div class="container__block">
-                <h3>Campaigns</h3>
-                @include('users.partials.campaigns')
-            </div>
-        </div>
-    </div>
-
-    <div class="container -padded">
-        <div class="wrapper">
-            <div class="container__block">
-                <h3>Reportbacks</h3>
-                @include('users.partials.reportbacks')
-            </div>
-        </div>
-    </div>
-
 @stop

@@ -2,12 +2,20 @@
 
 namespace Aurora\Providers;
 
+use DoSomething\Northstar\NorthstarClient;
+use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Routing\Router;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class RouteServiceProvider extends ServiceProvider
 {
+    /**
+     * The Northstar API client.
+     * @var NorthstarClient
+     */
+    private $northstar;
+
     /**
      * This namespace is applied to the controller routes in your routes file.
      *
@@ -20,13 +28,14 @@ class RouteServiceProvider extends ServiceProvider
     /**
      * Define your route model bindings, pattern filters, etc.
      *
-     * @param  \Illuminate\Routing\Router  $router
-     * @return void
+     * @param  \Illuminate\Routing\Router $router
      */
     public function boot(Router $router)
     {
-        $router->bind('users', function ($id) {
-            $user = app('\Aurora\Services\Northstar')->getUser('_id', $id);
+        $northstar = app('northstar');
+
+        $router->bind('users', function ($id) use ($northstar) {
+            $user = $northstar->getUser('_id', $id);
 
             if (! $user) {
                 throw new NotFoundHttpException;
@@ -35,8 +44,8 @@ class RouteServiceProvider extends ServiceProvider
             return $user;
         });
 
-        $router->bind('keys', function ($id) {
-            $key = app('\Aurora\Services\Northstar')->getApiKey($id);
+        $router->bind('keys', function ($id) use ($northstar) {
+            $key = $northstar->getApiKey($id);
 
             if (! $key) {
                 throw new NotFoundHttpException;

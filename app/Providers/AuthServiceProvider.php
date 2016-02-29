@@ -12,9 +12,7 @@ class AuthServiceProvider extends ServiceProvider
      *
      * @var array
      */
-    protected $policies = [
-        'Aurora\Model' => 'Aurora\Policies\ModelPolicy',
-    ];
+    protected $policies = [];
 
     /**
      * Register any application authentication / authorization services.
@@ -26,8 +24,10 @@ class AuthServiceProvider extends ServiceProvider
     {
         parent::registerPolicies($gate);
 
-        app('auth')->extend('northstar', function () {
-            return new \Aurora\Auth\NorthstarUserProvider($this->app['hash'], config('auth.model'));
+        $this->app['auth']->extend('northstar', function ($app) {
+            return new \DoSomething\Northstar\NorthstarUserProvider(
+                $app['northstar'], $app['hash'], config('auth.model')
+            );
         });
     }
 }

@@ -3,18 +3,21 @@
 namespace Aurora\Http\Controllers;
 
 use Aurora\Models\AuroraUser;
-use Aurora\NorthstarUser;
-use Aurora\Services\Northstar;
+use Aurora\Services\Drupal;
+use DoSomething\Northstar\Resources\NorthstarUser;
+use DoSomething\Northstar\NorthstarClient;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class UsersController extends Controller
 {
     /**
-     * @var Northstar
+     * The Northstar API client.
+     * @var NorthstarClient
      */
     protected $northstar;
 
-    public function __construct(Northstar $northstar)
+    public function __construct(NorthstarClient $northstar)
     {
         $this->northstar = $northstar;
 
@@ -31,6 +34,9 @@ class UsersController extends Controller
     public function index(Request $request)
     {
         $users = $this->northstar->getAllUsers($request->all());
+        $users->setPaginator(LengthAwarePaginator::class, [
+            'path' => 'users',
+        ]);
 
         return view('users.index')->with(compact('users'));
     }
@@ -45,11 +51,7 @@ class UsersController extends Controller
     {
         $auroraUser = AuroraUser::where('northstar_id', $user->id)->first();
 
-        //Calling other APIs related to the user.
-        $campaigns = $user->getCampaigns();
-        $reportbacks = $user->getReportbacks();
-
-        return view('users.show')->with(compact('user', 'auroraUser', 'campaigns', 'reportbacks'));
+        return view('users.show')->with(compact('user', 'auroraUser'));
     }
 
     /**
