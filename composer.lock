@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "a05cf48f324f420834e784ec00cb0e8b",
-    "content-hash": "43e8e26e51011416ab2c7f2ecad78a7c",
+    "hash": "477ae7cf3a08a86d66faa4653a46aee8",
+    "content-hash": "5c203ca87c799b5d0a4cd336b25fa62a",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -621,16 +621,16 @@
         },
         {
             "name": "dosomething/northstar",
-            "version": "dev-master",
+            "version": "v0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/DoSomething/northstar-php.git",
-                "reference": "3573b9a9614f5e0fcbb5154c72a18acb973ca229"
+                "reference": "52cf6518ee8ac9e359d58c6615698fe686341d4a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/DoSomething/northstar-php/zipball/3573b9a9614f5e0fcbb5154c72a18acb973ca229",
-                "reference": "3573b9a9614f5e0fcbb5154c72a18acb973ca229",
+                "url": "https://api.github.com/repos/DoSomething/northstar-php/zipball/52cf6518ee8ac9e359d58c6615698fe686341d4a",
+                "reference": "52cf6518ee8ac9e359d58c6615698fe686341d4a",
                 "shasum": ""
             },
             "require": {
@@ -656,7 +656,7 @@
                 }
             ],
             "description": "PHP API client for Northstar, the DoSomething.org user API.",
-            "time": "2016-02-22 22:53:55"
+            "time": "2016-02-29 15:52:35"
         },
         {
             "name": "giggsey/libphonenumber-for-php",
@@ -3861,9 +3861,7 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "dosomething/northstar": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
