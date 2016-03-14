@@ -13,13 +13,17 @@
             <div class="container__block -half profile-settings">
                 <h3>Profile</h3>
                 <dt>ID:</dt><dd>{{ $user->id }}</dd>
-                <dt>Drupal ID:</dt><dd>{{ $user->drupal_id or '&mdash;' }}</dd>
                 <dt>Email:</dt><dd>{{ $user->email or '&mdash;' }}</dd>
                 <dt>Mobile:</dt><dd>{{ $user->prettyMobile('&mdash;') }}</dd>
                 <dt>First Name:</dt><dd>{{ $user->first_name or '&mdash;' }}</dd>
                 <dt>Last Name:</dt><dd>{{ $user->last_name or '&mdash;' }}</dd>
                 <dt>Birthdate:</dt><dd>{{ $user->birthdate or '&mdash;' }}</dd>
 
+                @if(! empty($user->drupal_id))
+                    <dt>Phoenix:</dt><dd><a href="{{ config('services.drupal.url') }}/user/{{ $user->drupal_id }}">{{ $user->drupal_id }}</a></dd>
+                @else
+                    <dt>Phoenix:</dt><dd>&mdash;</dd>
+                @endif
 
                 <dt>Source:</dt><dd>{{ $user->source or '&mdash;' }}</dd>
 
