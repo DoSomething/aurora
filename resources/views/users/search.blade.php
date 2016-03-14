@@ -15,7 +15,7 @@
       <div class="container__block">
           @if ($users)
               @include('users.partials.index-table', ['users' => $users])
-              {!! $users->appendPaginationQuery(['query' => $query])->links() !!}
+              {!! $users->links(\Aurora\Http\Presenters\ForgePaginationPresenter::class) !!}
           @endif
       </div>
 
