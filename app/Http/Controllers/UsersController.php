@@ -119,6 +119,10 @@ class UsersController extends Controller
             'page' => $request->query('page', 1),
         ]);
 
+        $users->setPaginator(LengthAwarePaginator::class, [
+            'path' => 'users',
+        ]);
+
         // If only one user is matched, let's just redirect there.
         if ($users->total() === 1) {
             return redirect()->route('users.show', [$users->first()->id]);
