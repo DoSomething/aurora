@@ -25,6 +25,12 @@
                     <dt>Phoenix:</dt><dd>&mdash;</dd>
                 @endif
 
+                @if(! empty($user->parse_installation_ids))
+                    <dt>Parse:</dt><dd><code>{{ implode(', ', $user->parse_installation_ids) }}</code></dd>
+                @else
+                    <dt>Parse:</dt><dd>&mdash;</dd>
+                @endif
+
                 <dt>Source:</dt><dd>{{ $user->source or '&mdash;' }}</dd>
 
                 @if (isset($user->addr_street1) || isset($user->addr_street2) || isset($user->addr_city) || isset($user->addr_state) || isset($user->addr_zip) )
