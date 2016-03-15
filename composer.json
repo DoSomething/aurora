@@ -10,7 +10,7 @@
         "laravelcollective/html": "5.1.*",
         "guzzlehttp/guzzle": "5.1.*",
         "doctrine/dbal": "^2.5",
-        "dosomething/northstar": "0.3.*"
+        "dosomething/northstar": "0.4.*"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
