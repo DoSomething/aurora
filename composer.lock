@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "2106967dccfc08dba9eee66461d520b3",
-    "content-hash": "794965bef80884d3c6fc0cfa4b3c5a89",
+    "hash": "b42785ec38594a8b80533354acd02db2",
+    "content-hash": "ef4909e98de11bc48609f0d7b0d74e90",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -621,16 +621,16 @@
         },
         {
             "name": "dosomething/northstar",
-            "version": "v0.3",
+            "version": "v0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/DoSomething/northstar-php.git",
-                "reference": "08916c9bdd5e59eb7b723430b60b5cfb66e14d32"
+                "reference": "bee13c189e2e67f0305abd6c483b685fdc8a0385"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/DoSomething/northstar-php/zipball/08916c9bdd5e59eb7b723430b60b5cfb66e14d32",
-                "reference": "08916c9bdd5e59eb7b723430b60b5cfb66e14d32",
+                "url": "https://api.github.com/repos/DoSomething/northstar-php/zipball/bee13c189e2e67f0305abd6c483b685fdc8a0385",
+                "reference": "bee13c189e2e67f0305abd6c483b685fdc8a0385",
                 "shasum": ""
             },
             "require": {
@@ -656,7 +656,7 @@
                 }
             ],
             "description": "PHP API client for Northstar, the DoSomething.org user API.",
-            "time": "2016-03-14 17:05:22"
+            "time": "2016-03-15 18:27:17"
         },
         {
             "name": "giggsey/libphonenumber-for-php",
@@ -1205,16 +1205,16 @@
         },
         {
             "name": "league/flysystem",
-            "version": "1.0.19",
+            "version": "1.0.20",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/flysystem.git",
-                "reference": "635ee279a522233a567984756bf9da1db243d9bf"
+                "reference": "e87a786e3ae12a25cf78a71bb07b4b384bfaa83a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/635ee279a522233a567984756bf9da1db243d9bf",
-                "reference": "635ee279a522233a567984756bf9da1db243d9bf",
+                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/e87a786e3ae12a25cf78a71bb07b4b384bfaa83a",
+                "reference": "e87a786e3ae12a25cf78a71bb07b4b384bfaa83a",
                 "shasum": ""
             },
             "require": {
@@ -1284,7 +1284,7 @@
                 "sftp",
                 "storage"
             ],
-            "time": "2016-03-12 19:04:33"
+            "time": "2016-03-14 21:54:11"
         },
         {
             "name": "monolog/monolog",
