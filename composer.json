@@ -5,12 +5,11 @@
     "license": "MIT",
     "type": "project",
     "require": {
-        "php": ">=5.5.9",
         "laravel/framework": "5.1.*",
         "laravelcollective/html": "5.1.*",
-        "guzzlehttp/guzzle": "5.1.*",
+        "guzzlehttp/guzzle": "6.0.*",
         "doctrine/dbal": "^2.5",
-        "dosomething/northstar": "0.4.*"
+        "dosomething/northstar": "1.0.0-rc1"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

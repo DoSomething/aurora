@@ -29,14 +29,14 @@ class AuroraUser extends Model implements AuthenticatableContract
      *
      * @var array
      */
-    protected $hidden = ['remember_token'];
+    protected $hidden = ['access_token', 'refresh_token', 'remember_token'];
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $fillable = ['northstar_id', 'role'];
+    protected $fillable = [];
 
     /**
      * Indicates if the model should be timestamped.
@@ -50,7 +50,7 @@ class AuroraUser extends Model implements AuthenticatableContract
      */
     public function northstarUser()
     {
-        return app('\Aurora\Services\Northstar')->getUser('_id', $this->northstar_id);
+        return app('\Aurora\Services\Northstar')->getUser('id', $this->northstar_id);
     }
 
     /**
