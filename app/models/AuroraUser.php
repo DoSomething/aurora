@@ -6,6 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 
+/**
+ * Class AuroraUser
+ *
+ * @method static \Illuminate\Database\Eloquent\Builder|AuroraUser find(string $id, array $columns)
+ * @method static \Illuminate\Database\Eloquent\Builder|AuroraUser firstOrCreate(array $attributes)
+ * @method static \Illuminate\Database\Eloquent\Builder|AuroraUser where(string $field, string $comparison = '=', string $value)
+ */
 class AuroraUser extends Model implements AuthenticatableContract
 {
     use Authenticatable;
