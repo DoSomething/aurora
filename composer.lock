@@ -1,10 +1,11 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "67386156297b0193e77f9677bd6cc0db",
+    "hash": "26bcba95cd22c89e5acd89e555dd7b29",
+    "content-hash": "ff0ec5ea9d8c58b3d8be50d12998a16f",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -620,16 +621,16 @@
         },
         {
             "name": "dosomething/northstar",
-            "version": "v1.0.0-rc1",
+            "version": "v1.0.0-rc2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/DoSomething/northstar-php.git",
-                "reference": "f70b7712265984210046a4ad2fd77645934a38e7"
+                "reference": "9936e680fea5ee37e8acdb69077ffca34e834640"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/DoSomething/northstar-php/zipball/f70b7712265984210046a4ad2fd77645934a38e7",
-                "reference": "f70b7712265984210046a4ad2fd77645934a38e7",
+                "url": "https://api.github.com/repos/DoSomething/northstar-php/zipball/9936e680fea5ee37e8acdb69077ffca34e834640",
+                "reference": "9936e680fea5ee37e8acdb69077ffca34e834640",
                 "shasum": ""
             },
             "require": {
@@ -656,20 +657,20 @@
                 }
             ],
             "description": "PHP API client for Northstar, the DoSomething.org identity API.",
-            "time": "2016-06-28 15:38:00"
+            "time": "2016-06-29 17:53:17"
         },
         {
             "name": "giggsey/libphonenumber-for-php",
-            "version": "7.4.3",
+            "version": "7.4.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/giggsey/libphonenumber-for-php.git",
-                "reference": "415cef198620774bd54f63af097006ab3e6c64aa"
+                "reference": "75cc4cb41d1f590391f15484df5bdc13963c2b1a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/giggsey/libphonenumber-for-php/zipball/415cef198620774bd54f63af097006ab3e6c64aa",
-                "reference": "415cef198620774bd54f63af097006ab3e6c64aa",
+                "url": "https://api.github.com/repos/giggsey/libphonenumber-for-php/zipball/75cc4cb41d1f590391f15484df5bdc13963c2b1a",
+                "reference": "75cc4cb41d1f590391f15484df5bdc13963c2b1a",
                 "shasum": ""
             },
             "require": {
@@ -720,7 +721,7 @@
                 "phonenumber",
                 "validation"
             ],
-            "time": "2016-06-15 13:08:56"
+            "time": "2016-06-29 14:09:08"
         },
         {
             "name": "guzzlehttp/guzzle",

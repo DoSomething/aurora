@@ -23,11 +23,5 @@ class AuthServiceProvider extends ServiceProvider
     public function boot(GateContract $gate)
     {
         parent::registerPolicies($gate);
-
-        $this->app['auth']->extend('northstar', function ($app) {
-            return new \DoSomething\Northstar\NorthstarUserProvider(
-                $app['northstar'], $app['hash'], config('auth.model')
-            );
-        });
     }
 }

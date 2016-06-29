@@ -15,11 +15,10 @@ return [
     */
 
     'northstar' => [
-        'url'     => env('NORTHSTAR_URL'),
+        'grant' => 'password',
+        'url' => env('NORTHSTAR_URL'),
         'client_id' => env('NORTHSTAR_CLIENT_ID'),
         'client_secret' => env('NORTHSTAR_CLIENT_SECRET'),
-        'authorization_server_url' => env('NORTHSTAR_URL'),
-        'repository' => \Aurora\Auth\OAuthRepository::class,
         'scope' => ['admin', 'user'],
     ],
 
