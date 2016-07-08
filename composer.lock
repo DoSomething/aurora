@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "bbfc10e945a00796d448709f032ae0cb",
-    "content-hash": "5279392324c11f0f2ed5fd4b56ac77e1",
+    "hash": "d4d758f20b5ce07aed08cd6be2e480e4",
+    "content-hash": "e829b67a3d22cd7e9ca593dbf4d8355e",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -621,16 +621,16 @@
         },
         {
             "name": "dosomething/northstar",
-            "version": "v1.0.0-rc3",
+            "version": "v1.0.0-rc4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/DoSomething/northstar-php.git",
-                "reference": "f435a8f8fca83cae251c31dd1c2d559a60d34977"
+                "reference": "a5dce54de571166261cdfc4acc8998166cd56a19"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/DoSomething/northstar-php/zipball/f435a8f8fca83cae251c31dd1c2d559a60d34977",
-                "reference": "f435a8f8fca83cae251c31dd1c2d559a60d34977",
+                "url": "https://api.github.com/repos/DoSomething/northstar-php/zipball/a5dce54de571166261cdfc4acc8998166cd56a19",
+                "reference": "a5dce54de571166261cdfc4acc8998166cd56a19",
                 "shasum": ""
             },
             "require": {
@@ -657,7 +657,7 @@
                 }
             ],
             "description": "PHP API client for Northstar, the DoSomething.org identity API.",
-            "time": "2016-07-07 14:47:02"
+            "time": "2016-07-08 17:42:30"
         },
         {
             "name": "giggsey/libphonenumber-for-php",
@@ -1946,23 +1946,23 @@
         },
         {
             "name": "swiftmailer/swiftmailer",
-            "version": "v5.4.2",
+            "version": "v5.4.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/swiftmailer/swiftmailer.git",
-                "reference": "d8db871a54619458a805229a057ea2af33c753e8"
+                "reference": "4cc92842069c2bbc1f28daaaf1d2576ec4dfe153"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/d8db871a54619458a805229a057ea2af33c753e8",
-                "reference": "d8db871a54619458a805229a057ea2af33c753e8",
+                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/4cc92842069c2bbc1f28daaaf1d2576ec4dfe153",
+                "reference": "4cc92842069c2bbc1f28daaaf1d2576ec4dfe153",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.3"
             },
             "require-dev": {
-                "mockery/mockery": "~0.9.1,<0.9.4"
+                "mockery/mockery": "~0.9.1"
             },
             "type": "library",
             "extra": {
@@ -1995,7 +1995,7 @@
                 "mail",
                 "mailer"
             ],
-            "time": "2016-05-01 08:45:47"
+            "time": "2016-07-08 11:51:25"
         },
         {
             "name": "symfony/console",

@@ -2,7 +2,7 @@
 
 namespace Aurora\Providers;
 
-use DoSomething\Northstar\NorthstarClient;
+use DoSomething\Northstar\Northstar;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Routing\Router;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
@@ -12,7 +12,7 @@ class RouteServiceProvider extends ServiceProvider
 {
     /**
      * The Northstar API client.
-     * @var NorthstarClient
+     * @var Northstar
      */
     private $northstar;
 
@@ -44,8 +44,8 @@ class RouteServiceProvider extends ServiceProvider
             return $user;
         });
 
-        $router->bind('keys', function ($id) use ($northstar) {
-            $key = $northstar->getApiKey($id);
+        $router->bind('clients', function ($id) use ($northstar) {
+            $key = $northstar->getClient($id);
 
             if (! $key) {
                 throw new NotFoundHttpException;
