@@ -25,4 +25,4 @@ $router->get('search', ['as' => 'user.search', 'uses' => 'UsersController@search
 $router->resource('aurora-users', 'AuroraUsersController', ['only' => ['index', 'edit', 'update']]);
 
 // Key
-$router->resource('keys', 'KeyController');
+$router->resource('clients', 'ClientController');

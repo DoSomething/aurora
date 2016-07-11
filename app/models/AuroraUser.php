@@ -6,6 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 
+/**
+ * Class AuroraUser
+ *
+ * @method static \Illuminate\Database\Eloquent\Builder|AuroraUser find(string $id, array $columns)
+ * @method static \Illuminate\Database\Eloquent\Builder|AuroraUser firstOrCreate(array $attributes)
+ * @method static \Illuminate\Database\Eloquent\Builder|AuroraUser where(string $field, string $comparison = '=', string $value)
+ */
 class AuroraUser extends Model implements AuthenticatableContract
 {
     use Authenticatable;
@@ -22,14 +29,14 @@ class AuroraUser extends Model implements AuthenticatableContract
      *
      * @var array
      */
-    protected $hidden = ['remember_token'];
+    protected $hidden = ['access_token', 'refresh_token', 'remember_token'];
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $fillable = ['northstar_id', 'role'];
+    protected $fillable = [];
 
     /**
      * Indicates if the model should be timestamped.
@@ -43,7 +50,7 @@ class AuroraUser extends Model implements AuthenticatableContract
      */
     public function northstarUser()
     {
-        return app('\Aurora\Services\Northstar')->getUser('_id', $this->northstar_id);
+        return app('\Aurora\Services\Northstar')->getUser('id', $this->northstar_id);
     }
 
     /**

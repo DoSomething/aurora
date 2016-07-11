@@ -11,8 +11,8 @@
                 </li>
                 @if (Auth::user()->hasRole('admin'))
                     <li>
-                        <a href="{{ route('keys.index') }}">
-                            <strong class="navigation__title">API Keys</strong>
+                        <a href="{{ route('clients.index') }}">
+                            <strong class="navigation__title">OAuth Clients</strong>
                             <span class="navigation__subtitle">Northstar apps</span>
                         </a>
                     </li>

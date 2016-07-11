@@ -140,7 +140,7 @@ return [
         /*
          * Third-party Service Providers...
          */
-        DoSomething\Northstar\NorthstarServiceProvider::class,
+        DoSomething\Northstar\Laravel\NorthstarServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
 
         /*

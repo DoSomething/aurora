@@ -18,6 +18,10 @@ pre {
   margin: 12px 0;
 }
 
+.form-item .footnote {
+  margin-top: 6px;
+}
+
 .form-item .field-label + .footnote {
   line-height: 1.2;
   margin-top: -6px;

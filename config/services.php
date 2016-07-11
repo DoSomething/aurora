@@ -15,9 +15,11 @@ return [
     */
 
     'northstar' => [
-        'url'     => env('NORTHSTAR_URL'),
-        'version' => 'v1',
-        'api_key' => env('NORTHSTAR_API_KEY'),
+        'grant' => 'password',
+        'url' => env('NORTHSTAR_URL'),
+        'client_id' => env('NORTHSTAR_CLIENT_ID'),
+        'client_secret' => env('NORTHSTAR_CLIENT_SECRET'),
+        'scope' => ['role:admin', 'user'],
     ],
 
     'drupal' => [

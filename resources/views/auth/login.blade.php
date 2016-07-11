@@ -18,8 +18,8 @@
 
             {!! Form::open(['url' => '/auth/login', 'method' => 'POST', 'class' => 'form-signin']) !!}
             <div class="form-item -padded">
-                {!! Form::label('email', 'Email', array('class' => 'field-label')) !!}
-                {!! Form::text('email', NULL, array('class' => 'text-field', 'placeholder' => 'puppet-sloth@dosomething.org')) !!}
+                {!! Form::label('username', 'Email address or cell number', array('class' => 'field-label')) !!}
+                {!! Form::text('username', NULL, array('class' => 'text-field', 'placeholder' => 'puppet-sloth@dosomething.org')) !!}
             </div>
             <div class="form-item -padded">
                 {!! Form::label('password', 'Password', array('class' => 'field-label')) !!}

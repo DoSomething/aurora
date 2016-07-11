@@ -5,7 +5,7 @@ namespace Aurora\Http\Controllers;
 use Aurora\Models\AuroraUser;
 use Aurora\Services\Drupal;
 use DoSomething\Northstar\Resources\NorthstarUser;
-use DoSomething\Northstar\NorthstarClient;
+use DoSomething\Northstar\Northstar;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 
@@ -13,11 +13,11 @@ class UsersController extends Controller
 {
     /**
      * The Northstar API client.
-     * @var NorthstarClient
+     * @var Northstar
      */
     protected $northstar;
 
-    public function __construct(NorthstarClient $northstar)
+    public function __construct(Northstar $northstar)
     {
         $this->northstar = $northstar;
 
