@@ -37,7 +37,7 @@
 
             <div class="container__block -narrow">
                 <h3>Statistics</h3>
-                <p>This client has <strong>{{ $client->tokens }}</strong> active refresh tokens.</p>
+                <p>This client has <strong>{{ $client->refresh_tokens }}</strong> active refresh tokens.</p>
             </div>
 
             <div class="container__block -narrow">
