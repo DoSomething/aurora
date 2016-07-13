@@ -31,8 +31,9 @@ class ClientController extends Controller
     public function index()
     {
         $clients = $this->northstar->getAllClients();
+        $key = $this->northstar->get('v2/key');
 
-        return view('clients.index', ['clients' => $clients]);
+        return view('clients.index', ['clients' => $clients, 'key' => $key]);
     }
 
     /**
