@@ -8,7 +8,7 @@
   <div class="wrapper">
       <div class="container__block -narrow">
           <div class="gallery__heading"><h1>All Clients</h1></div>
-          <p>These are the OAuth clients registered in Northstar and the permissions they are allowed to grant. See <a href="https://github.com/DoSomething/northstar/blob/dev/documentation/authentication.md">Northstar's documentation</a> for more details.</p>
+          <p>These are the OAuth clients registered in Northstar and the permissions they are allowed to grant.</p>
       </div>
       <ul class="gallery -duo">
           @forelse($clients as $client)
@@ -34,6 +34,14 @@
       <div class="container__block">
           <a class="button -secondary" href="{{ route('clients.create') }}">New Client</a>
       </div>
+      <div class="container__block -narrow">
+          <h1>Public Key</h1>
+          <p>The public key can be used by other DoSomething.org services (i.e. resource servers) to verify JWT access tokens granted by Northstar (<code>{{ $key['issuer'] }}</code>).</p>
+          <pre>{{ $key['public_key'] }}</pre>
+          <p>See <a href="https://github.com/DoSomething/northstar/blob/dev/documentation/authentication.md">Northstar's documentation</a> for more details.</p>
+      </div>
+
+
 	</div>
 </div>
 @stop
