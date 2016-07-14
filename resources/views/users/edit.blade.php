@@ -7,19 +7,11 @@
 <div class ="container -padded">
   <div class="wrapper">
       <div class="container__block -narrow">
-          <h1>Edit Profile</h1>
+          <h1>{{ $user->displayName() }}</h1>
 
           @include('layout.errors')
 
           {!! Form::model($user, [ 'method' => 'PATCH', 'route' => ['users.update', $user->id]]) !!}
-          <div class="form-item -padded">
-              {!! Form::label('_id', 'Northstar ID', ['class' => 'field-label']) !!}
-              {!! Form::text('_id', NULL, ['class' => 'text-field', 'disabled' => 'true']) !!}
-          </div>
-          <div class="form-item -padded">
-              {!! Form::label('drupal_id', 'Drupal ID', ['class' => 'field-label']) !!}
-              {!! Form::text('drupal_id', NULL, ['class' => 'text-field', 'disabled' => 'true']) !!}
-          </div>
           <div class="form-item -padded">
               {!! Form::label('first_name', 'First Name', ['class' => 'field-label']) !!}
               {!! Form::text('first_name', NULL, ['class' => 'text-field']) !!}
