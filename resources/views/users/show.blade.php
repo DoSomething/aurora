@@ -40,6 +40,7 @@
                 @endif
 
                 <dt>Country:</dt><dd>{{ $user->country or '&mdash;' }}</dd>
+                <dt>Role:</dt><dd>{{ $user->role or '&mdash;' }}</dd>
             </div>
             <div class="container__block -half">
                 <div class="container -padded">
@@ -80,19 +81,8 @@
 
     <div class="container -padded">
         <div class="wrapper">
-            @if($auroraUser)
-                <div class="container__block profile-settings">
-                    <h3>Aurora Profile</h3>
-                    <dt>Role:</dt> <dd>{{ !empty($auroraUser->role) ? $auroraUser->role : '&mdash;' }}</dd>
-                </div>
-
-                @if(Auth::user()->hasRole('admin') || Auth::user()->hasRole('staff'))
-                    <div class="container__block">
-                        <a class="secondary" href="{{ url('aurora-users/' . $auroraUser->id . '/edit') }}">Update Aurora profile</a>
-                    </div>
                 @endif
 
-            @endif
         </div>
     </div>
 @stop
