@@ -16,13 +16,13 @@
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
                     <div class="form-item -padded">
-                        {!! Form::label('client_id', 'Client ID', ['class' => 'field-label']) !!}
-                        {!! Form::text('client_id', $client ->client_id, ['class' => 'text-field', 'disabled' => true]) !!}
+                        {!! Form::label('title', 'Title', ['class' => 'field-label']) !!}
+                        {!! Form::text('title', $client->title, ['class' => 'text-field']) !!}
                     </div>
 
                     <div class="form-item -padded">
-                        {!! Form::label('client_secret', 'Client Secret', ['class' => 'field-label']) !!}
-                        {!! Form::text('client_secret', $client->client_secret, ['class' => 'text-field', 'disabled' => true]) !!}
+                        {!! Form::label('description', 'Description', ['class' => 'field-label']) !!}
+                        {!! Form::textarea('description', $client->description, ['class' => 'text-field']) !!}
                     </div>
 
                     <div class="form-item -padded">

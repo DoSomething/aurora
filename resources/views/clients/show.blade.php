@@ -6,13 +6,11 @@
 
     <div class="container -padded">
         <div class="wrapper">
-            <div class="container__block">
-                <h1>{{ $client->title or title_case($client->client_id) }}</h1>
+            <div class="container__block -narrow">
+                <h1>{{ $client->title }}</h1>
                 @if(! empty($client->description))
                     <p>{{ $client->description }}</p>
                 @endif
-                <p class="footnote">This client was created on <strong>{{ $client->created_at->toFormattedDateString() }}</strong>, and last modified <strong>{{ $client->updated_at->toFormattedDateString() }}</strong>.</p>
-
             </div>
 
             <div class="container__block -half">
@@ -41,9 +39,11 @@
             </div>
 
             <div class="container__block -narrow">
-                <ul class="form-actions -inline">
-                    <li><a class="button -secondary" href="{{ route('clients.edit', [ $client->client_id]) }}">Edit Client</a></li>
-                </ul>
+                <a class="secondary" href="{{ route('clients.edit', [ $client->client_id]) }}">Edit this client</a>
+                <p class="footnote">
+                    Last updated: {{ $client->updated_at->format('F d, Y g:ia') }}<br />
+                    Created: {{ $client->created_at->format('F d, Y g:ia') }}
+                </p>
             </div>
         </div>
     </div>
