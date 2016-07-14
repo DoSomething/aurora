@@ -10,11 +10,11 @@
                 <p>This is a listing of all users with elevated privileges in Northstar. This determines their access
                 and abilities across OAuth client applications.</p>
             </div>
-            @foreach($users as $role => $group)
+            @foreach($groups as $role => $users)
                 <div class="container__block">
                     <h1>{{ ucwords($role) }} users</h1>
-                    @include('users.partials.index-table', ['users' => $group])
-                    {!! $group->links(\Aurora\Http\Presenters\ForgePaginationPresenter::class) !!}
+                    @include('users.partials.index-table', ['users' => $users])
+                    {!! $users->links(\Aurora\Http\Presenters\ForgePaginationPresenter::class) !!}
                 </div>
             @endforeach
         </div>
