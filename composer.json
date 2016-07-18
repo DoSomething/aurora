@@ -7,9 +7,9 @@
     "require": {
         "laravel/framework": "5.1.*",
         "laravelcollective/html": "5.1.*",
-        "guzzlehttp/guzzle": "6.0.*",
+        "guzzlehttp/guzzle": "~6.2.1",
         "doctrine/dbal": "^2.5",
-        "dosomething/northstar": "1.0.0-rc5"
+        "dosomething/northstar": "1.0.0-rc6"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
