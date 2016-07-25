@@ -1,0 +1,13 @@
+/**
+ * Pre-formatted text for code examples. Used
+ * for displaying API key request headers.
+ */
+pre {
+  font-family: "Menlo", "Consolas", "Courier New", serif;
+  background: #efefef;
+  font-size: $font-small;
+  border: 1px solid $light-gray;
+  border-radius: $sm-border-radius;
+  padding: $base-spacing;
+  margin: ($base-spacing / 2) 0;
+}

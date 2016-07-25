@@ -1,0 +1,13 @@
+/**
+ * Profiles
+ */
+.profile-settings dt{
+  float: left;
+  clear: both;
+  font-weight: $weight-bold;
+  padding-right: $base-spacing / 2;
+}
+
+.profile-settings dd{
+  float: left;
+}

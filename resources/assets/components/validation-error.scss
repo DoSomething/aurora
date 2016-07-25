@@ -1,0 +1,10 @@
+/**
+ * Validation
+ */
+.validation-error {
+  margin: ($base-spacing / 2) 0;
+}
+
+.validation-error, .validation-error h4 {
+  color: $error-color;
+}
