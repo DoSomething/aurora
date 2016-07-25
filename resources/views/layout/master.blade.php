@@ -5,7 +5,7 @@
     <title>Aurora</title>
 
     <link rel="stylesheet" href="{{ asset('dist/app.css') }}">
-    <script src="{{ asset('/assets/vendor/neue/modernizr.js') }}"></script>
+    <script src="{{ asset('dist/modernizr.js') }}"></script>
 </head>
 
 <body class="modernizr-no-js">
