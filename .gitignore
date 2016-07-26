@@ -7,5 +7,6 @@ Homestead.json
 .DS_Store
 
 /node_modules
-public/assets/vendor
+public/dist
 npm-debug.log
+.idea

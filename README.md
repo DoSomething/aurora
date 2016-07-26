@@ -6,13 +6,13 @@ This is __Aurora__, our user admin tool. It's the graphical front-end to [Norths
 
 Fork and clone this repository, and install into your local [DS Homestead](https://github.com/DoSomething/ds-homestead).
 
-After installation, run the outstanding migrations & seed the database:
+After installation, install dependencies & run database migrations:
 
-    $ php artisan migrate && php artisan db:seed
+    $ composer install && php artisan migrate
 
-You can build front-end assets (styles & scripts) with Gulp:
+You can build front-end assets (styles & scripts) with [Webpack](https://github.com/DoSomething/webpack-config):
 
-    $ gulp 
+    $ npm start
 
 You may run unit tests locally using PHPUnit:
 
