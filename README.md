@@ -27,6 +27,9 @@ Consider [writing a test case](http://laravel.com/docs/5.1/testing) when adding 
 Most steps you would take when manually testing your code can be automated, which makes it easier for
 yourself & others to review your code and ensures we don't accidentally break something later on!
 
+### Security Vulnerabilities
+We take security very seriously. Any vulnerabilities in Aurora should be reported to [security@dosomething.org](mailto:security@dosomething.org),
+and will be promptly addressed. Thank you for taking the time to responsibly disclose any issues you find.
 
 ### License
 &copy;2016 DoSomething.org. Aurora is free software, and may be redistributed under the terms specified
