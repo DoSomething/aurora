@@ -21,8 +21,8 @@ $router->get('auth/logout', 'Auth\AuthController@getLogout');
 $router->resource('users', 'UsersController', ['except' => ['create', 'store']]);
 $router->get('search', ['as' => 'user.search', 'uses' => 'UsersController@search']);
 
-// Aurora Users
-$router->resource('aurora-users', 'AuroraUsersController', ['only' => ['index', 'edit', 'update']]);
+// Superusers
+$router->resource('superusers', 'SuperusersController', ['only' => ['index']]);
 
 // Key
 $router->resource('clients', 'ClientController');

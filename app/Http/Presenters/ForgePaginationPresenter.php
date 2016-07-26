@@ -27,7 +27,7 @@ class ForgePaginationPresenter implements PresenterContract
     /**
      * Create a new Bootstrap presenter instance.
      *
-     * @param  \Illuminate\Contracts\Pagination\Paginator  $paginator
+     * @param  \Illuminate\Contracts\Pagination\LengthAwarePaginator $paginator
      * @param  \Illuminate\Pagination\UrlWindow|null  $window
      */
     public function __construct($paginator, UrlWindow $window = null)

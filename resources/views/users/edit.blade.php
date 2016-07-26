@@ -7,19 +7,11 @@
 <div class ="container -padded">
   <div class="wrapper">
       <div class="container__block -narrow">
-          <h1>Edit Profile</h1>
+          <h1>{{ $user->displayName() }}</h1>
 
           @include('layout.errors')
 
           {!! Form::model($user, [ 'method' => 'PATCH', 'route' => ['users.update', $user->id]]) !!}
-          <div class="form-item -padded">
-              {!! Form::label('_id', 'Northstar ID', ['class' => 'field-label']) !!}
-              {!! Form::text('_id', NULL, ['class' => 'text-field', 'disabled' => 'true']) !!}
-          </div>
-          <div class="form-item -padded">
-              {!! Form::label('drupal_id', 'Drupal ID', ['class' => 'field-label']) !!}
-              {!! Form::text('drupal_id', NULL, ['class' => 'text-field', 'disabled' => 'true']) !!}
-          </div>
           <div class="form-item -padded">
               {!! Form::label('first_name', 'First Name', ['class' => 'field-label']) !!}
               {!! Form::text('first_name', NULL, ['class' => 'text-field']) !!}
@@ -63,6 +55,12 @@
           <div class="form-item -padded">
               {!! Form::label('country', 'Country', ['class' => 'field-label']) !!}
               {!! Form::text('country', NULL, ['class' => 'text-field']) !!}
+          </div>
+          <div class="form-item -padded">
+              {!! Form::label('role', 'Role', ['class' => 'field-label']) !!}
+              <div class="select">
+                  {!! Form::select('role', ['user' => 'User (default)', 'staff' => 'Staff', 'admin' => 'Administrator']) !!}
+              </div>
           </div>
           <div class="form-actions">
               {!! Form::submit('Save Changes', ['class' => 'button', 'name' => 'complete']) !!}

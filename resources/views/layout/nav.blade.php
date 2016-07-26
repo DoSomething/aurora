@@ -17,8 +17,8 @@
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('aurora-users.index') }}">
-                            <strong class="navigation__title">Aurora Users</strong>
+                        <a href="{{ route('superusers.index') }}">
+                            <strong class="navigation__title">Superusers</strong>
                             <span class="navigation__subtitle">Admins, staff, etc.</span>
                         </a>
                     </li>

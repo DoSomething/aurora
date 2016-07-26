@@ -18,19 +18,6 @@
                 <dt>First Name:</dt><dd>{{ $user->first_name or '&mdash;' }}</dd>
                 <dt>Last Name:</dt><dd>{{ $user->last_name or '&mdash;' }}</dd>
                 <dt>Birthdate:</dt><dd>{{ $user->birthdate or '&mdash;' }}</dd>
-
-                @if(! empty($user->drupal_id))
-                    <dt>Phoenix:</dt><dd><a href="{{ config('services.drupal.url') }}/user/{{ $user->drupal_id }}">{{ $user->drupal_id }}</a></dd>
-                @else
-                    <dt>Phoenix:</dt><dd>&mdash;</dd>
-                @endif
-
-                @if(! empty($user->parse_installation_ids))
-                    <dt>Parse:</dt><dd><code>{{ implode(', ', $user->parse_installation_ids) }}</code></dd>
-                @else
-                    <dt>Parse:</dt><dd>&mdash;</dd>
-                @endif
-
                 <dt>Source:</dt><dd>{{ $user->source or '&mdash;' }}</dd>
 
                 @if (isset($user->addr_street1) || isset($user->addr_street2) || isset($user->addr_city) || isset($user->addr_state) || isset($user->addr_zip) )
@@ -40,6 +27,7 @@
                 @endif
 
                 <dt>Country:</dt><dd>{{ $user->country or '&mdash;' }}</dd>
+                <dt>Role:</dt><dd>{{ $user->role or '&mdash;' }}</dd>
             </div>
             <div class="container__block -half">
                 <div class="container -padded">
@@ -80,19 +68,20 @@
 
     <div class="container -padded">
         <div class="wrapper">
-            @if($auroraUser)
-                <div class="container__block profile-settings">
-                    <h3>Aurora Profile</h3>
-                    <dt>Role:</dt> <dd>{{ !empty($auroraUser->role) ? $auroraUser->role : '&mdash;' }}</dd>
-                </div>
-
-                @if(Auth::user()->hasRole('admin') || Auth::user()->hasRole('staff'))
-                    <div class="container__block">
-                        <a class="secondary" href="{{ url('aurora-users/' . $auroraUser->id . '/edit') }}">Update Aurora profile</a>
-                    </div>
+            <div class="container__block -narrow profile-settings">
+                <h3>Connected Accounts</h3>
+                @if(! empty($user->drupal_id))
+                    <dt>Phoenix:</dt><dd><a href="{{ config('services.drupal.url') }}/user/{{ $user->drupal_id }}">{{ $user->drupal_id }}</a></dd>
+                @else
+                    <dt>Phoenix:</dt><dd>&mdash;</dd>
                 @endif
 
-            @endif
+                @if(! empty($user->parse_installation_ids))
+                    <dt>Parse:</dt><dd><code>{{ implode(', ', $user->parse_installation_ids) }}</code></dd>
+                @else
+                    <dt>Parse:</dt><dd>&mdash;</dd>
+                @endif
+            </div>
         </div>
     </div>
 @stop
