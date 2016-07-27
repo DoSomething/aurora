@@ -32,6 +32,10 @@ class ClientController extends Controller
     public function index()
     {
         $clients = $this->northstar->getAllClients();
+        $clients->setPaginator(LengthAwarePaginator::class, [
+            'path' => 'clients',
+        ]);
+
         $key = $this->northstar->get('v2/key');
 
         return view('clients.index', ['clients' => $clients, 'key' => $key]);
