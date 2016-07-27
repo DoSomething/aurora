@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "b89c011a45d6be863f20eb4592766888",
-    "content-hash": "83b529f7f3e83b5bdce42afb3f3716ec",
+    "hash": "f89ed9f738d41bd0d3ebde612ade7f41",
+    "content-hash": "c80cfdfccd06c3426b278d003c5bed0f",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -621,16 +621,16 @@
         },
         {
             "name": "dosomething/northstar",
-            "version": "v1.0.0-rc6",
+            "version": "v1.0.0-rc7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/DoSomething/northstar-php.git",
-                "reference": "3980c27cf4d3ee5591d222690855ea5c5ec83786"
+                "reference": "821b6ebe02939b241c150ca672e306a37c54f3ed"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/DoSomething/northstar-php/zipball/3980c27cf4d3ee5591d222690855ea5c5ec83786",
-                "reference": "3980c27cf4d3ee5591d222690855ea5c5ec83786",
+                "url": "https://api.github.com/repos/DoSomething/northstar-php/zipball/821b6ebe02939b241c150ca672e306a37c54f3ed",
+                "reference": "821b6ebe02939b241c150ca672e306a37c54f3ed",
                 "shasum": ""
             },
             "require": {
@@ -657,7 +657,7 @@
                 }
             ],
             "description": "PHP API client for Northstar, the DoSomething.org identity API.",
-            "time": "2016-07-18 17:09:35"
+            "time": "2016-07-27 19:24:14"
         },
         {
             "name": "giggsey/libphonenumber-for-php",
@@ -1315,16 +1315,16 @@
         },
         {
             "name": "lcobucci/jwt",
-            "version": "3.1.1",
+            "version": "3.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/lcobucci/jwt.git",
-                "reference": "afea8e682e911a21574fd8519321b32522fa25b5"
+                "reference": "9a8db2cd42346f96993928ff6a6c22563f555ab1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lcobucci/jwt/zipball/afea8e682e911a21574fd8519321b32522fa25b5",
-                "reference": "afea8e682e911a21574fd8519321b32522fa25b5",
+                "url": "https://api.github.com/repos/lcobucci/jwt/zipball/9a8db2cd42346f96993928ff6a6c22563f555ab1",
+                "reference": "9a8db2cd42346f96993928ff6a6c22563f555ab1",
                 "shasum": ""
             },
             "require": {
@@ -1332,7 +1332,7 @@
                 "php": ">=5.5"
             },
             "require-dev": {
-                "mdanter/ecc": "~0.3",
+                "mdanter/ecc": "~0.3.1",
                 "mikey179/vfsstream": "~1.5",
                 "phpmd/phpmd": "~2.2",
                 "phpunit/php-invoker": "~1.1",
@@ -1369,7 +1369,7 @@
                 "JWS",
                 "jwt"
             ],
-            "time": "2016-03-24 22:46:13"
+            "time": "2016-07-27 11:09:37"
         },
         {
             "name": "league/flysystem",
@@ -3705,16 +3705,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "4.8.26",
+            "version": "4.8.27",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "fc1d8cd5b5de11625979125c5639347896ac2c74"
+                "reference": "c062dddcb68e44b563f66ee319ddae2b5a322a90"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/fc1d8cd5b5de11625979125c5639347896ac2c74",
-                "reference": "fc1d8cd5b5de11625979125c5639347896ac2c74",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/c062dddcb68e44b563f66ee319ddae2b5a322a90",
+                "reference": "c062dddcb68e44b563f66ee319ddae2b5a322a90",
                 "shasum": ""
             },
             "require": {
@@ -3773,7 +3773,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2016-05-17 03:09:28"
+            "time": "2016-07-21 06:48:14"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
