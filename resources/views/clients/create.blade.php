@@ -2,19 +2,30 @@
 
 @section('main_content')
 
-    @include('layout.header', ['header' => 'API Keys', 'subtitle' => 'Northstar application access & permissions'])
+    @include('layout.header', ['header' => 'OAuth Clients', 'subtitle' => 'Northstar application access & permissions'])
 
     <div class="container -padded">
         <div class="wrapper">
             <div class="container__block -narrow">
-                <h1>Create Clients</h1>
+                <h1>Create Client</h1>
 
                 @include('layout.errors')
 
                 {!! Form::open(['route' => 'clients.store', 'method' => 'post']) !!}
                     <div class="form-item -padded">
+                        {!! Form::label('title', 'Title', ['class' => 'field-label']) !!}
+                        {!! Form::text('title', null, ['class' => 'text-field', 'placeholder' => 'What\'s this client called?']) !!}
+                    </div>
+
+                    <div class="form-item -padded">
+                        {!! Form::label('description', 'Description', ['class' => 'field-label']) !!}
+                        {!! Form::textarea('description', null, ['class' => 'text-field', 'placeholder' => 'Explain what this client is used for!']) !!}
+                    </div>
+
+                    <div class="form-item -padded">
                         {!! Form::label('client_id', 'Client ID', ['class' => 'field-label']) !!}
-                        {!! Form::text('client_id', null, ['class' => 'text-field']) !!}
+                        {!! Form::text('client_id', null, ['class' => 'text-field', 'placeholder' => 'client-id']) !!}
+                        <span class="footnote">Careful, this cannot be changed later!</span>
                     </div>
 
                     <div class="form-item -padded">

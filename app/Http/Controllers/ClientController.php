@@ -5,6 +5,7 @@ namespace Aurora\Http\Controllers;
 use DoSomething\Northstar\Northstar;
 use DoSomething\Northstar\Resources\NorthstarClient;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class ClientController extends Controller
 {
@@ -31,6 +32,10 @@ class ClientController extends Controller
     public function index()
     {
         $clients = $this->northstar->getAllClients();
+        $clients->setPaginator(LengthAwarePaginator::class, [
+            'path' => 'clients',
+        ]);
+
         $key = $this->northstar->get('v2/key');
 
         return view('clients.index', ['clients' => $clients, 'key' => $key]);
@@ -72,7 +77,7 @@ class ClientController extends Controller
     {
         $this->northstar->createNewClient($request->all());
 
-        return redirect()->route('keys.index')->with('flash_message', ['class' => 'messages', 'text' => 'Cool, new app added!']);
+        return redirect()->route('clients.index')->with('flash_message', ['class' => 'messages', 'text' => 'Cool, new app added!']);
     }
 
     /**

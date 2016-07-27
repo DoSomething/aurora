@@ -44,18 +44,14 @@
                 <div class="danger-zone">
                     <h4 class="danger-zone__heading">Danger Zone&#8482;</h4>
                     <div class="danger-zone__block">
-                        <form action="{{ route('clients.destroy', $client->client_id) }}" method="POST">
-                            <input type="hidden" name="_method" value="DELETE">
-                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                            <div class="form-item">
-                                <label for="role" class="field-label">Delete Account</label>
-                                <p class="footnote">This will <strong>permanently delete</strong> this client, and it will no longer
-                                be able to create new access or refresh tokens. All existing tokens will continue to function until
-                                their expiration (up to 1 hour).
-                            </div>
+                        <div class="form-item">
+                            <label for="role" class="field-label">Delete OAuth Client</label>
+                            <p class="footnote">This will <strong>permanently delete</strong> this client, and it will no longer
+                            be able to create new access or refresh tokens. All existing access tokens will be valid until their
+                            expiration (up to 1 hour).
+                        </div>
 
-                            <button class="button -secondary -danger">Delete Client</button>
-                        </form>
+                        <a class="button -secondary -danger" href="{{ route('clients.destroy', $client->client_id) }}" data-method="DELETE" data-confirm="Are you sure you want to delete this OAuth client? This will prevent any users of this app from logging in or refreshing their access token.">Delete Client</a>
                     </div>
                 </div>
             </div>

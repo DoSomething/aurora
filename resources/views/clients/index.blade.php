@@ -20,16 +20,16 @@
                           </a>
                       </div>
                       <div class="figure__body">
-                          <h4><a href="{{ route('clients.show', [$client->client_id]) }}">{{ $client->client_id }}</a></h4>
+                          <h4><a href="{{ route('clients.show', [$client->client_id]) }}">{{ $client->title }}</a></h4>
                           <span class="footnote">{{ implode(', ', $client->scope) }}</span>
                       </div>
                   </article>
               </li>
           @empty
-              <h3>No API Keys</h3>
+              <h3>No OAuth clients.</h3>
           @endforelse
 
-{{--              {!! $clients->links(\Aurora\Http\Presenters\ForgePaginationPresenter::class) !!}--}}
+          {!! $clients->links(\Aurora\Http\Presenters\ForgePaginationPresenter::class) !!}
       </ul>
       <div class="container__block">
           <a class="button -secondary" href="{{ route('clients.create') }}">New Client</a>
