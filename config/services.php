@@ -26,6 +26,10 @@ return [
         'url' => env('DRUPAL_URL'),
     ],
 
+    'gladiator' => [
+        'url' => env('GLADIATOR_URL', 'https://gladiator.dosomething.org'),
+    ],
+
     'mobile_commons' => [
         'username' => env('MOBILE_COMMONS_USERNAME'),
         'password' => env('MOBILE_COMMONS_PASSWORD'),
