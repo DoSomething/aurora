@@ -76,7 +76,7 @@
                     <dt>Phoenix:</dt><dd>&mdash;</dd>
                 @endif
 
-                <dt>Gladiator:</dt><dd><a href="{{ config('services.gladiator.url') }}/user/{{ $user->id }}">{{ $user->id }}</a></dd>
+                <dt>Gladiator:</dt><dd><a href="{{ config('services.gladiator.url') }}/users/{{ $user->id }}">{{ $user->id }}</a></dd>
 
                 @if(! empty($user->parse_installation_ids))
                     <dt>Parse:</dt><dd><code>{{ implode(', ', $user->parse_installation_ids) }}</code></dd>
