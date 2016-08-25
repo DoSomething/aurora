@@ -9,7 +9,11 @@
         "laravelcollective/html": "5.1.*",
         "guzzlehttp/guzzle": "~6.2.1",
         "doctrine/dbal": "^2.5",
-        "dosomething/northstar": "1.0.0-rc7"
+        "dosomething/northstar": "1.0.0-rc7",
+        "spatie/laravel-backup": "^3.10",
+        "maknz/slack-laravel": "^1.0",
+        "aws/aws-sdk-php-laravel": "^3.1",
+        "league/flysystem-aws-s3-v3": "~1.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
