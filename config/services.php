@@ -17,9 +17,11 @@ return [
     'northstar' => [
         'grant' => 'password',
         'url' => env('NORTHSTAR_URL'),
-        'client_id' => env('NORTHSTAR_CLIENT_ID'),
-        'client_secret' => env('NORTHSTAR_CLIENT_SECRET'),
-        'scope' => ['role:admin', 'role:staff', 'user'],
+        'password' => [
+            'client_id' => env('NORTHSTAR_CLIENT_ID'),
+            'client_secret' => env('NORTHSTAR_CLIENT_SECRET'),
+            'scope' => ['role:admin', 'role:staff', 'user'],
+        ],
     ],
 
     'drupal' => [
