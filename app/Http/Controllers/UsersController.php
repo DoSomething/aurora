@@ -38,7 +38,7 @@ class UsersController extends Controller
             'path' => 'users',
         ]);
 
-        return view('users.index')->with(compact('users'));
+        return view('users.index', compact('users'));
     }
 
     /**
@@ -51,7 +51,7 @@ class UsersController extends Controller
     {
         $auroraUser = AuroraUser::where('northstar_id', $user->id)->first();
 
-        return view('users.show')->with(compact('user', 'auroraUser'));
+        return view('users.show', compact('user', 'auroraUser'));
     }
 
     /**
@@ -62,7 +62,7 @@ class UsersController extends Controller
      */
     public function edit(NorthstarUser $user)
     {
-        return view('users.edit')->with(compact('user'));
+        return view('users.edit', compact('user'));
     }
 
     /**
@@ -164,5 +164,6 @@ class UsersController extends Controller
         foreach ($delete_ids as $id) {
             $this->northstar->deleteUser($id);
         }
+        return view('users.search', compact('users', 'query'));
     }
 }
