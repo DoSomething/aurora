@@ -3,7 +3,6 @@
 namespace Aurora\Http\Controllers;
 
 use Aurora\Models\AuroraUser;
-use Aurora\Services\Drupal;
 use DoSomething\Northstar\Resources\NorthstarUser;
 use DoSomething\Northstar\Northstar;
 use Illuminate\Http\Request;
@@ -128,42 +127,6 @@ class UsersController extends Controller
             return redirect()->route('users.show', [$users->first()->id]);
         }
 
-        return view('users.search')->with(compact('users', 'query'));
-    }
-
-    /**
-     * Display form to merge duplicate users. Multiple users information is
-     * merged into the selected user where blank/different attribute will
-     * be filled or overwritten by the selected keep user.
-     *
-     * @return Response
-     */
-    public function mergedForm()
-    {
-        $inputs = \Input::all();
-        $keep_id = $inputs['keep'];
-        $delete_ids = $inputs['delete'];
-        $keep_user = $this->northstar->getUser('_id', $keep_id);
-        $user = [];
-        foreach ($delete_ids as $delete_id) {
-            $delete_user = $this->northstar->getUser('_id', $delete_id);
-            $user = array_merge($user, array_filter($delete_user), array_filter($keep_user));
-        }
-
-        return \View::make('search.merge-and-delete-form')->with(compact('user'));
-    }
-
-    /**
-     * Making request to NorthstarAPI to delete users marked
-     * for deletion from duplication form
-     */
-    public function deleteUnmergedUsers()
-    {
-        $inputs = \Input::all();
-        $delete_ids = $inputs['delete'];
-        foreach ($delete_ids as $id) {
-            $this->northstar->deleteUser($id);
-        }
         return view('users.search', compact('users', 'query'));
     }
 }
