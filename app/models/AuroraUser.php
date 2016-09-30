@@ -5,6 +5,8 @@ namespace Aurora\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
+use DoSomething\Northstar\Contracts\NorthstarUserContract;
+use DoSomething\Northstar\Laravel\HasNorthstarToken;
 
 /**
  * Class AuroraUser
@@ -13,9 +15,9 @@ use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
  * @method static \Illuminate\Database\Eloquent\Builder|AuroraUser firstOrCreate(array $attributes)
  * @method static \Illuminate\Database\Eloquent\Builder|AuroraUser where(string $field, string $comparison = '=', string $value)
  */
-class AuroraUser extends Model implements AuthenticatableContract
+class AuroraUser extends Model implements AuthenticatableContract, NorthstarUserContract
 {
-    use Authenticatable;
+    use Authenticatable, HasNorthstarToken;
 
     /**
      * The database table used by the model.
@@ -29,7 +31,7 @@ class AuroraUser extends Model implements AuthenticatableContract
      *
      * @var array
      */
-    protected $hidden = ['access_token', 'refresh_token', 'remember_token'];
+    protected $hidden = ['remember_token'];
 
     /**
      * The attributes that are mass assignable.
