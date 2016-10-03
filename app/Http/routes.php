@@ -4,7 +4,7 @@
  * Set routes for the application.
  *
  * @var \Illuminate\Routing\Router $router
- * @see \Northstar\Providers\RouteServiceProvider
+ * @see \Aurora\Providers\RouteServiceProvider
  */
 
 // Homepage
@@ -21,5 +21,5 @@ $router->get('search', ['as' => 'user.search', 'uses' => 'UsersController@search
 // Superusers
 $router->resource('superusers', 'SuperusersController', ['only' => ['index']]);
 
-// Key
+// Clients
 $router->resource('clients', 'ClientController');
