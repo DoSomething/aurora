@@ -15,12 +15,13 @@ return [
     */
 
     'northstar' => [
-        'grant' => 'password',
+        'grant' => 'authorization_code',
         'url' => env('NORTHSTAR_URL'),
-        'password' => [
+        'authorization_code' => [
             'client_id' => env('NORTHSTAR_CLIENT_ID'),
             'client_secret' => env('NORTHSTAR_CLIENT_SECRET'),
-            'scope' => ['role:admin', 'role:staff', 'user'],
+            'scope' => ['role:admin', 'role:staff', 'user', 'openid'],
+            'redirect_uri' => 'auth/login',
         ],
     ],
 

@@ -7,14 +7,11 @@
  * @see \Northstar\Providers\RouteServiceProvider
  */
 
-// Redirect to the users index from the homepage
-$router->get('/', function () {
-    return redirect()->route('users.index');
-});
+// Homepage
+$router->get('/', 'HomeController@home');
 
 // Authentication
 $router->get('auth/login', 'Auth\AuthController@getLogin');
-$router->post('auth/login', 'Auth\AuthController@postLogin');
 $router->get('auth/logout', 'Auth\AuthController@getLogout');
 
 // Users
