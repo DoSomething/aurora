@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "825b58de01865c78e15a0a8c938aa47a",
-    "content-hash": "d31c6d660ff5a827b9d0ae096237a6bb",
+    "hash": "48cabb572675d318d569205123bcad09",
+    "content-hash": "7916ee9294bd04f4a1629b99e6cfab51",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -756,17 +756,17 @@
             "time": "2014-09-09 13:34:57"
         },
         {
-            "name": "dosomething/northstar",
-            "version": "v1.0.0-rc11",
+            "name": "dosomething/gateway",
+            "version": "v1.0.0-rc12",
             "source": {
                 "type": "git",
-                "url": "https://github.com/DoSomething/northstar-php.git",
-                "reference": "14bf67b5443d3be31e074f2b6867b86bfaa284a2"
+                "url": "https://github.com/DoSomething/gateway.git",
+                "reference": "fdac8a325a36414f7d3ff982d0c326222b0d9f8e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/DoSomething/northstar-php/zipball/14bf67b5443d3be31e074f2b6867b86bfaa284a2",
-                "reference": "14bf67b5443d3be31e074f2b6867b86bfaa284a2",
+                "url": "https://api.github.com/repos/DoSomething/gateway/zipball/fdac8a325a36414f7d3ff982d0c326222b0d9f8e",
+                "reference": "fdac8a325a36414f7d3ff982d0c326222b0d9f8e",
                 "shasum": ""
             },
             "require": {
@@ -781,8 +781,11 @@
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "DoSomething\\Northstar\\": "src/"
-                }
+                    "DoSomething\\Gateway\\": "src/"
+                },
+                "files": [
+                    "src/Laravel/helpers.php"
+                ]
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -794,8 +797,8 @@
                     "email": "dfurnes@dosomething.org"
                 }
             ],
-            "description": "PHP API client for Northstar, the DoSomething.org identity API.",
-            "time": "2016-10-04 17:05:17"
+            "description": "Standard PHP API client for DoSomething.org services.",
+            "time": "2016-10-04 18:21:58"
         },
         {
             "name": "giggsey/libphonenumber-for-php",
@@ -4920,7 +4923,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "dosomething/northstar": 5
+        "dosomething/gateway": 5
     },
     "prefer-stable": false,
     "prefer-lowest": false,

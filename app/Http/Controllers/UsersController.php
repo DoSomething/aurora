@@ -3,8 +3,8 @@
 namespace Aurora\Http\Controllers;
 
 use Aurora\Models\AuroraUser;
-use DoSomething\Northstar\Resources\NorthstarUser;
-use DoSomething\Northstar\Northstar;
+use DoSomething\Gateway\Resources\NorthstarUser;
+use DoSomething\Gateway\Northstar;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 
