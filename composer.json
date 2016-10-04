@@ -9,7 +9,7 @@
         "laravelcollective/html": "5.1.*",
         "guzzlehttp/guzzle": "~6.2.1",
         "doctrine/dbal": "^2.5",
-        "dosomething/northstar": "1.0.0-rc10",
+        "dosomething/northstar": "v1.0.0-rc11",
         "spatie/laravel-backup": "^3.10",
         "maknz/slack-laravel": "^1.0",
         "aws/aws-sdk-php-laravel": "^3.1",

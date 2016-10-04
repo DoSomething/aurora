@@ -4,17 +4,14 @@
  * Set routes for the application.
  *
  * @var \Illuminate\Routing\Router $router
- * @see \Northstar\Providers\RouteServiceProvider
+ * @see \Aurora\Providers\RouteServiceProvider
  */
 
-// Redirect to the users index from the homepage
-$router->get('/', function () {
-    return redirect()->route('users.index');
-});
+// Homepage
+$router->get('/', 'HomeController@home');
 
 // Authentication
 $router->get('auth/login', 'Auth\AuthController@getLogin');
-$router->post('auth/login', 'Auth\AuthController@postLogin');
 $router->get('auth/logout', 'Auth\AuthController@getLogout');
 
 // Users
@@ -24,5 +21,5 @@ $router->get('search', ['as' => 'user.search', 'uses' => 'UsersController@search
 // Superusers
 $router->resource('superusers', 'SuperusersController', ['only' => ['index']]);
 
-// Key
+// Clients
 $router->resource('clients', 'ClientController');
