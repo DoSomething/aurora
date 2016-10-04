@@ -2,7 +2,7 @@
 
 namespace Aurora\Http\Controllers;
 
-use DoSomething\Northstar\Northstar;
+use DoSomething\Gateway\Northstar;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 

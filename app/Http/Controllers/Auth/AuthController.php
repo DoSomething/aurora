@@ -3,7 +3,7 @@
 namespace Aurora\Http\Controllers\Auth;
 
 use Aurora\Http\Controllers\Controller;
-use DoSomething\Northstar\Northstar;
+use DoSomething\Gateway\Northstar;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 

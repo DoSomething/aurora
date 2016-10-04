@@ -5,8 +5,8 @@ namespace Aurora\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
-use DoSomething\Northstar\Contracts\NorthstarUserContract;
-use DoSomething\Northstar\Laravel\HasNorthstarToken;
+use DoSomething\Gateway\Contracts\NorthstarUserContract;
+use DoSomething\Gateway\Laravel\HasNorthstarToken;
 
 /**
  * Class AuroraUser

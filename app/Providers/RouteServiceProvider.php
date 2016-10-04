@@ -2,20 +2,12 @@
 
 namespace Aurora\Providers;
 
-use DoSomething\Northstar\Northstar;
-use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Routing\Router;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class RouteServiceProvider extends ServiceProvider
 {
-    /**
-     * The Northstar API client.
-     * @var Northstar
-     */
-    private $northstar;
-
     /**
      * This namespace is applied to the controller routes in your routes file.
      *
@@ -32,10 +24,10 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot(Router $router)
     {
-        $northstar = app('northstar');
+        $northstar = gateway('northstar');
 
         $router->bind('users', function ($id) use ($northstar) {
-            $user = $northstar->getUser('_id', $id);
+            $user = $northstar->getUser('id', $id);
 
             if (! $user) {
                 throw new NotFoundHttpException;
