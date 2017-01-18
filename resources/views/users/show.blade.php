@@ -78,6 +78,12 @@
 
                 <dt>Gladiator:</dt><dd><a href="{{ config('services.gladiator.url') }}/users/{{ $user->id }}">{{ $user->id }}</a></dd>
 
+                @if(! empty($user->mobilecommons_id))
+                    <dt>Mobile Commons:</dt><dd><a href="https://secure.mcommons.com/profiles/{{ $user->mobilecommons_id }}">{{ $user->mobilecommons_id }}</a> <code class="footnote">({{ $user->mobilecommons_status or '–' }})</code></dd>
+                @else
+                    <dt>Mobile Commons:</dt><dd>&mdash;</dd>
+                @endif
+
                 @if(! empty($user->parse_installation_ids))
                     <dt>Parse:</dt><dd><code>{{ implode(', ', $user->parse_installation_ids) }}</code></dd>
                 @else
