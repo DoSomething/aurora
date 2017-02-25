@@ -30,4 +30,3 @@ deploy:
           subdomain: dosomething
           token: $SLACK_TOKEN
           channel: $SLACK_ROOM
-
