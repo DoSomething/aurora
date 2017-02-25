@@ -1,4 +1,4 @@
-box: dosomething/ds-wercker-box
+box: dosomething/ds-docker-php
 build:
     steps:
       - leipert/composer-install@0.9.1
