@@ -2,8 +2,6 @@
 
 namespace Aurora\Services;
 
-use GuzzleHttp\Client;
-
 class MobileCommons
 {
     protected $client;
