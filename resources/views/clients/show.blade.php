@@ -11,6 +11,9 @@
                 @if(! empty($client->description))
                     <p>{{ $client->description }}</p>
                 @endif
+                @if(! empty($client->redirect_uri))
+                    <p><b>Redirect URI:</b> {{ $client->redirect_uri }}</p>
+                @endif
             </div>
 
             <div class="container__block -half">
