@@ -23,6 +23,11 @@
                     </div>
 
                     <div class="form-item -padded">
+                        {!! Form::label('redirect_uri', 'Redirect URI', ['class' => 'field-label']) !!}
+                        {!! Form::text('redirect_uri', null, ['class' => 'text-field', 'placeholder' => 'Where does this client redirect post-auth?']) !!}
+                    </div>
+
+                    <div class="form-item -padded">
                         {!! Form::label('client_id', 'Client ID', ['class' => 'field-label']) !!}
                         {!! Form::text('client_id', null, ['class' => 'text-field', 'placeholder' => 'client-id']) !!}
                         <span class="footnote">Careful, this cannot be changed later!</span>

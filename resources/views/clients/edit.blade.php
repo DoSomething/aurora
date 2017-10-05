@@ -26,6 +26,11 @@
                     </div>
 
                     <div class="form-item -padded">
+                        {!! Form::label('redirect_uri', 'Redirect URI', ['class' => 'field-label']) !!}
+                        {!! Form::text('redirect_uri', $client->redirect_uri, ['class' => 'text-field']) !!}
+                    </div>
+
+                    <div class="form-item -padded">
                         {!! Form::label('scope', 'Allowed Scopes', ['class' => 'field-label']) !!}
                         @foreach($scopes as $scope => $details)
                             <label class="option -checkbox">
