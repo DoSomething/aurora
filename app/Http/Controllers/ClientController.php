@@ -75,7 +75,14 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
-        $this->northstar->createNewClient($request->all());
+        $parameters = $request->all();
+
+        // If more than one `redirect_uri` is provided, parse into an array.
+        if (str_contains($parameters['redirect_uri'], ',')) {
+            $parameters['redirect_uri'] = array_map('trim', explode(',', $parameters['redirect_uri']));
+        }
+
+        $this->northstar->createNewClient($parameters);
 
         return redirect()->route('clients.index')->with('flash_message', ['class' => 'messages', 'text' => 'Cool, new app added!']);
     }
@@ -104,7 +111,14 @@ class ClientController extends Controller
      */
     public function update(NorthstarClient $client, Request $request)
     {
-        $this->northstar->updateClient($client->client_id, $request->all());
+        $parameters = $request->all();
+
+        // If more than one `redirect_uri` is provided, parse into an array.
+        if (str_contains($parameters['redirect_uri'], ',')) {
+            $parameters['redirect_uri'] = array_map('trim', explode(',', $parameters['redirect_uri']));
+        }
+
+        $this->northstar->updateClient($client->client_id, $parameters);
 
         return redirect()->route('clients.index')->with('flash_message', ['class' => 'messages', 'text' => 'Cool, saved those changes!']);
     }
