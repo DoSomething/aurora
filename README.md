@@ -4,15 +4,22 @@ This is __Aurora__, our user admin tool. It's the graphical front-end to [Norths
 
 ### Getting Started
 
-Fork and clone this repository, and install into your local [DS Homestead](https://github.com/DoSomething/ds-homestead).
+Fork and clone this repository, and [add it to your Homestead](https://github.com/DoSomething/communal-docs/blob/master/Homestead/readme.md).
 
-After installation, install dependencies & run database migrations:
+```sh
+# Install dependencies:
+$ composer install && npm install
+    
+# Copy the default environment variables:
+$ cp .env.example .env
 
-    $ composer install && php artisan migrate
+# Make app key & run database migrations:
+$ php artisan key:generate
+$ php artisan migrate
 
-You can build front-end assets (styles & scripts) with [Webpack](https://github.com/DoSomething/webpack-config):
-
-    $ npm start
+# And finally, build the frontend assets:
+$ npm run build
+```
 
 You may run unit tests locally using PHPUnit:
 
