@@ -32,8 +32,8 @@
                 <code>{{ $client->client_secret }}</code><br><br>
 
                 @if($client->allowed_grant == 'authorization_code')
-                    <label class="field-label">Redirect URI:</label>
-                    <code>{{ $client->redirect_uri }}</code>
+                    <label class="field-label">Redirect URIs:</label>
+                    <code>{{ implode(', ', $client->redirect_uri) }}</code>
                 @endif
             </div>
 

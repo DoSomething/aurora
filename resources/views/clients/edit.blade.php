@@ -34,7 +34,7 @@
 
                     <div class="form-item -padded">
                         {!! Form::label('redirect_uri', 'Redirect URI', ['class' => 'field-label']) !!}
-                        {!! Form::text('redirect_uri', $client->redirect_uri, ['class' => 'text-field']) !!}
+                        {!! Form::text('redirect_uri', implode(', ', $client->redirect_uri), ['class' => 'text-field']) !!}
                         <em class="footnote">This is a comma-separated list of URLs that can be used to login with this client.</em>
                     </div>
 

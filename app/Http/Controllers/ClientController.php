@@ -77,10 +77,8 @@ class ClientController extends Controller
     {
         $parameters = $request->all();
 
-        // If more than one `redirect_uri` is provided, parse into an array.
-        if (str_contains($parameters['redirect_uri'], ',')) {
-            $parameters['redirect_uri'] = array_map('trim', explode(',', $parameters['redirect_uri']));
-        }
+        // Transform 'redirect_uri' from a CSV into an array of strings.
+        $parameters['redirect_uri'] = array_map('trim', explode(',', $parameters['redirect_uri']));
 
         $this->northstar->createNewClient($parameters);
 
@@ -113,10 +111,8 @@ class ClientController extends Controller
     {
         $parameters = $request->all();
 
-        // If more than one `redirect_uri` is provided, parse into an array.
-        if (str_contains($parameters['redirect_uri'], ',')) {
-            $parameters['redirect_uri'] = array_map('trim', explode(',', $parameters['redirect_uri']));
-        }
+        // Transform 'redirect_uri' from a CSV into an array of strings.
+        $parameters['redirect_uri'] = array_map('trim', explode(',', $parameters['redirect_uri']));
 
         $this->northstar->updateClient($client->client_id, $parameters);
 
