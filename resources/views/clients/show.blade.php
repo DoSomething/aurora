@@ -33,7 +33,7 @@
 
                 @if($client->allowed_grant == 'authorization_code')
                     <label class="field-label">Redirect URIs:</label>
-                    <code>{{ implode(', ', $client->redirect_uri) }}</code>
+                    <code>{{ array_to_csv($client->redirect_uri) }}</code>
                 @endif
             </div>
 
