@@ -11,19 +11,30 @@
                 @if(! empty($client->description))
                     <p>{{ $client->description }}</p>
                 @endif
-                @if(! empty($client->redirect_uri))
-                    <p><b>Redirect URI:</b> {{ $client->redirect_uri }}</p>
-                @endif
             </div>
 
             <div class="container__block -half">
                 <h3>Credentials</h3>
-                <p>These credentials will allow applications to create tokens and act as this client. Keep them safe! See the <a href="https://github.com/DoSomething/northstar/blob/dev/documentation/authentication.md">Northstar documentation</a> for more details.</p>
+                @if($client->allowed_grant == 'authorization_code')
+                    <p>This is an application that users can login to via Northstar,
+                    using the <a href="https://git.io/vduUZ">Authorization Code grant</a>.</p>
+                @elseif($client->allowed_grant == 'client_credentials')
+                    <p>This is a machine client that requests tokens via the
+                    <a href="https://git.io/vduUC">Client Credentials grant</a>.</p>
+                @else
+                    <p>This client uses the <code>'{{ $client->allowed_grant }}'</code> grant.</p>
+                @endif
+
                 <br>
                 <label class="field-label">Client ID:</label>
                 <code>{{ $client->client_id }}</code><br><br>
                 <label class="field-label">Client Secret:</label>
-                <code>{{ $client->client_secret }}</code>
+                <code>{{ $client->client_secret }}</code><br><br>
+
+                @if($client->allowed_grant == 'authorization_code')
+                    <label class="field-label">Redirect URIs:</label>
+                    <code>{{ array_to_csv($client->redirect_uri) }}</code>
+                @endif
             </div>
 
             <div class="container__block -half">

@@ -23,8 +23,16 @@
                     </div>
 
                     <div class="form-item -padded">
+                        {!! Form::label('allowed_grant', 'Client Type', ['class' => 'field-label']) !!}
+                        <div class="select">
+                            {!! Form::select('allowed_grant', ['authorization_code' => 'Web (Authorization Code grant)', 'client_credentials' => 'Machine (Client Credentials grant)']) !!}
+                        </div>
+                    </div>
+
+                    <div class="form-item -padded">
                         {!! Form::label('redirect_uri', 'Redirect URI', ['class' => 'field-label']) !!}
-                        {!! Form::text('redirect_uri', null, ['class' => 'text-field', 'placeholder' => 'Where does this client redirect post-auth?']) !!}
+                        {!! Form::text('redirect_uri', null, ['class' => 'text-field', 'placeholder' => 'https://app.dosomething.org/login']) !!}
+                        <em class="footnote">This is a comma-separated list of URLs that can be used to login with this client.</em>
                     </div>
 
                     <div class="form-item -padded">

@@ -16,7 +16,7 @@
                   <article class="figure -left">
                       <div class="figure__media">
                           <a href="{{ route('clients.show', [$client->client_id]) }}">
-                              <img alt="key" src="/images/key{{ in_array('admin', $client->scope) ? '-admin' : '' }}.svg" />
+                              <img alt="key" src="/images/{{ $client->allowed_grant === 'authorization_code' ? 'user' : 'machine'}}.svg" />
                           </a>
                       </div>
                       <div class="figure__body">
