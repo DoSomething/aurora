@@ -48,9 +48,7 @@ class UsersController extends Controller
      */
     public function show(NorthstarUser $user)
     {
-        $auroraUser = AuroraUser::where('northstar_id', $user->id)->first();
-
-        return view('users.show', compact('user', 'auroraUser'));
+        return view('users.show', compact('user'));
     }
 
     /**
