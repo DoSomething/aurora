@@ -20,7 +20,7 @@
                           </a>
                       </div>
                       <div class="figure__body">
-                          <h4><a href="{{ route('clients.show', [$client->client_id]) }}">{{ $client->title }}</a></h4>
+                          <h4><a href="{{ route('clients.show', [$client->client_id]) }}">{{ $client->client_id }}</a></h4>
                           <span class="footnote">{{ implode(', ', $client->scope) }}</span>
                       </div>
                   </article>
