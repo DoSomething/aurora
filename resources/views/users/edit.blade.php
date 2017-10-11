@@ -56,12 +56,14 @@
               {!! Form::label('country', 'Country', ['class' => 'field-label']) !!}
               {!! Form::text('country', NULL, ['class' => 'text-field']) !!}
           </div>
-          <div class="form-item -padded">
-              {!! Form::label('role', 'Role', ['class' => 'field-label']) !!}
-              <div class="select">
-                  {!! Form::select('role', ['user' => 'User (default)', 'staff' => 'Staff', 'admin' => 'Administrator']) !!}
+          @if (auth()->user()->hasRole('admin'))
+              <div class="form-item -padded">
+                  {!! Form::label('role', 'Role', ['class' => 'field-label']) !!}
+                  <div class="select">
+                      {!! Form::select('role', ['user' => 'User (default)', 'staff' => 'Staff', 'admin' => 'Administrator']) !!}
+                  </div>
               </div>
-          </div>
+          @endif
           <div class="form-actions">
               {!! Form::submit('Save Changes', ['class' => 'button', 'name' => 'complete']) !!}
           </div>
