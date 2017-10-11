@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\HtmlString;
+
 /**
  * Turn the given array of strings into a CSV.
  *
@@ -20,4 +22,18 @@ function array_to_csv(array $array)
 function csv_to_array($string)
 {
     return array_map('trim', explode(',', $string));
+}
+
+/**
+ * Format a string of Markdown into HTML.
+ *
+ * @param $source
+ * @return string
+ */
+function markdown($source)
+{
+    $parsedown = Parsedown::instance();
+    $markup = $parsedown->setMarkupEscaped(true)->text($source);
+
+    return new HtmlString($markup);
 }

@@ -9,7 +9,7 @@
             <div class="container__block -narrow">
                 <h1>{{ $client->title }}</h1>
                 @if(! empty($client->description))
-                    <p>{{ $client->description }}</p>
+                    <p>{{ markdown($client->description) }}</p>
                 @endif
             </div>
 
