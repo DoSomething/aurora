@@ -46,8 +46,6 @@ class RouteServiceProvider extends ServiceProvider
             return $key;
         });
 
-        $router->model('aurora-users', '\Aurora\Models\AuroraUser');
-
         parent::boot($router);
     }
 
