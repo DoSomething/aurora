@@ -2,7 +2,6 @@
 
 namespace Aurora\Http\Controllers;
 
-use Aurora\Models\AuroraUser;
 use DoSomething\Gateway\Resources\NorthstarUser;
 use DoSomething\Gateway\Northstar;
 use Illuminate\Http\Request;
@@ -48,9 +47,7 @@ class UsersController extends Controller
      */
     public function show(NorthstarUser $user)
     {
-        $auroraUser = AuroraUser::where('northstar_id', $user->id)->first();
-
-        return view('users.show', compact('user', 'auroraUser'));
+        return view('users.show', compact('user'));
     }
 
     /**
