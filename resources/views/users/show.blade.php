@@ -26,6 +26,8 @@
                     <dt>Address:</dt><dd>&mdash;</dd>
                 @endif
 
+                <dt>SMS Status:</dt><dd>{{ $user->sms_status or '&mdash;' }}</dd>
+                <dt>SMS Paused:</dt><dd>{{ $user->sms_paused ? '✔' : '✘' }}</dd>
                 <dt>Country:</dt><dd>{{ $user->country or '&mdash;' }}</dd>
                 <dt>Role:</dt><dd>{{ $user->role or '&mdash;' }}</dd>
             </div>
@@ -79,15 +81,9 @@
                 <dt>Gladiator:</dt><dd><a href="{{ config('services.gladiator.url') }}/users/{{ $user->id }}">{{ $user->id }}</a></dd>
 
                 @if(! empty($user->mobilecommons_id))
-                    <dt>Mobile Commons:</dt><dd><a href="https://secure.mcommons.com/profiles/{{ $user->mobilecommons_id }}">{{ $user->mobilecommons_id }}</a> <code class="footnote">({{ $user->mobilecommons_status or '–' }})</code></dd>
+                    <dt>Mobile Commons:</dt><dd><a href="https://secure.mcommons.com/profiles/{{ $user->mobilecommons_id }}">{{ $user->mobilecommons_id }}</a></dd>
                 @else
                     <dt>Mobile Commons:</dt><dd>&mdash;</dd>
-                @endif
-
-                @if(! empty($user->parse_installation_ids))
-                    <dt>Parse:</dt><dd><code>{{ implode(', ', $user->parse_installation_ids) }}</code></dd>
-                @else
-                    <dt>Parse:</dt><dd>&mdash;</dd>
                 @endif
             </div>
         </div>
