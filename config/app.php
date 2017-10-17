@@ -166,11 +166,12 @@ return [
         /*
          * Package Service Providers...
          */
-        DoSomething\Gateway\Laravel\GatewayServiceProvider::class,
-        Collective\Html\HtmlServiceProvider::class,
-        Spatie\Backup\BackupServiceProvider::class,
-        Maknz\Slack\Laravel\ServiceProvider::class,
         Aws\Laravel\AwsServiceProvider::class,
+        Collective\Html\HtmlServiceProvider::class,
+        DoSomething\Gateway\Laravel\GatewayServiceProvider::class,
+        Laravel\Tinker\TinkerServiceProvider::class,
+        Maknz\Slack\Laravel\ServiceProvider::class,
+        Spatie\Backup\BackupServiceProvider::class,
 
         /*
          * Application Service Providers...
