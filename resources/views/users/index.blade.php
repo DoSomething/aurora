@@ -15,7 +15,7 @@
       <div class="container__block">
           @if ($users)
               @include('users.partials.index-table', ['users' => $users])
-              {!! $users->links() !!}
+              {{ $users->links() }}
           @endif
       </div>
 

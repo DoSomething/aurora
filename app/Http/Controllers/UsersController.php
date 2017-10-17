@@ -6,6 +6,7 @@ use DoSomething\Gateway\Resources\NorthstarUser;
 use DoSomething\Gateway\Northstar;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Pagination\Paginator;
 
 class UsersController extends Controller
 {
@@ -31,8 +32,9 @@ class UsersController extends Controller
      */
     public function index(Request $request)
     {
-        $users = $this->northstar->getAllUsers($request->all());
-        $users->setPaginator(LengthAwarePaginator::class, [
+        $inputs = array_merge($request->all(), ['pagination' => 'cursor']);
+        $users = $this->northstar->getAllUsers($inputs);
+        $users->setPaginator(Paginator::class, [
             'path' => 'users',
         ]);
 

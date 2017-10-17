@@ -29,7 +29,7 @@
               <h3>No OAuth clients.</h3>
           @endforelse
 
-          {!! $clients->links(\Aurora\Http\Presenters\ForgePaginationPresenter::class) !!}
+          {{ $clients->links() }}
       </ul>
       <div class="container__block">
           <a class="button -secondary" href="{{ route('clients.create') }}">New Client</a>
