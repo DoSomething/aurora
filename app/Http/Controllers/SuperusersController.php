@@ -30,9 +30,11 @@ class SuperusersController extends Controller
      */
     public function index(Request $request)
     {
+        $page = $request->query('page', []);
+
         $admins = $this->northstar->getAllUsers([
             'filter' => ['role' => 'admin'],
-            'page' => $request->get('page[admin]', 1, true),
+            'page' => array_get($page, 'admin', 1),
         ]);
         $admins->setPaginator(LengthAwarePaginator::class, [
             'path' => 'superusers',
@@ -41,7 +43,7 @@ class SuperusersController extends Controller
 
         $staff = $this->northstar->getAllUsers([
             'filter' => ['role' => 'staff'],
-            'page' => $request->get('page[staff]', 1, true),
+            'page' => array_get($page, 'staff', 1),
         ]);
         $staff->setPaginator(LengthAwarePaginator::class, [
             'path' => 'superusers',
