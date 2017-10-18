@@ -32,13 +32,19 @@ class UsersController extends Controller
      */
     public function index(Request $request)
     {
+        // Cache the total user count for 15 minutes so we can make fast cursor-based
+        // queries, but still show the total number of records to admins.
+        $total = remember('users.count', 15, function () {
+            return gateway('northstar')->getAllUsers()->total();
+        });
+
         $inputs = array_merge($request->all(), ['pagination' => 'cursor']);
         $users = $this->northstar->getAllUsers($inputs);
         $users->setPaginator(Paginator::class, [
             'path' => 'users',
         ]);
 
-        return view('users.index', compact('users'));
+        return view('users.index', compact('users', 'total'));
     }
 
     /**
