@@ -115,6 +115,9 @@ class ClientController extends Controller
         // Transform 'redirect_uri' from a CSV into an array of strings.
         $parameters['redirect_uri'] = csv_to_array($parameters['redirect_uri']);
 
+        // Ensure that all scopes can be removed from a client.
+        $parameters['scope'] = ! empty($parameters['scope']) ? $parameters['scope'] : [];
+
         $this->northstar->updateClient($client->client_id, $parameters);
 
         return redirect()->route('clients.index')->with('flash_message', ['class' => 'messages', 'text' => 'Cool, saved those changes!']);
