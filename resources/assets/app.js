@@ -10,10 +10,16 @@ import confirm from './utilities/confirm';
 import formLoader from './utilities/form-loader';
 import methodLink from './utilities/method-link';
 
+// Users
+import lazyCount from './users/lazy-user-count';
+
 /**
  * Let's go!
  */
 ready(function() {
+  // Lazy-load user count in the background.
+  lazyCount.initialize();
+
   // Initialize `data-confirm` link handler.
   confirm.initialize();
 
