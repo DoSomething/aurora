@@ -3,7 +3,7 @@
     "require": {
         "php": ">=7.0.0",
         "doctrine/dbal": "^2.5",
-        "dosomething/gateway": "^1.9.0",
+        "dosomething/gateway": "v1.9.3",
         "erusev/parsedown": "^1.6",
         "fideloper/proxy": "^3.3",
         "guzzlehttp/guzzle": "~6.2.1",

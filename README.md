@@ -13,8 +13,9 @@ $ composer install && npm install
 # Copy the default environment variables:
 $ cp .env.example .env
 
-# Make app key & run database migrations:
+# Make app key, get Northstar public key, & run migrations:
 $ php artisan key:generate
+$ php artisan gateway:key
 $ php artisan migrate
 
 # And finally, build the frontend assets:
