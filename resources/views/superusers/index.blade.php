@@ -14,7 +14,7 @@
                 <div class="container__block">
                     <h1>{{ ucwords($role) }} users</h1>
                     @include('users.partials.index-table', ['users' => $users])
-                    {!! $users->links(\Aurora\Http\Presenters\ForgePaginationPresenter::class) !!}
+                    {{ $users->links() }}
                 </div>
             @endforeach
         </div>

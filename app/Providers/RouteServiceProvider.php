@@ -4,6 +4,7 @@ namespace Aurora\Providers;
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -23,9 +24,27 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
-
         parent::boot();
+
+        Route::bind('user', function ($id) {
+            $user = gateway('northstar')->getUser('id', $id);
+
+            if (! $user) {
+                throw new NotFoundHttpException;
+            }
+
+            return $user;
+        });
+
+        Route::bind('client', function ($id) {
+            $key = gateway('northstar')->getClient($id);
+
+            if (! $key) {
+                throw new NotFoundHttpException;
+            }
+
+            return $key;
+        });
     }
 
     /**

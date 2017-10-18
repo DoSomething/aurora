@@ -27,11 +27,12 @@ class ClientController extends Controller
      * Display a listing of the resource.
      * GET /clients
      *
+     * @param Request $request
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $clients = $this->northstar->getAllClients();
+        $clients = $this->northstar->getAllClients($request->all());
         $clients->setPaginator(LengthAwarePaginator::class, [
             'path' => 'clients',
         ]);
