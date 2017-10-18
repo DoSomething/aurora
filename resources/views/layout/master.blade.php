@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Aurora</title>
 
-    <link rel="stylesheet" href="{{ asset('dist/app.css') }}">
+    <link rel="stylesheet" href="{{ elixir('app.css', 'dist') }}">
     <script src="{{ asset('dist/modernizr.js') }}"></script>
     <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
@@ -26,6 +26,7 @@
 </div>
 </body>
 
-<script src="{{ asset('/dist/app.js') }}"></script>
+
+<script src="{{ elixir('app.js', 'dist') }}"></script>
 
 </html>
