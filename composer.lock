@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "8fa74b17c5e0f341978f42673dc2c534",
+    "content-hash": "58318abff633503aaaa4c92354ca576e",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -591,16 +591,16 @@
         },
         {
             "name": "dosomething/gateway",
-            "version": "dev-pagination",
+            "version": "v1.9.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/DoSomething/gateway.git",
-                "reference": "1ad86f9688cf234c40454a5bfc6e106a12087213"
+                "reference": "c1250977bd1ec99201af5fd92c468586b68fd8c3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/DoSomething/gateway/zipball/1ad86f9688cf234c40454a5bfc6e106a12087213",
-                "reference": "1ad86f9688cf234c40454a5bfc6e106a12087213",
+                "url": "https://api.github.com/repos/DoSomething/gateway/zipball/c1250977bd1ec99201af5fd92c468586b68fd8c3",
+                "reference": "c1250977bd1ec99201af5fd92c468586b68fd8c3",
                 "shasum": ""
             },
             "require": {
@@ -639,7 +639,7 @@
                 }
             ],
             "description": "Standard PHP API client for DoSomething.org services.",
-            "time": "2017-10-17T20:03:13+00:00"
+            "time": "2017-10-18T18:11:37+00:00"
         },
         {
             "name": "egulias/email-validator",
@@ -5595,9 +5595,7 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "dosomething/gateway": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
