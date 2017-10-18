@@ -50,3 +50,15 @@ function remember($key, $minutes, Closure $callback)
 {
     return app('cache')->remember($key, $minutes, $callback);
 }
+
+/**
+ * Create a script tag to set a global variable.
+ *
+ * @param $json
+ * @param string $store
+ * @return HtmlString
+ */
+function scriptify($json = [], $store = 'STATE')
+{
+    return new HtmlString('<script type="text/javascript">window.'.$store.' = '.json_encode($json).'</script>');
+}
