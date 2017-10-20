@@ -41,7 +41,7 @@ class CheckRole
             if ($request->ajax()) {
                 return response('Unauthorized.', 401);
             } else {
-                return view('auth.unauthorized');
+                return response()->view('auth.unauthorized');
             }
         }
 
