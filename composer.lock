@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "242b2c350facb6e312e405c3a1b17981",
+    "content-hash": "5bef649b395d164b5bf0b43d12445baa",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.36.30",
+            "version": "3.36.31",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "356d36a46e5cfd2f061fa33a5604fa8ab7acf4f2"
+                "reference": "e3135c1f6bc797ca0e0fbba7b2a27faae4e09d5e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/356d36a46e5cfd2f061fa33a5604fa8ab7acf4f2",
-                "reference": "356d36a46e5cfd2f061fa33a5604fa8ab7acf4f2",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/e3135c1f6bc797ca0e0fbba7b2a27faae4e09d5e",
+                "reference": "e3135c1f6bc797ca0e0fbba7b2a27faae4e09d5e",
                 "shasum": ""
             },
             "require": {
@@ -84,7 +84,40 @@
                 "s3",
                 "sdk"
             ],
-            "time": "2017-10-19T17:42:39+00:00"
+            "time": "2017-10-20T16:43:56+00:00"
+        },
+        {
+            "name": "dfurnes/environmentalist",
+            "version": "v0.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/DFurnes/environmentalist.git",
+                "reference": "27ead600b30e84c3276a924103a55f5c7d7e7447"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/DFurnes/environmentalist/zipball/27ead600b30e84c3276a924103a55f5c7d7e7447",
+                "reference": "27ead600b30e84c3276a924103a55f5c7d7e7447",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "DFurnes\\Environmentalist\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "David Furnes",
+                    "email": "david@dfurnes.com"
+                }
+            ],
+            "description": "Dead-simple setup for Laravel apps.",
+            "time": "2017-10-23T04:03:44+00:00"
         },
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -2074,16 +2107,16 @@
         },
         {
             "name": "phpseclib/phpseclib",
-            "version": "2.0.6",
+            "version": "2.0.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpseclib/phpseclib.git",
-                "reference": "34a7699e6f31b1ef4035ee36444407cecf9f56aa"
+                "reference": "f4b6a522dfa1fd1e477c9cfe5909d5b31f098c0b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/34a7699e6f31b1ef4035ee36444407cecf9f56aa",
-                "reference": "34a7699e6f31b1ef4035ee36444407cecf9f56aa",
+                "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/f4b6a522dfa1fd1e477c9cfe5909d5b31f098c0b",
+                "reference": "f4b6a522dfa1fd1e477c9cfe5909d5b31f098c0b",
                 "shasum": ""
             },
             "require": {
@@ -2162,7 +2195,7 @@
                 "x.509",
                 "x509"
             ],
-            "time": "2017-06-05T06:31:10+00:00"
+            "time": "2017-10-23T05:04:54+00:00"
         },
         {
             "name": "psr/container",
