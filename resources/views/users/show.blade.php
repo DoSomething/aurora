@@ -8,6 +8,7 @@
         <div class="wrapper">
             <div class="container__block">
                 <h1>{{ $user->displayName() }}</h1>
+                @include('layout.errors')
             </div>
 
             <div class="container__block -half profile-settings">
