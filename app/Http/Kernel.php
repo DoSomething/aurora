@@ -16,7 +16,8 @@ class Kernel extends HttpKernel
     protected $middleware = [
         \Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode::class,
         \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
-        \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
+        // @TODO: Re-add once 'nullable' validation is fixed in Northstar.
+        // \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
         \Aurora\Http\Middleware\TrimStrings::class,
         \Aurora\Http\Middleware\TrustProxies::class,
     ];
