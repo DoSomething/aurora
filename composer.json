@@ -2,6 +2,7 @@
     "type": "project",
     "require": {
         "php": ">=7.0.0",
+        "dfurnes/environmentalist": "0.0.1",
         "doctrine/dbal": "^2.5",
         "dosomething/gateway": "v1.9.3",
         "erusev/parsedown": "^1.6",

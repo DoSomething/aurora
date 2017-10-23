@@ -1,22 +1,17 @@
-# Aurora [![Wercker](https://img.shields.io/wercker/ci/54fa2257ad79ab4d690003d5.svg?style=flat-square)](https://app.wercker.com/#applications/54fa2257ad79ab4d690003d5) [![StyleCI](https://styleci.io/repos/28877721/shield)](https://styleci.io/repos/28877721)
+# Aurora [![wercker status](https://app.wercker.com/status/6941ef894ee169cc7cf72297186e107d/s/master "wercker status")](https://app.wercker.com/project/byKey/6941ef894ee169cc7cf72297186e107d) [![StyleCI](https://styleci.io/repos/28877721/shield)](https://styleci.io/repos/28877721)
 
-This is __Aurora__, our user admin tool. It's the graphical front-end to [Northstar](https://www.github.com/dosomething/northstar), our user & activity API.
+This is __Aurora__, our member admin tool. It's the graphical front-end to [Northstar](https://www.github.com/dosomething/northstar), our user & identity API.
 
 ### Getting Started
 
-Fork and clone this repository, and [add it to your Homestead](https://github.com/DoSomething/communal-docs/blob/master/Homestead/readme.md).
+Clone this repository, and [add it to your Homestead](https://github.com/DoSomething/communal-docs/blob/master/Homestead/readme.md).
 
 ```sh
 # Install dependencies:
 $ composer install && npm install
     
-# Copy the default environment variables:
-$ cp .env.example .env
-
-# Make app key, get Northstar public key, & run migrations:
-$ php artisan key:generate
-$ php artisan gateway:key
-$ php artisan migrate
+# Configure application & run migrations:
+$ php artisan aurora:setup
 
 # And finally, build the frontend assets:
 $ npm run build
@@ -24,7 +19,7 @@ $ npm run build
 
 You may run unit tests locally using PHPUnit:
 
-    $ vendor/bin/phpunit
+    $ phpunit
     
 ### Contributing
 We follow [Laravel's code style](http://laravel.com/docs/5.1/contributions#coding-style) and automatically
