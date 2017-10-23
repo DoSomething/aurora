@@ -9,7 +9,5 @@
  * @see \Aurora\Providers\RouteServiceProvider
  */
 
-// Health Check
-$router->get('/status', function () {
-    return response()->json(['status' => true]);
-});
+// Total User Count
+$router->get('/total', 'Api\TotalsController@index');

@@ -38,12 +38,12 @@ return [
     'guards' => [
         'web' => [
             'driver' => 'session',
-            'provider' => 'users',
+            'provider' => 'local',
         ],
 
         'api' => [
-            'driver' => 'token',
-            'provider' => 'users',
+            'driver' => 'gateway',
+            'provider' => 'northstar',
         ],
     ],
 
@@ -67,9 +67,13 @@ return [
     'model' => Aurora\Models\AuroraUser::class,
 
     'providers' => [
-        'users' => [
+        'local' => [
             'driver' => 'eloquent',
             'model' => Aurora\Models\AuroraUser::class,
+        ],
+
+        'northstar' => [
+            'driver' => 'gateway',
         ],
     ],
 

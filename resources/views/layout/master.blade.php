@@ -26,6 +26,7 @@
 </div>
 </body>
 
+{{ scriptify(auth()->user() ? auth()->user()->access_token : null, 'AUTH') }}
 
 <script src="{{ elixir('app.js', 'dist') }}"></script>
 
