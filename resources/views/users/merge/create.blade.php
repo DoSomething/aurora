@@ -21,7 +21,7 @@
       </div>
 
       <div class="container__block -narrow">
-        {!! Form::model($user, [ 'method' => 'POST', 'route' => ['users.merge.store', $user->id]]) !!}
+        {!! Form::model($user, ['route' => ['users.merge.store', $user->id]]) !!}
         <div class="form-actions">
             {!! Form::submit('Save Changes', ['class' => 'button', 'name' => 'complete']) !!}
         </div>
