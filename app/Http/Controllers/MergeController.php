@@ -28,9 +28,6 @@ class MergeController extends Controller
         $response = gateway('northstar')->post($mergeEndpoint, ['id' => $request->query('id')]);
         $mergedUser = new NorthstarUser($response['data']);
 
-        // - Should we be deleting the merged account?
-        // - merging can be somewhat inelegant unless *no* fields overlap
-
         return view('users.merge.create', compact('user', 'mergedUser'));
     }
 
