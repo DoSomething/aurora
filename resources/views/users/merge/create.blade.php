@@ -4,6 +4,8 @@
 
 @include('layout.header', ['header' => 'Users', 'subtitle' => 'View & edit member profiles.']);
 
+@include('layout.errors')
+
 <div class ="container -padded">
   <div class="wrapper">
       <div class="container__block -narrow">
@@ -22,6 +24,7 @@
 
       <div class="container__block -narrow">
         {!! Form::model($user, ['route' => ['users.merge.store', $user->id]]) !!}
+            {!! Form::hidden('merge_id', $duplicateId) !!}
         <div class="form-actions">
             {!! Form::submit('Save Changes', ['class' => 'button', 'name' => 'complete']) !!}
         </div>
