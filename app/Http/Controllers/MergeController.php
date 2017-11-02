@@ -24,11 +24,11 @@ class MergeController extends Controller
     public function create(NorthstarUser $user, Request $request)
     {
         $mergeEndpoint = 'v1/users/'.$user->id.'/merge?pretend=true';
-
         $response = gateway('northstar')->post($mergeEndpoint, ['id' => $request->query('id')]);
         $mergedUser = new NorthstarUser($response['data']);
+        $duplicateId = $request->query('id');
 
-        return view('users.merge.create', compact('user', 'mergedUser'));
+        return view('users.merge.create', compact('user', 'mergedUser', 'duplicateId'));
     }
 
     /**
