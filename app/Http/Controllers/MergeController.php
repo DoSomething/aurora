@@ -24,11 +24,11 @@ class MergeController extends Controller
     public function create(NorthstarUser $user, Request $request)
     {
         $mergeEndpoint = 'v1/users/'.$user->id.'/merge?pretend=true';
-
         $response = gateway('northstar')->post($mergeEndpoint, ['id' => $request->query('id')]);
         $mergedUser = new NorthstarUser($response['data']);
+        $duplicateId = $request->query('id');
 
-        return view('users.merge.create', compact('user', 'mergedUser'));
+        return view('users.merge.create', compact('user', 'mergedUser', 'duplicateId'));
     }
 
     /**
@@ -37,8 +37,19 @@ class MergeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(NorthstarUser $user, Request $request)
     {
-        return redirect()->back()->with('flash_message', ['class' => 'messages', 'text' => 'Not yet implemented.']);
+        $mergeEndpoint = 'v1/users/'.$user->id.'/merge';
+        $message = null;
+
+        try {
+            $response = gateway('northstar')->post($mergeEndpoint, ['id' => $request->input('merge_id')]);
+        } catch (\Exception $exception) {
+            $message = 'Merge Unsuccessful. Error: '.$exception->getMessage();
+        }
+
+        $message = $message ?: 'Users successfully merged. You\'re a star!';
+
+        return redirect()->route('users.show', [$user->id])->with('flash_message', ['class' => 'messages', 'text' => $message]);
     }
 }
