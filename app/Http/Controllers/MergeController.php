@@ -23,10 +23,9 @@ class MergeController extends Controller
      */
     public function create(NorthstarUser $user, Request $request)
     {
-        $mergeEndpoint = 'v1/users/'.$user->id.'/merge?pretend=true';
-        $response = gateway('northstar')->post($mergeEndpoint, ['id' => $request->query('id')]);
-        $mergedUser = new NorthstarUser($response['data']);
         $duplicateId = $request->query('id');
+
+        $mergedUser = gateway('northstar')->mergeUsers($user->id, $duplicateId, true);
 
         return view('users.merge.create', compact('user', 'mergedUser', 'duplicateId'));
     }
@@ -39,11 +38,10 @@ class MergeController extends Controller
      */
     public function store(NorthstarUser $user, Request $request)
     {
-        $mergeEndpoint = 'v1/users/'.$user->id.'/merge';
         $message = null;
 
         try {
-            $response = gateway('northstar')->post($mergeEndpoint, ['id' => $request->input('merge_id')]);
+            $reponse = gateway('northstar')->mergeUsers($user->id, $request->input('merge_id'));
         } catch (\Exception $exception) {
             $message = 'Merge Unsuccessful. Error: '.$exception->getMessage();
         }
