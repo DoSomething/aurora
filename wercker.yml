@@ -2,13 +2,7 @@ box: dosomething/ds-docker-php
 build:
     steps:
       - leipert/composer-install@0.9.1
-      - script:
-          name: npm install
-          code: |-
-            mkdir -p $WERCKER_CACHE_DIR/wercker/npm
-            npm config set cache $WERCKER_CACHE_DIR/wercker/npm
-            sudo npm install
-      - wercker/bundle-install@1.1.1
+      - wercker/npm-install
       - script:
           name: build assets
           code: npm run build
