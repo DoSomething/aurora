@@ -56,6 +56,18 @@
               {!! Form::label('country', 'Country', ['class' => 'field-label']) !!}
               {!! Form::text('country', NULL, ['class' => 'text-field']) !!}
           </div>
+          <div class="form-item -padded">
+              {!! Form::label('sms_status', 'SMS Status', ['class' => 'field-label']) !!}
+                  <div class="select">
+                      {!! Form::select('sms_status', [
+                          'active' => 'Active Subscriber',
+                          'less' => 'Active Subscriber (Less)',
+                          'stop' => 'Unsubscribed (texted STOP)',
+                          'undeliverable' => 'Undeliverable',
+                          'unknown' => 'Unknown Issue'
+                      ], null, ['placeholder' => '--']) !!}
+                  </div>
+          </div>
           @if (auth()->user()->hasRole('admin'))
               <div class="form-item -padded">
                   {!! Form::label('role', 'Role', ['class' => 'field-label']) !!}
