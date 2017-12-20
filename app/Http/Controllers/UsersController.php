@@ -73,6 +73,12 @@ class UsersController extends Controller
     public function update(NorthstarUser $user, Request $request)
     {
         $input = $request->except('_token', '_id', 'drupal_uid');
+
+        // @HACK: This field should be `nullable` in Northstar.
+        if (is_null($input['sms_status'])) {
+            unset($input['sms_status']);
+        }
+
         $this->northstar->updateUser($user->id, $input);
 
         return redirect()->route('users.show', $user->id)->with('flash_message', ['class' => 'messages', 'text' => 'Sweet, look at you updating that user.']);
