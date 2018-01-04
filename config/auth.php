@@ -74,6 +74,8 @@ return [
 
         'northstar' => [
             'driver' => 'gateway',
+            'url' => env('NORTHSTAR_URL'),
+            'key' => storage_path('keys/public.key'),
         ],
     ],
 
