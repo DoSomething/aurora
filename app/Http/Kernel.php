@@ -38,6 +38,7 @@ class Kernel extends HttpKernel
         ],
 
         'api' => [
+            'guard:api',
             'throttle:60,1',
             'bindings',
         ],
@@ -56,6 +57,7 @@ class Kernel extends HttpKernel
         'role' => \Aurora\Http\Middleware\CheckRole::class,
         'can' => \Illuminate\Auth\Middleware\Authorize::class,
 
+        'guard' => \DoSomething\Gateway\Server\Middleware\SetGuard::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'bindings' => \Illuminate\Routing\Middleware\SubstituteBindings::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
