@@ -35,6 +35,7 @@ class Kernel extends HttpKernel
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             \Aurora\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
+            \DoSomething\Gateway\Laravel\Middleware\RefreshTokenMiddleware::class,
         ],
 
         'api' => [
