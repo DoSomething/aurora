@@ -80,6 +80,9 @@ class ClientController extends Controller
 
         // Transform 'redirect_uri' from a CSV into an array of strings.
         $parameters['redirect_uri'] = csv_to_array($parameters['redirect_uri']);
+        if ($parameters['allowed_grant'] === 'client_credentials') {
+            unset($parameters['redirect_uri']);
+        }
 
         $this->northstar->createNewClient($parameters);
 
@@ -114,6 +117,9 @@ class ClientController extends Controller
 
         // Transform 'redirect_uri' from a CSV into an array of strings.
         $parameters['redirect_uri'] = csv_to_array($parameters['redirect_uri']);
+        if ($parameters['allowed_grant'] === 'client_credentials') {
+            unset($parameters['redirect_uri']);
+        }
 
         // Ensure that all scopes can be removed from a client.
         $parameters['scope'] = ! empty($parameters['scope']) ? $parameters['scope'] : [];
