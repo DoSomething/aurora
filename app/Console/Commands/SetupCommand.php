@@ -34,7 +34,7 @@ class SetupCommand extends Command
 
         $this->section('Set Northstar environment variables', function () {
             $environments = [
-                'http://northstar.dev',
+                'http://northstar.test',
                 'https://northstar-qa.dosomething.org',
                 'https://northstar-thor.dosomething.org',
             ];
