@@ -1,7 +1,7 @@
 {
     "type": "project",
     "require": {
-        "php": ">=7.0.0",
+        "php": "~7.0.0",
         "dfurnes/environmentalist": "0.0.1",
         "doctrine/dbal": "^2.5",
         "dosomething/gateway": "^1.13.1",
@@ -50,6 +50,9 @@
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover"
+        ],
+        "warmup": [
+          "@php artisan gateway:key"
         ]
     },
     "config": {
