@@ -16,7 +16,7 @@ if (env('JAWSDB_MARIA_URL')) {
     putenv('DB_PORT='.$url['port']);
     putenv('DB_USERNAME='.$url['user']);
     putenv('DB_PASSWORD='.$url['pass']);
-    putenv('DB_NAME='.str_replace('/', '', $url['path']));
+    putenv('DB_DATABASE='.str_replace('/', '', $url['path']));
 }
 
 return [
@@ -61,6 +61,7 @@ return [
         'mysql' => [
             'driver'    => 'mysql',
             'host'      => env('DB_HOST', 'localhost'),
+            'port'      => env('DB_PORT', '3306'),
             'database'  => env('DB_DATABASE', 'forge'),
             'username'  => env('DB_USERNAME', 'forge'),
             'password'  => env('DB_PASSWORD', ''),
