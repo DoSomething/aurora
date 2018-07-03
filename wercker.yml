@@ -1,26 +1,13 @@
 box: dosomething/ds-docker-php
 build:
     steps:
+      - script:
+          name: install php extension
+          code: |-
+            sudo apt-get update
+            sudo DEBIAN_FRONTEND=noninteractive apt-get install -y php7.0-intl
       - leipert/composer-install@0.9.1
       - wercker/npm-install
       - script:
           name: build assets
           code: npm run build
-
-deploy:
-  steps:
-    - bundle-install
-    - script:
-        name: write private key env var
-        code: |-
-          export CAP_PRIVATE_KEY=`mktemp`
-          echo -e $WERCKER_APP_KEY_PRIVATE > $CAP_PRIVATE_KEY
-    - script:
-        name: print public key
-        code: echo $WERCKER_APP_KEY_PUBLIC
-    - cap
-  after-steps:
-      - sherzberg/slack-notify:
-          subdomain: dosomething
-          token: $SLACK_TOKEN
-          channel: $SLACK_ROOM

@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "05d7687a72bb0c518a9b57b06b70d796",
+    "content-hash": "578f7b6824b935699e68167014ae6d6b",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.62.6",
+            "version": "3.62.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "0be301c36a5c337b40e69ce3b4698cca5427e4b9"
+                "reference": "0935b8b9048c9ca803e8afd8aec8f38225f1de79"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/0be301c36a5c337b40e69ce3b4698cca5427e4b9",
-                "reference": "0be301c36a5c337b40e69ce3b4698cca5427e4b9",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/0935b8b9048c9ca803e8afd8aec8f38225f1de79",
+                "reference": "0935b8b9048c9ca803e8afd8aec8f38225f1de79",
                 "shasum": ""
             },
             "require": {
@@ -84,7 +84,7 @@
                 "s3",
                 "sdk"
             ],
-            "time": "2018-06-29T22:12:11+00:00"
+            "time": "2018-07-02T20:50:31+00:00"
         },
         {
             "name": "dfurnes/environmentalist",
@@ -5367,16 +5367,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "6.5.8",
+            "version": "6.5.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "4f21a3c6b97c42952fd5c2837bb354ec0199b97b"
+                "reference": "093ca5508174cd8ab8efe44fd1dde447adfdec8f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/4f21a3c6b97c42952fd5c2837bb354ec0199b97b",
-                "reference": "4f21a3c6b97c42952fd5c2837bb354ec0199b97b",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/093ca5508174cd8ab8efe44fd1dde447adfdec8f",
+                "reference": "093ca5508174cd8ab8efe44fd1dde447adfdec8f",
                 "shasum": ""
             },
             "require": {
@@ -5447,7 +5447,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2018-04-10T11:38:34+00:00"
+            "time": "2018-07-03T06:40:40+00:00"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
@@ -6279,7 +6279,8 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": "~7.0.0"
+        "php": "~7.0.0",
+        "ext-intl": "*"
     },
     "platform-dev": []
 }
