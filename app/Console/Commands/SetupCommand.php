@@ -35,8 +35,8 @@ class SetupCommand extends Command
         $this->section('Set Northstar environment variables', function () {
             $environments = [
                 'http://northstar.test',
-                'https://northstar-qa.dosomething.org',
-                'https://northstar-thor.dosomething.org',
+                'https://identity-dev.dosomething.org',
+                'https://identity-qa.dosomething.org',
             ];
 
             $this->chooseEnvironmentVariable('NORTHSTAR_URL', 'Choose a Northstar environment', $environments);
