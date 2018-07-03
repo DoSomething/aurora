@@ -19,6 +19,7 @@ class Kernel extends HttpKernel
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
         \Aurora\Http\Middleware\TrimStrings::class,
         \Aurora\Http\Middleware\TrustProxies::class,
+        \Aurora\Http\Middleware\ForceHttps::class,
     ];
 
     /**
