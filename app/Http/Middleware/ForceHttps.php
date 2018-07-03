@@ -22,9 +22,8 @@ class ForceHttps
         if (config('app.env') == 'production') {
             $canonicalHost = parse(config('app.url'))['host'];
             $hasIncorrectHost = $request->header('Host') !== $canonicalHost;
-            $isInsecure = ! $request->secure();
 
-            if ($hasIncorrectHost || $isInsecure) {
+            if ($hasIncorrectHost || ! $request->secure()) {
                 $parsedUrl = parse($request->url());
                 $parsedUrl['scheme'] = 'https';
                 $parsedUrl['host'] = $canonicalHost;
