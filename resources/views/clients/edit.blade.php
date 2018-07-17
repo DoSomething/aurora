@@ -28,7 +28,10 @@
                     <div class="form-item -padded">
                         {!! Form::label('allowed_grant', 'Client Type', ['class' => 'field-label']) !!}
                         <div class="select">
-                            {!! Form::select('allowed_grant', ['authorization_code' => 'Web (Authorization Code grant)', 'client_credentials' => 'Machine (Client Credentials grant)']) !!}
+                            {!! Form::select('allowed_grant', [
+                                'authorization_code' => 'Web (Authorization Code grant)',
+                                'client_credentials' => 'Machine (Client Credentials grant)'
+                            ], $client->allowed_grant ) !!}
                         </div>
                     </div>
 
