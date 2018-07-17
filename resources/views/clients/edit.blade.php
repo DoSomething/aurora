@@ -33,12 +33,19 @@
                                 'client_credentials' => 'Machine (Client Credentials grant)'
                             ], $client->allowed_grant ) !!}
                         </div>
+                        <em class="footnote">Use the Authorization Code grant
+                            if a user is logging in and doing things (e.g. the
+                            website or an admin app). Use the Client
+                            Credentials grant if a computer is acting on it's
+                            own (e.g. a cron job or queue worker).</em>
                     </div>
 
                     <div class="form-item -padded">
                         {!! Form::label('redirect_uri', 'Redirect URI', ['class' => 'field-label']) !!}
                         {!! Form::text('redirect_uri', array_to_csv($client->redirect_uri), ['class' => 'text-field']) !!}
-                        <em class="footnote">This is a comma-separated list of URLs that can be used to login with this client.</em>
+                        <em class="footnote">Required for Authorization Code
+                            grant. This is a comma-separated list of URLs that
+                            start the login flow.</em>
                     </div>
 
                     <div class="form-item -padded">
