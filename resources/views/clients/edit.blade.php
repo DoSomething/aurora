@@ -54,7 +54,13 @@
                             <label class="option -checkbox">
                                 {!! Form::checkbox('scope['.$scope.']', $scope, in_array($scope, $client->scope)) !!}
                                 <span class="option__indicator"></span>
-                                <span><strong>{{ $scope }}</strong> – {{ $details['description'] }} <em class="footnote">{{ isset($details['warning']) && $details['warning'] ? '(Careful, don\'t use this scope with untrusted clients!)' : '' }}</em></span>
+                                <span><strong>{{ $scope }}</strong> – {{ $details['description'] }}
+                                    @if(! empty($details['hint']))
+                                        <em class="footnote">
+                                            {{ $details['hint'] }}
+                                        </em>
+                                    @endif
+                                </span>
                             </label>
                         @endforeach
                     </div>
