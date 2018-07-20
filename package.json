@@ -25,9 +25,10 @@
     "dosomething-modal": "^0.3.4"
   },
   "devDependencies": {
-    "@dosomething/webpack-config": "^2.0.4",
-    "@dosomething/babel-config": "^1.0.0",
+    "@dosomething/webpack-config": "^4.0.0",
+    "@dosomething/babel-config": "^2.2.2",
     "modernizr": "^3.3.1",
-    "webpack": "^2.7.0"
+    "webpack": "^4.15.1",
+    "webpack-cli": "^2.1.5"
   }
 }
