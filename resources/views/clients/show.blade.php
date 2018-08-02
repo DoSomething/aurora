@@ -20,7 +20,7 @@
                     using the <a href="https://git.io/vduUZ">Authorization Code grant</a>.</p>
                 @elseif($client->allowed_grant == 'client_credentials')
                     <p>This is a machine client that requests tokens via the
-                    <a href="https://git.io/vduUC">Client Credentials grant</a>.</p>
+                    <a href="https://git.io/fN6yP">Client Credentials grant</a>.</p>
                 @else
                     <p>This client uses the <code>'{{ $client->allowed_grant }}'</code> grant.</p>
                 @endif
