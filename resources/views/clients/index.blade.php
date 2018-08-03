@@ -9,7 +9,7 @@
       <div class="container__block -narrow">
           <div class="gallery__heading"><h1>All Clients</h1></div>
           <p>These are the OAuth clients registered in Northstar and the permissions they have been given. Tokens can be
-             used to <a href="https://git.io/vdXBk">authorize requests</a> to any compatible DoSomething.org services.</p>
+             used to <a href="https://git.io/fN6yC">authorize requests</a> to any compatible DoSomething.org services.</p>
       </div>
       <ul class="gallery -duo">
           @forelse($clients as $client)
