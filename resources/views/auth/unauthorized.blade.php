@@ -7,7 +7,8 @@
 		<div class="wrapper">
 			<div class="container__block -narrow">
                 <p><strong>Aurora is only accessible to DoSomething.org staff members.</strong> It doesn't look like your
-                user account has been granted permission to continue. If you think you should, ask in the <code>#api</code>
+                user account has been granted permission to continue. If you
+                think you should, ask in the <code>#help-web-template</code>
                 Slack room.</p>
 			</div>
 		</div>
