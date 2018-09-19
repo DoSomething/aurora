@@ -1,11 +1,11 @@
-box: dosomething/ds-docker-php
+box: dosomething/ds-docker-php:7.2
 build:
     steps:
       - script:
           name: install php extension
           code: |-
             sudo apt-get update
-            sudo DEBIAN_FRONTEND=noninteractive apt-get install -y php7.0-intl
+            sudo DEBIAN_FRONTEND=noninteractive apt-get install -y php7.2-intl
       - leipert/composer-install@0.9.1
       - wercker/npm-install
       - script:
