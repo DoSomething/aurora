@@ -16,3 +16,8 @@ code em {
   font-style: normal;
   color: $med-gray;
 }
+
+// Utility class for word-breaks.
+.break-all {
+  word-break: break-all;
+}

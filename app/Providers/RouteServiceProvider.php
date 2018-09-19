@@ -2,6 +2,7 @@
 
 namespace Aurora\Providers;
 
+use Aurora\Services\Fastly;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -44,6 +45,16 @@ class RouteServiceProvider extends ServiceProvider
             }
 
             return $key;
+        });
+
+        Route::bind('redirect', function ($key) {
+            $redirect = app(Fastly::class)->getRedirect($key);
+
+            if (! $redirect) {
+                throw new NotFoundHttpException;
+            }
+
+            return $redirect;
         });
     }
 

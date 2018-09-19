@@ -27,3 +27,6 @@ $router->resource('superusers', 'SuperusersController', ['only' => ['index']]);
 
 // Clients
 $router->resource('clients', 'ClientController');
+
+// Redirects
+$router->resource('redirects', 'RedirectsController');
