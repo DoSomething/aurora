@@ -42,7 +42,7 @@ class Fastly extends RestApiClient
         $idedTypes = collect($types)->keyBy('item_key');
 
         $redirects = array_map(function ($redirect) use ($idedTypes) {
-            return $this->parseResponses($redirect, $idedTypes[$redirect['item_key']]);
+            return Redirect::fromItems($redirect, $idedTypes[$redirect['item_key']]);
         }, $redirects);
 
         return new RedirectCollection(['data' => $redirects]);
@@ -55,12 +55,12 @@ class Fastly extends RestApiClient
      */
     public function getRedirect($id)
     {
-        $key = $this->decodeId($id);
+        $key = Redirect::decodeId($id);
 
-        $target = $this->get('dictionary/'.$this->redirects.'/item/'.$key);
+        $redirect = $this->get('dictionary/'.$this->redirects.'/item/'.$key);
         $type = $this->get('dictionary/'.$this->types.'/item/'.$key);
 
-        return new Redirect($this->parseResponses($target, $type));
+        return Redirect::fromItems($redirect, $type);
     }
 
     /**
@@ -87,19 +87,26 @@ class Fastly extends RestApiClient
             'item_value' => $status,
         ]);
 
-        return new Redirect($this->parseResponses($redirect, $type));
+        return Redirect::fromItems($redirect, $type);
     }
 
     /**
      * Update a redirect.
      *
-     * @return void
+     * @return Redirect
      */
     public function updateRedirect($path, $target, $status)
     {
         // Update the corresponding record in the redirects & statuses dictionaries.
-        $this->patch('dictionary/'.$this->redirects.'/item/'.urlencode($path), ['item_value' => $target]);
-        $this->patch('dictionary/'.$this->types.'/item/'.urlencode($path), ['item_value' => $status]);
+        $redirect = $this->patch('dictionary/'.$this->redirects.'/item/'.urlencode($path), [
+            'item_value' => $target
+        ]);
+
+        $type = $this->patch('dictionary/'.$this->types.'/item/'.urlencode($path), [
+            'item_value' => $status
+        ]);
+
+        return Redirect::fromItems($redirect, $type);
     }
 
     /**
@@ -109,55 +116,13 @@ class Fastly extends RestApiClient
      */
     public function deleteRedirect($id)
     {
-        $key = $this->decodeId($id);
+        $key = Redirect::decodeId($id);
 
         // Delete the corresponding record in the redirects & statuses dictionaries.
         $deletedRedirect = $this->delete('dictionary/'.$this->redirects.'/item/'.$key);
         $deletedType = $this->delete('dictionary/'.$this->types.'/item/'.$key);
 
         return $deletedRedirect && $deletedType;
-    }
-
-    /**
-     * Encode the redirect key to be URL-safe.
-     *
-     * @param string $redirect
-     * @return string
-     */
-    protected function encodeId($redirect)
-    {
-        // In order to use these in URLs (like /redirects/:id), we need to
-        // make them URL-safe. We first base64-encode the path, and then
-        // replace any slashes with underscores.
-        return str_replace('/', '_', base64_encode($redirect['item_key']));
-    }
-
-    /**
-     * Decode the ID into a Fastly item key.
-     *
-     * @param string $redirect
-     * @return string
-     */
-    protected function decodeId($id)
-    {
-        return urlencode(base64_decode(str_replace('_', '/', $id)));
-    }
-
-    /**
-     * Parse the redirect & type dictionary items.
-     *
-     * @return array
-     */
-    protected function parseResponses($redirect, $type)
-    {
-        return [
-            'id' => $this->encodeId($redirect),
-            'path' => $redirect['item_key'],
-            'target' => $redirect['item_value'],
-            'status' => $type['item_value'],
-            'updated_at' => $redirect['updated_at'],
-            'created_at' => $redirect['created_at'],
-        ];
     }
 
     /**
