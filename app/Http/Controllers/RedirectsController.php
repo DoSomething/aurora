@@ -24,7 +24,7 @@ class RedirectsController extends Controller
         $this->fastly = $fastly;
 
         $this->middleware('auth');
-        $this->middleware('role:staff,admin');
+        $this->middleware('role:admin');
     }
 
     /**

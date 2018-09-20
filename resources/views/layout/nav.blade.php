@@ -22,13 +22,13 @@
                             <span class="navigation__subtitle">Northstar apps</span>
                         </a>
                     </li>
+                    <li>
+                        <a href="{{ route('redirects.index') }}">
+                            <strong class="navigation__title">Redirects</strong>
+                            <span class="navigation__subtitle">Vanity URLs & SEO</span>
+                        </a>
+                    </li>
                 @endif
-                <li>
-                    <a href="{{ route('redirects.index') }}">
-                        <strong class="navigation__title">Redirects</strong>
-                        <span class="navigation__subtitle">Vanity URLs & SEO</span>
-                    </a>
-                </li>
             </ul>
             <ul class="navigation__secondary">
                 <li><a href="/auth/logout">Log Out</a> </li>
