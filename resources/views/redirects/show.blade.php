@@ -33,8 +33,7 @@
 
                         <a class="button -secondary -danger"
                             href="{{ route('redirects.destroy', $redirect->id) }}"
-                            data-method="DELETE" data-confirm="Are you sure you
-                            want to delete this redirect?">Delete Redirect</a>
+                            data-method="DELETE" data-confirm="Are you sure you want to delete this redirect?">Delete Redirect</a>
                     </div>
                 </div>
             </div>
