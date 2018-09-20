@@ -33,4 +33,12 @@ return [
         'url' => env('GLADIATOR_URL', 'https://gladiator.dosomething.org'),
     ],
 
+    'fastly' => [
+        'url' => 'https://api.fastly.com',
+        'service_id' => env('FASTLY_SERVICE_ID'),
+        'service_url' => env('FASTLY_SERVICE_URL'),
+        'api_key' => env('FASTLY_API_KEY'),
+        'redirects_table' => env('FASTLY_TABLE_REDIRECTS'),
+        'types_table' => env('FASTLY_TABLE_REDIRECT_TYPES'),
+    ],
 ];

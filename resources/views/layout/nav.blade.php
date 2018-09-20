@@ -11,15 +11,21 @@
                 </li>
                 @if (Auth::user()->hasRole('admin'))
                     <li>
+                        <a href="{{ route('superusers.index') }}">
+                            <strong class="navigation__title">Superusers</strong>
+                            <span class="navigation__subtitle">Admins, staff, etc.</span>
+                        </a>
+                    </li>
+                    <li>
                         <a href="{{ route('clients.index') }}">
                             <strong class="navigation__title">OAuth Clients</strong>
                             <span class="navigation__subtitle">Northstar apps</span>
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('superusers.index') }}">
-                            <strong class="navigation__title">Superusers</strong>
-                            <span class="navigation__subtitle">Admins, staff, etc.</span>
+                        <a href="{{ route('redirects.index') }}">
+                            <strong class="navigation__title">Redirects</strong>
+                            <span class="navigation__subtitle">Vanity URLs & SEO</span>
                         </a>
                     </li>
                 @endif

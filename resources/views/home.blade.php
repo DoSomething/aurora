@@ -2,21 +2,17 @@
 
 @section('main_content')
 
-    @include('layout.header', ['header' => 'Aurora', 'subtitle' => 'Please log in to continue.'])
+    @include('layout.header', ['header' => 'Administration', 'subtitle' => 'Please log in to continue.'])
 
     <div class="container -padded">
         <div class="wrapper">
             <div class="container__block -narrow">
-                <p>
-                    This is <strong>Aurora</strong>, our user admin tool. It's the graphical front-end to
-                    <a href="https://github.com/DoSomething/northstar">Northstar</a>, our user & activity API.
-                    Aurora is only available to DoSomething.org staff members.
-                </p>
-                <p>Drop a message in the <code>#api</code> Slack room if you can't log in!</p>
+                <p>Welcome to the <strong>DoSomething.org admin interface</strong>. If you're looking to
+                manage user accounts or domain redirects, you're in the right place.</p>
 
-                <p>
-                    <a href="/auth/login" class="button">Log In</a>
-                </p>
+                <p>Drop a message in the <code>#help-web-template</code> Slack room if you can't log in!</p>
+
+                <p><a href="/auth/login" class="button">Log In</a></p>
         </div>
     </div>
 
