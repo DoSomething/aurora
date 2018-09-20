@@ -76,12 +76,12 @@ class RedirectsController extends Controller
         $this->validate($request, [
             'path' => 'required|string',
             'target' => 'required|url',
-            'status' => 'required|in:301,302'
+            'status' => 'required|in:301,302',
         ]);
 
-        $this->fastly->createRedirect($request->path, $request->target, $request->status);
+        $redirect = $this->fastly->createRedirect($request->path, $request->target, $request->status);
 
-        return redirect()->route('redirects.show', urlencode($request->path));
+        return redirect()->route('redirects.show', $redirect->id);
     }
 
     /**
@@ -107,12 +107,11 @@ class RedirectsController extends Controller
     public function update(Redirect $redirect, Request $request)
     {
         $this->validate($request, [
-            'path' => 'required|string',
             'target' => 'required|url',
-            'status' => 'required|in:301,302'
+            'status' => 'required|in:301,302',
         ]);
 
-        $this->fastly->updateRedirect($redirect->id, $request->target, $request->status);
+        $this->fastly->updateRedirect($redirect->path, $request->target, $request->status);
 
         return redirect()->route('redirects.show', $redirect->id);
     }

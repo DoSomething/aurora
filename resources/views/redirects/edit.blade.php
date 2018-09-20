@@ -39,25 +39,6 @@
                 </form>
 
             </div>
-            <div class="container__block -narrow">
-                <br><br><br>
-                <div class="danger-zone">
-                    <h4 class="danger-zone__heading">Danger Zone&#8482;</h4>
-                    <div class="danger-zone__block">
-                        <div class="form-item">
-                            <label for="role" class="field-label">Delete Redirect</label>
-                            <p class="footnote">This will
-                                <strong>delete</strong> this redirect and it
-                                will no longer be available to users or search
-                                engines.
-                        </div>
-
-                        <a class="button -secondary -danger"
-                            href="{{ route('redirects.destroy', $redirect->id) }}"
-                            data-method="DELETE" data-confirm="Are you sure you want to delete this redirect?">Delete Client</a>
-                    </div>
-                </div>
-            </div>
     </div>
 
 @stop

@@ -10,13 +10,33 @@
                 <h1><code>{{ $redirect->path }}</code></h1>
             </div>
 
-            <div class="container__block -narrow">
+            <div class="container__block -half">
                 <label class="field-label">Path:</label>
-                <code><em>{{ config('services.fastly.service_url') }}</em>{{ $redirect->path }}</code><br><br>
+                <code class="break-all"><em>{{ config('services.fastly.service_url') }}</em>{{ $redirect->path }}</code><br><br>
                 <label class="field-label">Target:</label>
-                <code>{{ $redirect->target }}</code><br><br>
+                <code class="break-all">{{ $redirect->target }}</code><br><br>
                 <label class="field-label">Redirect Status:</label>
-                <code>{{ $redirect->status }}</code><br><br>
+                <code>{{ $redirect->status == '301' ? '301 (Moved Permanently)' : '302 (Found)'}}</code><br><br>
+            </div>
+
+            <div class="container__block -half">
+                <div class="danger-zone">
+                    <h4 class="danger-zone__heading">Danger Zone&#8482;</h4>
+                    <div class="danger-zone__block">
+                        <div class="form-item">
+                            <label for="role" class="field-label">Delete Redirect</label>
+                            <p class="footnote">This will
+                                <strong>delete</strong> this redirect path and it
+                                will no longer be available to users or search
+                                engines. The target will not be modified.
+                        </div>
+
+                        <a class="button -secondary -danger"
+                            href="{{ route('redirects.destroy', $redirect->id) }}"
+                            data-method="DELETE" data-confirm="Are you sure you
+                            want to delete this redirect?">Delete Redirect</a>
+                    </div>
+                </div>
             </div>
 
             <div class="container__block -narrow">

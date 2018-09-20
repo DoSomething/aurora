@@ -15,4 +15,3 @@ class Redirect extends ApiResponse
         parent::__construct($attributes);
     }
 }
-

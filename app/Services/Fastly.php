@@ -33,7 +33,7 @@ class Fastly extends RestApiClient
     /**
      * Get all redirects.
      *
-     * @return array
+     * @return RedirectCollection
      */
     public function getAllRedirects()
     {
@@ -41,8 +41,8 @@ class Fastly extends RestApiClient
         $types = $this->get('dictionary/'.$this->types.'/items');
         $idedTypes = collect($types)->keyBy('item_key');
 
-        $redirects = array_map(function($redirect) use ($idedTypes) {
-            return $this->parseRedirect($redirect, $idedTypes[$redirect['item_key']]);
+        $redirects = array_map(function ($redirect) use ($idedTypes) {
+            return $this->parseResponses($redirect, $idedTypes[$redirect['item_key']]);
         }, $redirects);
 
         return new RedirectCollection(['data' => $redirects]);
@@ -51,7 +51,7 @@ class Fastly extends RestApiClient
     /**
      * Get a redirect by key.
      *
-     * @return array
+     * @return Redirect
      */
     public function getRedirect($id)
     {
@@ -60,49 +60,52 @@ class Fastly extends RestApiClient
         $target = $this->get('dictionary/'.$this->redirects.'/item/'.$key);
         $type = $this->get('dictionary/'.$this->types.'/item/'.$key);
 
-        return new Redirect($this->parseRedirect($target, $type));
+        return new Redirect($this->parseResponses($target, $type));
     }
 
     /**
      * Create a redirect.
      *
-     * @return array
+     * @return Redirect
      */
     public function createRedirect($path, $target, $status)
     {
-        $key = $this->decodeId($id);
+        // Make sure path begins with a slash.
+        if ($path[0] !== '/') {
+            $path = '/'.$path;
+        }
 
         // Create a record in the redirects dictionary.
-        $this->post('dictionary/'.$this->redirects.'/item', [
+        $redirect = $this->post('dictionary/'.$this->redirects.'/item', [
             'item_key' => $path,
             'item_value' => $target,
         ]);
 
         // Create a record in the statuses dictionary.
-        $this->post('dictionary/'.$this->types.'/item', [
+        $type = $this->post('dictionary/'.$this->types.'/item', [
             'item_key' => $path,
             'item_value' => $status,
         ]);
+
+        return new Redirect($this->parseResponses($redirect, $type));
     }
 
     /**
      * Update a redirect.
      *
-     * @return array
+     * @return void
      */
-    public function updateRedirect($id, $path, $status)
+    public function updateRedirect($path, $target, $status)
     {
-        $key = $this->decodeId($id);
-
         // Update the corresponding record in the redirects & statuses dictionaries.
-        $this->patch('dictionary/'.$this->redirects.'/item/'.$key, ['item_value' => $path]);
-        $this->patch('dictionary/'.$this->types.'/item/'.$key, ['item_value' => $status]);
+        $this->patch('dictionary/'.$this->redirects.'/item/'.urlencode($path), ['item_value' => $target]);
+        $this->patch('dictionary/'.$this->types.'/item/'.urlencode($path), ['item_value' => $status]);
     }
 
     /**
      * Delete a redirect.
      *
-     * @return array
+     * @return bool
      */
     public function deleteRedirect($id)
     {
@@ -119,8 +122,13 @@ class Fastly extends RestApiClient
      * Encode the redirect key to be URL-safe.
      *
      * @param string $redirect
+     * @return string
      */
-    protected function encodeId($redirect) {
+    protected function encodeId($redirect)
+    {
+        // In order to use these in URLs (like /redirects/:id), we need to
+        // make them URL-safe. We first base64-encode the path, and then
+        // replace any slashes with underscores.
         return str_replace('/', '_', base64_encode($redirect['item_key']));
     }
 
@@ -128,15 +136,20 @@ class Fastly extends RestApiClient
      * Decode the ID into a Fastly item key.
      *
      * @param string $redirect
+     * @return string
      */
-    protected function decodeId($id) {
+    protected function decodeId($id)
+    {
         return urlencode(base64_decode(str_replace('_', '/', $id)));
     }
 
     /**
      * Parse the redirect & type dictionary items.
+     *
+     * @return array
      */
-    protected function parseRedirect($redirect, $type) {
+    protected function parseResponses($redirect, $type)
+    {
         return [
             'id' => $this->encodeId($redirect),
             'path' => $redirect['item_key'],
