@@ -99,11 +99,11 @@ class Fastly extends RestApiClient
     {
         // Update the corresponding record in the redirects & statuses dictionaries.
         $redirect = $this->patch('dictionary/'.$this->redirects.'/item/'.urlencode($path), [
-            'item_value' => $target
+            'item_value' => $target,
         ]);
 
         $type = $this->patch('dictionary/'.$this->types.'/item/'.urlencode($path), [
-            'item_value' => $status
+            'item_value' => $status,
         ]);
 
         return Redirect::fromItems($redirect, $type);
