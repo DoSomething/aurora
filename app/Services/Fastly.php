@@ -70,9 +70,9 @@ class Fastly extends RestApiClient
      */
     public function createRedirect($path, $target, $status)
     {
-        // Make sure path begins with a slash.
+        // Make sure path is lower-case & begins with a slash.
         if ($path[0] !== '/') {
-            $path = '/'.$path;
+            $path = strtolower('/'.$path);
         }
 
         // Create or update a record in the redirects dictionary.
