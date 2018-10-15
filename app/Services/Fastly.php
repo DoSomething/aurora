@@ -76,12 +76,12 @@ class Fastly extends RestApiClient
         }
 
         // Create or update a record in the redirects dictionary.
-        $redirect = $this->put('dictionary/'.$this->redirects.'/item/'.$path, [
+        $redirect = $this->put('dictionary/'.$this->redirects.'/item/'.urlencode($path), [
             'item_value' => $target,
         ]);
 
         // Create or update a record in the statuses dictionary.
-        $type = $this->put('dictionary/'.$this->types.'/item/'.$path, [
+        $type = $this->put('dictionary/'.$this->types.'/item/'.urlencode($path), [
             'item_value' => $status,
         ]);
 
