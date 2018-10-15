@@ -78,7 +78,7 @@ class RedirectsController extends Controller
             'target' => 'required|url',
             'status' => 'required|in:301,302',
         ], [
-            'path.regex' => 'Paths cannot contain query strings.'
+            'path.regex' => 'Paths cannot contain query strings.',
         ]);
 
         $redirect = $this->fastly->createRedirect($request->path, $request->target, $request->status);
