@@ -38,13 +38,10 @@ class FastlyImportCommand extends Command
         $url = config('services.fastly.service_url');
         $confirmation = 'Would you like to create ' . count($redirects) . ' redirects on ' . $url . '?';
         if ($this->confirm($confirmation)) {
-            $progress = $this->output->createProgressBar(count($redirects));
             foreach ($redirects as $redirect) {
+                $this->line('Redirecting "' . $redirect->path . '" to "' . $redirect->target . '" (' . $redirect->status . ')');
                 $fastly->createRedirect($redirect->path, $redirect->target, $redirect->status);
-                $progress->advance();
             }
-
-            $progress->finish();
         }
 
     }
