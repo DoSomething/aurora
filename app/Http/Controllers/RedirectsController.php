@@ -74,9 +74,11 @@ class RedirectsController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'path' => 'required|string',
+            'path' => 'required|string|regex:/^[^?]+$/',
             'target' => 'required|url',
             'status' => 'required|in:301,302',
+        ], [
+            'path.regex' => 'Paths cannot contain query strings.'
         ]);
 
         $redirect = $this->fastly->createRedirect($request->path, $request->target, $request->status);
