@@ -3,9 +3,10 @@
 namespace Aurora\Resources;
 
 use Carbon\Carbon;
+use JsonSerializable;
 use DoSomething\Gateway\Common\ApiResponse;
 
-class Redirect extends ApiResponse
+class Redirect extends ApiResponse implements JsonSerializable
 {
     /**
      * Create a new redirect from the given API response.
@@ -60,5 +61,15 @@ class Redirect extends ApiResponse
     public static function decodeId($id)
     {
         return urlencode(base64_decode(str_replace('_', '/', $id)));
+    }
+
+    /**
+     * Convert the object into something JSON serializable.
+     *
+     * @return array
+     */
+    public function jsonSerialize()
+    {
+        return $this->attributes;
     }
 }

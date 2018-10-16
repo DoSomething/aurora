@@ -70,20 +70,18 @@ class Fastly extends RestApiClient
      */
     public function createRedirect($path, $target, $status)
     {
-        // Make sure path begins with a slash.
+        // Make sure path is lower-case & begins with a slash.
         if ($path[0] !== '/') {
-            $path = '/'.$path;
+            $path = strtolower('/'.$path);
         }
 
-        // Create a record in the redirects dictionary.
-        $redirect = $this->post('dictionary/'.$this->redirects.'/item', [
-            'item_key' => $path,
+        // Create or update a record in the redirects dictionary.
+        $redirect = $this->put('dictionary/'.$this->redirects.'/item/'.urlencode($path), [
             'item_value' => $target,
         ]);
 
-        // Create a record in the statuses dictionary.
-        $type = $this->post('dictionary/'.$this->types.'/item', [
-            'item_key' => $path,
+        // Create or update a record in the statuses dictionary.
+        $type = $this->put('dictionary/'.$this->types.'/item/'.urlencode($path), [
             'item_value' => $status,
         ]);
 
