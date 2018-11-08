@@ -30,6 +30,6 @@
     "@dosomething/babel-config": "^2.2.2",
     "modernizr": "^3.3.1",
     "webpack": "^4.15.1",
-    "webpack-cli": "^2.1.5"
+    "webpack-cli": "^3.0.0"
   }
 }
