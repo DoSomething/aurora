@@ -22,7 +22,8 @@
     "@dosomething/gateway": "^1.1.5",
     "babel-polyfill": "^6.26.0",
     "dom-delegate": "^2.0.3",
-    "dosomething-modal": "^0.3.4"
+    "dosomething-modal": "^0.3.4",
+    "environment-badge": "^1.0.1"
   },
   "devDependencies": {
     "@dosomething/webpack-config": "^4.0.0",
