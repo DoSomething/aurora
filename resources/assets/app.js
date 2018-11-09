@@ -17,6 +17,9 @@ import lazyCount from './users/lazy-user-count';
  * Let's go!
  */
 ready(function() {
+  // Display environment badge on local, dev, or QA:
+  require('environment-badge')();
+
   // Lazy-load user count in the background.
   lazyCount.initialize();
 

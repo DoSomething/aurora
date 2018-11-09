@@ -22,13 +22,14 @@
     "@dosomething/gateway": "^1.1.5",
     "babel-polyfill": "^6.26.0",
     "dom-delegate": "^2.0.3",
-    "dosomething-modal": "^0.3.4"
+    "dosomething-modal": "^0.3.4",
+    "environment-badge": "^1.0.1"
   },
   "devDependencies": {
     "@dosomething/webpack-config": "^4.0.0",
     "@dosomething/babel-config": "^2.2.2",
     "modernizr": "^3.3.1",
     "webpack": "^4.15.1",
-    "webpack-cli": "^2.1.5"
+    "webpack-cli": "^3.0.0"
   }
 }
