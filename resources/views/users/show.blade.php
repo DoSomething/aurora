@@ -11,8 +11,15 @@
                 @include('layout.errors')
             </div>
             <div class="container__block -half profile-settings">
-                <h3>Profile</h3>
-                @include('users.partials.profile')
+                <div class="container -padded">
+                    <h3>Profile</h3>
+                    @include('users.partials.profile')
+                </div>
+                <div class="container -padded">
+                    <h3>Subscriptions</h3>
+                    @include('users.partials.subscriptions')
+                </div>
+
             </div>
 
             <div class="container__block -half">
