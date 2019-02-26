@@ -12,8 +12,7 @@
     <dt>Address:</dt><dd>&mdash;</dd>
 @endif
 
-<dt>SMS Status:</dt><dd>{{ $user->sms_status or '&mdash;' }}</dd>
-<dt>SMS Paused:</dt><dd>{{ $user->sms_paused ? '✔' : '✘' }}</dd>
 <dt>Country:</dt><dd>{{ $user->country or '&mdash;' }}</dd>
 <dt>Role:</dt><dd>{{ $user->role or '&mdash;' }}</dd>
 <dt>Voter Registration Status:</dt><dd>{{ $user->voter_registration_status or '&mdash;' }}</dd>
+
