@@ -68,6 +68,15 @@
                       ], null, ['placeholder' => '--']) !!}
                   </div>
           </div>
+          <div class="form-item -padded">
+              {!! Form::label('email_subscription_status', 'Email Subscription Status', ['class' => 'field-label']) !!}
+                  <div class="select">
+                      {!! Form::select('email_subscription_status', [
+                          true => 'Subscribed',
+                          false => 'Unsubscribed',
+                      ], null, ['placeholder' => '--']) !!}
+                  </div>
+          </div>
           @if (auth()->user()->hasRole('admin'))
               <div class="form-item -padded">
                   {!! Form::label('role', 'Role', ['class' => 'field-label']) !!}
