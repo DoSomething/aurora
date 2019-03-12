@@ -21,6 +21,7 @@ $router->resource('users', 'UsersController', ['except' => ['create', 'store']])
 $router->get('search', ['as' => 'user.search', 'uses' => 'UsersController@search']);
 $router->get('users/{user}/merge', ['as' => 'users.merge.create', 'uses' => 'MergeController@create']);
 $router->post('users/{user}/merge', ['as' => 'users.merge.store', 'uses' => 'MergeController@store']);
+$router->post('users/{user}/resets', ['as' => 'users.resets.create', 'uses' => 'UsersController@sendPasswordReset']);
 
 // Superusers
 $router->resource('superusers', 'SuperusersController', ['only' => ['index']]);
