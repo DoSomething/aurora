@@ -2,10 +2,10 @@
     "type": "project",
     "require": {
         "php": "~7.2.0",
+        "ext-intl": "*",
         "dfurnes/environmentalist": "0.0.1",
         "doctrine/dbal": "^2.5",
-        "dosomething/gateway": "^1.13.1",
-        "ext-intl": "*",
+        "dosomething/gateway": "^1.17",
         "erusev/parsedown": "^1.6",
         "fideloper/proxy": "^3.3",
         "guzzlehttp/guzzle": "^6.3.0",
