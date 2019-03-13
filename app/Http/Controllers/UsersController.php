@@ -146,7 +146,7 @@ class UsersController extends Controller
     {
         $type = $request['type'];
 
-        $response = $this->northstar->sendUserPasswordReset($user->id, $type);
+        $this->northstar->sendUserPasswordReset($user->id, $type);
 
         return redirect()->route('users.show', $user->id)->with('flash_message', ['class' => 'messages', 'text' => 'Sent a '.$type.' email to '.$user->email.'.']);
     }
