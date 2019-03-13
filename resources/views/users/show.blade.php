@@ -19,7 +19,6 @@
                     <h3>Subscriptions</h3>
                     @include('users.partials.subscriptions')
                 </div>
-
             </div>
 
             <div class="container__block -half">
@@ -27,6 +26,9 @@
                     @if(Auth::user()->hasRole('admin'))
                         <div class="danger-zone">
                             <h4 class="danger-zone__heading">Danger Zone&#8482;</h4>
+                            <div class="danger-zone__block">
+                                @include('users.partials.resets')
+                            </div>
                             <div class="danger-zone__block">
                                 {!! Form::open(['route' => ['users.merge.create', $user->id], 'method' => 'GET']) !!}
                                 <div class="form-item">
