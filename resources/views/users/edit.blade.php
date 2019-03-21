@@ -77,6 +77,18 @@
                       ], null, ['placeholder' => '--']) !!}
                   </div>
           </div>
+          <div class="form-item -padded">
+              {!! Form::label('email_subscription_topics', 'Email Subscription Topics', ['class' => 'field-label']) !!}
+                  <div class="select">
+                    {!! Form::select(
+                      'email_subscription_topics', [
+                        'news' => 'news',
+                        'scholarships' => 'scholarships',
+                        'lifestyle' => 'lifestyle',
+                        'community' => 'community',
+                      ], null, ['multiple' => 'multiple', 'name' => 'email_subscription_topics[]']) !!}
+                  </div>
+          </div>
           @if (auth()->user()->hasRole('admin'))
               <div class="form-item -padded">
                   {!! Form::label('role', 'Role', ['class' => 'field-label']) !!}
