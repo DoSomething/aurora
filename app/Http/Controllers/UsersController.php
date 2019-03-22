@@ -79,6 +79,8 @@ class UsersController extends Controller
             unset($input['sms_status']);
         }
 
+        $input['email_subscription_topics'] = ! empty($input['email_subscription_topics']) ? $input['email_subscription_topics'] : [];
+
         $this->northstar->updateUser($user->id, $input);
 
         return redirect()->route('users.show', $user->id)->with('flash_message', ['class' => 'messages', 'text' => 'Sweet, look at you updating that user.']);

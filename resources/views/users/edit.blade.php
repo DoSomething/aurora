@@ -79,14 +79,21 @@
           </div>
           <div class="form-item -padded">
               {!! Form::label('email_subscription_topics', 'Email Subscription Topics', ['class' => 'field-label']) !!}
-                  <div class="select">
-                    {!! Form::select(
-                      'email_subscription_topics', [
-                        'news' => 'news',
-                        'scholarships' => 'scholarships',
-                        'lifestyle' => 'lifestyle',
-                        'community' => 'community',
-                      ], null, ['multiple' => 'multiple', 'name' => 'email_subscription_topics[]']) !!}
+                  <div>
+                    {!! Form::checkbox('email_subscription_topics[]', 'community') !!}
+                    {!! Form::label('community', 'community') !!}
+                  </div>
+                  <div>
+                    {!! Form::checkbox('email_subscription_topics[]', 'lifestyle') !!}
+                    {!! Form::label('lifestyle', 'lifestyle') !!}
+                  </div>
+                  <div>
+                    {!! Form::checkbox('email_subscription_topics[]', 'news') !!}
+                    {!! Form::label('news', 'news') !!}
+                  </div>
+                  <div>
+                    {!! Form::checkbox('email_subscription_topics[]', 'scholarships') !!}
+                    {!! Form::label('scholarships', 'scholarships') !!}
                   </div>
           </div>
           @if (auth()->user()->hasRole('admin'))
