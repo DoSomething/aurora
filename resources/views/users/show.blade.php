@@ -6,9 +6,11 @@
 
     <div class="container">
         <div class="wrapper">
-            <div class="container__block">
+            <div class="container__block profile-settings">
                 <h1>{{ $user->displayName() }}</h1>
                 @include('layout.errors')
+                <dt>Source:</dt><dd>{{ $user->source or '&mdash;' }}</dd>
+                <dt>Source Detail:</dt><dd>{{ $user->source_detail or '&mdash;' }}</dd>
             </div>
             <div class="container__block -half profile-settings">
                 <div class="container -padded">
