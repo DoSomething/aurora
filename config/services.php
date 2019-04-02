@@ -25,12 +25,16 @@ return [
         ],
     ],
 
-    'drupal' => [
-        'url' => env('DRUPAL_URL'),
+    'customerio' => [
+        'profile_url' => env('CUSTOMER_IO_PROFILE_URL', 'https://fly.customer.io/env/63704/people'),
     ],
 
-    'gladiator' => [
-        'url' => env('GLADIATOR_URL', 'https://gladiator.dosomething.org'),
+    'gambit' => [
+        'profile_url' => env('GAMBIT_PROFILE_URL', 'https://gambit-admin.herokuapp.org/users'),
+    ],
+
+    'rogue' => [
+        'profile_url' => env('ROGUE_PROFILE_URL', 'https://activity.dosomething.org/users'),
     ],
 
     'fastly' => [
