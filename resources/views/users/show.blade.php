@@ -47,20 +47,17 @@
     <div class="container -padded">
         <div class="wrapper">
             <div class="container__block -narrow profile-settings">
-                <h3>Connected Accounts</h3>
-                @if(! empty($user->drupal_id))
-                    <dt>Phoenix:</dt><dd><a href="{{ config('services.drupal.url') }}/user/{{ $user->drupal_id }}">{{ $user->drupal_id }}</a></dd>
-                @else
-                    <dt>Phoenix:</dt><dd>&mdash;</dd>
-                @endif
-
-                <dt>Gladiator:</dt><dd><a href="{{ config('services.gladiator.url') }}/users/{{ $user->id }}">{{ $user->id }}</a></dd>
-
-                @if(! empty($user->mobilecommons_id))
-                    <dt>Mobile Commons:</dt><dd><a href="https://secure.mcommons.com/profiles/{{ $user->mobilecommons_id }}">{{ $user->mobilecommons_id }}</a></dd>
-                @else
-                    <dt>Mobile Commons:</dt><dd>&mdash;</dd>
-                @endif
+                <h3>Links</h3>
+                <ul>
+                    <li>
+                        <a href="{{ config('services.customerio.profile_url') }}/{{ $user->id }}">Customer.io</a>
+                    </li>
+                    <li>
+                        <a href="{{ config('services.gambit.profile_url') }}/{{ $user->id }}">Gambit</a>
+                    </li>
+                    <li>
+                        <a href="{{ config('services.rogue.profile_url') }}/{{ $user->id }}">Rogue</a>
+                    </li>
             </div>
         </div>
     </div>
