@@ -1,3 +1,4 @@
+<dt>ID:</dt><dd>{{ $user->id }}</dd>
 <dt>Email:</dt><dd>{{ $user->email or '&mdash;' }}</dd>
 <dt>Mobile:</dt><dd>{{ $user->prettyMobile('&mdash;') }}</dd>
 <dt>First Name:</dt><dd>{{ $user->first_name or '&mdash;' }}</dd>
