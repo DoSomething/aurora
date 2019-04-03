@@ -4,8 +4,6 @@
 <dt>First Name:</dt><dd>{{ $user->first_name or '&mdash;' }}</dd>
 <dt>Last Name:</dt><dd>{{ $user->last_name or '&mdash;' }}</dd>
 <dt>Birthdate:</dt><dd>{{ $user->birthdate or '&mdash;' }}</dd>
-<dt>Source:</dt><dd>{{ $user->source or '&mdash;' }}</dd>
-<dt>Source Detail:</dt><dd>{{ $user->source_detail or '&mdash;' }}</dd>
 
 @if (isset($user->addr_street1) || isset($user->addr_street2) || isset($user->addr_city) || isset($user->addr_state) || isset($user->addr_zip) )
     <dt>Address:</dt><dd>{{ $user->addr_street1 or '' }} {{ $user->addr_street2 or '' }} {{ $user->addr_city or '' }} {{ $user->addr_state or '' }} {{ $user->addr_zip or '' }}</dd>
