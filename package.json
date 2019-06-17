@@ -18,18 +18,18 @@
     ]
   },
   "dependencies": {
-    "@dosomething/forge": "^6.8.0",
+    "@dosomething/forge": "^6.9.1",
     "@dosomething/gateway": "^1.5.0",
     "babel-polyfill": "^6.26.0",
-    "dom-delegate": "^2.2.0",
+    "dom-delegate": "^2.2.1",
     "dosomething-modal": "^0.3.4",
-    "environment-badge": "^1.0.1"
+    "environment-badge": "^1.2.1"
   },
   "devDependencies": {
     "@dosomething/babel-config": "^2.2.2",
     "@dosomething/webpack-config": "^4.0.0",
-    "modernizr": "^3.6.0",
-    "webpack": "^4.15.1",
-    "webpack-cli": "^3.0.0"
+    "modernizr": "^3.7.1",
+    "webpack": "^4.34.0",
+    "webpack-cli": "^3.3.4"
   }
 }

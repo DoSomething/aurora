@@ -169,7 +169,6 @@ return [
         Collective\Html\HtmlServiceProvider::class,
         DoSomething\Gateway\Laravel\GatewayServiceProvider::class,
         Laravel\Tinker\TinkerServiceProvider::class,
-        Spatie\Backup\BackupServiceProvider::class,
 
         /*
          * Application Service Providers...
