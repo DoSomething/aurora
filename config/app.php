@@ -168,7 +168,6 @@ return [
          */
         Collective\Html\HtmlServiceProvider::class,
         DoSomething\Gateway\Laravel\GatewayServiceProvider::class,
-        Laravel\Tinker\TinkerServiceProvider::class,
 
         /*
          * Application Service Providers...
