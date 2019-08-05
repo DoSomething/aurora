@@ -74,11 +74,6 @@ class UsersController extends Controller
     {
         $input = $request->except('_token', '_id', 'drupal_uid');
 
-        // @HACK: This field should be `nullable` in Northstar.
-        if (is_null($input['sms_status'])) {
-            unset($input['sms_status']);
-        }
-
         $input['email_subscription_topics'] = ! empty($input['email_subscription_topics']) ? $input['email_subscription_topics'] : [];
 
         $this->northstar->updateUser($user->id, $input);
