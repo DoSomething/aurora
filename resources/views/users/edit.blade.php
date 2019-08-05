@@ -78,6 +78,18 @@
                   </div>
           </div>
           <div class="form-item -padded">
+              {!! Form::label('voter_registration_status', 'Voter Registration Status', ['class' => 'field-label']) !!}
+                  <div class="select">
+                      {!! Form::select('voter_registration_status', [
+                          'uncertain' => 'Uncertain',
+                          'ineligible' => 'Ineligible',
+                          'unregistered' => 'Unregistered',
+                          'confirmed' => 'Confirmed',
+                          'registration_complete' => 'Registration Complete',
+                      ], null, ['placeholder' => '--']) !!}
+                  </div>
+          </div>
+          <div class="form-item -padded">
               {!! Form::label('email_subscription_topics', 'Email Subscription Topics', ['class' => 'field-label']) !!}
                   <div>
                     {!! Form::checkbox('email_subscription_topics[]', 'community') !!}
