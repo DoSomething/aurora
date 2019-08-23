@@ -78,8 +78,7 @@ class UsersController extends Controller
 
         if (array_key_exists('feature_flags', $input) && in_array('badges', $input['feature_flags'])) {
             $input['feature_flags'] = ['badges' => true];
-        } else
-        {
+        } else {
             unset($input['feature_flags']);
         }
 
