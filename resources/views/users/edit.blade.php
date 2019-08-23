@@ -107,6 +107,14 @@
                     {!! Form::checkbox('email_subscription_topics[]', 'scholarships') !!}
                     {!! Form::label('scholarships', 'scholarships') !!}
                   </div>
+
+          </div>
+            <div class="form-item -padded">
+              {!! Form::label('feature_flags', 'Feature Flags', ['class' => 'field-label']) !!}
+                  <div>
+                    {!! Form::checkbox('feature_flags[]', 'badges', $user->feature_flags['badges'], $user->feature_flags['badges'] ? ['disabled' => true] : null) !!}
+                    {!! Form::label('badges', 'badges') !!}
+                  </div>
           </div>
           @if (auth()->user()->hasRole('admin'))
               <div class="form-item -padded">

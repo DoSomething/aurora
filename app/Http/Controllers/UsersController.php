@@ -76,6 +76,13 @@ class UsersController extends Controller
 
         $input['email_subscription_topics'] = ! empty($input['email_subscription_topics']) ? $input['email_subscription_topics'] : [];
 
+        if (array_key_exists('feature_flags', $input) && in_array('badges', $input['feature_flags'])) {
+            $input['feature_flags'] = ['badges' => true];
+        } else
+        {
+            unset($input['feature_flags']);
+        }
+
         $this->northstar->updateUser($user->id, $input);
 
         return redirect()->route('users.show', $user->id)->with('flash_message', ['class' => 'messages', 'text' => 'Sweet, look at you updating that user.']);

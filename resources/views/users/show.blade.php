@@ -11,6 +11,7 @@
                 @include('layout.errors')
                 <dt>Source:</dt><dd>{{ $user->source or '&mdash;' }}</dd>
                 <dt>Source Detail:</dt><dd>{{ $user->source_detail or '&mdash;' }}</dd>
+                <dt>Feature Flags:</dt><dd>{{ isset($user->feature_flags) ? json_encode($user->feature_flags) :  '&mdash;'}}</dd>
             </div>
             <div class="container__block -half profile-settings">
                 <div class="container -padded">
