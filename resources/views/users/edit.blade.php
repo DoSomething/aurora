@@ -2,7 +2,7 @@
 
 @section('main_content')
 
-@include('layout.header', ['header' => 'Users', 'subtitle' => 'View & edit member profiles.']);
+@include('layout.header', ['header' => 'Users', 'subtitle' => 'View & edit member profiles.'])
 
 <div class ="container -padded">
   <div class="wrapper">
@@ -106,6 +106,14 @@
                   <div>
                     {!! Form::checkbox('email_subscription_topics[]', 'scholarships') !!}
                     {!! Form::label('scholarships', 'scholarships') !!}
+                  </div>
+
+          </div>
+            <div class="form-item -padded">
+              {!! Form::label('feature_flags', 'Feature Flags', ['class' => 'field-label']) !!}
+                  <div>
+                    {!! Form::checkbox('feature_flags[]', 'badges', $user->feature_flags['badges'], $user->feature_flags['badges'] ? ['disabled' => true] : null) !!}
+                    {!! Form::label('badges', 'badges') !!}
                   </div>
           </div>
           @if (auth()->user()->hasRole('admin'))
