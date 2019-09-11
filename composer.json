@@ -5,7 +5,7 @@
         "ext-intl": "*",
         "dfurnes/environmentalist": "0.0.1",
         "doctrine/dbal": "^2.5",
-        "dosomething/gateway": "^1.17",
+        "dosomething/gateway": "^2.0",
         "erusev/parsedown": "^1.6",
         "fideloper/proxy": "^3.3",
         "guzzlehttp/guzzle": "^6.3.0",
