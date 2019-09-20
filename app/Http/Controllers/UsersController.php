@@ -76,8 +76,11 @@ class UsersController extends Controller
 
         $input['email_subscription_topics'] = ! empty($input['email_subscription_topics']) ? $input['email_subscription_topics'] : [];
 
-        if (array_key_exists('feature_flags', $input) && in_array('badges', $input['feature_flags'])) {
-            $input['feature_flags'] = ['badges' => true];
+        if (array_key_exists('feature_flags', $input)) {
+            $input['feature_flags'] = [
+                'badges' => in_array('badges', $input['feature_flags']),
+                'refer-friends' => in_array('refer-friends', $input['feature_flags']),
+            ];
         } else {
             unset($input['feature_flags']);
         }

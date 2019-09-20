@@ -112,8 +112,12 @@
             <div class="form-item -padded">
               {!! Form::label('feature_flags', 'Feature Flags', ['class' => 'field-label']) !!}
                   <div>
-                    {!! Form::checkbox('feature_flags[]', 'badges', $user->feature_flags['badges'], $user->feature_flags['badges'] ? ['disabled' => true] : null) !!}
+                    {!! Form::checkbox('feature_flags[]', 'badges', $user->feature_flags['badges']) !!}
                     {!! Form::label('badges', 'badges') !!}
+                  </div>
+                  <div>
+                    {!! Form::checkbox('feature_flags[]', 'refer-friends', $user->feature_flags['refer-friends']) !!}
+                    {!! Form::label('refer-friends', 'refer-friends') !!}
                   </div>
           </div>
           @if (auth()->user()->hasRole('admin'))
