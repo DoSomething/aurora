@@ -82,7 +82,7 @@ class UsersController extends Controller
                 'refer-friends' => in_array('refer-friends', $input['feature_flags']),
             ];
         } else {
-            $input['feature_flags'] = null;
+            $input['feature_flags'] = [];
         }
 
         $this->northstar->updateUser($user->id, $input);
