@@ -3,6 +3,24 @@
 use Illuminate\Support\HtmlString;
 
 /**
+ * Read a given CSV-formatted query string.
+ *
+ * @param string $key
+ * @param string[] $default
+ * @return string[]
+ */
+function csv_query(string $key, array $default = []): array
+{
+    $query = request()->query($key);
+
+    if (! $query) {
+       return $default;
+    }
+
+    return explode(',', $query);
+}
+
+/**
  * Turn the given array of strings into a CSV.
  *
  * @param string[] $array
@@ -82,8 +100,7 @@ function country_name($code)
  */
 function revealer(...$fields)
 {
-    $query = request()->query('include');
-    $currentIncludes = $query ? explode(',', $query) : [];
+    $currentIncludes = csv_query('include');
 
     $isActive = count(array_intersect($currentIncludes, $fields)) > 0;
     $newFields = $isActive ? array_diff($currentIncludes, $fields) : array_merge($currentIncludes, $fields);
