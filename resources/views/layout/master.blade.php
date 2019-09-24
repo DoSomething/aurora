@@ -2,11 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Aurora</title>
+    <title>
+        Aurora
+    </title>
 
     <link rel="stylesheet" href="{{ elixir('app.css', 'dist') }}">
-    <script src="{{ asset('dist/modernizr.js') }}"></script>
     <meta name="csrf-token" content="{{ csrf_token() }}">
+
+    {{ scriptify(auth()->user() ? auth()->user()->access_token : null, 'AUTH') }}
+    <script src="{{ elixir('app.js', 'dist') }}"></script>
 </head>
 
 <body class="modernizr-no-js">
@@ -25,9 +29,5 @@
     </div>
 </div>
 </body>
-
-{{ scriptify(auth()->user() ? auth()->user()->access_token : null, 'AUTH') }}
-
-<script src="{{ elixir('app.js', 'dist') }}"></script>
 
 </html>
