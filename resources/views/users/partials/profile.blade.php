@@ -1,17 +1,30 @@
-<dt>ID:</dt><dd>{{ $user->id }}</dd>
-<dt>Email:</dt><dd>{{ $user->email or '&mdash;' }}</dd>
-<dt>Mobile:</dt><dd>{{ $user->prettyMobile('&mdash;') }}</dd>
-<dt>First Name:</dt><dd>{{ $user->first_name or '&mdash;' }}</dd>
-<dt>Last Name:</dt><dd>{{ $user->last_name or '&mdash;' }}</dd>
-<dt>Birthdate:</dt><dd>{{ $user->birthdate or '&mdash;' }}</dd>
+<div class="profile-section">
+    <h3>Identity</h3>
+    @include('users.partials.field', ['label' => 'ID', 'field' => 'id'])
+    @include('users.partials.sensitive-field', ['field' => 'email', 'preview_field' => 'email_preview'])
+    @include('users.partials.sensitive-field', ['field' => 'mobile', 'preview_field' => 'mobile_preview'])
+</div>
+<div class="profile-section">
+    <h3>Profile</h3>
+    @include('users.partials.field', ['label' => 'First Name', 'field' => 'first_name'])
+    @include('users.partials.sensitive-field', ['label' => 'Last Name', 'field' => 'last_name', 'preview_field' => 'last_initial', 'preview_suffix' => '.'])
+    @include('users.partials.sensitive-field', ['field' => 'birthdate', 'preview_field' => 'age', 'preview_suffix' => ' years old'])
+    @include('users.partials.field', ['label' => 'Voter Registration Status', 'field' => 'voter_registration_status'])
+</div>
+<div class="profile-section">
+    <h4>Address:</h4>
+    @if ($user->addr_street1 || $user->addr_street2 || $user->addr_city || $user->addr_state || $user->addr_zip || $user->country)
+    <p>
+        @if (str_contains(request()->query('include'), ['addr_street1', 'addr_street2']))
+            {{ $user->addr_street1 or 'N/A' }} {{ $user->addr_street2 }}<br/>
+        @endif
+        {{ $user->addr_city or 'N/A' }}, {{ $user->addr_state or 'N/A' }} {{ $user->addr_zip }}
+        {{ revealer('addr_street1', 'addr_street2') }}
+        <br/>
+        {{ $user->country ? country_name($user->country) : 'N/A' }}
+    </span>
+    @else
+    <p>&mdash;</p>
+    @endif
 
-@if (isset($user->addr_street1) || isset($user->addr_street2) || isset($user->addr_city) || isset($user->addr_state) || isset($user->addr_zip) )
-    <dt>Address:</dt><dd>{{ $user->addr_street1 or '' }} {{ $user->addr_street2 or '' }} {{ $user->addr_city or '' }} {{ $user->addr_state or '' }} {{ $user->addr_zip or '' }}</dd>
-@else
-    <dt>Address:</dt><dd>&mdash;</dd>
-@endif
-
-<dt>Country:</dt><dd>{{ $user->country or '&mdash;' }}</dd>
-<dt>Role:</dt><dd>{{ $user->role or '&mdash;' }}</dd>
-<dt>Voter Registration Status:</dt><dd>{{ $user->voter_registration_status or '&mdash;' }}</dd>
-
+</div>

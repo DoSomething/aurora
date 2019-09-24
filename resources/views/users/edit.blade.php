@@ -7,7 +7,7 @@
 <div class ="container -padded">
   <div class="wrapper">
       <div class="container__block -narrow">
-          <h1>{{ $user->displayName() }}</h1>
+          <h1>{{ $user->display_name }}</h1>
 
           @include('layout.errors')
 

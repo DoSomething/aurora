@@ -22,6 +22,8 @@ class UsersController extends Controller
 
         $this->middleware('auth');
         $this->middleware('role:admin,staff,intern');
+
+        $this->middleware('role:admin', ['only' => ['edit', 'update']]);
     }
 
     /**
@@ -49,7 +51,7 @@ class UsersController extends Controller
      */
     public function show(NorthstarUser $user)
     {
-        return view('users.show', compact('user'));
+        return view('users.show', ['user' => $user, 'title' => $user->display_name]);
     }
 
     /**
@@ -60,7 +62,7 @@ class UsersController extends Controller
      */
     public function edit(NorthstarUser $user)
     {
-        return view('users.edit', compact('user'));
+        return view('users.edit', ['user' => $user, 'title' => $user->display_name]);
     }
 
     /**
