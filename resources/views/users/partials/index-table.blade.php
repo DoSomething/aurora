@@ -18,7 +18,7 @@
                 <code>{{ $user->mobile_preview }}</code>
             </td>
             <td class="table-cell footnote">
-                {{ $user->last_accessed_at ? $user->last_accessed_at->diffForHumans() : 'more than 2 years ago' }}
+                {{ $user->last_accessed_at ? $user->last_accessed_at->diffForHumans() : 'N/A' }}
             </td>
             </tr>
         @empty
