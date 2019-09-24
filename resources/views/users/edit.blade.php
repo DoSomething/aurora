@@ -112,11 +112,11 @@
             <div class="form-item -padded">
               {!! Form::label('feature_flags', 'Feature Flags', ['class' => 'field-label']) !!}
                   <div>
-                    {!! Form::checkbox('feature_flags[]', 'badges', $user->feature_flags['badges']) !!}
+                    {!! Form::checkbox('feature_flags[]', 'badges', data_get($user, 'feature_flags.badges', false)) !!}
                     {!! Form::label('badges', 'badges') !!}
                   </div>
                   <div>
-                    {!! Form::checkbox('feature_flags[]', 'refer-friends', $user->feature_flags['refer-friends']) !!}
+                    {!! Form::checkbox('feature_flags[]', 'refer-friends',  data_get($user, 'feature_flags.refer-friends', false))!!}
                     {!! Form::label('refer-friends', 'refer-friends') !!}
                   </div>
           </div>
