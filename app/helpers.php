@@ -62,3 +62,17 @@ function scriptify($json = [], $store = 'STATE')
 {
     return new HtmlString('<script type="text/javascript">window.'.$store.' = '.json_encode($json).'</script>');
 }
+
+/**
+ * Create a "revealer" toggle for sensitive fields.
+ */
+function revealer(...$fields)
+{
+    $query = request()->query('include');
+    $currentIncludes = $query ? explode(',', $query) : [];
+
+    $isActive = count(array_intersect($currentIncludes, $fields)) > 0;
+    $newFields = $isActive ? array_diff($currentIncludes, $fields) : array_merge($currentIncludes, $fields);
+
+    return new HtmlString('<a href="'.e(request()->url().'?include='.implode(',', $newFields)).'" class="reveal '.($isActive ? 'is-active' : '').'" data-turbolinks-action="replace" data-turbolinks-scroll="false"><span>reveal</span></a>');
+}
