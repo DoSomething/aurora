@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>
-        Aurora
+        {{ isset($title) ? $title . ' | Aurora' : 'Aurora' }}
     </title>
 
     <link rel="stylesheet" href="{{ elixir('app.css', 'dist') }}">
