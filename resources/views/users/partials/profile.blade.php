@@ -15,7 +15,7 @@
     <h4>Address:</h4>
     @if ($user->addr_street1 || $user->addr_street2 || $user->addr_city || $user->addr_state || $user->addr_zip || $user->country)
     <p>
-        @if (str_contains(request()->query('include'), 'addr_street1'))
+        @if (str_contains(request()->query('include'), ['addr_street1', 'addr_street2']))
             {{ $user->addr_street1 or 'N/A' }} {{ $user->addr_street2 }}<br/>
         @endif
         {{ $user->addr_city or 'N/A' }}, {{ $user->addr_state or 'N/A' }} {{ $user->addr_zip }}
