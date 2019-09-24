@@ -14,7 +14,7 @@ function csv_query(string $key, array $default = []): array
     $query = request()->query($key);
 
     if (! $query) {
-       return $default;
+        return $default;
     }
 
     return explode(',', $query);
