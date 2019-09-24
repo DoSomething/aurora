@@ -21,7 +21,7 @@
         {{ $user->addr_city or 'N/A' }}, {{ $user->addr_state or 'N/A' }} {{ $user->addr_zip }}
         {{ revealer('addr_street1', 'addr_street2') }}
         <br/>
-        {{ $user->country }}
+        {{ $user->country ? country_name($user->country) : 'N/A' }}
     </span>
     @else
     <p>&mdash;</p>

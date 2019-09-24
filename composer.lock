@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b0b12a9cd2f42ecd7c1865f47fda817e",
+    "content-hash": "51dd9d21c3f30a87261f9c9941264816",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -2723,6 +2723,55 @@
                 "uuid"
             ],
             "time": "2018-07-19T23:38:55+00:00"
+        },
+        {
+            "name": "sokil/php-isocodes",
+            "version": "3.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sokil/php-isocodes.git",
+                "reference": "0cedafc9171e9368a80659ee8d32f9e65ad65848"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sokil/php-isocodes/zipball/0cedafc9171e9368a80659ee8d32f9e65ad65848",
+                "reference": "0cedafc9171e9368a80659ee8d32f9e65ad65848",
+                "shasum": ""
+            },
+            "require": {
+                "ext-gettext": "*",
+                "ext-json": "*",
+                "php": ">=7.1"
+            },
+            "require-dev": {
+                "dealerdirect/phpcodesniffer-composer-installer": "^0.5.0",
+                "php-coveralls/php-coveralls": "^2.1",
+                "phpbench/phpbench": "^0.16.9",
+                "phpmd/phpmd": "@stable",
+                "phpunit/phpunit": "^7.0",
+                "slevomat/coding-standard": "^5.0",
+                "squizlabs/php_codesniffer": "^3.4"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Sokil\\IsoCodes\\": [
+                        "src/"
+                    ]
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Dmytro Sokil",
+                    "email": "dmytro.sokil@gmail.com"
+                }
+            ],
+            "description": "ISO country, subdivision, language, currency and script definitions and their translations. Based on pythons pycountry.",
+            "time": "2019-08-28T20:12:17+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",

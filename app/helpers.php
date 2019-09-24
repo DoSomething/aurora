@@ -64,6 +64,20 @@ function scriptify($json = [], $store = 'STATE')
 }
 
 /**
+ * Print user-friendly name from an ISO country code.
+ *
+ * @param  string $code
+ * @return string
+ */
+function country_name($code)
+{
+    $isoCodes = new \Sokil\IsoCodes\IsoCodesFactory();
+    $country = $isoCodes->getCountries()->getByAlpha2($code);
+
+    return $country ? $country->getName() : 'Unknown';
+}
+
+/**
  * Create a "revealer" toggle for sensitive fields.
  */
 function revealer(...$fields)

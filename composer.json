@@ -12,7 +12,8 @@
         "laravel/framework": "5.5.*",
         "laravelcollective/html": "5.5.*",
         "league/flysystem-aws-s3-v3": "~1.0",
-        "league/uri": "^5.3"
+        "league/uri": "^5.3",
+        "sokil/php-isocodes": "^3.0"
     },
     "require-dev": {
         "filp/whoops": "~2.0",
