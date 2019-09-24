@@ -1,19 +1,27 @@
 <table id="user-table" class="table">
-	<thead>
-		<tr class="row table-header">
-			<th class="table-cell">User</th>
-			<th class="table-cell">Email</th>
-			<th class="table-cell">Phone</th>
-		</tr>
-	</thead>
-	<tbody>
-		@forelse($users as $user)
-			<tr class="table-row">
-				<td class="table-cell"><a href="{{ route('users.show', [$user->id]) }}">{{ $user->displayName() }}</a></td>
-				<td class="table-cell">{{ $user->email or '' }}</td>
-				<td class="table-cell">{{ $user->prettyMobile() }}</td>
-			</tr>
-		@empty
-		@endforelse
-	</tbody>
+    <thead>
+        <tr class="row table-header">
+            <th class="table-cell">Name</th>
+            <th class="table-cell">Contact Methods</th>
+            <th class="table-cell">Last Visited</th>
+        </tr>
+    </thead>
+    <tbody>
+        @forelse($users as $user)
+            <tr class="table-row">
+            <td class="table-cell"><a href="{{ route('users.show', [$user->id]) }}">{{ $user->display_name }}</a></td>
+            <td class="table-cell">
+                <code>{{ $user->email_preview }}</code>
+                @if ($user->email_preview && $user->mobile_preview)
+                    <span class="footnote"> and </span>
+                @endif
+                <code>{{ $user->mobile_preview }}</code>
+            </td>
+            <td class="table-cell footnote">
+                {{ $user->last_accessed_at ? $user->last_accessed_at->diffForHumans() : 'more than 2 years ago' }}
+            </td>
+            </tr>
+        @empty
+        @endforelse
+    </tbody>
 </table>
