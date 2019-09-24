@@ -74,7 +74,7 @@ function country_name($code)
     $isoCodes = new \Sokil\IsoCodes\IsoCodesFactory();
     $country = $isoCodes->getCountries()->getByAlpha2($code);
 
-    return $country ? $country->getName() : 'Unknown';
+    return $country ? $country->getName() : 'Unknown ('.$code.')';
 }
 
 /**
