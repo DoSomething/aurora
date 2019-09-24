@@ -22,6 +22,8 @@ class UsersController extends Controller
 
         $this->middleware('auth');
         $this->middleware('role:admin,staff,intern');
+
+        $this->middleware('role:admin', ['only' => ['edit', 'update']]);
     }
 
     /**

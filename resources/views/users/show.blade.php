@@ -37,7 +37,7 @@
     <div class="container">
         <div class="wrapper">
             <div class="container__block -half">
-                @if(Auth::user()->hasRole('admin') || Auth::user()->hasRole('staff'))
+                @if(Auth::user()->hasRole('admin'))
                     <a class="secondary" href="{{ url('users/' . $user->id . '/edit') }}">Update user's profile</a>
                 @endif
                 <p class="footnote">
