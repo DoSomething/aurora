@@ -7,17 +7,18 @@
     <div class="container">
         <div class="wrapper">
             <div class="container__block profile-settings">
-                <h1>{{ $user->displayName() }}</h1>
+                <h1>{{ $user->display_name }}</h1>
                 @include('layout.errors')
-                <dt>Source:</dt><dd>{{ $user->source or '&mdash;' }}</dd>
-                <dt>Source Detail:</dt><dd>{{ $user->source_detail or '&mdash;' }}</dd>
+                <dt>Source:</dt>
+                <dd>
+                    {{ $user->source or '&mdash;' }}
+                    <span class="footnote">({{ $user->source_detail or 'N/A' }})</span>
+                </dd>
                 <dt>Feature Flags:</dt><dd>{{ isset($user->feature_flags) ? json_encode($user->feature_flags) :  '&mdash;'}}</dd>
+                @include('users.partials.field', ['field' => 'role'])
             </div>
             <div class="container__block -half profile-settings">
-                <div class="container -padded">
-                    <h3>Profile</h3>
-                    @include('users.partials.profile')
-                </div>
+                @include('users.partials.profile')
                 <div class="container -padded">
                     <h3>Subscriptions</h3>
                     @include('users.partials.subscriptions')
@@ -41,7 +42,7 @@
                 @endif
                 <p class="footnote">
                     Last updated: {{ $user->updated_at->format('F d, Y g:ia') }}<br />
-                    Created: {{ $user->created_at->format('F d, Y g:ia') }}
+                    Created: {{ $user->created_at->format('F d, Y g:ia') }} ({{ $user->created_at->diffForHumans() }})
                 </p>
             </div>
         </div>
