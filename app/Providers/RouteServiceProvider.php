@@ -28,7 +28,7 @@ class RouteServiceProvider extends ServiceProvider
         parent::boot();
 
         Route::bind('user', function ($id) {
-            $user = gateway('northstar')->getUser($id);
+            $user = gateway('northstar')->getUser($id, csv_query('include'));
 
             if (! $user) {
                 throw new NotFoundHttpException;
