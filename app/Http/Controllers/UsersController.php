@@ -57,11 +57,14 @@ class UsersController extends Controller
     /**
      * Display the form for editing user information
      *
-     * @param NorthstarUser $user
+     * @param string $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(NorthstarUser $user)
+    public function edit($id)
     {
+        $optionalFields = ['last_name', 'email', 'mobile', 'birthdate', 'addr_street1', 'addr_street2'];
+        $user = gateway('northstar')->getUser($id, $optionalFields);
+
         return view('users.edit', ['user' => $user, 'title' => $user->display_name]);
     }
 

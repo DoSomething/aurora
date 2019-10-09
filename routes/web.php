@@ -17,7 +17,8 @@ $router->get('auth/login', 'Auth\AuthController@getLogin');
 $router->get('auth/logout', 'Auth\AuthController@getLogout');
 
 // Users
-$router->resource('users', 'UsersController', ['except' => ['create', 'store']]);
+$router->resource('users', 'UsersController', ['except' => ['create', 'edit', 'store']]);
+$router->get('users/{id}/edit', ['as' => 'users.edit', 'uses' => 'UsersController@edit']);
 $router->get('search', ['as' => 'user.search', 'uses' => 'UsersController@search']);
 $router->get('users/{user}/merge', ['as' => 'users.merge.create', 'uses' => 'MergeController@create']);
 $router->post('users/{user}/merge', ['as' => 'users.merge.store', 'uses' => 'MergeController@store']);
