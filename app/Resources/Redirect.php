@@ -22,9 +22,8 @@ class Redirect extends ApiResponse implements JsonSerializable
     }
 
     /**
-     * Create a new redirect from the corresponding Fastly
-     * dictionary items (redirect & status key/value pairs).
-     * @param $attributes
+     * Create a new redirect from the Fastly dictionary item.
+     * @param $redirect
      */
     public static function fromItems($redirect)
     {
