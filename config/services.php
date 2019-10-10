@@ -43,6 +43,5 @@ return [
         'service_url' => env('FASTLY_SERVICE_URL'),
         'api_key' => env('FASTLY_API_KEY'),
         'redirects_table' => env('FASTLY_TABLE_REDIRECTS'),
-        'types_table' => env('FASTLY_TABLE_REDIRECT_TYPES'),
     ],
 ];

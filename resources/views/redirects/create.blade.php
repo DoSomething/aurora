@@ -24,16 +24,6 @@
                         'placeholder' => 'e.g. https://www.dosomething.org/new-path']) !!}
                     </div>
 
-                    <div class="form-item -padded">
-                        {!! Form::label('status', 'Redirect Type', ['class' => 'field-label']) !!}
-                        <div class="select">
-                            {!! Form::select('status', ['301' => '301 (Moved Permanently)', '302' => '302 (Found)']) !!}
-                        </div>
-                        <em class="footnote">With <strong>301 Moved Permanently</strong>,
-                            Google will update their records with this new URL. Use
-                            <strong>302 Found</strong> if the redirect is temporary.</em>
-                    </div>
-
                     {!! Form::submit('Submit', ['class' => 'button']) !!}
                 {!! Form::close() !!}
             </div>

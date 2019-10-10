@@ -76,12 +76,11 @@ class RedirectsController extends Controller
         $this->validate($request, [
             'path' => 'required|string|regex:/^[^?]+$/',
             'target' => 'required|url',
-            'status' => 'required|in:301,302',
         ], [
             'path.regex' => 'Paths cannot contain query strings.',
         ]);
 
-        $redirect = $this->fastly->createRedirect($request->path, $request->target, $request->status);
+        $redirect = $this->fastly->createRedirect($request->path, $request->target);
 
         return redirect()->route('redirects.show', $redirect->id);
     }
@@ -110,10 +109,9 @@ class RedirectsController extends Controller
     {
         $this->validate($request, [
             'target' => 'required|url',
-            'status' => 'required|in:301,302',
         ]);
 
-        $this->fastly->updateRedirect($redirect->path, $request->target, $request->status);
+        $this->fastly->updateRedirect($redirect->path, $request->target);
 
         return redirect()->route('redirects.show', $redirect->id);
     }

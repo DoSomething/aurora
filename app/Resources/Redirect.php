@@ -26,13 +26,12 @@ class Redirect extends ApiResponse implements JsonSerializable
      * dictionary items (redirect & status key/value pairs).
      * @param $attributes
      */
-    public static function fromItems($redirect, $type)
+    public static function fromItems($redirect)
     {
         return new static([
             'id' => self::encodeId($redirect),
             'path' => $redirect['item_key'],
             'target' => $redirect['item_value'],
-            'status' => $type['item_value'],
             'updated_at' => array_get($redirect, 'updated_at', Carbon::now()), // not returned from updates.
             'created_at' => array_get($redirect, 'updated_at', Carbon::now()), // not returned from updates.
         ]);
