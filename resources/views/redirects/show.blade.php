@@ -16,7 +16,7 @@
                 <label class="field-label">Target:</label>
                 <code class="break-all">{{ $redirect->target }}</code><br><br>
                 <label class="field-label">Redirect Status:</label>
-                <code>{{ $redirect->status == '301' ? '301 (Moved Permanently)' : '302 (Found)'}}</code><br><br>
+                <code>302 (Found)</code><br><br>
             </div>
 
             <div class="container__block -half">

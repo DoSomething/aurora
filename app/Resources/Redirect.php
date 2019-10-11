@@ -22,17 +22,15 @@ class Redirect extends ApiResponse implements JsonSerializable
     }
 
     /**
-     * Create a new redirect from the corresponding Fastly
-     * dictionary items (redirect & status key/value pairs).
-     * @param $attributes
+     * Create a new redirect from the Fastly dictionary item.
+     * @param $redirect
      */
-    public static function fromItems($redirect, $type)
+    public static function fromItems($redirect)
     {
         return new static([
             'id' => self::encodeId($redirect),
             'path' => $redirect['item_key'],
             'target' => $redirect['item_value'],
-            'status' => $type['item_value'],
             'updated_at' => array_get($redirect, 'updated_at', Carbon::now()), // not returned from updates.
             'created_at' => array_get($redirect, 'updated_at', Carbon::now()), // not returned from updates.
         ]);

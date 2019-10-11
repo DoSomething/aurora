@@ -20,15 +20,13 @@
                       <tr class="row table-header">
                           <th class="table-cell">Path</th>
                           <th class="table-cell">Target</th>
-                          <th class="table-cell">Status</th>
                       </tr>
                   </thead>
                   <tbody>
                       @foreach($redirects as $redirect)
                           <tr class="table-row">
                               <td class="table-cell break-all" title="{{ $redirect->path }}"><a href="{{ route('redirects.show', [$redirect->id]) }}">{{ str_limit($redirect->path, 40) }}</a></td>
-                              <td class="table-cell break-all" title="{{ $redirect->target }}">{{ str_limit($redirect->target, 40) }}</td>
-                              <td class="table-cell"><code>{{ $redirect->status }}</code></td>
+                              <td class="table-cell break-all" title="{{ $redirect->target }}">{{ str_limit($redirect->target, 60) }}</td>
                           </tr>
                       @endforeach
                   </tbody>
