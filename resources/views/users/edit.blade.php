@@ -90,6 +90,10 @@
                   </div>
           </div>
           <div class="form-item -padded">
+              {!! Form::label('school_id', 'School ID', ['class' => 'field-label']) !!}
+              {!! Form::text('school_id', NULL, ['class' => 'text-field']) !!}
+          </div>
+          <div class="form-item -padded">
               {!! Form::label('email_subscription_topics', 'Email Subscription Topics', ['class' => 'field-label']) !!}
                   <div>
                     {!! Form::checkbox('email_subscription_topics[]', 'community') !!}
