@@ -62,7 +62,7 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
-        $optionalFields = ['last_name', 'email', 'mobile', 'birthdate', 'addr_street1', 'addr_street2'];
+        $optionalFields = ['last_name', 'email', 'mobile', 'birthdate', 'addr_street1', 'addr_street2', 'school_id'];
         $user = gateway('northstar')->getUser($id, $optionalFields);
 
         return view('users.edit', ['user' => $user, 'title' => $user->display_name]);
