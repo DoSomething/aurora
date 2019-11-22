@@ -122,6 +122,8 @@
                   <div>
                     {!! Form::checkbox('feature_flags[]', 'refer-friends',  data_get($user, 'feature_flags.refer-friends', false))!!}
                     {!! Form::label('refer-friends', 'refer-friends') !!}
+                    {!! Form::checkbox('feature_flags[]', 'refer-friends-scholarship',  data_get($user, 'feature_flags.refer-friends-scholarship', false))!!}
+                    {!! Form::label('refer-friends-scholarship', 'refer-friends-scholarship') !!}
                   </div>
           </div>
           @if (auth()->user()->hasRole('admin'))
