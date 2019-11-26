@@ -14,7 +14,7 @@
   },
   "babel": {
     "presets": [
-      "@dosomething/babel-config"
+      "@dosomething"
     ]
   },
   "dependencies": {
@@ -24,11 +24,14 @@
     "dom-delegate": "^2.2.1",
     "dosomething-modal": "^0.3.4",
     "environment-badge": "^1.2.1",
+    "graphql": "^14.5.8",
+    "graphql-tag": "^2.10.1",
     "turbolinks": "^5.2.0"
   },
   "devDependencies": {
-    "@dosomething/babel-config": "^2.2.2",
-    "@dosomething/webpack-config": "^4.0.0",
+    "@babel/core": "^7.5.4",
+    "@dosomething/babel-preset": "^3.2.0",
+    "@dosomething/webpack-config": "^6.0.0",
     "modernizr": "^3.7.1",
     "webpack": "^4.35.3",
     "webpack-cli": "^3.3.6"
