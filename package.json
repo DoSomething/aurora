@@ -30,8 +30,10 @@
   },
   "devDependencies": {
     "@babel/core": "^7.5.4",
+    "@babel/runtime": "^7.7.4",
     "@dosomething/babel-preset": "^3.2.0",
     "@dosomething/webpack-config": "^6.0.0",
+    "core-js": "^3.4.3",
     "modernizr": "^3.7.1",
     "webpack": "^4.35.3",
     "webpack-cli": "^3.3.6"
