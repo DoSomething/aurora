@@ -25,7 +25,10 @@
                 This is the point of no return! Beware!</p>
         </div>
         <div class="form-actions">
-            {!! Form::submit('Delete User', ['class' => 'button -secondary -danger']) !!}
+            {{ Form::submit('Delete Now', [
+                'class' => 'button -secondary -danger',
+                'data-confirm' => 'Are you sure you want to immediately & permanently destroy this user? THIS CANNOT BE UNDONE.'
+            ]) }}
         </div>
         {!! Form::close() !!}
     </div>
