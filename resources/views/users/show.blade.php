@@ -6,6 +6,15 @@
 
     <div class="container">
         <div class="wrapper">
+            @if ($user->deletion_requested_at)
+                <div class="container__block">
+                    <div class="danger-zone">
+                        <strong>This user requested to delete their account on {{ (new Carbon\Carbon($user->deletion_requested_at))->format('F d, Y')}}.</strong>
+                        We automatically process account deletions two weeks after the request is made. Users can "undo" this request from their account page.
+                    </div>
+                </div>
+            @endif
+
             <div class="container__block profile-settings">
                 <h1>{{ $user->display_name }}</h1>
                 @include('layout.errors')
