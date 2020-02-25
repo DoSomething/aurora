@@ -21,11 +21,10 @@
         {!! Form::open(['route' => ['users.destroy', $user->id], 'method' => 'DELETE']) !!}
         <div class="form-item">
             <label for="role" class="field-label">Delete Account</label>
-            <p class="footnote">This will <strong>permanently remove</strong> a user's account from Northstar.
-                This is the point of no return! Beware!</p>
+            <p class="footnote">This will <strong>permanently destroy</strong> this user's Northstar & Customer.io profiles, Rogue campaign activity, and Gambit conversation history.</p>
         </div>
         <div class="form-actions">
-            {{ Form::submit('Delete Now', [
+            {{ Form::submit('Delete Immediately', [
                 'class' => 'button -secondary -danger',
                 'data-confirm' => 'Are you sure you want to immediately & permanently destroy this user? THIS CANNOT BE UNDONE.'
             ]) }}
