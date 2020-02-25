@@ -10,7 +10,7 @@
                 <p>Welcome to the <strong>DoSomething.org admin interface</strong>. If you're looking to
                 manage user accounts or domain redirects, you're in the right place.</p>
 
-                <p>Drop a message in the <code>#help-web-template</code> Slack room if you can't log in!</p>
+                <p>Drop a message in the <code>#help-product</code> Slack room if you can't log in!</p>
 
                 <p><a href="/auth/login" class="button">Log In</a></p>
         </div>

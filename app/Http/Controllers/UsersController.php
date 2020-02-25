@@ -104,8 +104,9 @@ class UsersController extends Controller
      */
     public function destroy(NorthstarUser $user)
     {
-        // @TODO!
-        return redirect()->back()->with('flash_message', ['class' => 'messages', 'text' => 'Not yet implemented.']);
+        $this->northstar->deleteUser($user->id);
+
+        return redirect()->route('users.index')->with('flash_message', ['class' => 'messages', 'text' => 'User deleted.']);
     }
 
     /**
