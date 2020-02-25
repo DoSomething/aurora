@@ -26,7 +26,7 @@
         <div class="form-actions">
             {{ Form::submit('Delete Immediately', [
                 'class' => 'button -secondary -danger',
-                'data-confirm' => 'Are you sure you want to immediately & permanently destroy this user? THIS CANNOT BE UNDONE.'
+                'data-confirm' => 'Are you sure you want to immediately & permanently destroy all of '.$user->display_name.'\'s data? THIS CANNOT BE UNDONE.'
             ]) }}
         </div>
         {!! Form::close() !!}
