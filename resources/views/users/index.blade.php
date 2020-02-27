@@ -8,7 +8,8 @@
   <div class="wrapper">
       <div class="container__block">
           <h1>All Users</h1>
-          <p>We currently have <strong><span id="lazy-user-count" class="lazy-loading">#,###,###</span> users</strong> in Northstar.</p>
+          {{-- @TODO (2020-02-27): Re-enable this after #170078318 is solved. --}}
+          {{-- <p>We currently have <strong><span id="lazy-user-count" class="lazy-loading">#,###,###</span> users</strong> in Northstar.</p> --}}
           @include('search.search')
       </div>
 
