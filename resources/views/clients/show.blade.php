@@ -17,7 +17,7 @@
                 <h3>Credentials</h3>
                 @if($client->allowed_grant == 'authorization_code')
                     <p>This is an application that users can login to via Northstar,
-                    using the <a href="https://git.io/vduUZ">Authorization Code grant</a>.</p>
+                    using the <a href="https://git.io/Jvz0R">Authorization Code grant</a>.</p>
                 @elseif($client->allowed_grant == 'client_credentials')
                     <p>This is a machine client that requests tokens via the
                     <a href="https://git.io/fN6yP">Client Credentials grant</a>.</p>
