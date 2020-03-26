@@ -47,11 +47,17 @@
         <div class="wrapper">
             <div class="container__block -half">
                 @if(Auth::user()->hasRole('admin'))
-                    <a class="secondary" href="{{ url('users/' . $user->id . '/edit') }}">Update user's profile</a>
+                    <a class="primary" href="{{ url('users/' . $user->id . '/edit') }}">Update user's profile</a>
                 @endif
                 <p class="footnote">
                     Last updated: {{ $user->updated_at->format('F d, Y g:ia') }}<br />
-                    Created: {{ $user->created_at->format('F d, Y g:ia') }} ({{ $user->created_at->diffForHumans() }})
+                    Created: {{ $user->created_at->format('F d, Y g:ia') }} ({{ $user->created_at->diffForHumans() }})<br />
+                    Referrer: 
+                    @if ($user->referrer_user_id)
+                      <a href="{{ url('users/' . $user->referrer_user_id) }}">{{$user->referrer_user_id}}</a>
+                    @else
+                      -
+                    @endif
                 </p>
             </div>
         </div>
