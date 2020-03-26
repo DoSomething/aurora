@@ -51,7 +51,8 @@
                 @endif
                 <p class="footnote">
                     Last updated: {{ $user->updated_at->format('F d, Y g:ia') }}<br />
-                    Created: {{ $user->created_at->format('F d, Y g:ia') }} ({{ $user->created_at->diffForHumans() }})
+                    Created: {{ $user->created_at->format('F d, Y g:ia') }} ({{ $user->created_at->diffForHumans() }})<br />
+                    Referrer: {{ $user->referrer_user_id ? $user->referrer_user_id : '-' }}
                 </p>
             </div>
         </div>
