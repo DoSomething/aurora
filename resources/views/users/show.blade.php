@@ -28,9 +28,13 @@
             </div>
             <div class="container__block -half profile-settings">
                 @include('users.partials.profile')
-                <div class="container -padded">
+                <div class="container profile-section">
                     <h3>Subscriptions</h3>
                     @include('users.partials.subscriptions')
+                </div>
+                <div class="container -padded">
+                    <h3>Interests</h3>
+                    @include('users.partials.interests')
                 </div>
             </div>
 
