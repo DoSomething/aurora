@@ -79,6 +79,7 @@ class UsersController extends Controller
     {
         $input = $request->except('_token', '_id', 'drupal_uid');
 
+        $input['causes'] = ! empty($input['causes']) ? $input['causes'] : [];
         $input['email_subscription_topics'] = ! empty($input['email_subscription_topics']) ? $input['email_subscription_topics'] : [];
         $input['sms_subscription_topics'] = ! empty($input['sms_subscription_topics']) ? $input['sms_subscription_topics'] : [];
 
