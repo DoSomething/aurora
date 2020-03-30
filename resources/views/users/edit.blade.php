@@ -120,6 +120,57 @@
                   </div>
 
           </div>
+           <div class="form-item -padded">
+              {!! Form::label('causes', 'Cause Interests', ['class' => 'field-label']) !!}
+                  <div>
+                    {!! Form::checkbox('causes[]', 'animal_welfare') !!}
+                    {!! Form::label('animal_welfare', 'animal_welfare') !!}
+                  </div>
+                  <div>
+                    {!! Form::checkbox('causes[]', 'bullying') !!}
+                    {!! Form::label('bullying', 'bullying') !!}
+                  </div>
+                  <div>
+                    {!! Form::checkbox('causes[]', 'education') !!}
+                    {!! Form::label('education', 'education') !!}
+                  </div>
+                  <div>
+                    {!! Form::checkbox('causes[]', 'environment') !!}
+                    {!! Form::label('environment', 'environment') !!}
+                  </div>
+                   <div>
+                    {!! Form::checkbox('causes[]', 'gender_rights_equality') !!}
+                    {!! Form::label('gender_rights_equality', 'gender_rights_equality') !!}
+                  </div>
+                  <div>
+                    {!! Form::checkbox('causes[]', 'homelessness_poverty') !!}
+                    {!! Form::label('homelessness_poverty', 'homelessness_poverty') !!}
+                  </div>
+                  <div>
+                    {!! Form::checkbox('causes[]', 'immigration_refugees') !!}
+                    {!! Form::label('immigration_refugees', 'immigration_refugees') !!}
+                  </div>
+                  <div>
+                    {!! Form::checkbox('causes[]', 'lgbtq_rights_equality') !!}
+                    {!! Form::label('lgbtq_rights_equality', 'lgbtq_rights_equality') !!}
+                  </div>
+                   <div>
+                    {!! Form::checkbox('causes[]', 'mental_health') !!}
+                    {!! Form::label('mental_health', 'mental_health') !!}
+                  </div>
+                  <div>
+                    {!! Form::checkbox('causes[]', 'physical_health') !!}
+                    {!! Form::label('physical_health', 'physical_health') !!}
+                  </div>
+                  <div>
+                    {!! Form::checkbox('causes[]', 'racial_justice_equity') !!}
+                    {!! Form::label('racial_justice_equity', 'racial_justice_equity') !!}
+                  </div>
+                  <div>
+                    {!! Form::checkbox('causes[]', 'sexual_harassment_assault') !!}
+                    {!! Form::label('sexual_harassment_assault', 'sexual_harassment_assault') !!}
+                  </div>
+          </div>
             <div class="form-item -padded">
               {!! Form::label('feature_flags', 'Feature Flags', ['class' => 'field-label']) !!}
                   <div>
