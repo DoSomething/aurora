@@ -71,6 +71,10 @@
           <div class="form-item -padded">
               {!! Form::label('sms_subscription_topics', 'SMS Subscription Topics', ['class' => 'field-label']) !!}
                   <div>
+                    {!! Form::checkbox('sms_subscription_topics[]', 'general') !!}
+                    {!! Form::label('general', 'general') !!}
+                  </div>
+                  <div>
                     {!! Form::checkbox('sms_subscription_topics[]', 'voting') !!}
                     {!! Form::label('voting', 'voting') !!}
                   </div>
