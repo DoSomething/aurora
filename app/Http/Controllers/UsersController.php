@@ -81,7 +81,6 @@ class UsersController extends Controller
 
         $input['causes'] = ! empty($input['causes']) ? $input['causes'] : [];
         $input['email_subscription_topics'] = ! empty($input['email_subscription_topics']) ? $input['email_subscription_topics'] : [];
-        $input['sms_subscription_topics'] = ! empty($input['sms_subscription_topics']) ? $input['sms_subscription_topics'] : [];
 
         if (array_key_exists('feature_flags', $input)) {
             $input['feature_flags'] = [
