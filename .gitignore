@@ -1,12 +1,11 @@
-/vendor
 /node_modules
-Homestead.yaml
-Homestead.json
-.env
+/vendor
 
 .DS_Store
+.env
+.idea
 
-/node_modules
+Homestead.json
+Homestead.yaml
 public/dist
 npm-debug.log
-.idea
