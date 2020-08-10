@@ -39,7 +39,7 @@ class AuthController extends Controller
     {
         $this->northstar = $northstar;
 
-        $this->middleware('guest', ['except' => 'getLogout']);
+        $this->middleware('guest')->except('getLogout');
     }
 
     /**
