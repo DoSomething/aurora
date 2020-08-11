@@ -14,7 +14,7 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $middleware = [
-        \Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode::class,
+        \Aurora\Http\Middleware\CheckForMaintenanceMode::class,
         \Aurora\Http\Middleware\ForceHttps::class,
         \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
         \Aurora\Http\Middleware\TrimStrings::class,
@@ -55,13 +55,14 @@ class Kernel extends HttpKernel
      */
     protected $routeMiddleware = [
         'auth' => \Illuminate\Auth\Middleware\Authenticate::class,
-        'guest' => \Aurora\Http\Middleware\RedirectIfAuthenticated::class,
-        'role' => \Aurora\Http\Middleware\CheckRole::class,
-        'can' => \Illuminate\Auth\Middleware\Authorize::class,
-
-        'guard' => \DoSomething\Gateway\Server\Middleware\SetGuard::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'bindings' => \Illuminate\Routing\Middleware\SubstituteBindings::class,
+        'cache.headers' => \Illuminate\Http\Middleware\SetCacheHeaders::class,
+        'can' => \Illuminate\Auth\Middleware\Authorize::class,
+        'guard' => \DoSomething\Gateway\Server\Middleware\SetGuard::class,
+        'guest' => \Aurora\Http\Middleware\RedirectIfAuthenticated::class,
+        'role' => \Aurora\Http\Middleware\CheckRole::class,
+        'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
     ];
 }

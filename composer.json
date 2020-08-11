@@ -7,34 +7,42 @@
     "doctrine/dbal": "^2.5",
     "dosomething/gateway": "^2.1",
     "erusev/parsedown": "^1.6",
-    "fideloper/proxy": "^3.3",
+    "fideloper/proxy": "^4.0",
     "guzzlehttp/guzzle": "^6.3.0",
-    "laravel/framework": "5.5.*",
+    "laravel/framework": "5.6.*",
     "laravelcollective/html": "5.5.*",
     "league/flysystem-aws-s3-v3": "~1.0",
     "league/uri": "^5.3",
     "sokil/php-isocodes": "^3.0"
   },
   "require-dev": {
-    "filp/whoops": "~2.0",
-    "fzaninotto/faker": "~1.4",
-    "laravel/tinker": "~1.0.0",
-    "mockery/mockery": "~1.0",
-    "phpunit/phpunit": "~6.0",
-    "phpspec/phpspec": "~2.1",
-    "symfony/dom-crawler": "3.1.*",
-    "symfony/css-selector": "3.1.*"
+    "filp/whoops": "^2.0",
+    "fzaninotto/faker": "^1.4",
+    "laravel/tinker": "^1.0",
+    "mockery/mockery": "^1.0",
+    "nunomaduro/collision": "^2.0",
+    "phpunit/phpunit": "^7.0"
+  },
+  "config": {
+    "optimize-autoloader": true,
+    "preferred-install": "dist",
+    "sort-packages": true
+  },
+  "extra": {
+    "laravel": {
+      "dont-discover": []
+    }
   },
   "autoload": {
     "classmap": [
       "database"
     ],
-    "psr-4": {
-      "Aurora\\": "app/"
-    },
     "files": [
       "app/helpers.php"
-    ]
+    ],
+    "psr-4": {
+      "Aurora\\": "app/"
+    }
   },
   "autoload-dev": {
     "psr-4": {
@@ -44,11 +52,8 @@
       "tests/TestCase.php"
     ]
   },
-  "extra": {
-    "laravel": {
-      "dont-discover": []
-    }
-  },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
   "scripts": {
     "post-root-package-install": [
       "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
@@ -63,10 +68,5 @@
     "warmup": [
       "@php artisan gateway:key"
     ]
-  },
-  "config": {
-    "preferred-install": "dist",
-    "sort-packages": true,
-    "optimize-autoloader": true
   }
 }

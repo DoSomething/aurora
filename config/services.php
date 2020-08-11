@@ -37,6 +37,12 @@ return [
         'profile_url' => env('ROGUE_PROFILE_URL', 'https://activity.dosomething.org/users'),
     ],
 
+    'ses' => [
+        'key' => env('AWS_ACCESS_KEY_ID'),
+        'secret' => env('AWS_SECRET_ACCESS_KEY'),
+        'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
+    ],
+
     'fastly' => [
         'url' => 'https://api.fastly.com',
         'service_id' => env('FASTLY_SERVICE_ID'),
