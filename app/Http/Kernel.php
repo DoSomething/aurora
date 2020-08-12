@@ -64,6 +64,7 @@ class Kernel extends HttpKernel
         'role' => \Aurora\Http\Middleware\CheckRole::class,
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
+        'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
     ];
 
     /**
