@@ -11,6 +11,7 @@ class ForceHttps
 {
     /**
      * Handle an incoming request.
+     * This middleware needs to run after the TrustProxies middleware.
      *
      * @param  \Illuminate\Http\Request $request
      * @param  \Closure $next

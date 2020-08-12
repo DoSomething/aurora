@@ -15,11 +15,11 @@ class Kernel extends HttpKernel
      */
     protected $middleware = [
         \Aurora\Http\Middleware\CheckForMaintenanceMode::class,
-        \Aurora\Http\Middleware\ForceHttps::class,
         \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
         \Aurora\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
         \Aurora\Http\Middleware\TrustProxies::class,
+        \Aurora\Http\Middleware\ForceHttps::class,
     ];
 
     /**
