@@ -26,6 +26,7 @@ class ForceHttps
 
             Log::debug('Middelware/ForceHttps@handle Request:', [
                 'Canonical Host' => $canonicalHost,
+                'Request Host' => $request->header('Host'),
                 'Incorrect Request Host' => $hasIncorrectHost,
                 'Secure Request' => $request->secure(),
             ]);
