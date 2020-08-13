@@ -4,6 +4,7 @@ namespace Aurora\Resources;
 
 use Carbon\Carbon;
 use JsonSerializable;
+use Illuminate\Support\Arr;
 use DoSomething\Gateway\Common\ApiResponse;
 
 class Redirect extends ApiResponse implements JsonSerializable
@@ -31,8 +32,8 @@ class Redirect extends ApiResponse implements JsonSerializable
             'id' => self::encodeId($redirect),
             'path' => $redirect['item_key'],
             'target' => $redirect['item_value'],
-            'updated_at' => array_get($redirect, 'updated_at', Carbon::now()), // not returned from updates.
-            'created_at' => array_get($redirect, 'updated_at', Carbon::now()), // not returned from updates.
+            'updated_at' => Arr::get($redirect, 'updated_at', Carbon::now()), // not returned from updates.
+            'created_at' => Arr::get($redirect, 'updated_at', Carbon::now()), // not returned from updates.
         ]);
     }
 

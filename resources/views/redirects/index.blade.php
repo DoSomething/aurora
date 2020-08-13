@@ -25,8 +25,8 @@
                   <tbody>
                       @foreach($redirects as $redirect)
                           <tr class="table-row">
-                              <td class="table-cell break-all" title="{{ $redirect->path }}"><a href="{{ route('redirects.show', [$redirect->id]) }}">{{ str_limit($redirect->path, 40) }}</a></td>
-                              <td class="table-cell break-all" title="{{ $redirect->target }}">{{ str_limit($redirect->target, 60) }}</td>
+                              <td class="table-cell break-all" title="{{ $redirect->path }}"><a href="{{ route('redirects.show', [$redirect->id]) }}">{{ Str::limit($redirect->path, 40) }}</a></td>
+                              <td class="table-cell break-all" title="{{ $redirect->target }}">{{ Str::limit($redirect->target, 60) }}</td>
                           </tr>
                       @endforeach
                   </tbody>
