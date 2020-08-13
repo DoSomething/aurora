@@ -14,12 +14,12 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $middleware = [
+        \Aurora\Http\Middleware\TrustProxies::class,
+        \Aurora\Http\Middleware\ForceHttps::class,
         \Aurora\Http\Middleware\CheckForMaintenanceMode::class,
         \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
         \Aurora\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
-        \Aurora\Http\Middleware\TrustProxies::class,
-        \Aurora\Http\Middleware\ForceHttps::class,
     ];
 
     /**
