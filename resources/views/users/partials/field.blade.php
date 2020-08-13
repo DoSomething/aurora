@@ -1,2 +1,2 @@
-<dt>{{ $label or title_case($field) }}:</dt>
-<dd>{{ $user->{$field} or '&mdash;' }}</dd>
+<dt>{{ $label ?? title_case($field) }}:</dt>
+<dd>{{ $user->{$field} ?? '&mdash;' }}</dd>

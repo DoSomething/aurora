@@ -1,4 +1,4 @@
-<dt>SMS Status:</dt><dd>{{ $user->sms_status or '&mdash;' }}</dd>
+<dt>SMS Status:</dt><dd>{{ $user->sms_status ?? '&mdash;' }}</dd>
 <dt>SMS Paused:</dt><dd>{{ $user->sms_paused ? '✔' : '✘' }}</dd>
 <dt>SMS Subscription Topics:</dt><dd>{{ $user->sms_subscription_topics ? implode(",  ",$user->sms_subscription_topics) : '&mdash;'}}</dd>
 <dt>Email Subscription Status:</dt><dd>{{ $user->email_subscription_status ? '✔' : '✘' }}</dd>

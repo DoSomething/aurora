@@ -20,8 +20,8 @@
                 @include('layout.errors')
                 <dt>Source:</dt>
                 <dd>
-                    {{ $user->source or '&mdash;' }}
-                    <span class="footnote">({{ $user->source_detail or 'N/A' }})</span>
+                    {{ $user->source ?? '&mdash;' }}
+                    <span class="footnote">({{ $user->source_detail ?? 'N/A' }})</span>
                 </dd>
                 <dt>Feature Flags:</dt><dd>{{ isset($user->feature_flags) ? json_encode($user->feature_flags) :  '&mdash;'}}</dd>
                 @include('users.partials.field', ['field' => 'role'])
@@ -56,7 +56,7 @@
                 <p class="footnote">
                     Last updated: {{ $user->updated_at->format('F d, Y g:ia') }}<br />
                     Created: {{ $user->created_at->format('F d, Y g:ia') }} ({{ $user->created_at->diffForHumans() }})<br />
-                    Referrer: 
+                    Referrer:
                     @if ($user->referrer_user_id)
                       <a href="{{ url('users/' . $user->referrer_user_id) }}">{{$user->referrer_user_id}}</a>
                     @else

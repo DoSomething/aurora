@@ -7,7 +7,7 @@
     <div class="container -padded">
         <div class="wrapper">
             <div class="container__block -narrow">
-                <h1>{{ $client->title or title_case($client->client_id) }}</h1>
+                <h1>{{ $client->title ?? title_case($client->client_id) }}</h1>
 
                 @include('layout.errors')
 
