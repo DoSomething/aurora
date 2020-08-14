@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+
 /**
  * Here is where you can register web routes for your application. These
  * routes are loaded by the RouteServiceProvider within a group which
@@ -10,25 +12,25 @@
  */
 
 // Homepage
-$router->get('/', 'HomeController@home')->name('login');
+Route::get('/', 'HomeController@home')->name('login');
 
 // Authentication
-$router->get('auth/login', 'Auth\AuthController@getLogin');
-$router->get('auth/logout', 'Auth\AuthController@getLogout');
+Route::get('auth/login', 'Auth\AuthController@getLogin');
+Route::get('auth/logout', 'Auth\AuthController@getLogout');
 
 // Users
-$router->resource('users', 'UsersController', ['except' => ['create', 'edit', 'store']]);
-$router->get('users/{id}/edit', ['as' => 'users.edit', 'uses' => 'UsersController@edit']);
-$router->get('search', ['as' => 'user.search', 'uses' => 'UsersController@search']);
-$router->get('users/{user}/merge', ['as' => 'users.merge.create', 'uses' => 'MergeController@create']);
-$router->post('users/{user}/merge', ['as' => 'users.merge.store', 'uses' => 'MergeController@store']);
-$router->post('users/{user}/resets', ['as' => 'users.resets.create', 'uses' => 'UsersController@sendPasswordReset']);
+Route::resource('users', 'UsersController', ['except' => ['create', 'edit', 'store']]);
+Route::get('users/{id}/edit', ['as' => 'users.edit', 'uses' => 'UsersController@edit']);
+Route::get('search', ['as' => 'user.search', 'uses' => 'UsersController@search']);
+Route::get('users/{user}/merge', ['as' => 'users.merge.create', 'uses' => 'MergeController@create']);
+Route::post('users/{user}/merge', ['as' => 'users.merge.store', 'uses' => 'MergeController@store']);
+Route::post('users/{user}/resets', ['as' => 'users.resets.create', 'uses' => 'UsersController@sendPasswordReset']);
 
 // Superusers
-$router->resource('superusers', 'SuperusersController', ['only' => ['index']]);
+Route::resource('superusers', 'SuperusersController', ['only' => ['index']]);
 
 // Clients
-$router->resource('clients', 'ClientController');
+Route::resource('clients', 'ClientController');
 
 // Redirects
-$router->resource('redirects', 'RedirectsController');
+Route::resource('redirects', 'RedirectsController');

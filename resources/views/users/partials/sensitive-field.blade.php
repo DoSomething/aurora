@@ -1,5 +1,5 @@
 <dt>{{ $label ?? title_case($field) }}:</dt>
-@if (str_contains(request()->query('include'), $field))
+@if (Str::contains(request()->query('include'), $field))
     <dd class="revealed">{{ $user->{$field} }} {{ revealer($field) }}
 @elseif ($user->{$preview_field})
     <dd>{{ $user->{$preview_field} }}{{ $preview_suffix ?? '' }} {{ revealer($field) }}</dd>

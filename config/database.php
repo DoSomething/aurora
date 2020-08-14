@@ -1,23 +1,6 @@
 <?php
 
-// Convert Heroku's `REDIS_URL` to standard `REDIS_HOST`, `REDIS_PORT`,
-// and `REDIS_PASSWORD` environment variables:
-if (env('REDIS_URL')) {
-    $url = parse_url(env('REDIS_URL'));
-    putenv('REDIS_HOST='.$url['host']);
-    putenv('REDIS_PORT='.$url['port']);
-    putenv('REDIS_PASSWORD='.$url['pass']);
-}
-
-// Convert Heroku's `JAWSDB_MARIA_URL` to standard `DB_*` variables:
-if (env('JAWSDB_MARIA_URL')) {
-    $url = parse_url(env('JAWSDB_MARIA_URL'));
-    putenv('DB_HOST='.$url['host']);
-    putenv('DB_PORT='.$url['port']);
-    putenv('DB_USERNAME='.$url['user']);
-    putenv('DB_PASSWORD='.$url['pass']);
-    putenv('DB_DATABASE='.str_replace('/', '', $url['path']));
-}
+use Illuminate\Support\Str;
 
 return [
 
@@ -54,6 +37,7 @@ return [
 
         'sqlite' => [
             'driver' => 'sqlite',
+            'url' => env('DATABASE_URL'),
             'database' => env('DB_DATABASE', database_path('database.sqlite')),
             'prefix' => '',
             'foreign_key_constraints' => env('DB_FOREIGN_KEYS', true),
@@ -61,6 +45,7 @@ return [
 
         'mysql' => [
             'driver' => 'mysql',
+            'url' => env('JAWSDB_MARIA_URL'),
             'host' => env('DB_HOST', '127.0.0.1'),
             'port' => env('DB_PORT', '3306'),
             'database' => env('DB_DATABASE', 'forge'),
@@ -73,10 +58,14 @@ return [
             'prefix_indexes' => true,
             'strict' => false,
             'engine' => null,
+            'options' => extension_loaded('pdo_mysql') ? array_filter([
+                PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
+            ]) : [],
         ],
 
         'pgsql' => [
             'driver' => 'pgsql',
+            'url' => env('DATABASE_URL'),
             'host' => env('DB_HOST', '127.0.0.1'),
             'port' => env('DB_PORT', '5432'),
             'database' => env('DB_DATABASE', 'forge'),
@@ -91,6 +80,7 @@ return [
 
         'sqlsrv' => [
             'driver' => 'sqlsrv',
+            'url' => env('DATABASE_URL'),
             'host' => env('DB_HOST', 'localhost'),
             'port' => env('DB_PORT', '1433'),
             'database' => env('DB_DATABASE', 'forge'),
@@ -129,9 +119,15 @@ return [
 
     'redis' => [
 
-        'client' => 'predis',
+        'client' => env('REDIS_CLIENT', 'predis'),
+
+        'options' => [
+            'cluster' => env('REDIS_CLUSTER', 'predis'),
+            'prefix' => env('REDIS_PREFIX', Str::slug(env('APP_NAME', 'laravel'), '_').'_database_'),
+        ],
 
         'default' => [
+            'url' => env('REDIS_URL'),
             'host' => env('REDIS_HOST', '127.0.0.1'),
             'password' => env('REDIS_PASSWORD', null),
             'port' => env('REDIS_PORT', 6379),
@@ -139,6 +135,7 @@ return [
         ],
 
         'cache' => [
+            'url' => env('REDIS_URL'),
             'host' => env('REDIS_HOST', '127.0.0.1'),
             'password' => env('REDIS_PASSWORD', null),
             'port' => env('REDIS_PORT', 6379),

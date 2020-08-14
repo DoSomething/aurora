@@ -2,8 +2,9 @@
 
 namespace Aurora\Http\Controllers;
 
-use DoSomething\Gateway\Northstar;
+use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
+use DoSomething\Gateway\Northstar;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 class SuperusersController extends Controller
@@ -34,7 +35,7 @@ class SuperusersController extends Controller
 
         $admins = $this->northstar->getAllUsers([
             'filter' => ['role' => 'admin'],
-            'page' => array_get($page, 'admin', 1),
+            'page' => Arr::get($page, 'admin', 1),
         ]);
         $admins->setPaginator(LengthAwarePaginator::class, [
             'path' => 'superusers',
@@ -43,7 +44,7 @@ class SuperusersController extends Controller
 
         $staff = $this->northstar->getAllUsers([
             'filter' => ['role' => 'staff'],
-            'page' => array_get($page, 'staff', 1),
+            'page' => Arr::get($page, 'staff', 1),
         ]);
         $staff->setPaginator(LengthAwarePaginator::class, [
             'path' => 'superusers',
