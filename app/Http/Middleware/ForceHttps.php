@@ -4,7 +4,7 @@ namespace Aurora\Http\Middleware;
 
 use Closure;
 use League\Uri\Http;
-use function League\Uri\parse;
+use League\Uri\UriString;
 use Illuminate\Support\Facades\Log;
 
 class ForceHttps
@@ -22,7 +22,8 @@ class ForceHttps
         // If running in a non-local environment, redirect all traffic to HTTPS
         // and the correct canonical URL, e.g. never '*.herokuapp.com'!
         if (config('app.env') !== 'local') {
-            $canonicalHost = parse(config('app.url'))['host'];
+            $canonicalHost = UriString::parse(config('app.url'))['host'];
+
             $hasIncorrectHost = $request->header('Host') !== $canonicalHost;
 
             Log::debug('Middelware/ForceHttps@handle Request:', [
@@ -33,7 +34,7 @@ class ForceHttps
             ]);
 
             if ($hasIncorrectHost || ! $request->secure()) {
-                $parsedUrl = parse($request->url());
+                $parsedUrl = UriString::parse($request->url());
                 $parsedUrl['scheme'] = 'https';
                 $parsedUrl['host'] = $canonicalHost;
 
