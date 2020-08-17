@@ -19,6 +19,13 @@ class RouteServiceProvider extends ServiceProvider
     protected $namespace = 'Aurora\Http\Controllers';
 
     /**
+     * The path to the "home" route for your application.
+     *
+     * @var string
+     */
+    public const HOME = '/users';
+
+    /**
      * Define your route model bindings, pattern filters, etc.
      *
      * @return void
