@@ -14,7 +14,7 @@
       <ul class="gallery -duo">
           @forelse($clients as $client)
               <li>
-                  <article class="figure -left client {{ starts_with($client->client_id, 'dev-') ? '-dev' : null }}">
+                  <article class="figure -left client {{ Str::startsWith($client->client_id, 'dev-') ? '-dev' : null }}">
                       <div class="figure__media">
                           <a href="{{ route('clients.show', [$client->client_id]) }}">
                               <img alt="key" src="/images/{{ $client->allowed_grant === 'authorization_code' ? 'user' : 'machine'}}.svg" />
@@ -23,7 +23,7 @@
                       <div class="figure__body">
                           <h4><a href="{{ route('clients.show', [$client->client_id]) }}">{{ $client->client_id }}</a></h4>
                           <span class="footnote">{{ implode(', ', $client->scope) }}</span>
-                          @if(starts_with($client->client_id, 'dev-'))
+                          @if(Str::startsWith($client->client_id, 'dev-'))
                               <span class="footnote client__hint">Use for development!</span>
                           @endif
                       </div>
