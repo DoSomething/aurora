@@ -49,9 +49,15 @@ class AuthController extends Controller
      * @param ResponseInterface $response
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function getLogin(ServerRequestInterface $request, ResponseInterface $response)
-    {
-        return $this->northstar->authorize($request, $response, $this->redirectTo);
+    public function getLogin(
+        ServerRequestInterface $request,
+        ResponseInterface $response
+    ) {
+        return $this->northstar->authorize(
+            $request,
+            $response,
+            $this->redirectTo
+        );
     }
 
     /**

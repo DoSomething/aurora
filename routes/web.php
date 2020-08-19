@@ -19,12 +19,29 @@ Route::get('auth/login', 'Auth\AuthController@getLogin');
 Route::get('auth/logout', 'Auth\AuthController@getLogout');
 
 // Users
-Route::resource('users', 'UsersController', ['except' => ['create', 'edit', 'store']]);
-Route::get('users/{id}/edit', ['as' => 'users.edit', 'uses' => 'UsersController@edit']);
-Route::get('search', ['as' => 'user.search', 'uses' => 'UsersController@search']);
-Route::get('users/{user}/merge', ['as' => 'users.merge.create', 'uses' => 'MergeController@create']);
-Route::post('users/{user}/merge', ['as' => 'users.merge.store', 'uses' => 'MergeController@store']);
-Route::post('users/{user}/resets', ['as' => 'users.resets.create', 'uses' => 'UsersController@sendPasswordReset']);
+Route::resource('users', 'UsersController', [
+    'except' => ['create', 'edit', 'store'],
+]);
+Route::get('users/{id}/edit', [
+    'as' => 'users.edit',
+    'uses' => 'UsersController@edit',
+]);
+Route::get('search', [
+    'as' => 'user.search',
+    'uses' => 'UsersController@search',
+]);
+Route::get('users/{user}/merge', [
+    'as' => 'users.merge.create',
+    'uses' => 'MergeController@create',
+]);
+Route::post('users/{user}/merge', [
+    'as' => 'users.merge.store',
+    'uses' => 'MergeController@store',
+]);
+Route::post('users/{user}/resets', [
+    'as' => 'users.resets.create',
+    'uses' => 'UsersController@sendPasswordReset',
+]);
 
 // Superusers
 Route::resource('superusers', 'SuperusersController', ['only' => ['index']]);

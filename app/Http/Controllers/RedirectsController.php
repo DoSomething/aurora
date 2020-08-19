@@ -73,14 +73,21 @@ class RedirectsController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'path' => 'required|string|regex:/^[^?]+$/',
-            'target' => 'required|url',
-        ], [
-            'path.regex' => 'Paths cannot contain query strings.',
-        ]);
+        $this->validate(
+            $request,
+            [
+                'path' => 'required|string|regex:/^[^?]+$/',
+                'target' => 'required|url',
+            ],
+            [
+                'path.regex' => 'Paths cannot contain query strings.',
+            ]
+        );
 
-        $redirect = $this->fastly->createRedirect($request->path, $request->target);
+        $redirect = $this->fastly->createRedirect(
+            $request->path,
+            $request->target
+        );
 
         return redirect()->route('redirects.show', $redirect->id);
     }
@@ -127,10 +134,20 @@ class RedirectsController extends Controller
     {
         $successful = $this->fastly->deleteRedirect($redirect->id);
 
-        if (! $successful) {
-            return redirect()->route('redirects.index')->with('flash_message', ['class' => 'messages -error', 'text' => 'Could not delete redirect.']);
+        if (!$successful) {
+            return redirect()
+                ->route('redirects.index')
+                ->with('flash_message', [
+                    'class' => 'messages -error',
+                    'text' => 'Could not delete redirect.',
+                ]);
         }
 
-        return redirect()->route('redirects.index')->with('flash_message', ['class' => 'messages', 'text' => 'BAM! Deleted.']);
+        return redirect()
+            ->route('redirects.index')
+            ->with('flash_message', [
+                'class' => 'messages',
+                'text' => 'BAM! Deleted.',
+            ]);
     }
 }

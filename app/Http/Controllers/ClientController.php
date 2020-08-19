@@ -86,7 +86,12 @@ class ClientController extends Controller
 
         $this->northstar->createNewClient($parameters);
 
-        return redirect()->route('clients.index')->with('flash_message', ['class' => 'messages', 'text' => 'Cool, new app added!']);
+        return redirect()
+            ->route('clients.index')
+            ->with('flash_message', [
+                'class' => 'messages',
+                'text' => 'Cool, new app added!',
+            ]);
     }
 
     /**
@@ -122,11 +127,18 @@ class ClientController extends Controller
         }
 
         // Ensure that all scopes can be removed from a client.
-        $parameters['scope'] = ! empty($parameters['scope']) ? $parameters['scope'] : [];
+        $parameters['scope'] = !empty($parameters['scope'])
+            ? $parameters['scope']
+            : [];
 
         $this->northstar->updateClient($client->client_id, $parameters);
 
-        return redirect()->route('clients.index')->with('flash_message', ['class' => 'messages', 'text' => 'Cool, saved those changes!']);
+        return redirect()
+            ->route('clients.index')
+            ->with('flash_message', [
+                'class' => 'messages',
+                'text' => 'Cool, saved those changes!',
+            ]);
     }
 
     /**
@@ -140,10 +152,20 @@ class ClientController extends Controller
     {
         $deleted = $this->northstar->deleteClient($client->client_id);
 
-        if (! $deleted) {
-            return redirect()->route('clients.index')->with('flash_message', ['class' => 'messages -error', 'text' => 'Could not delete client.']);
+        if (!$deleted) {
+            return redirect()
+                ->route('clients.index')
+                ->with('flash_message', [
+                    'class' => 'messages -error',
+                    'text' => 'Could not delete client.',
+                ]);
         }
 
-        return redirect()->route('clients.index')->with('flash_message', ['class' => 'messages', 'text' => 'BAM! Deleted.']);
+        return redirect()
+            ->route('clients.index')
+            ->with('flash_message', [
+                'class' => 'messages',
+                'text' => 'BAM! Deleted.',
+            ]);
     }
 }

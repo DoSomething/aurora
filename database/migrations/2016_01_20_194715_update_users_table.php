@@ -20,7 +20,10 @@ class UpdateUsersTable extends Migration
         });
 
         // Translate existing relations to plain column value
-        $roleMapping = DB::table('roles')->join('role_user', 'role_user.role_id', '=', 'roles.id')->select('role_user.user_id', 'roles.name')->get();
+        $roleMapping = DB::table('roles')
+            ->join('role_user', 'role_user.role_id', '=', 'roles.id')
+            ->select('role_user.user_id', 'roles.name')
+            ->get();
         foreach ($roleMapping as $mapping) {
             $user = \Aurora\Models\AuroraUser::find($mapping->user_id);
             $user->role = $mapping->name;

@@ -15,9 +15,18 @@ class AddOauthFieldsToUsers extends Migration
     {
         // Update columns on user table
         Schema::table('users', function (Blueprint $table) {
-            $table->string('access_token', 1024)->after('northstar_id')->nullable();
-            $table->integer('access_token_expiration')->after('access_token')->nullable();
-            $table->string('refresh_token', 1024)->after('access_token_expiration')->nullable();
+            $table
+                ->string('access_token', 1024)
+                ->after('northstar_id')
+                ->nullable();
+            $table
+                ->integer('access_token_expiration')
+                ->after('access_token')
+                ->nullable();
+            $table
+                ->string('refresh_token', 1024)
+                ->after('access_token_expiration')
+                ->nullable();
         });
     }
 

@@ -20,8 +20,11 @@ class TotalsController extends Controller
     {
         // Cache the total user count for 15 minutes so we can make fast cursor-based
         // queries, but still show the total number of records to admins.
-        $total = remember('users.count.'.auth()->id(), 15, function () {
-            return gateway('northstar')->withToken(token())->getAllUsers()->total();
+        $total = remember('users.count.' . auth()->id(), 15, function () {
+            return gateway('northstar')
+                ->withToken(token())
+                ->getAllUsers()
+                ->total();
         });
 
         return ['total' => number_format($total)];

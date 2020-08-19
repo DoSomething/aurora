@@ -25,7 +25,7 @@ class Fastly extends RestApiClient
 
         $this->redirects = $config['redirects_table'];
 
-        $basePath = $config['url'].'/service/'.$config['service_id'].'/';
+        $basePath = $config['url'] . '/service/' . $config['service_id'] . '/';
         parent::__construct($basePath, $overrides);
     }
 
@@ -36,7 +36,7 @@ class Fastly extends RestApiClient
      */
     public function getAllRedirects()
     {
-        $redirects = $this->get('dictionary/'.$this->redirects.'/items');
+        $redirects = $this->get('dictionary/' . $this->redirects . '/items');
 
         $redirects = array_map(function ($redirect) {
             return Redirect::fromItems($redirect);
@@ -54,7 +54,9 @@ class Fastly extends RestApiClient
     {
         $key = Redirect::decodeId($id);
 
-        $redirect = $this->get('dictionary/'.$this->redirects.'/item/'.$key);
+        $redirect = $this->get(
+            'dictionary/' . $this->redirects . '/item/' . $key
+        );
 
         return Redirect::fromItems($redirect);
     }
@@ -67,13 +69,16 @@ class Fastly extends RestApiClient
     public function createRedirect($path, $target)
     {
         // Ensure path begins with a slash & is lower-case.
-        $path = $path[0] === '/' ? $path : '/'.$path;
+        $path = $path[0] === '/' ? $path : '/' . $path;
         $path = strtolower($path);
 
         // Create or update a record in the redirects dictionary.
-        $redirect = $this->put('dictionary/'.$this->redirects.'/item/'.urlencode($path), [
-            'item_value' => $target,
-        ]);
+        $redirect = $this->put(
+            'dictionary/' . $this->redirects . '/item/' . urlencode($path),
+            [
+                'item_value' => $target,
+            ]
+        );
 
         return Redirect::fromItems($redirect);
     }
@@ -86,9 +91,12 @@ class Fastly extends RestApiClient
     public function updateRedirect($path, $target)
     {
         // Update the corresponding record in the redirects dictionary.
-        $redirect = $this->patch('dictionary/'.$this->redirects.'/item/'.urlencode($path), [
-            'item_value' => $target,
-        ]);
+        $redirect = $this->patch(
+            'dictionary/' . $this->redirects . '/item/' . urlencode($path),
+            [
+                'item_value' => $target,
+            ]
+        );
 
         return Redirect::fromItems($redirect);
     }
@@ -103,7 +111,9 @@ class Fastly extends RestApiClient
         $key = Redirect::decodeId($id);
 
         // Delete the corresponding record in the redirects dictionary.
-        return $this->delete('dictionary/'.$this->redirects.'/item/'.$key);
+        return $this->delete(
+            'dictionary/' . $this->redirects . '/item/' . $key
+        );
     }
 
     /**
