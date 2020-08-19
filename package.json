@@ -8,7 +8,7 @@
     "modernizr": "modernizr -c node_modules/@dosomething/forge/modernizr.json -d public/dist/modernizr.js",
     "heroku-postbuild": "npm run build",
     "format:js": "prettier --write \"resources/**/*.{js,md,scss,graphql}\"",
-    "format:php": "prettier \"{app,config,database,resources,routes,tests}/**/*.php\" \"!resources/views/**\""
+    "format:php": "prettier --write \"{app,config,database,resources,routes,tests}/**/*.php\" \"!resources/views/**\""
   },
   "engines": {
     "node": "10.x",
