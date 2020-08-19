@@ -3,21 +3,21 @@
  * for displaying API key request headers.
  */
 pre {
-  font-family: 'Menlo', 'Consolas', 'Courier New', serif;
-  background: #efefef;
-  font-size: $font-small;
-  border: 1px solid $light-gray;
-  border-radius: $sm-border-radius;
-  padding: $base-spacing;
-  margin: ($base-spacing / 2) 0;
+    font-family: 'Menlo', 'Consolas', 'Courier New', serif;
+    background: #efefef;
+    font-size: $font-small;
+    border: 1px solid $light-gray;
+    border-radius: $sm-border-radius;
+    padding: $base-spacing;
+    margin: ($base-spacing / 2) 0;
 }
 
 code em {
-  font-style: normal;
-  color: $med-gray;
+    font-style: normal;
+    color: $med-gray;
 }
 
 // Utility class for word-breaks.
 .break-all {
-  word-break: break-all;
+    word-break: break-all;
 }

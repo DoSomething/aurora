@@ -19,14 +19,18 @@ import lazyCount from './users/lazy-user-count';
 /**
  * Let's go!
  */
-ready(function() {
+ready(function () {
   // Let's go turbo!
-  Turbolinks.start()
+  Turbolinks.start();
   let scrollPosition = null;
 
   // Optionally, keep scroll position when loading a page via Turbolinks:
   const noScrollSelector = '[data-turbolinks-scroll=false]';
-  $(document).on('click', noScrollSelector, () => scrollPosition = window.scrollY);
+  $(document).on(
+    'click',
+    noScrollSelector,
+    () => (scrollPosition = window.scrollY),
+  );
   $(document).on('turbolinks:render', () => {
     if (scrollPosition) {
       window.scrollTo(0, scrollPosition);
