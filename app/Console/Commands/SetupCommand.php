@@ -39,14 +39,27 @@ class SetupCommand extends Command
                 'https://identity-qa.dosomething.org',
             ];
 
-            $this->chooseEnvironmentVariable('NORTHSTAR_URL', 'Choose a Northstar environment', $environments);
-            $this->setEnvironmentVariable('NORTHSTAR_CLIENT_ID', 'Enter the OAuth Client ID');
-            $this->setEnvironmentVariable('NORTHSTAR_CLIENT_SECRET', 'Enter the OAuth Client Secret');
+            $this->chooseEnvironmentVariable(
+                'NORTHSTAR_URL',
+                'Choose a Northstar environment',
+                $environments
+            );
+            $this->setEnvironmentVariable(
+                'NORTHSTAR_CLIENT_ID',
+                'Enter the OAuth Client ID'
+            );
+            $this->setEnvironmentVariable(
+                'NORTHSTAR_CLIENT_SECRET',
+                'Enter the OAuth Client Secret'
+            );
         });
 
         $this->runArtisanCommand('key:generate', 'Creating application key');
 
-        $this->runArtisanCommand('gateway:key', 'Fetching public key from Northstar');
+        $this->runArtisanCommand(
+            'gateway:key',
+            'Fetching public key from Northstar'
+        );
 
         $this->runArtisanCommand('migrate', 'Running database migrations');
 

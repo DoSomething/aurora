@@ -5,9 +5,10 @@ import delegate from 'dom-delegate';
  */
 function initialize() {
   const csrfTag = document.querySelectorAll('meta[name=csrf-token]');
-  const csrfToken = csrfTag.length > 0 ? csrfTag[0].getAttribute('content') : null;
+  const csrfToken =
+    csrfTag.length > 0 ? csrfTag[0].getAttribute('content') : null;
 
-  delegate(document.body).on('click', '*[data-method]', function(event) {
+  delegate(document.body).on('click', '*[data-method]', function (event) {
     event.preventDefault();
 
     const url = this.getAttribute('href');

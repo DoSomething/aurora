@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Third Party Services
@@ -20,21 +19,37 @@ return [
         'authorization_code' => [
             'client_id' => env('NORTHSTAR_CLIENT_ID'),
             'client_secret' => env('NORTHSTAR_CLIENT_SECRET'),
-            'scope' => ['role:admin', 'role:staff', 'user', 'openid', 'client', 'write'],
+            'scope' => [
+                'role:admin',
+                'role:staff',
+                'user',
+                'openid',
+                'client',
+                'write',
+            ],
             'redirect_uri' => 'auth/login',
         ],
     ],
 
     'customerio' => [
-        'profile_url' => env('CUSTOMER_IO_PROFILE_URL', 'https://fly.customer.io/env/63704/people'),
+        'profile_url' => env(
+            'CUSTOMER_IO_PROFILE_URL',
+            'https://fly.customer.io/env/63704/people'
+        ),
     ],
 
     'gambit' => [
-        'profile_url' => env('GAMBIT_PROFILE_URL', 'https://gambit-admin.herokuapp.org/users'),
+        'profile_url' => env(
+            'GAMBIT_PROFILE_URL',
+            'https://gambit-admin.herokuapp.org/users'
+        ),
     ],
 
     'rogue' => [
-        'profile_url' => env('ROGUE_PROFILE_URL', 'https://activity.dosomething.org/users'),
+        'profile_url' => env(
+            'ROGUE_PROFILE_URL',
+            'https://activity.dosomething.org/users'
+        ),
     ],
 
     'ses' => [

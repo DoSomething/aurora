@@ -37,8 +37,8 @@ class RouteServiceProvider extends ServiceProvider
         Route::bind('user', function ($id) {
             $user = gateway('northstar')->getUser($id, csv_query('include'));
 
-            if (! $user) {
-                throw new NotFoundHttpException;
+            if (!$user) {
+                throw new NotFoundHttpException();
             }
 
             return $user;
@@ -47,8 +47,8 @@ class RouteServiceProvider extends ServiceProvider
         Route::bind('client', function ($id) {
             $key = gateway('northstar')->getClient($id);
 
-            if (! $key) {
-                throw new NotFoundHttpException;
+            if (!$key) {
+                throw new NotFoundHttpException();
             }
 
             return $key;
@@ -57,8 +57,8 @@ class RouteServiceProvider extends ServiceProvider
         Route::bind('redirect', function ($key) {
             $redirect = app(Fastly::class)->getRedirect($key);
 
-            if (! $redirect) {
-                throw new NotFoundHttpException;
+            if (!$redirect) {
+                throw new NotFoundHttpException();
             }
 
             return $redirect;

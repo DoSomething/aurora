@@ -51,7 +51,10 @@ class UsersController extends Controller
      */
     public function show(NorthstarUser $user)
     {
-        return view('users.show', ['user' => $user, 'title' => $user->display_name]);
+        return view('users.show', [
+            'user' => $user,
+            'title' => $user->display_name,
+        ]);
     }
 
     /**
@@ -62,10 +65,21 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
-        $optionalFields = ['last_name', 'email', 'mobile', 'birthdate', 'addr_street1', 'addr_street2', 'school_id'];
+        $optionalFields = [
+            'last_name',
+            'email',
+            'mobile',
+            'birthdate',
+            'addr_street1',
+            'addr_street2',
+            'school_id',
+        ];
         $user = gateway('northstar')->getUser($id, $optionalFields);
 
-        return view('users.edit', ['user' => $user, 'title' => $user->display_name]);
+        return view('users.edit', [
+            'user' => $user,
+            'title' => $user->display_name,
+        ]);
     }
 
     /**
@@ -79,14 +93,24 @@ class UsersController extends Controller
     {
         $input = $request->except('_token', '_id', 'drupal_uid');
 
-        $input['causes'] = ! empty($input['causes']) ? $input['causes'] : [];
-        $input['email_subscription_topics'] = ! empty($input['email_subscription_topics']) ? $input['email_subscription_topics'] : [];
+        $input['causes'] = !empty($input['causes']) ? $input['causes'] : [];
+        $input['email_subscription_topics'] = !empty(
+            $input['email_subscription_topics']
+        )
+            ? $input['email_subscription_topics']
+            : [];
 
         if (array_key_exists('feature_flags', $input)) {
             $input['feature_flags'] = [
                 'badges' => in_array('badges', $input['feature_flags']),
-                'refer-friends' => in_array('refer-friends', $input['feature_flags']),
-                'refer-friends-scholarship' => in_array('refer-friends-scholarship', $input['feature_flags']),
+                'refer-friends' => in_array(
+                    'refer-friends',
+                    $input['feature_flags']
+                ),
+                'refer-friends-scholarship' => in_array(
+                    'refer-friends-scholarship',
+                    $input['feature_flags']
+                ),
             ];
         } else {
             $input['feature_flags'] = [];
@@ -94,7 +118,12 @@ class UsersController extends Controller
 
         $this->northstar->updateUser($user->id, $input);
 
-        return redirect()->route('users.show', $user->id)->with('flash_message', ['class' => 'messages', 'text' => 'Sweet, look at you updating that user.']);
+        return redirect()
+            ->route('users.show', $user->id)
+            ->with('flash_message', [
+                'class' => 'messages',
+                'text' => 'Sweet, look at you updating that user.',
+            ]);
     }
 
     /**
@@ -107,7 +136,12 @@ class UsersController extends Controller
     {
         $this->northstar->deleteUser($user->id);
 
-        return redirect()->route('users.index')->with('flash_message', ['class' => 'messages', 'text' => 'User deleted.']);
+        return redirect()
+            ->route('users.index')
+            ->with('flash_message', [
+                'class' => 'messages',
+                'text' => 'User deleted.',
+            ]);
     }
 
     /**
@@ -162,6 +196,11 @@ class UsersController extends Controller
 
         $this->northstar->sendUserPasswordReset($user->id, $type);
 
-        return redirect()->route('users.show', $user->id)->with('flash_message', ['class' => 'messages', 'text' => 'Sent a '.$type.' email to '.$user->email.'.']);
+        return redirect()
+            ->route('users.show', $user->id)
+            ->with('flash_message', [
+                'class' => 'messages',
+                'text' => 'Sent a ' . $type . ' email to ' . $user->email . '.',
+            ]);
     }
 }

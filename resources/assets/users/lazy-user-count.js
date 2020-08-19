@@ -5,12 +5,12 @@ import { RestApiClient } from '@dosomething/gateway';
  */
 async function initialize() {
   const element = document.getElementById('lazy-user-count');
-  if (! element) {
+  if (!element) {
     return;
   }
 
   const aurora = new RestApiClient(window.location.origin, {
-    headers: { 'Authorization' : `Bearer ${window.AUTH}`}
+    headers: { Authorization: `Bearer ${window.AUTH}` },
   });
 
   const response = await aurora.get('api/total');

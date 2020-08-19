@@ -25,9 +25,16 @@ class MergeController extends Controller
     {
         $duplicateId = $request->query('id');
 
-        $mergedUser = gateway('northstar')->mergeUsers($user->id, $duplicateId, true);
+        $mergedUser = gateway('northstar')->mergeUsers(
+            $user->id,
+            $duplicateId,
+            true
+        );
 
-        return view('users.merge.create', compact('user', 'mergedUser', 'duplicateId'));
+        return view(
+            'users.merge.create',
+            compact('user', 'mergedUser', 'duplicateId')
+        );
     }
 
     /**
@@ -41,13 +48,21 @@ class MergeController extends Controller
         $message = null;
 
         try {
-            $reponse = gateway('northstar')->mergeUsers($user->id, $request->input('merge_id'));
+            $reponse = gateway('northstar')->mergeUsers(
+                $user->id,
+                $request->input('merge_id')
+            );
         } catch (\Exception $exception) {
-            $message = 'Merge Unsuccessful. Error: '.$exception->getMessage();
+            $message = 'Merge Unsuccessful. Error: ' . $exception->getMessage();
         }
 
         $message = $message ?: 'Users successfully merged. You\'re a star!';
 
-        return redirect()->route('users.show', [$user->id])->with('flash_message', ['class' => 'messages', 'text' => $message]);
+        return redirect()
+            ->route('users.show', [$user->id])
+            ->with('flash_message', [
+                'class' => 'messages',
+                'text' => $message,
+            ]);
     }
 }

@@ -33,7 +33,7 @@ class ForceHttps
                 'Secure Request' => $request->secure(),
             ]);
 
-            if ($hasIncorrectHost || ! $request->secure()) {
+            if ($hasIncorrectHost || !$request->secure()) {
                 $parsedUrl = UriString::parse($request->url());
                 $parsedUrl['scheme'] = 'https';
                 $parsedUrl['host'] = $canonicalHost;

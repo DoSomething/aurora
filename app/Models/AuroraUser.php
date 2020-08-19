@@ -15,7 +15,9 @@ use DoSomething\Gateway\Laravel\HasNorthstarToken;
  * @method static \Illuminate\Database\Eloquent\Builder|AuroraUser firstOrCreate(array $attributes)
  * @method static \Illuminate\Database\Eloquent\Builder|AuroraUser where(string $field, string $comparison = '=', string $value)
  */
-class AuroraUser extends Model implements AuthenticatableContract, NorthstarUserContract
+class AuroraUser extends Model implements
+    AuthenticatableContract,
+    NorthstarUserContract
 {
     use Authenticatable, HasNorthstarToken;
 
@@ -52,7 +54,10 @@ class AuroraUser extends Model implements AuthenticatableContract, NorthstarUser
      */
     public function northstarUser()
     {
-        return app('\Aurora\Services\Northstar')->getUser('id', $this->northstar_id);
+        return app('\Aurora\Services\Northstar')->getUser(
+            'id',
+            $this->northstar_id
+        );
     }
 
     /**

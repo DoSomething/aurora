@@ -13,7 +13,7 @@ function csv_query(string $key, array $default = []): array
 {
     $query = request()->query($key);
 
-    if (! $query) {
+    if (!$query) {
         return $default;
     }
 
@@ -78,7 +78,13 @@ function remember($key, $minutes, Closure $callback)
  */
 function scriptify($json = [], $store = 'STATE')
 {
-    return new HtmlString('<script type="text/javascript">window.'.$store.' = '.json_encode($json).'</script>');
+    return new HtmlString(
+        '<script type="text/javascript">window.' .
+            $store .
+            ' = ' .
+            json_encode($json) .
+            '</script>'
+    );
 }
 
 /**
@@ -92,7 +98,7 @@ function country_name($code)
     $isoCodes = new \Sokil\IsoCodes\IsoCodesFactory();
     $country = $isoCodes->getCountries()->getByAlpha2($code);
 
-    return $country ? $country->getName() : 'Unknown ('.$code.')';
+    return $country ? $country->getName() : 'Unknown (' . $code . ')';
 }
 
 /**
@@ -103,7 +109,15 @@ function revealer(...$fields)
     $currentIncludes = csv_query('include');
 
     $isActive = count(array_intersect($currentIncludes, $fields)) > 0;
-    $newFields = $isActive ? array_diff($currentIncludes, $fields) : array_merge($currentIncludes, $fields);
+    $newFields = $isActive
+        ? array_diff($currentIncludes, $fields)
+        : array_merge($currentIncludes, $fields);
 
-    return new HtmlString('<a href="'.e(request()->url().'?include='.implode(',', $newFields)).'" class="reveal '.($isActive ? 'is-active' : '').'" data-turbolinks-action="replace" data-turbolinks-scroll="false"><span>reveal</span></a>');
+    return new HtmlString(
+        '<a href="' .
+            e(request()->url() . '?include=' . implode(',', $newFields)) .
+            '" class="reveal ' .
+            ($isActive ? 'is-active' : '') .
+            '" data-turbolinks-action="replace" data-turbolinks-scroll="false"><span>reveal</span></a>'
+    );
 }

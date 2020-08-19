@@ -37,7 +37,7 @@ class CheckRole
         $roles = array_slice(func_get_args(), 2);
 
         // If user is a guest (e.g. no role), or is missing the provided role... get out!
-        if ($this->auth->guest() || ! $this->auth->user()->hasRole($roles)) {
+        if ($this->auth->guest() || !$this->auth->user()->hasRole($roles)) {
             if ($request->ajax()) {
                 return response('Unauthorized.', 401);
             } else {
