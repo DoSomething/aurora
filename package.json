@@ -7,8 +7,9 @@
     "clean": "rm -rf public/dist",
     "modernizr": "modernizr -c node_modules/@dosomething/forge/modernizr.json -d public/dist/modernizr.js",
     "heroku-postbuild": "npm run build",
-    "format": "npm run format:js && npm run format:php",
-    "format:js": "prettier --write \"resources/**/*.{js,md,scss,graphql}\"",
+    "format": "npm run format:css && npm run format:js && npm run format:php",
+    "format:css": "prettier --write \"resources/**/*.{css,scss}\"",
+    "format:js": "prettier --write \"resources/**/*.{js,graphql}\"",
     "format:php": "prettier --write \"{app,config,database,resources,routes,tests}/**/*.php\" \"!resources/views/**\""
   },
   "engines": {
