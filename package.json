@@ -7,7 +7,8 @@
     "clean": "rm -rf public/dist",
     "modernizr": "modernizr -c node_modules/@dosomething/forge/modernizr.json -d public/dist/modernizr.js",
     "heroku-postbuild": "npm run build",
-    "format:js": "prettier --write \"resources/**/*.{js,md,scss,graphql}\""
+    "format:js": "prettier --write \"resources/**/*.{js,md,scss,graphql}\"",
+    "format:php": "prettier \"{app,config,database,resources,routes,tests}/**/*.php\" \"!resources/views/**\""
   },
   "engines": {
     "node": "10.x",
@@ -43,6 +44,7 @@
     "@babel/runtime": "^7.8.4",
     "@dosomething/babel-preset": "^3.2.0",
     "@dosomething/webpack-config": "^6.0.0",
+    "@prettier/plugin-php": "^0.14.3",
     "autoprefixer": "^9.7.4",
     "core-js": "^3.6.4",
     "husky": "^4.2.5",
