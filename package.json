@@ -6,11 +6,21 @@
     "build": "npm run clean && npm run modernizr && NODE_ENV=production webpack",
     "clean": "rm -rf public/dist",
     "modernizr": "modernizr -c node_modules/@dosomething/forge/modernizr.json -d public/dist/modernizr.js",
-    "heroku-postbuild": "npm run build"
+    "heroku-postbuild": "npm run build",
+    "format:js": "prettier --write \"resources/**/*.{js,md,scss,graphql}\""
   },
   "engines": {
     "node": "10.x",
     "npm": "6.x"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged"
+    }
+  },
+  "prettier": {
+    "singleQuote": true,
+    "trailingComma": "all"
   },
   "babel": {
     "presets": [
@@ -35,7 +45,10 @@
     "@dosomething/webpack-config": "^6.0.0",
     "autoprefixer": "^9.7.4",
     "core-js": "^3.6.4",
+    "husky": "^4.2.5",
     "modernizr": "^3.11.3",
+    "prettier": "^2.0.5",
+    "pretty-quick": "^2.0.1",
     "webpack": "^4.41.6",
     "webpack-cli": "^3.3.11"
   }
