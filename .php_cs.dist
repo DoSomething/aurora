@@ -5,12 +5,12 @@ use function Weerd\PhpStyle\configure;
 
 $finder = Finder::create()
     ->in([
-        __DIR__.'/app',
-        __DIR__.'/config',
-        __DIR__.'/database',
-        __DIR__.'/routes',
-        __DIR__.'/tests',
+        __DIR__ . '/app',
+        __DIR__ . '/config',
+        __DIR__ . '/database',
+        __DIR__ . '/routes',
+        __DIR__ . '/tests',
     ])
     ->notName('*.blade.php');
 
-return configure($finder, ['base' => 'laravel']);
+return configure($finder, ['base' => 'laravel-prettier']);
