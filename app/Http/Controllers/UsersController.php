@@ -2,8 +2,8 @@
 
 namespace Aurora\Http\Controllers;
 
-use DoSomething\Gateway\Resources\NorthstarUser;
 use DoSomething\Gateway\Northstar;
+use DoSomething\Gateway\Resources\NorthstarUser;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Pagination\Paginator;
@@ -58,7 +58,7 @@ class UsersController extends Controller
     }
 
     /**
-     * Display the form for editing user information
+     * Display the form for editing user information.
      *
      * @param string $id
      * @return \Illuminate\Http\Response
@@ -83,7 +83,7 @@ class UsersController extends Controller
     }
 
     /**
-     * Making request to NorthstarAPI to update user's information
+     * Making request to NorthstarAPI to update user's information.
      *
      * @param NorthstarUser $user
      * @param Request $request

@@ -3,9 +3,9 @@
 namespace Aurora\Resources;
 
 use Carbon\Carbon;
-use JsonSerializable;
-use Illuminate\Support\Arr;
 use DoSomething\Gateway\Common\ApiResponse;
+use Illuminate\Support\Arr;
+use JsonSerializable;
 
 class Redirect extends ApiResponse implements JsonSerializable
 {

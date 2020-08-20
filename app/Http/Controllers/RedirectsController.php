@@ -2,9 +2,9 @@
 
 namespace Aurora\Http\Controllers;
 
+use Aurora\Resources\Redirect;
 use Aurora\Services\Fastly;
 use Illuminate\Http\Request;
-use Aurora\Resources\Redirect;
 
 class RedirectsController extends Controller
 {
@@ -29,7 +29,7 @@ class RedirectsController extends Controller
 
     /**
      * Display a listing of the resource.
-     * GET /redirects
+     * GET /redirects.
      *
      * @param Request $request
      * @return \Illuminate\Http\Response
@@ -43,7 +43,7 @@ class RedirectsController extends Controller
 
     /**
      * Show redirect details.
-     * GET /redirects/:redirect_id
+     * GET /redirects/:redirect_id.
      *
      * @param Redirect $redirect
      * @return \Illuminate\Http\Response
@@ -55,7 +55,7 @@ class RedirectsController extends Controller
 
     /**
      * Create a new redirect.
-     * GET /redirects/create
+     * GET /redirects/create.
      *
      * @return \Illuminate\Http\Response
      */
@@ -66,7 +66,7 @@ class RedirectsController extends Controller
 
     /**
      * Store a new redirect.
-     * POST /redirects
+     * POST /redirects.
      *
      * @param Request $request
      * @return \Illuminate\Http\Response
@@ -94,7 +94,7 @@ class RedirectsController extends Controller
 
     /**
      * Edit redirect details.
-     * GET /redirects/:redirect_id/edit
+     * GET /redirects/:redirect_id/edit.
      *
      * @param Redirect $redirect
      * @return \Illuminate\Http\Response
@@ -106,7 +106,7 @@ class RedirectsController extends Controller
 
     /**
      * Update an existing redirect's details.
-     * PUT /redirects/:redirect_id
+     * PUT /redirects/:redirect_id.
      *
      * @param Redirect $redirect
      * @param Request $request
@@ -125,7 +125,7 @@ class RedirectsController extends Controller
 
     /**
      * Destroy an existing redirect.
-     * DELETE /redirects/:redirect_id
+     * DELETE /redirects/:redirect_id.
      *
      * @param Redirect $redirect
      * @return \Illuminate\Http\Response

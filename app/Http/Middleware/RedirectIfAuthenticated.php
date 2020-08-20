@@ -2,9 +2,9 @@
 
 namespace Aurora\Http\Middleware;
 
+use Aurora\Providers\RouteServiceProvider;
 use Closure;
 use Illuminate\Support\Facades\Auth;
-use Aurora\Providers\RouteServiceProvider;
 
 class RedirectIfAuthenticated
 {

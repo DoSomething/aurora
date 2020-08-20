@@ -2,8 +2,8 @@
 
 namespace Aurora\Http\Controllers;
 
-use Illuminate\Http\Request;
 use DoSomething\Gateway\Resources\NorthstarUser;
+use Illuminate\Http\Request;
 
 class MergeController extends Controller
 {
