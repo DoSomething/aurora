@@ -2,8 +2,8 @@
 
 namespace Aurora\Console\Commands;
 
-use Aurora\Services\Fastly;
 use Aurora\Resources\Redirect;
+use Aurora\Services\Fastly;
 use Illuminate\Console\Command;
 
 class FastlyImportCommand extends Command

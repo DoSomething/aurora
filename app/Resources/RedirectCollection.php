@@ -2,8 +2,8 @@
 
 namespace Aurora\Resources;
 
-use JsonSerializable;
 use DoSomething\Gateway\Common\ApiCollection;
+use JsonSerializable;
 
 class RedirectCollection extends ApiCollection implements JsonSerializable
 {

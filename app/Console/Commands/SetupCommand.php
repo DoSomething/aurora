@@ -2,8 +2,8 @@
 
 namespace Aurora\Console\Commands;
 
-use Illuminate\Console\Command;
 use DFurnes\Environmentalist\ConfiguresApplication;
+use Illuminate\Console\Command;
 
 class SetupCommand extends Command
 {

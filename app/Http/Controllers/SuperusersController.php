@@ -2,10 +2,10 @@
 
 namespace Aurora\Http\Controllers;
 
-use Illuminate\Support\Arr;
-use Illuminate\Http\Request;
 use DoSomething\Gateway\Northstar;
+use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Arr;
 
 class SuperusersController extends Controller
 {

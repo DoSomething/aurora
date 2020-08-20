@@ -3,9 +3,9 @@
 namespace Aurora\Http\Middleware;
 
 use Closure;
+use Illuminate\Support\Facades\Log;
 use League\Uri\Http;
 use League\Uri\UriString;
-use Illuminate\Support\Facades\Log;
 
 class ForceHttps
 {

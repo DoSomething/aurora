@@ -2,14 +2,14 @@
 
 namespace Aurora\Models;
 
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Auth\Authenticatable;
-use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use DoSomething\Gateway\Contracts\NorthstarUserContract;
 use DoSomething\Gateway\Laravel\HasNorthstarToken;
+use Illuminate\Auth\Authenticatable;
+use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
+use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class AuroraUser
+ * Class AuroraUser.
  *
  * @method static \Illuminate\Database\Eloquent\Builder|AuroraUser find(string $id, array $columns)
  * @method static \Illuminate\Database\Eloquent\Builder|AuroraUser firstOrCreate(array $attributes)
@@ -77,7 +77,7 @@ class AuroraUser extends Model implements
     }
 
     /**
-     * Used in UsersController->show()
+     * Used in UsersController->show().
      *
      * @return array - all possible values for user roles
      */

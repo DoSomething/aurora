@@ -4,8 +4,8 @@ namespace Aurora\Services;
 
 use Aurora\Resources\Redirect;
 use Aurora\Resources\RedirectCollection;
-use DoSomething\Gateway\Common\RestApiClient;
 use DoSomething\Gateway\AuthorizesWithApiKey;
+use DoSomething\Gateway\Common\RestApiClient;
 
 class Fastly extends RestApiClient
 {

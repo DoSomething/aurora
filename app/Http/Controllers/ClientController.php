@@ -25,7 +25,7 @@ class ClientController extends Controller
 
     /**
      * Display a listing of the resource.
-     * GET /clients
+     * GET /clients.
      *
      * @param Request $request
      * @return \Illuminate\Http\Response
@@ -44,7 +44,7 @@ class ClientController extends Controller
 
     /**
      * Show client details.
-     * GET /clients/:client_id
+     * GET /clients/:client_id.
      *
      * @param NorthstarClient $client
      * @return \Illuminate\Http\Response
@@ -56,7 +56,7 @@ class ClientController extends Controller
 
     /**
      * Create a new client.
-     * GET /clients/create
+     * GET /clients/create.
      *
      * @return \Illuminate\Http\Response
      */
@@ -69,7 +69,7 @@ class ClientController extends Controller
 
     /**
      * Store a new client.
-     * POST /clients
+     * POST /clients.
      *
      * @param Request $request
      * @return \Illuminate\Http\Response
@@ -96,7 +96,7 @@ class ClientController extends Controller
 
     /**
      * Edit client details.
-     * GET /clients/:client_id/edit
+     * GET /clients/:client_id/edit.
      *
      * @param NorthstarClient $client
      * @return \Illuminate\Http\Response
@@ -110,7 +110,7 @@ class ClientController extends Controller
 
     /**
      * Update an existing client's details.
-     * PUT /clients/:client_id
+     * PUT /clients/:client_id.
      *
      * @param NorthstarClient $client
      * @param Request $request
@@ -143,7 +143,7 @@ class ClientController extends Controller
 
     /**
      * Destroy an existing client.
-     * DELETE /clients/:client_id
+     * DELETE /clients/:client_id.
      *
      * @param NorthstarClient $client
      * @return \Illuminate\Http\Response
