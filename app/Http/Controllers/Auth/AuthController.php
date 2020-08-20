@@ -56,7 +56,7 @@ class AuthController extends Controller
         return $this->northstar->authorize(
             $request,
             $response,
-            $this->redirectTo
+            $this->redirectTo,
         );
     }
 

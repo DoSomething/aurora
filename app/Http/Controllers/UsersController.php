@@ -105,11 +105,11 @@ class UsersController extends Controller
                 'badges' => in_array('badges', $input['feature_flags']),
                 'refer-friends' => in_array(
                     'refer-friends',
-                    $input['feature_flags']
+                    $input['feature_flags'],
                 ),
                 'refer-friends-scholarship' => in_array(
                     'refer-friends-scholarship',
-                    $input['feature_flags']
+                    $input['feature_flags'],
                 ),
             ];
         } else {

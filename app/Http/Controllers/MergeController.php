@@ -28,12 +28,12 @@ class MergeController extends Controller
         $mergedUser = gateway('northstar')->mergeUsers(
             $user->id,
             $duplicateId,
-            true
+            true,
         );
 
         return view(
             'users.merge.create',
-            compact('user', 'mergedUser', 'duplicateId')
+            compact('user', 'mergedUser', 'duplicateId'),
         );
     }
 
@@ -50,7 +50,7 @@ class MergeController extends Controller
         try {
             $reponse = gateway('northstar')->mergeUsers(
                 $user->id,
-                $request->input('merge_id')
+                $request->input('merge_id'),
             );
         } catch (\Exception $exception) {
             $message = 'Merge Unsuccessful. Error: ' . $exception->getMessage();

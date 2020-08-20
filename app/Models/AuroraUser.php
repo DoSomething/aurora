@@ -56,7 +56,7 @@ class AuroraUser extends Model implements
     {
         return app('\Aurora\Services\Northstar')->getUser(
             'id',
-            $this->northstar_id
+            $this->northstar_id,
         );
     }
 

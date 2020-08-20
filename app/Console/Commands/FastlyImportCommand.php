@@ -51,12 +51,12 @@ class FastlyImportCommand extends Command
                         $redirect->target .
                         '" (' .
                         $redirect->status .
-                        ')'
+                        ')',
                 );
                 $fastly->createRedirect(
                     $redirect->path,
                     $redirect->target,
-                    $redirect->status
+                    $redirect->status,
                 );
             }
         }

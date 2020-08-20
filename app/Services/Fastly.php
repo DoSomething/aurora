@@ -55,7 +55,7 @@ class Fastly extends RestApiClient
         $key = Redirect::decodeId($id);
 
         $redirect = $this->get(
-            'dictionary/' . $this->redirects . '/item/' . $key
+            'dictionary/' . $this->redirects . '/item/' . $key,
         );
 
         return Redirect::fromItems($redirect);
@@ -77,7 +77,7 @@ class Fastly extends RestApiClient
             'dictionary/' . $this->redirects . '/item/' . urlencode($path),
             [
                 'item_value' => $target,
-            ]
+            ],
         );
 
         return Redirect::fromItems($redirect);
@@ -95,7 +95,7 @@ class Fastly extends RestApiClient
             'dictionary/' . $this->redirects . '/item/' . urlencode($path),
             [
                 'item_value' => $target,
-            ]
+            ],
         );
 
         return Redirect::fromItems($redirect);
@@ -112,7 +112,7 @@ class Fastly extends RestApiClient
 
         // Delete the corresponding record in the redirects dictionary.
         return $this->delete(
-            'dictionary/' . $this->redirects . '/item/' . $key
+            'dictionary/' . $this->redirects . '/item/' . $key,
         );
     }
 

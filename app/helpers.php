@@ -83,7 +83,7 @@ function scriptify($json = [], $store = 'STATE')
             $store .
             ' = ' .
             json_encode($json) .
-            '</script>'
+            '</script>',
     );
 }
 
@@ -118,6 +118,6 @@ function revealer(...$fields)
             e(request()->url() . '?include=' . implode(',', $newFields)) .
             '" class="reveal ' .
             ($isActive ? 'is-active' : '') .
-            '" data-turbolinks-action="replace" data-turbolinks-scroll="false"><span>reveal</span></a>'
+            '" data-turbolinks-action="replace" data-turbolinks-scroll="false"><span>reveal</span></a>',
     );
 }

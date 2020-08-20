@@ -81,12 +81,12 @@ class RedirectsController extends Controller
             ],
             [
                 'path.regex' => 'Paths cannot contain query strings.',
-            ]
+            ],
         );
 
         $redirect = $this->fastly->createRedirect(
             $request->path,
-            $request->target
+            $request->target,
         );
 
         return redirect()->route('redirects.show', $redirect->id);
