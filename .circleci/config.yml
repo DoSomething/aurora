@@ -36,3 +36,7 @@ jobs:
             - ~/.cache/Cypress
       # Build Javacript application.
       - run: npm run build
+      # Check PHP code
+      - run:
+          name: check php code style
+          command: vendor/bin/php-cs-fixer fix --dry-run --no-interaction --verbose
