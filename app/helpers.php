@@ -78,13 +78,14 @@ function remember($key, $minutes, Closure $callback)
  */
 function scriptify($json = [], $store = 'STATE')
 {
-    return new HtmlString(
+    $scriptTag =
         '<script type="text/javascript">window.' .
-            $store .
-            ' = ' .
-            json_encode($json) .
-            '</script>',
-    );
+        $store .
+        ' = ' .
+        json_encode($json) .
+        '</script>';
+
+    return new HtmlString($scriptTag);
 }
 
 /**
@@ -109,15 +110,17 @@ function revealer(...$fields)
     $currentIncludes = csv_query('include');
 
     $isActive = count(array_intersect($currentIncludes, $fields)) > 0;
+
     $newFields = $isActive
         ? array_diff($currentIncludes, $fields)
         : array_merge($currentIncludes, $fields);
 
-    return new HtmlString(
+    $linkTag =
         '<a href="' .
-            e(request()->url() . '?include=' . implode(',', $newFields)) .
-            '" class="reveal ' .
-            ($isActive ? 'is-active' : '') .
-            '" data-turbolinks-action="replace" data-turbolinks-scroll="false"><span>reveal</span></a>',
-    );
+        e(request()->url() . '?include=' . implode(',', $newFields)) .
+        '" class="reveal ' .
+        ($isActive ? 'is-active' : '') .
+        '" data-turbolinks-action="replace" data-turbolinks-scroll="false"><span>reveal</span></a>';
+
+    return new HtmlString($linkTag);
 }
