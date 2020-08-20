@@ -1,7 +1,7 @@
 <?php
 
 return [
-    /*
+  /*
     |--------------------------------------------------------------------------
     | Authentication Defaults
     |--------------------------------------------------------------------------
@@ -12,12 +12,12 @@ return [
     |
     */
 
-    'defaults' => [
-        'guard' => 'web',
-        'passwords' => 'users',
-    ],
+  'defaults' => [
+    'guard' => 'web',
+    'passwords' => 'users',
+  ],
 
-    /*
+  /*
     |--------------------------------------------------------------------------
     | Authentication Guards
     |--------------------------------------------------------------------------
@@ -34,19 +34,19 @@ return [
     |
     */
 
-    'guards' => [
-        'web' => [
-            'driver' => 'session',
-            'provider' => 'local',
-        ],
-
-        'api' => [
-            'driver' => 'gateway',
-            'provider' => 'northstar',
-        ],
+  'guards' => [
+    'web' => [
+      'driver' => 'session',
+      'provider' => 'local',
     ],
 
-    /*
+    'api' => [
+      'driver' => 'gateway',
+      'provider' => 'northstar',
+    ],
+  ],
+
+  /*
     |--------------------------------------------------------------------------
     | User Providers
     |--------------------------------------------------------------------------
@@ -63,22 +63,22 @@ return [
     |
     */
 
-    'model' => Aurora\Models\AuroraUser::class,
+  'model' => Aurora\Models\AuroraUser::class,
 
-    'providers' => [
-        'local' => [
-            'driver' => 'eloquent',
-            'model' => Aurora\Models\AuroraUser::class,
-        ],
-
-        'northstar' => [
-            'driver' => 'gateway',
-            'url' => env('NORTHSTAR_URL'),
-            'key' => storage_path('keys/public.key'),
-        ],
+  'providers' => [
+    'local' => [
+      'driver' => 'eloquent',
+      'model' => Aurora\Models\AuroraUser::class,
     ],
 
-    /*
+    'northstar' => [
+      'driver' => 'gateway',
+      'url' => env('NORTHSTAR_URL'),
+      'key' => storage_path('keys/public.key'),
+    ],
+  ],
+
+  /*
     |--------------------------------------------------------------------------
     | Resetting Passwords
     |--------------------------------------------------------------------------
@@ -97,16 +97,16 @@ return [
     |
     */
 
-    'passwords' => [
-        'users' => [
-            'provider' => 'users',
-            'table' => 'password_resets',
-            'expire' => 60,
-            'throttle' => 60,
-        ],
+  'passwords' => [
+    'users' => [
+      'provider' => 'users',
+      'table' => 'password_resets',
+      'expire' => 60,
+      'throttle' => 60,
     ],
+  ],
 
-    /*
+  /*
     |--------------------------------------------------------------------------
     | Password Confirmation Timeout
     |--------------------------------------------------------------------------
@@ -117,5 +117,5 @@ return [
     |
     */
 
-    'password_timeout' => 10800,
+  'password_timeout' => 10800,
 ];

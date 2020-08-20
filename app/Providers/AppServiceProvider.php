@@ -9,29 +9,29 @@ use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
-    /**
-     * Register any application services.
-     *
-     * @return void
-     */
-    public function register()
-    {
-        $this->app->bind(Fastly::class, function ($app) {
-            return new Fastly(config('services.fastly'));
-        });
-    }
+  /**
+   * Register any application services.
+   *
+   * @return void
+   */
+  public function register()
+  {
+    $this->app->bind(Fastly::class, function ($app) {
+      return new Fastly(config('services.fastly'));
+    });
+  }
 
-    /**
-     * Bootstrap any application services.
-     *
-     * @return void
-     */
-    public function boot()
-    {
-        Paginator::defaultView('pagination::default');
+  /**
+   * Bootstrap any application services.
+   *
+   * @return void
+   */
+  public function boot()
+  {
+    Paginator::defaultView('pagination::default');
 
-        Paginator::defaultSimpleView('pagination::simple-default');
+    Paginator::defaultSimpleView('pagination::simple-default');
 
-        Schema::defaultStringLength(191);
-    }
+    Schema::defaultStringLength(191);
+  }
 }

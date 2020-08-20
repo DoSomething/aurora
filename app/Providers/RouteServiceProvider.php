@@ -9,102 +9,102 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class RouteServiceProvider extends ServiceProvider
 {
-    /**
-     * This namespace is applied to your controller routes.
-     *
-     * In addition, it is set as the URL generator's root namespace.
-     *
-     * @var string
-     */
-    protected $namespace = 'Aurora\Http\Controllers';
+  /**
+   * This namespace is applied to your controller routes.
+   *
+   * In addition, it is set as the URL generator's root namespace.
+   *
+   * @var string
+   */
+  protected $namespace = 'Aurora\Http\Controllers';
 
-    /**
-     * The path to the "home" route for your application.
-     *
-     * @var string
-     */
-    public const HOME = '/users';
+  /**
+   * The path to the "home" route for your application.
+   *
+   * @var string
+   */
+  public const HOME = '/users';
 
-    /**
-     * Define your route model bindings, pattern filters, etc.
-     *
-     * @return void
-     */
-    public function boot()
-    {
-        parent::boot();
+  /**
+   * Define your route model bindings, pattern filters, etc.
+   *
+   * @return void
+   */
+  public function boot()
+  {
+    parent::boot();
 
-        Route::bind('user', function ($id) {
-            $user = gateway('northstar')->getUser($id, csv_query('include'));
+    Route::bind('user', function ($id) {
+      $user = gateway('northstar')->getUser($id, csv_query('include'));
 
-            if (!$user) {
-                throw new NotFoundHttpException();
-            }
+      if (!$user) {
+        throw new NotFoundHttpException();
+      }
 
-            return $user;
-        });
+      return $user;
+    });
 
-        Route::bind('client', function ($id) {
-            $key = gateway('northstar')->getClient($id);
+    Route::bind('client', function ($id) {
+      $key = gateway('northstar')->getClient($id);
 
-            if (!$key) {
-                throw new NotFoundHttpException();
-            }
+      if (!$key) {
+        throw new NotFoundHttpException();
+      }
 
-            return $key;
-        });
+      return $key;
+    });
 
-        Route::bind('redirect', function ($key) {
-            $redirect = app(Fastly::class)->getRedirect($key);
+    Route::bind('redirect', function ($key) {
+      $redirect = app(Fastly::class)->getRedirect($key);
 
-            if (!$redirect) {
-                throw new NotFoundHttpException();
-            }
+      if (!$redirect) {
+        throw new NotFoundHttpException();
+      }
 
-            return $redirect;
-        });
-    }
+      return $redirect;
+    });
+  }
 
-    /**
-     * Define the routes for the application.
-     *
-     * @return void
-     */
-    public function map()
-    {
-        $this->mapApiRoutes();
+  /**
+   * Define the routes for the application.
+   *
+   * @return void
+   */
+  public function map()
+  {
+    $this->mapApiRoutes();
 
-        $this->mapWebRoutes();
+    $this->mapWebRoutes();
 
-        //
-    }
+    //
+  }
 
-    /**
-     * Define the "web" routes for the application.
-     *
-     * These routes all receive session state, CSRF protection, etc.
-     *
-     * @return void
-     */
-    protected function mapWebRoutes()
-    {
-        Route::middleware('web')
-            ->namespace($this->namespace)
-            ->group(base_path('routes/web.php'));
-    }
+  /**
+   * Define the "web" routes for the application.
+   *
+   * These routes all receive session state, CSRF protection, etc.
+   *
+   * @return void
+   */
+  protected function mapWebRoutes()
+  {
+    Route::middleware('web')
+      ->namespace($this->namespace)
+      ->group(base_path('routes/web.php'));
+  }
 
-    /**
-     * Define the "api" routes for the application.
-     *
-     * These routes are typically stateless.
-     *
-     * @return void
-     */
-    protected function mapApiRoutes()
-    {
-        Route::prefix('api')
-            ->middleware('api')
-            ->namespace($this->namespace)
-            ->group(base_path('routes/api.php'));
-    }
+  /**
+   * Define the "api" routes for the application.
+   *
+   * These routes are typically stateless.
+   *
+   * @return void
+   */
+  protected function mapApiRoutes()
+  {
+    Route::prefix('api')
+      ->middleware('api')
+      ->namespace($this->namespace)
+      ->group(base_path('routes/api.php'));
+  }
 }
