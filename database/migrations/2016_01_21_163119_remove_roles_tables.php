@@ -6,50 +6,50 @@ use Illuminate\Support\Facades\Schema;
 
 class RemoveRolesTables extends Migration
 {
-  /**
-   * Run the migrations.
-   *
-   * @return void
-   */
-  public function up()
-  {
-    Schema::drop('role_user');
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::drop('role_user');
 
-    Schema::drop('roles');
-  }
+        Schema::drop('roles');
+    }
 
-  /**
-   * Reverse the migrations.
-   *
-   * @return void
-   */
-  public function down()
-  {
-    Schema::create('roles', function (Blueprint $table) {
-      $table->increments('id');
-      $table->string('name')->unique();
-    });
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::create('roles', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('name')->unique();
+        });
 
-    Schema::create('role_user', function (Blueprint $table) {
-      $table->increments('id');
-      $table
-        ->integer('role_id')
-        ->unsigned()
-        ->index();
-      $table
-        ->foreign('role_id')
-        ->references('id')
-        ->on('roles')
-        ->onDelete('cascade');
-      $table
-        ->integer('user_id')
-        ->unsigned()
-        ->index();
-      $table
-        ->foreign('user_id')
-        ->references('id')
-        ->on('users')
-        ->onDelete('cascade');
-    });
-  }
+        Schema::create('role_user', function (Blueprint $table) {
+            $table->increments('id');
+            $table
+                ->integer('role_id')
+                ->unsigned()
+                ->index();
+            $table
+                ->foreign('role_id')
+                ->references('id')
+                ->on('roles')
+                ->onDelete('cascade');
+            $table
+                ->integer('user_id')
+                ->unsigned()
+                ->index();
+            $table
+                ->foreign('user_id')
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade');
+        });
+    }
 }

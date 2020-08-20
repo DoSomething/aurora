@@ -11,13 +11,13 @@ use Illuminate\Support\HtmlString;
  */
 function csv_query(string $key, array $default = []): array
 {
-  $query = request()->query($key);
+    $query = request()->query($key);
 
-  if (!$query) {
-    return $default;
-  }
+    if (!$query) {
+        return $default;
+    }
 
-  return explode(',', $query);
+    return explode(',', $query);
 }
 
 /**
@@ -28,7 +28,7 @@ function csv_query(string $key, array $default = []): array
  */
 function array_to_csv(array $array)
 {
-  return implode(', ', $array);
+    return implode(', ', $array);
 }
 
 /**
@@ -39,7 +39,7 @@ function array_to_csv(array $array)
  */
 function csv_to_array($string)
 {
-  return array_map('trim', explode(',', $string));
+    return array_map('trim', explode(',', $string));
 }
 
 /**
@@ -50,10 +50,10 @@ function csv_to_array($string)
  */
 function markdown($source)
 {
-  $parsedown = Parsedown::instance();
-  $markup = $parsedown->setMarkupEscaped(true)->text($source);
+    $parsedown = Parsedown::instance();
+    $markup = $parsedown->setMarkupEscaped(true)->text($source);
 
-  return new HtmlString($markup);
+    return new HtmlString($markup);
 }
 
 /**
@@ -66,7 +66,7 @@ function markdown($source)
  */
 function remember($key, $minutes, Closure $callback)
 {
-  return app('cache')->remember($key, $minutes, $callback);
+    return app('cache')->remember($key, $minutes, $callback);
 }
 
 /**
@@ -78,13 +78,13 @@ function remember($key, $minutes, Closure $callback)
  */
 function scriptify($json = [], $store = 'STATE')
 {
-  return new HtmlString(
-    '<script type="text/javascript">window.' .
-      $store .
-      ' = ' .
-      json_encode($json) .
-      '</script>'
-  );
+    return new HtmlString(
+        '<script type="text/javascript">window.' .
+            $store .
+            ' = ' .
+            json_encode($json) .
+            '</script>'
+    );
 }
 
 /**
@@ -95,10 +95,10 @@ function scriptify($json = [], $store = 'STATE')
  */
 function country_name($code)
 {
-  $isoCodes = new \Sokil\IsoCodes\IsoCodesFactory();
-  $country = $isoCodes->getCountries()->getByAlpha2($code);
+    $isoCodes = new \Sokil\IsoCodes\IsoCodesFactory();
+    $country = $isoCodes->getCountries()->getByAlpha2($code);
 
-  return $country ? $country->getName() : 'Unknown (' . $code . ')';
+    return $country ? $country->getName() : 'Unknown (' . $code . ')';
 }
 
 /**
@@ -106,18 +106,18 @@ function country_name($code)
  */
 function revealer(...$fields)
 {
-  $currentIncludes = csv_query('include');
+    $currentIncludes = csv_query('include');
 
-  $isActive = count(array_intersect($currentIncludes, $fields)) > 0;
-  $newFields = $isActive
-    ? array_diff($currentIncludes, $fields)
-    : array_merge($currentIncludes, $fields);
+    $isActive = count(array_intersect($currentIncludes, $fields)) > 0;
+    $newFields = $isActive
+        ? array_diff($currentIncludes, $fields)
+        : array_merge($currentIncludes, $fields);
 
-  return new HtmlString(
-    '<a href="' .
-      e(request()->url() . '?include=' . implode(',', $newFields)) .
-      '" class="reveal ' .
-      ($isActive ? 'is-active' : '') .
-      '" data-turbolinks-action="replace" data-turbolinks-scroll="false"><span>reveal</span></a>'
-  );
+    return new HtmlString(
+        '<a href="' .
+            e(request()->url() . '?include=' . implode(',', $newFields)) .
+            '" class="reveal ' .
+            ($isActive ? 'is-active' : '') .
+            '" data-turbolinks-action="replace" data-turbolinks-scroll="false"><span>reveal</span></a>'
+    );
 }
