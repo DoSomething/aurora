@@ -2,19 +2,19 @@
  * Profiles
  */
 .profile-settings dt {
-    float: left;
-    clear: both;
-    color: $dark-gray;
-    font-weight: $weight-bold;
-    padding-right: $base-spacing / 2;
+  float: left;
+  clear: both;
+  color: $dark-gray;
+  font-weight: $weight-bold;
+  padding-right: $base-spacing / 2;
 }
 
 .profile-settings dd {
-    float: left;
+  float: left;
 }
 
 .profile-section {
-    @include clearfix;
+  @include clearfix;
 
-    padding-bottom: $base-spacing;
+  padding-bottom: $base-spacing;
 }

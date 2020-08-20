@@ -1,21 +1,21 @@
 @keyframes pulse {
-    0% {
-        color: #666;
-    }
-    50% {
-        color: #ddd;
-    }
-    100% {
-        color: #666;
-    }
+  0% {
+    color: #666;
+  }
+  50% {
+    color: #ddd;
+  }
+  100% {
+    color: #666;
+  }
 }
 
 .lazy-loading {
-    animation: pulse 3s infinite;
-    transition: color 1s;
+  animation: pulse 3s infinite;
+  transition: color 1s;
 }
 
 .lazy-loading.is-loaded {
-    color: inherit !important;
-    animation: none;
+  color: inherit !important;
+  animation: none;
 }

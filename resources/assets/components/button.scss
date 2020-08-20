@@ -2,8 +2,8 @@
  * Button: danger modifier
  */
 .button {
-    &.-danger,
-    &.-danger:hover {
-        background: $error-color;
-    }
+  &.-danger,
+  &.-danger:hover {
+    background: $error-color;
+  }
 }
