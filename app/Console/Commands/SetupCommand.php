@@ -42,15 +42,15 @@ class SetupCommand extends Command
             $this->chooseEnvironmentVariable(
                 'NORTHSTAR_URL',
                 'Choose a Northstar environment',
-                $environments
+                $environments,
             );
             $this->setEnvironmentVariable(
                 'NORTHSTAR_CLIENT_ID',
-                'Enter the OAuth Client ID'
+                'Enter the OAuth Client ID',
             );
             $this->setEnvironmentVariable(
                 'NORTHSTAR_CLIENT_SECRET',
-                'Enter the OAuth Client Secret'
+                'Enter the OAuth Client Secret',
             );
         });
 
@@ -58,7 +58,7 @@ class SetupCommand extends Command
 
         $this->runArtisanCommand(
             'gateway:key',
-            'Fetching public key from Northstar'
+            'Fetching public key from Northstar',
         );
 
         $this->runArtisanCommand('migrate', 'Running database migrations');
