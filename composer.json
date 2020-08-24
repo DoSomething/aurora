@@ -3,7 +3,7 @@
   "description": "The DoSomething admin interface.",
   "type": "project",
   "require": {
-    "php": "~7.3.0",
+    "php": "~7.4.0",
     "ext-intl": "*",
     "dfurnes/environmentalist": "0.0.6",
     "doctrine/dbal": "^2.5",
