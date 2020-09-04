@@ -94,6 +94,10 @@
               {!! Form::text('school_id', NULL, ['class' => 'text-field']) !!}
           </div>
           <div class="form-item -padded">
+              {!! Form::label('club_id', 'Club ID', ['class' => 'field-label']) !!}
+              {!! Form::text('club_id', NULL, ['class' => 'text-field']) !!}
+          </div>
+          <div class="form-item -padded">
               {!! Form::label('email_subscription_topics', 'Email Subscription Topics', ['class' => 'field-label']) !!}
                   <div>
                     {!! Form::checkbox('email_subscription_topics[]', 'community') !!}
@@ -110,6 +114,10 @@
                   <div>
                     {!! Form::checkbox('email_subscription_topics[]', 'scholarships') !!}
                     {!! Form::label('scholarships', 'scholarships') !!}
+                  </div>
+                  <div>
+                    {!! Form::checkbox('email_subscription_topics[]', 'clubs') !!}
+                    {!! Form::label('clubs', 'clubs') !!}
                   </div>
 
           </div>
