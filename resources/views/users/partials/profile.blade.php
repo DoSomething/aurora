@@ -11,6 +11,7 @@
     @include('users.partials.sensitive-field', ['field' => 'birthdate', 'preview_field' => 'age', 'preview_suffix' => ' years old'])
     @include('users.partials.field', ['label' => 'Voter Registration Status', 'field' => 'voter_registration_status'])
     @include('users.partials.sensitive-field', ['label' => 'School ID', 'preview_field' => 'school_id_preview', 'field' => 'school_id'])
+    @include('users.partials.field', ['label' => 'Club ID', 'field' => 'club_id'])
 </div>
 <div class="profile-section">
     <h4>Address:</h4>

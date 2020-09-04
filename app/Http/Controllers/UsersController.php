@@ -116,6 +116,9 @@ class UsersController extends Controller
             $input['feature_flags'] = [];
         }
 
+        // The Club ID needs to be an integer.
+        $input['club_id'] = isset($input['club_id']) ? (int) $input['club_id'] : null;
+
         $this->northstar->updateUser($user->id, $input);
 
         return redirect()

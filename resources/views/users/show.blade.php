@@ -20,10 +20,10 @@
                 @include('layout.errors')
                 <dt>Source:</dt>
                 <dd>
-                    {{ $user->source ?? '&mdash;' }}
+                    {{ $user->source ?? '—' }}
                     <span class="footnote">({{ $user->source_detail ?? 'N/A' }})</span>
                 </dd>
-                <dt>Feature Flags:</dt><dd>{{ isset($user->feature_flags) ? json_encode($user->feature_flags) :  '&mdash;'}}</dd>
+                <dt>Feature Flags:</dt><dd>{{ isset($user->feature_flags) ? json_encode($user->feature_flags) :  '—'}}</dd>
                 @include('users.partials.field', ['field' => 'role'])
             </div>
             <div class="container__block -half profile-settings">
