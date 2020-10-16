@@ -11,7 +11,17 @@
     @include('users.partials.sensitive-field', ['field' => 'birthdate', 'preview_field' => 'age', 'preview_suffix' => ' years old'])
     @include('users.partials.field', ['label' => 'Voter Registration Status', 'field' => 'voter_registration_status'])
     @include('users.partials.sensitive-field', ['label' => 'School ID', 'preview_field' => 'school_id_preview', 'field' => 'school_id'])
-    @include('users.partials.field', ['label' => 'Club ID', 'field' => 'club_id'])
+
+    <dt>Club ID:</dt>
+    <dd>
+        @if ($user->club_id)
+            <a href="{{ config('services.rogue.url') }}/clubs/{{ $user->club_id }}">
+                {{$user->club_id}}
+            </a>
+        @else
+            —
+        @endif
+    </dd>
 </div>
 <div class="profile-section">
     <h4>Address:</h4>
