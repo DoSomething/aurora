@@ -46,10 +46,7 @@ return [
     ],
 
     'rogue' => [
-        'profile_url' => env(
-            'ROGUE_PROFILE_URL',
-            'https://activity.dosomething.org/users',
-        ),
+        'url' => env('ROGUE_URL', 'https://activity.dosomething.org'),
     ],
 
     'ses' => [
