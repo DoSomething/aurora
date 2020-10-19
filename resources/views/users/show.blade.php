@@ -79,7 +79,7 @@
                         <a href="{{ config('services.gambit.profile_url') }}/{{ $user->id }}">Gambit</a>
                     </li>
                     <li>
-                        <a href="{{ config('services.rogue.profile_url') }}/{{ $user->id }}">Rogue</a>
+                        <a href="{{ config('services.rogue.url') }}/users/{{ $user->id }}">Rogue</a>
                     </li>
             </div>
         </div>
