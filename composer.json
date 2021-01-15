@@ -13,6 +13,7 @@
     "guzzlehttp/guzzle": "^6.3.0",
     "laravel/framework": "^6.0",
     "laravelcollective/html": "^6.0",
+    "lcobucci/jwt": "~3.3.3",
     "league/flysystem-aws-s3-v3": "~1.0",
     "league/uri": "^6.0",
     "sokil/php-isocodes": "^3.0"
