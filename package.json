@@ -43,18 +43,18 @@
     "turbolinks": "^5.2.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.8.6",
-    "@babel/runtime": "^7.8.4",
+    "@babel/core": "^7.12.10",
+    "@babel/runtime": "^7.12.5",
     "@dosomething/babel-preset": "^3.2.0",
     "@dosomething/webpack-config": "^6.0.0",
     "@prettier/plugin-php": "^0.14.3",
     "autoprefixer": "^9.7.4",
-    "core-js": "^3.6.4",
-    "husky": "^4.2.5",
-    "modernizr": "^3.11.3",
-    "prettier": "^2.0.5",
-    "pretty-quick": "^2.0.1",
-    "webpack": "^4.41.6",
+    "core-js": "^3.8.2",
+    "husky": "^4.3.7",
+    "modernizr": "^3.11.4",
+    "prettier": "^2.2.1",
+    "pretty-quick": "^2.0.2",
+    "webpack": "^4.46.0",
     "webpack-cli": "^3.3.11"
   }
 }
