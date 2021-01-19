@@ -5,6 +5,7 @@
   "require": {
     "php": "~7.4.0",
     "ext-intl": "*",
+    "ext-gettext": "*",
     "dfurnes/environmentalist": "0.0.6",
     "doctrine/dbal": "^2.5",
     "dosomething/gateway": "^3.0",
